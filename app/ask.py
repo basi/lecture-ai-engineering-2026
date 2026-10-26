@@ -11,6 +11,7 @@
 """
 
 import argparse
+from time import perf_counter
 
 from google import genai
 from google.genai import errors
@@ -28,14 +29,17 @@ def ask(question: str, history: list[types.Content] | None = None) -> str:
     conversation.append(
         types.Content(role="user", parts=[types.Part.from_text(text=question)])
     )
+    started_at = perf_counter()
     response = client.models.generate_content(model=MODEL, contents=conversation)
+    elapsed_ms = (perf_counter() - started_at) * 1000
 
     usage = response.usage_metadata
-    if usage is not None:
-        print(
-            f"[usage] input={usage.prompt_token_count} "
-            f"output={usage.candidates_token_count}"
-        )
+    input_tokens = usage.prompt_token_count if usage is not None else "n/a"
+    output_tokens = usage.candidates_token_count if usage is not None else "n/a"
+    print(
+        f"[metrics] latency={elapsed_ms:.0f} ms "
+        f"input_tokens={input_tokens} output_tokens={output_tokens}"
+    )
 
     if response.text is None:
         raise RuntimeError("モデルからテキスト回答がありません")
@@ -52,6 +56,11 @@ def ask(question: str, history: list[types.Content] | None = None) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description="素のLLMに質問する")
     parser.add_argument("question", nargs="?", default=DEFAULT_QUESTION)
+    parser.add_argument(
+        "--once",
+        action="store_true",
+        help="質問に1回だけ回答して終了する（モデルや質問の比較向け）",
+    )
     args = parser.parse_args()
 
     print(f"[model] {MODEL}")
@@ -64,6 +73,9 @@ def main() -> None:
         except errors.APIError as e:
             print(api_error_message(e.code, e.message))
             raise SystemExit(1) from e
+
+        if args.once:
+            return
 
         while True:
             try:

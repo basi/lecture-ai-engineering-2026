@@ -12,7 +12,10 @@ def test_ask_sends_and_updates_conversation_history():
             requests.append((model, contents.copy()))
             return SimpleNamespace(
                 text=f"answer {len(requests)}",
-                usage_metadata=None,
+                usage_metadata=SimpleNamespace(
+                    prompt_token_count=10,
+                    candidates_token_count=5,
+                ),
             )
 
     class FakeClient:
@@ -41,6 +44,35 @@ def test_ask_sends_and_updates_conversation_history():
     assert [part.text for part in requests[1][1][2].parts] == ["follow-up"]
 
 
+def test_ask_prints_latency_and_token_counts(capsys):
+    class FakeModels:
+        def generate_content(self, *, model, contents):
+            return SimpleNamespace(
+                text="answer",
+                usage_metadata=SimpleNamespace(
+                    prompt_token_count=12,
+                    candidates_token_count=7,
+                ),
+            )
+
+    class FakeClient:
+        models = FakeModels()
+
+        def __init__(self, *, api_key):
+            pass
+
+    with (
+        patch.object(ask.genai, "Client", FakeClient),
+        patch.object(ask, "get_api_key", return_value="test-key"),
+        patch.object(ask, "perf_counter", side_effect=[1.0, 1.125]),
+    ):
+        assert ask.ask("question") == "answer"
+
+    assert capsys.readouterr().out == (
+        "[metrics] latency=125 ms input_tokens=12 output_tokens=7\n"
+    )
+
+
 def test_main_skips_blank_questions(monkeypatch):
     questions = iter(["", "follow-up", "exit"])
     asked = []
@@ -55,3 +87,21 @@ def test_main_skips_blank_questions(monkeypatch):
     ask.main()
 
     assert asked == ["first question", "follow-up"]
+
+
+def test_main_once_does_not_prompt(monkeypatch):
+    asked = []
+    monkeypatch.setattr("sys.argv", ["app.ask", "--once", "question"])
+    monkeypatch.setattr(
+        ask,
+        "ask",
+        lambda question, history: asked.append(question) or "answer",
+    )
+    monkeypatch.setattr(
+        "builtins.input",
+        lambda _: (_ for _ in ()).throw(AssertionError("unexpected prompt")),
+    )
+
+    ask.main()
+
+    assert asked == ["question"]
