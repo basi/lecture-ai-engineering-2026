@@ -1,0 +1,715 @@
+{
+  "experiment": "baseline",
+  "config": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 20,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 96,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "versions": {
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "trl": "1.14.2",
+    "torch": "2.11.0+cu130"
+  },
+  "method": "LoRA（量子化なし）",
+  "before": {
+    "label": "before",
+    "n": 21,
+    "format_rate": 0.09523809523809523,
+    "content_rate": 0.0,
+    "both_rate": 0.0,
+    "seconds": 44.4
+  },
+  "after": {
+    "label": "after",
+    "n": 21,
+    "format_rate": 1.0,
+    "content_rate": 0.9047619047619048,
+    "both_rate": 0.9047619047619048,
+    "seconds": 44.4
+  },
+  "regressed": [],
+  "knowledge": [
+    {
+      "質問": "この講座の最終課題の締切はいつですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"9 月 30 日 23:59\"}",
+      "学習後の分類": "asserted",
+      "学習後の出力": "{\"answer\": \"課題の提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}"
+    },
+    {
+      "質問": "担当教員の名前は何ですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"確認が必要\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "次回の講義のテーマは何ですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"次回の講義のテーマは「学習ポータル」の「課題」欄で提出する PDF 1 ファイルを提出します。\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "課題の提出期限はいつですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"9 月 30 日 23:59\"}",
+      "学習後の分類": "asserted",
+      "学習後の出力": "{\"answer\": \"課題の提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}"
+    }
+  ],
+  "train": {
+    "train_seconds": 253.8,
+    "global_step": 40,
+    "epoch": 20.0,
+    "final_loss": 0.0139,
+    "train_loss_mean": 0.421,
+    "peak_gpu_allocated_gb": 4.77,
+    "peak_gpu_reserved_gb": 5.18,
+    "trainable_params": 6389760,
+    "all_params": 758782784,
+    "loss_curve": [
+      {
+        "step": 1,
+        "loss": 2.449822425842285,
+        "grad_norm": 7.939164161682129,
+        "learning_rate": 0.0
+      },
+      {
+        "step": 2,
+        "loss": 2.495671272277832,
+        "grad_norm": 8.076739311218262,
+        "learning_rate": 3.3333333333333335e-05
+      },
+      {
+        "step": 3,
+        "loss": 2.3687448501586914,
+        "grad_norm": 5.759624004364014,
+        "learning_rate": 6.666666666666667e-05
+      },
+      {
+        "step": 4,
+        "loss": 2.1290788650512695,
+        "grad_norm": 3.951289653778076,
+        "learning_rate": 0.0001
+      },
+      {
+        "step": 5,
+        "loss": 1.7737418413162231,
+        "grad_norm": 3.213918924331665,
+        "learning_rate": 0.00013333333333333334
+      },
+      {
+        "step": 6,
+        "loss": 1.538701057434082,
+        "grad_norm": 3.0133965015411377,
+        "learning_rate": 0.0001666666666666667
+      },
+      {
+        "step": 7,
+        "loss": 1.178467035293579,
+        "grad_norm": 2.7972304821014404,
+        "learning_rate": 0.0002
+      },
+      {
+        "step": 8,
+        "loss": 0.8100490570068359,
+        "grad_norm": 2.6743898391723633,
+        "learning_rate": 0.00019957341762950344
+      },
+      {
+        "step": 9,
+        "loss": 0.559244692325592,
+        "grad_norm": 2.3354060649871826,
+        "learning_rate": 0.0001982973099683902
+      },
+      {
+        "step": 10,
+        "loss": 0.3503938317298889,
+        "grad_norm": 2.015043020248413,
+        "learning_rate": 0.00019618256431728194
+      },
+      {
+        "step": 11,
+        "loss": 0.23891989886760712,
+        "grad_norm": 1.959917664527893,
+        "learning_rate": 0.00019324722294043558
+      },
+      {
+        "step": 12,
+        "loss": 0.1542256474494934,
+        "grad_norm": 1.3092628717422485,
+        "learning_rate": 0.00018951632913550626
+      },
+      {
+        "step": 13,
+        "loss": 0.10709576308727264,
+        "grad_norm": 0.8978244662284851,
+        "learning_rate": 0.00018502171357296144
+      },
+      {
+        "step": 14,
+        "loss": 0.08358562737703323,
+        "grad_norm": 0.97425776720047,
+        "learning_rate": 0.000179801722728024
+      },
+      {
+        "step": 15,
+        "loss": 0.058427825570106506,
+        "grad_norm": 0.637395977973938,
+        "learning_rate": 0.00017390089172206592
+      },
+      {
+        "step": 16,
+        "loss": 0.06791746616363525,
+        "grad_norm": 0.5739393830299377,
+        "learning_rate": 0.00016736956436465573
+      },
+      {
+        "step": 17,
+        "loss": 0.049102798104286194,
+        "grad_norm": 0.3725649416446686,
+        "learning_rate": 0.00016026346363792567
+      },
+      {
+        "step": 18,
+        "loss": 0.034325629472732544,
+        "grad_norm": 0.3857402205467224,
+        "learning_rate": 0.0001526432162877356
+      },
+      {
+        "step": 19,
+        "loss": 0.03196755051612854,
+        "grad_norm": 0.3108119070529938,
+        "learning_rate": 0.00014457383557765386
+      },
+      {
+        "step": 20,
+        "loss": 0.030857335776090622,
+        "grad_norm": 0.3017662465572357,
+        "learning_rate": 0.00013612416661871533
+      },
+      {
+        "step": 21,
+        "loss": 0.02489050105214119,
+        "grad_norm": 0.2901664078235626,
+        "learning_rate": 0.0001273662990072083
+      },
+      {
+        "step": 22,
+        "loss": 0.024860728532075882,
+        "grad_norm": 0.33807289600372314,
+        "learning_rate": 0.00011837495178165706
+      },
+      {
+        "step": 23,
+        "loss": 0.022903895005583763,
+        "grad_norm": 0.25206229090690613,
+        "learning_rate": 0.00010922683594633021
+      },
+      {
+        "step": 24,
+        "loss": 0.017549991607666016,
+        "grad_norm": 0.18702909350395203,
+        "learning_rate": 0.0001
+      },
+      {
+        "step": 25,
+        "loss": 0.017701786011457443,
+        "grad_norm": 0.24083654582500458,
+        "learning_rate": 9.077316405366981e-05
+      },
+      {
+        "step": 26,
+        "loss": 0.01892217807471752,
+        "grad_norm": 0.2829440236091614,
+        "learning_rate": 8.162504821834295e-05
+      },
+      {
+        "step": 27,
+        "loss": 0.017342716455459595,
+        "grad_norm": 0.25365450978279114,
+        "learning_rate": 7.263370099279172e-05
+      },
+      {
+        "step": 28,
+        "loss": 0.01474057137966156,
+        "grad_norm": 0.3671732544898987,
+        "learning_rate": 6.387583338128471e-05
+      },
+      {
+        "step": 29,
+        "loss": 0.015687093138694763,
+        "grad_norm": 0.22508512437343597,
+        "learning_rate": 5.542616442234618e-05
+      },
+      {
+        "step": 30,
+        "loss": 0.014643508940935135,
+        "grad_norm": 0.2504686415195465,
+        "learning_rate": 4.735678371226441e-05
+      },
+      {
+        "step": 31,
+        "loss": 0.014111223630607128,
+        "grad_norm": 0.1804473102092743,
+        "learning_rate": 3.973653636207437e-05
+      },
+      {
+        "step": 32,
+        "loss": 0.01489446684718132,
+        "grad_norm": 0.26519742608070374,
+        "learning_rate": 3.263043563534428e-05
+      },
+      {
+        "step": 33,
+        "loss": 0.01409381628036499,
+        "grad_norm": 0.16838401556015015,
+        "learning_rate": 2.6099108277934103e-05
+      },
+      {
+        "step": 34,
+        "loss": 0.014295574277639389,
+        "grad_norm": 0.21518349647521973,
+        "learning_rate": 2.0198277271976052e-05
+      },
+      {
+        "step": 35,
+        "loss": 0.013162259012460709,
+        "grad_norm": 0.15950898826122284,
+        "learning_rate": 1.4978286427038601e-05
+      },
+      {
+        "step": 36,
+        "loss": 0.014679635874927044,
+        "grad_norm": 0.2315201759338379,
+        "learning_rate": 1.0483670864493778e-05
+      },
+      {
+        "step": 37,
+        "loss": 0.013481810688972473,
+        "grad_norm": 0.1519540548324585,
+        "learning_rate": 6.75277705956443e-06
+      },
+      {
+        "step": 38,
+        "loss": 0.014613719657063484,
+        "grad_norm": 0.2125420719385147,
+        "learning_rate": 3.817435682718096e-06
+      },
+      {
+        "step": 39,
+        "loss": 0.013958876021206379,
+        "grad_norm": 0.1309446394443512,
+        "learning_rate": 1.7026900316098215e-06
+      },
+      {
+        "step": 40,
+        "loss": 0.01385677233338356,
+        "grad_norm": 0.21771776676177979,
+        "learning_rate": 4.2658237049655323e-07
+      }
+    ]
+  },
+  "answer_scores": {
+    "before": {
+      "summary": {
+        "test": {
+          "n": 21,
+          "choice_acc": 0.5714,
+          "mean_margin": -4.271
+        },
+        "test_grounded": {
+          "n": 15,
+          "choice_acc": 0.8,
+          "mean_margin": 3.131
+        },
+        "test_ungrounded": {
+          "n": 6,
+          "choice_acc": 0.0,
+          "mean_margin": -22.775
+        },
+        "test_gold_nll": 0.663,
+        "valid_gold_nll": 0.6166
+      },
+      "rows": [
+        {
+          "question": "提出の期限は？",
+          "gold_needs_review": false,
+          "gold": "deadline",
+          "choice": "deadline",
+          "margin": 2.603,
+          "gold_nll": 0.2969
+        },
+        {
+          "question": "提出期限の日付と時刻を教えてください",
+          "gold_needs_review": false,
+          "gold": "deadline",
+          "choice": "office_hours",
+          "margin": -0.992,
+          "gold_nll": 0.3853
+        },
+        {
+          "question": "課題の締切は何月何日の何時ですか",
+          "gold_needs_review": false,
+          "gold": "deadline",
+          "choice": "office_hours",
+          "margin": -1.123,
+          "gold_nll": 0.3875
+        },
+        {
+          "question": "提出場所は？",
+          "gold_needs_review": false,
+          "gold": "destination",
+          "choice": "destination",
+          "margin": 3.021,
+          "gold_nll": 0.3235
+        },
+        {
+          "question": "課題の提出はどこで行いますか",
+          "gold_needs_review": false,
+          "gold": "destination",
+          "choice": "destination",
+          "margin": 2.428,
+          "gold_nll": 0.346
+        },
+        {
+          "question": "提出物を出す先を教えてください",
+          "gold_needs_review": false,
+          "gold": "destination",
+          "choice": "destination",
+          "margin": 3.508,
+          "gold_nll": 0.3679
+        },
+        {
+          "question": "PDF 以外でも出せますか",
+          "gold_needs_review": false,
+          "gold": "format",
+          "choice": "office_hours",
+          "margin": -0.926,
+          "gold_nll": 0.4132
+        },
+        {
+          "question": "提出するファイルの形式は何ですか",
+          "gold_needs_review": false,
+          "gold": "format",
+          "choice": "format",
+          "margin": 5.942,
+          "gold_nll": 0.3666
+        },
+        {
+          "question": "提出ファイルは何形式で、いくつ出しますか",
+          "gold_needs_review": false,
+          "gold": "format",
+          "choice": "format",
+          "margin": 1.294,
+          "gold_nll": 0.4028
+        },
+        {
+          "question": "相談できる時間帯は？",
+          "gold_needs_review": false,
+          "gold": "office_hours",
+          "choice": "office_hours",
+          "margin": 2.996,
+          "gold_nll": 0.236
+        },
+        {
+          "question": "オフィスアワーの曜日と時間を教えてください",
+          "gold_needs_review": false,
+          "gold": "office_hours",
+          "choice": "office_hours",
+          "margin": 4.185,
+          "gold_nll": 0.2328
+        },
+        {
+          "question": "質問を受け付けてもらえるのは何曜日の何時からですか",
+          "gold_needs_review": false,
+          "gold": "office_hours",
+          "choice": "office_hours",
+          "margin": 6.895,
+          "gold_nll": 0.2211
+        },
+        {
+          "question": "締切後の扱いを教えてください",
+          "gold_needs_review": false,
+          "gold": "late",
+          "choice": "late",
+          "margin": 8.57,
+          "gold_nll": 0.1788
+        },
+        {
+          "question": "提出が締切に間に合わなかったらどうなりますか",
+          "gold_needs_review": false,
+          "gold": "late",
+          "choice": "late",
+          "margin": 4.581,
+          "gold_nll": 0.2013
+        },
+        {
+          "question": "期限後に提出した課題は受理されますか",
+          "gold_needs_review": false,
+          "gold": "late",
+          "choice": "late",
+          "margin": 3.978,
+          "gold_nll": 0.288
+        },
+        {
+          "question": "成績はいつ出ますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "office_hours",
+          "margin": -24.046,
+          "gold_nll": 1.5782
+        },
+        {
+          "question": "講義の録画は公開されますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "deadline",
+          "margin": -21.375,
+          "gold_nll": 1.4897
+        },
+        {
+          "question": "課題の文字数に制限はありますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "deadline",
+          "margin": -22.541,
+          "gold_nll": 1.4755
+        },
+        {
+          "question": "提出した課題へのフィードバックはもらえますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "office_hours",
+          "margin": -23.413,
+          "gold_nll": 1.5174
+        },
+        {
+          "question": "参考文献の書き方に指定はありますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "deadline",
+          "margin": -23.005,
+          "gold_nll": 1.6138
+        },
+        {
+          "question": "オフィスアワーは事前予約が必要ですか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "office_hours",
+          "margin": -22.271,
+          "gold_nll": 1.6004
+        }
+      ]
+    },
+    "after": {
+      "summary": {
+        "test": {
+          "n": 21,
+          "choice_acc": 0.9524,
+          "mean_margin": 6.709
+        },
+        "test_grounded": {
+          "n": 15,
+          "choice_acc": 1.0,
+          "mean_margin": 8.13
+        },
+        "test_ungrounded": {
+          "n": 6,
+          "choice_acc": 0.8333,
+          "mean_margin": 3.155
+        },
+        "test_gold_nll": 0.0124,
+        "valid_gold_nll": 0.0044
+      },
+      "rows": [
+        {
+          "question": "提出の期限は？",
+          "gold_needs_review": false,
+          "gold": "deadline",
+          "choice": "deadline",
+          "margin": 6.698,
+          "gold_nll": 0.0009
+        },
+        {
+          "question": "提出期限の日付と時刻を教えてください",
+          "gold_needs_review": false,
+          "gold": "deadline",
+          "choice": "deadline",
+          "margin": 6.185,
+          "gold_nll": 0.0015
+        },
+        {
+          "question": "課題の締切は何月何日の何時ですか",
+          "gold_needs_review": false,
+          "gold": "deadline",
+          "choice": "deadline",
+          "margin": 7.577,
+          "gold_nll": 0.0006
+        },
+        {
+          "question": "提出場所は？",
+          "gold_needs_review": false,
+          "gold": "destination",
+          "choice": "destination",
+          "margin": 10.138,
+          "gold_nll": 0.0006
+        },
+        {
+          "question": "課題の提出はどこで行いますか",
+          "gold_needs_review": false,
+          "gold": "destination",
+          "choice": "destination",
+          "margin": 9.986,
+          "gold_nll": 0.0006
+        },
+        {
+          "question": "提出物を出す先を教えてください",
+          "gold_needs_review": false,
+          "gold": "destination",
+          "choice": "destination",
+          "margin": 10.107,
+          "gold_nll": 0.0007
+        },
+        {
+          "question": "PDF 以外でも出せますか",
+          "gold_needs_review": false,
+          "gold": "format",
+          "choice": "format",
+          "margin": 6.017,
+          "gold_nll": 0.0013
+        },
+        {
+          "question": "提出するファイルの形式は何ですか",
+          "gold_needs_review": false,
+          "gold": "format",
+          "choice": "format",
+          "margin": 11.252,
+          "gold_nll": 0.0005
+        },
+        {
+          "question": "提出ファイルは何形式で、いくつ出しますか",
+          "gold_needs_review": false,
+          "gold": "format",
+          "choice": "format",
+          "margin": 10.852,
+          "gold_nll": 0.0006
+        },
+        {
+          "question": "相談できる時間帯は？",
+          "gold_needs_review": false,
+          "gold": "office_hours",
+          "choice": "office_hours",
+          "margin": 7.797,
+          "gold_nll": 0.0003
+        },
+        {
+          "question": "オフィスアワーの曜日と時間を教えてください",
+          "gold_needs_review": false,
+          "gold": "office_hours",
+          "choice": "office_hours",
+          "margin": 9.476,
+          "gold_nll": 0.0003
+        },
+        {
+          "question": "質問を受け付けてもらえるのは何曜日の何時からですか",
+          "gold_needs_review": false,
+          "gold": "office_hours",
+          "choice": "office_hours",
+          "margin": 9.052,
+          "gold_nll": 0.0004
+        },
+        {
+          "question": "締切後の扱いを教えてください",
+          "gold_needs_review": false,
+          "gold": "late",
+          "choice": "late",
+          "margin": 6.518,
+          "gold_nll": 0.0013
+        },
+        {
+          "question": "提出が締切に間に合わなかったらどうなりますか",
+          "gold_needs_review": false,
+          "gold": "late",
+          "choice": "late",
+          "margin": 2.27,
+          "gold_nll": 0.006
+        },
+        {
+          "question": "期限後に提出した課題は受理されますか",
+          "gold_needs_review": false,
+          "gold": "late",
+          "choice": "late",
+          "margin": 8.029,
+          "gold_nll": 0.001
+        },
+        {
+          "question": "成績はいつ出ますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 0.341,
+          "gold_nll": 0.0999
+        },
+        {
+          "question": "講義の録画は公開されますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 9.863,
+          "gold_nll": 0.002
+        },
+        {
+          "question": "課題の文字数に制限はありますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 3.108,
+          "gold_nll": 0.0069
+        },
+        {
+          "question": "提出した課題へのフィードバックはもらえますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 4.35,
+          "gold_nll": 0.0038
+        },
+        {
+          "question": "参考文献の書き方に指定はありますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 4.057,
+          "gold_nll": 0.0066
+        },
+        {
+          "question": "オフィスアワーは事前予約が必要ですか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "office_hours",
+          "margin": -2.786,
+          "gold_nll": 0.1245
+        }
+      ]
+    },
+    "seconds": 74.7
+  },
+  "executed_training_myself": true
+}
