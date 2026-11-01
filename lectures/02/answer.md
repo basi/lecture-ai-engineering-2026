@@ -23,6 +23,7 @@
 - 実行に使うスクリプト：v1 から実験ごとに派生させた `notebooks/lora_format_tuning_ipynb_v1_<実験名>.py`。
   - v1 は、`notebooks/lora_format_tuning.ipynb` を Colab で .py に書き出したもので、コードは元のノートブックと同じ。
   - 派生スクリプトはリポジトリに含めないので、変えた点はすべてこのファイルに書く。
+  - Colab での実行の順番と手順は、[experiment.md](experiment.md) にまとめた。
 - すべての実験に共通して、記録を足した（学習そのものは変えていない）：
   - 保存先を、実験ごとに `/content/qlora_lab/<実験名>/` に分けた。
   - `logging_steps` を 10 から 1 にした。
