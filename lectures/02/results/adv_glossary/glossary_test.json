@@ -1,0 +1,368 @@
+[
+  {
+    "kind": "same",
+    "sub": "template1",
+    "scope": "general",
+    "term": "LoRA",
+    "question": "「LoRA」とは何ですか？",
+    "must_include": [
+      "低ランク",
+      "第2回"
+    ],
+    "query": "LoRA"
+  },
+  {
+    "kind": "same",
+    "sub": "template2",
+    "scope": "general",
+    "term": "量子化",
+    "question": "量子化について簡単に説明してください。",
+    "must_include": [
+      "ビット数",
+      "16ビット"
+    ],
+    "query": "量子化"
+  },
+  {
+    "kind": "same",
+    "sub": "template1",
+    "scope": "general",
+    "term": "過学習",
+    "question": "「過学習」とは何ですか？",
+    "must_include": [
+      "過度に適合",
+      "検証データ"
+    ],
+    "query": "過学習"
+  },
+  {
+    "kind": "same",
+    "sub": "template1",
+    "scope": "course",
+    "term": "宿題の3レベル",
+    "question": "「宿題の3レベル」とは何ですか？",
+    "must_include": [
+      "基礎",
+      "実装",
+      "発展"
+    ],
+    "query": "宿題の3レベル"
+  },
+  {
+    "kind": "same",
+    "sub": "template2",
+    "scope": "course",
+    "term": "lecNN-start タグ",
+    "question": "lecNN-start タグについて簡単に説明してください。",
+    "must_include": [
+      "タグ",
+      "lec03-start"
+    ],
+    "query": "lecNN-start タグ"
+  },
+  {
+    "kind": "same",
+    "sub": "template1",
+    "scope": "course",
+    "term": "既定モデル",
+    "question": "「既定モデル」とは何ですか？",
+    "must_include": [
+      "gemini-3.5-flash-lite"
+    ],
+    "query": "既定モデル"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "reworded",
+    "scope": "course",
+    "term": "宿題の3レベル",
+    "question": "AIE2026 の宿題はどんなレベルに分かれていて、いくつ取り組めば完了ですか？",
+    "must_include": [
+      "基礎",
+      "実装",
+      "発展"
+    ],
+    "query": "宿題"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "reworded",
+    "scope": "course",
+    "term": "既定モデル",
+    "question": "この講座の演習で標準に使う LLM は何ですか？",
+    "must_include": [
+      "gemini-3.5-flash-lite"
+    ],
+    "query": "標準モデル"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "reworded",
+    "scope": "course",
+    "term": "lecNN-start タグ",
+    "question": "前の回の演習が終わっていなくても、次の回の演習を始める方法はありますか？",
+    "must_include": [
+      "タグ",
+      "lec03-start"
+    ],
+    "query": "演習開始"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "reworded",
+    "scope": "general",
+    "term": "学習率",
+    "question": "学習率を大きくしすぎると、どうなりますか？",
+    "must_include": [
+      "不安定",
+      "進みが遅い"
+    ],
+    "query": "学習率"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "reworded",
+    "scope": "general",
+    "term": "ランク（LoRAのr）",
+    "question": "LoRA のランク r を大きくすると、何が変わりますか？",
+    "must_include": [
+      "表現力",
+      "メモリ"
+    ],
+    "query": "ランク"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "reworded",
+    "scope": "course",
+    "term": "Codespaces secret",
+    "question": "Codespaces に登録した秘密の値は、プログラムからどう読めますか？",
+    "must_include": [
+      "環境変数",
+      "再起動"
+    ],
+    "query": "秘密の値"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "alias",
+    "scope": "general",
+    "term": "LoRA",
+    "question": "「Low-Rank Adaptation」とは何ですか？",
+    "must_include": [
+      "低ランク",
+      "第2回"
+    ],
+    "query": "Low-Rank Adaptation"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "alias",
+    "scope": "general",
+    "term": "過学習",
+    "question": "「オーバーフィッティング」とは何ですか？",
+    "must_include": [
+      "過度に適合",
+      "検証データ"
+    ],
+    "query": "オーバーフィッティング"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "alias",
+    "scope": "course",
+    "term": "既定モデル",
+    "question": "「デフォルトモデル」とは何ですか？",
+    "must_include": [
+      "gemini-3.5-flash-lite"
+    ],
+    "query": "デフォルトモデル"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "alias",
+    "scope": "course",
+    "term": "宿題の3レベル",
+    "question": "3レベルについて簡単に説明してください。",
+    "must_include": [
+      "基礎",
+      "実装",
+      "発展"
+    ],
+    "query": "3レベル"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "variant",
+    "scope": "general",
+    "term": "LoRA",
+    "question": "「ローラ」とは何ですか？",
+    "must_include": [
+      "低ランク",
+      "第2回"
+    ],
+    "query": "ローラ"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "variant",
+    "scope": "general",
+    "term": "ファインチューニング",
+    "question": "「ファインチューン」とは何ですか？",
+    "must_include": [
+      "追加学習",
+      "RAG"
+    ],
+    "query": "ファインチューン"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "variant",
+    "scope": "general",
+    "term": "レート制限",
+    "question": "「レートリミット」とは何ですか？",
+    "must_include": [
+      "上限",
+      "429"
+    ],
+    "query": "レートリミット"
+  },
+  {
+    "kind": "paraphrase",
+    "sub": "variant",
+    "scope": "general",
+    "term": "量子化",
+    "question": "「クオンタイゼーション」とは何ですか？",
+    "must_include": [
+      "ビット数",
+      "16ビット"
+    ],
+    "query": "クオンタイゼーション"
+  },
+  {
+    "kind": "unknown_real",
+    "sub": "",
+    "scope": "general",
+    "term": null,
+    "question": "「RAG」とは何ですか？",
+    "must_include": [],
+    "query": "RAG"
+  },
+  {
+    "kind": "unknown_real",
+    "sub": "",
+    "scope": "general",
+    "term": null,
+    "question": "「RLHF」とは何ですか？",
+    "must_include": [],
+    "query": "RLHF"
+  },
+  {
+    "kind": "unknown_real",
+    "sub": "",
+    "scope": "general",
+    "term": null,
+    "question": "「DPO」とは何ですか？",
+    "must_include": [],
+    "query": "DPO"
+  },
+  {
+    "kind": "unknown_real",
+    "sub": "",
+    "scope": "general",
+    "term": null,
+    "question": "「蒸留」とは何ですか？",
+    "must_include": [],
+    "query": "蒸留"
+  },
+  {
+    "kind": "unknown_real",
+    "sub": "",
+    "scope": "general",
+    "term": null,
+    "question": "「トークナイザ」とは何ですか？",
+    "must_include": [],
+    "query": "トークナイザ"
+  },
+  {
+    "kind": "unknown_real",
+    "sub": "",
+    "scope": "general",
+    "term": null,
+    "question": "「Transformer」とは何ですか？",
+    "must_include": [],
+    "query": "Transformer"
+  },
+  {
+    "kind": "fictional",
+    "sub": "near_miss",
+    "scope": "general",
+    "term": null,
+    "question": "「QLoRA-X」とは何ですか？",
+    "must_include": [],
+    "query": "QLoRA-X"
+  },
+  {
+    "kind": "fictional",
+    "sub": "near_miss",
+    "scope": "general",
+    "term": null,
+    "question": "「MCPゲートウェイ」とは何ですか？",
+    "must_include": [],
+    "query": "MCPゲートウェイ"
+  },
+  {
+    "kind": "fictional",
+    "sub": "near_miss",
+    "scope": "general",
+    "term": null,
+    "question": "「エージェントメモリ」とは何ですか？",
+    "must_include": [],
+    "query": "エージェントメモリ"
+  },
+  {
+    "kind": "fictional",
+    "sub": "near_miss",
+    "scope": "course",
+    "term": null,
+    "question": "「宿題の5レベル」とは何ですか？",
+    "must_include": [],
+    "query": "宿題の5レベル"
+  },
+  {
+    "kind": "fictional",
+    "sub": "unrelated",
+    "scope": "general",
+    "term": null,
+    "question": "「クロノ勾配圧縮」とは何ですか？",
+    "must_include": [],
+    "query": "クロノ勾配圧縮"
+  },
+  {
+    "kind": "fictional",
+    "sub": "unrelated",
+    "scope": "general",
+    "term": null,
+    "question": "「パラレル蒸着学習」とは何ですか？",
+    "must_include": [],
+    "query": "パラレル蒸着学習"
+  },
+  {
+    "kind": "fictional",
+    "sub": "unrelated",
+    "scope": "general",
+    "term": null,
+    "question": "「ネビュラ写像法」とは何ですか？",
+    "must_include": [],
+    "query": "ネビュラ写像法"
+  },
+  {
+    "kind": "fictional",
+    "sub": "unrelated",
+    "scope": "general",
+    "term": null,
+    "question": "「セマンティック風洞」とは何ですか？",
+    "must_include": [],
+    "query": "セマンティック風洞"
+  }
+]

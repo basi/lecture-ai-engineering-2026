@@ -1,0 +1,164 @@
+{
+  "利用できる時間帯は？": {
+    "needs_review": false,
+    "must_include": [
+      "9:00",
+      "20:00"
+    ]
+  },
+  "平日と土日の開館時間を教えてください": {
+    "needs_review": false,
+    "must_include": [
+      "9:00",
+      "20:00"
+    ]
+  },
+  "図書館の営業時間は何時から何時までですか": {
+    "needs_review": false,
+    "must_include": [
+      "9:00",
+      "20:00"
+    ]
+  },
+  "定休日は何曜日ですか": {
+    "needs_review": false,
+    "must_include": [
+      "月曜",
+      "第 3 木曜"
+    ]
+  },
+  "毎月決まって休みになる日はありますか": {
+    "needs_review": false,
+    "must_include": [
+      "月曜",
+      "第 3 木曜"
+    ]
+  },
+  "休館日の曜日を教えてください": {
+    "needs_review": false,
+    "must_include": [
+      "月曜",
+      "第 3 木曜"
+    ]
+  },
+  "本を借りられる期間を教えてください": {
+    "needs_review": false,
+    "must_include": [
+      "10 冊",
+      "2 週間"
+    ]
+  },
+  "貸出の上限冊数と期間を教えてください": {
+    "needs_review": false,
+    "must_include": [
+      "10 冊",
+      "2 週間"
+    ]
+  },
+  "1 人で何冊まで借りられますか": {
+    "needs_review": false,
+    "must_include": [
+      "10 冊",
+      "2 週間"
+    ]
+  },
+  "借りた本の期間を延長したいのですが": {
+    "needs_review": false,
+    "must_include": [
+      "1 回",
+      "予約"
+    ]
+  },
+  "返却期限の延長は何回できますか": {
+    "needs_review": false,
+    "must_include": [
+      "1 回",
+      "予約"
+    ]
+  },
+  "予約が入っている本も延長できますか": {
+    "needs_review": false,
+    "must_include": [
+      "1 回",
+      "予約"
+    ]
+  },
+  "開館時間外に返したいのですが": {
+    "needs_review": false,
+    "must_include": [
+      "ブックポスト"
+    ]
+  },
+  "閉館後の返却場所はどこですか": {
+    "needs_review": false,
+    "must_include": [
+      "ブックポスト"
+    ]
+  },
+  "ブックポストはどこにありますか": {
+    "needs_review": false,
+    "must_include": [
+      "ブックポスト"
+    ]
+  },
+  "駐車場はありますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "CD や DVD は何枚まで借りられますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "閉館時間の何分前まで入館できますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "雑誌の最新号も借りられますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "返却が遅れたら罰金はありますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "ブックポストに CD を入れてもいいですか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "利用カードはどうやって作りますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "自習室はありますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "館内で携帯電話は使えますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "本の寄贈は受け付けていますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  }
+}

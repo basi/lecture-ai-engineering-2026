@@ -1,0 +1,845 @@
+{
+  "experiment": "impl_library_faq",
+  "config": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 20,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 96,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "versions": {
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "trl": "1.14.2",
+    "torch": "2.11.0+cu130"
+  },
+  "method": "LoRA（量子化なし）",
+  "before": {
+    "label": "before",
+    "n": 25,
+    "format_rate": 0.24,
+    "content_rate": 0.16,
+    "both_rate": 0.16,
+    "seconds": 37.8
+  },
+  "after": {
+    "label": "after",
+    "n": 25,
+    "format_rate": 1.0,
+    "content_rate": 0.96,
+    "both_rate": 0.96,
+    "seconds": 47.1
+  },
+  "regressed": [],
+  "ungrounded_kind": {
+    "休館日に予約した本を受け取る方法はありますか": [
+      "near_miss",
+      "closed"
+    ],
+    "館内に Wi-Fi はありますか": [
+      "unrelated",
+      null
+    ],
+    "延長の手続きはインターネットからできますか": [
+      "near_miss",
+      "renewal"
+    ],
+    "駐車場はありますか": [
+      "unrelated",
+      null
+    ],
+    "館内で飲食はできますか": [
+      "unrelated",
+      null
+    ],
+    "延長するときに利用カードは必要ですか": [
+      "near_miss",
+      "renewal"
+    ],
+    "コピー機は使えますか": [
+      "unrelated",
+      null
+    ],
+    "CD や DVD は何枚まで借りられますか": [
+      "near_miss",
+      "loan"
+    ],
+    "閉館時間の何分前まで入館できますか": [
+      "near_miss",
+      "hours"
+    ],
+    "雑誌の最新号も借りられますか": [
+      "near_miss",
+      "loan"
+    ],
+    "返却が遅れたら罰金はありますか": [
+      "near_miss",
+      "return"
+    ],
+    "ブックポストに CD を入れてもいいですか": [
+      "near_miss",
+      "return"
+    ],
+    "利用カードはどうやって作りますか": [
+      "unrelated",
+      null
+    ],
+    "自習室はありますか": [
+      "unrelated",
+      null
+    ],
+    "館内で携帯電話は使えますか": [
+      "unrelated",
+      null
+    ],
+    "本の寄贈は受け付けていますか": [
+      "unrelated",
+      null
+    ]
+  },
+  "knowledge": [
+    {
+      "質問": "この図書館の館長の名前は何ですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"確認が必要\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "蔵書は全部で何冊ありますか",
+      "FAQ にある": false,
+      "学習前の分類": "asserted",
+      "学習前の出力": "{\"answer\": \"0\", \"needs_review\": false}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "来月のおはなし会はいつですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"確認が必要\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "平日と土日の開館時間を教えてください",
+      "FAQ にある": true,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"平日 9:00〜20:00、土日祝日 9:00〜17:00\"}",
+      "学習後の分類": "asserted",
+      "学習後の出力": "{\"answer\": \"開館時間は平日 9:00〜20:00、土日祝日 9:00〜17:00 です。\", \"needs_review\": false}"
+    }
+  ],
+  "train": {
+    "train_seconds": 225.2,
+    "global_step": 40,
+    "epoch": 20.0,
+    "final_loss": 0.0143,
+    "train_loss_mean": 0.4162,
+    "peak_gpu_allocated_gb": 4.77,
+    "peak_gpu_reserved_gb": 5.56,
+    "trainable_params": 6389760,
+    "all_params": 758782784,
+    "loss_curve": [
+      {
+        "step": 1,
+        "loss": 2.4524173736572266,
+        "grad_norm": 6.886516094207764,
+        "learning_rate": 0.0
+      },
+      {
+        "step": 2,
+        "loss": 2.4352450370788574,
+        "grad_norm": 6.904840469360352,
+        "learning_rate": 3.3333333333333335e-05
+      },
+      {
+        "step": 3,
+        "loss": 2.3871355056762695,
+        "grad_norm": 5.202667713165283,
+        "learning_rate": 6.666666666666667e-05
+      },
+      {
+        "step": 4,
+        "loss": 2.084249496459961,
+        "grad_norm": 3.740461587905884,
+        "learning_rate": 0.0001
+      },
+      {
+        "step": 5,
+        "loss": 1.761354684829712,
+        "grad_norm": 3.216388702392578,
+        "learning_rate": 0.00013333333333333334
+      },
+      {
+        "step": 6,
+        "loss": 1.535697340965271,
+        "grad_norm": 2.9130465984344482,
+        "learning_rate": 0.0001666666666666667
+      },
+      {
+        "step": 7,
+        "loss": 1.1564565896987915,
+        "grad_norm": 2.708265781402588,
+        "learning_rate": 0.0002
+      },
+      {
+        "step": 8,
+        "loss": 0.8131205439567566,
+        "grad_norm": 2.473877429962158,
+        "learning_rate": 0.00019957341762950344
+      },
+      {
+        "step": 9,
+        "loss": 0.5335596799850464,
+        "grad_norm": 2.1615538597106934,
+        "learning_rate": 0.0001982973099683902
+      },
+      {
+        "step": 10,
+        "loss": 0.33470016717910767,
+        "grad_norm": 1.8349199295043945,
+        "learning_rate": 0.00019618256431728194
+      },
+      {
+        "step": 11,
+        "loss": 0.22018370032310486,
+        "grad_norm": 2.3954665660858154,
+        "learning_rate": 0.00019324722294043558
+      },
+      {
+        "step": 12,
+        "loss": 0.150098517537117,
+        "grad_norm": 1.265039324760437,
+        "learning_rate": 0.00018951632913550626
+      },
+      {
+        "step": 13,
+        "loss": 0.0969182550907135,
+        "grad_norm": 0.7739096283912659,
+        "learning_rate": 0.00018502171357296144
+      },
+      {
+        "step": 14,
+        "loss": 0.08295881748199463,
+        "grad_norm": 0.5938089489936829,
+        "learning_rate": 0.000179801722728024
+      },
+      {
+        "step": 15,
+        "loss": 0.06137586012482643,
+        "grad_norm": 0.42791813611984253,
+        "learning_rate": 0.00017390089172206592
+      },
+      {
+        "step": 16,
+        "loss": 0.052177637815475464,
+        "grad_norm": 0.5311678051948547,
+        "learning_rate": 0.00016736956436465573
+      },
+      {
+        "step": 17,
+        "loss": 0.04984503611922264,
+        "grad_norm": 0.3670795261859894,
+        "learning_rate": 0.00016026346363792567
+      },
+      {
+        "step": 18,
+        "loss": 0.028717048466205597,
+        "grad_norm": 0.3436613976955414,
+        "learning_rate": 0.0001526432162877356
+      },
+      {
+        "step": 19,
+        "loss": 0.031633906066417694,
+        "grad_norm": 0.4288562834262848,
+        "learning_rate": 0.00014457383557765386
+      },
+      {
+        "step": 20,
+        "loss": 0.03195439279079437,
+        "grad_norm": 0.6789471507072449,
+        "learning_rate": 0.00013612416661871533
+      },
+      {
+        "step": 21,
+        "loss": 0.025582339614629745,
+        "grad_norm": 0.20576858520507812,
+        "learning_rate": 0.0001273662990072083
+      },
+      {
+        "step": 22,
+        "loss": 0.025629278272390366,
+        "grad_norm": 0.6219550371170044,
+        "learning_rate": 0.00011837495178165706
+      },
+      {
+        "step": 23,
+        "loss": 0.019598910585045815,
+        "grad_norm": 0.1934269666671753,
+        "learning_rate": 0.00010922683594633021
+      },
+      {
+        "step": 24,
+        "loss": 0.022887825965881348,
+        "grad_norm": 0.5298316478729248,
+        "learning_rate": 0.0001
+      },
+      {
+        "step": 25,
+        "loss": 0.01787996105849743,
+        "grad_norm": 0.16260163486003876,
+        "learning_rate": 9.077316405366981e-05
+      },
+      {
+        "step": 26,
+        "loss": 0.021343648433685303,
+        "grad_norm": 0.3921378552913666,
+        "learning_rate": 8.162504821834295e-05
+      },
+      {
+        "step": 27,
+        "loss": 0.018809888511896133,
+        "grad_norm": 0.20872969925403595,
+        "learning_rate": 7.263370099279172e-05
+      },
+      {
+        "step": 28,
+        "loss": 0.0157120730727911,
+        "grad_norm": 0.20042185485363007,
+        "learning_rate": 6.387583338128471e-05
+      },
+      {
+        "step": 29,
+        "loss": 0.016704879701137543,
+        "grad_norm": 0.15475615859031677,
+        "learning_rate": 5.542616442234618e-05
+      },
+      {
+        "step": 30,
+        "loss": 0.01579130068421364,
+        "grad_norm": 0.27688145637512207,
+        "learning_rate": 4.735678371226441e-05
+      },
+      {
+        "step": 31,
+        "loss": 0.015462215058505535,
+        "grad_norm": 0.1690751612186432,
+        "learning_rate": 3.973653636207437e-05
+      },
+      {
+        "step": 32,
+        "loss": 0.015102683566510677,
+        "grad_norm": 0.2359108179807663,
+        "learning_rate": 3.263043563534428e-05
+      },
+      {
+        "step": 33,
+        "loss": 0.014688367024064064,
+        "grad_norm": 0.222456157207489,
+        "learning_rate": 2.6099108277934103e-05
+      },
+      {
+        "step": 34,
+        "loss": 0.01548374816775322,
+        "grad_norm": 0.19949576258659363,
+        "learning_rate": 2.0198277271976052e-05
+      },
+      {
+        "step": 35,
+        "loss": 0.014141492545604706,
+        "grad_norm": 0.16362524032592773,
+        "learning_rate": 1.4978286427038601e-05
+      },
+      {
+        "step": 36,
+        "loss": 0.015134414657950401,
+        "grad_norm": 0.22637638449668884,
+        "learning_rate": 1.0483670864493778e-05
+      },
+      {
+        "step": 37,
+        "loss": 0.013859236612915993,
+        "grad_norm": 0.1683901846408844,
+        "learning_rate": 6.75277705956443e-06
+      },
+      {
+        "step": 38,
+        "loss": 0.014936687424778938,
+        "grad_norm": 0.22312022745609283,
+        "learning_rate": 3.817435682718096e-06
+      },
+      {
+        "step": 39,
+        "loss": 0.014045809395611286,
+        "grad_norm": 0.13837943971157074,
+        "learning_rate": 1.7026900316098215e-06
+      },
+      {
+        "step": 40,
+        "loss": 0.014511127024888992,
+        "grad_norm": 0.21868053078651428,
+        "learning_rate": 4.2658237049655323e-07
+      }
+    ]
+  },
+  "answer_scores": {
+    "before": {
+      "summary": {
+        "test": {
+          "n": 25,
+          "choice_acc": 0.44,
+          "mean_margin": -7.696
+        },
+        "test_grounded": {
+          "n": 15,
+          "choice_acc": 0.7333,
+          "mean_margin": 2.371
+        },
+        "test_ungrounded": {
+          "n": 10,
+          "choice_acc": 0.0,
+          "mean_margin": -22.795
+        },
+        "test_gold_nll": 0.7625,
+        "valid_gold_nll": 0.6522
+      },
+      "rows": [
+        {
+          "question": "利用できる時間帯は？",
+          "gold_needs_review": false,
+          "gold": "hours",
+          "choice": "hours",
+          "margin": 3.602,
+          "gold_nll": 0.2128
+        },
+        {
+          "question": "平日と土日の開館時間を教えてください",
+          "gold_needs_review": false,
+          "gold": "hours",
+          "choice": "hours",
+          "margin": 4.589,
+          "gold_nll": 0.2212
+        },
+        {
+          "question": "図書館の営業時間は何時から何時までですか",
+          "gold_needs_review": false,
+          "gold": "hours",
+          "choice": "hours",
+          "margin": 4.726,
+          "gold_nll": 0.1878
+        },
+        {
+          "question": "定休日は何曜日ですか",
+          "gold_needs_review": false,
+          "gold": "closed",
+          "choice": "closed",
+          "margin": 4.682,
+          "gold_nll": 0.1563
+        },
+        {
+          "question": "毎月決まって休みになる日はありますか",
+          "gold_needs_review": false,
+          "gold": "closed",
+          "choice": "closed",
+          "margin": 8.479,
+          "gold_nll": 0.1473
+        },
+        {
+          "question": "休館日の曜日を教えてください",
+          "gold_needs_review": false,
+          "gold": "closed",
+          "choice": "closed",
+          "margin": 8.922,
+          "gold_nll": 0.1144
+        },
+        {
+          "question": "本を借りられる期間を教えてください",
+          "gold_needs_review": false,
+          "gold": "loan",
+          "choice": "renewal",
+          "margin": -5.155,
+          "gold_nll": 0.4832
+        },
+        {
+          "question": "貸出の上限冊数と期間を教えてください",
+          "gold_needs_review": false,
+          "gold": "loan",
+          "choice": "renewal",
+          "margin": -2.2,
+          "gold_nll": 0.3285
+        },
+        {
+          "question": "1 人で何冊まで借りられますか",
+          "gold_needs_review": false,
+          "gold": "loan",
+          "choice": "renewal",
+          "margin": -2.837,
+          "gold_nll": 0.4781
+        },
+        {
+          "question": "借りた本の期間を延長したいのですが",
+          "gold_needs_review": false,
+          "gold": "renewal",
+          "choice": "renewal",
+          "margin": 1.26,
+          "gold_nll": 0.2645
+        },
+        {
+          "question": "返却期限の延長は何回できますか",
+          "gold_needs_review": false,
+          "gold": "renewal",
+          "choice": "closed",
+          "margin": -0.872,
+          "gold_nll": 0.4247
+        },
+        {
+          "question": "予約が入っている本も延長できますか",
+          "gold_needs_review": false,
+          "gold": "renewal",
+          "choice": "renewal",
+          "margin": 0.392,
+          "gold_nll": 0.3267
+        },
+        {
+          "question": "開館時間外に返したいのですが",
+          "gold_needs_review": false,
+          "gold": "return",
+          "choice": "return",
+          "margin": 0.918,
+          "gold_nll": 0.3011
+        },
+        {
+          "question": "閉館後の返却場所はどこですか",
+          "gold_needs_review": false,
+          "gold": "return",
+          "choice": "return",
+          "margin": 4.051,
+          "gold_nll": 0.332
+        },
+        {
+          "question": "ブックポストはどこにありますか",
+          "gold_needs_review": false,
+          "gold": "return",
+          "choice": "return",
+          "margin": 5.005,
+          "gold_nll": 0.272
+        },
+        {
+          "question": "駐車場はありますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "return",
+          "margin": -23.301,
+          "gold_nll": 1.5372
+        },
+        {
+          "question": "CD や DVD は何枚まで借りられますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "renewal",
+          "margin": -22.696,
+          "gold_nll": 1.5321
+        },
+        {
+          "question": "閉館時間の何分前まで入館できますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "return",
+          "margin": -29.145,
+          "gold_nll": 1.643
+        },
+        {
+          "question": "雑誌の最新号も借りられますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "renewal",
+          "margin": -21.44,
+          "gold_nll": 1.4231
+        },
+        {
+          "question": "返却が遅れたら罰金はありますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "return",
+          "margin": -22.228,
+          "gold_nll": 1.4845
+        },
+        {
+          "question": "ブックポストに CD を入れてもいいですか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "return",
+          "margin": -20.159,
+          "gold_nll": 1.3031
+        },
+        {
+          "question": "利用カードはどうやって作りますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "hours",
+          "margin": -20.071,
+          "gold_nll": 1.3852
+        },
+        {
+          "question": "自習室はありますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "return",
+          "margin": -25.642,
+          "gold_nll": 1.6028
+        },
+        {
+          "question": "館内で携帯電話は使えますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "return",
+          "margin": -20.324,
+          "gold_nll": 1.3917
+        },
+        {
+          "question": "本の寄贈は受け付けていますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "return",
+          "margin": -22.947,
+          "gold_nll": 1.5086
+        }
+      ]
+    },
+    "after": {
+      "summary": {
+        "test": {
+          "n": 25,
+          "choice_acc": 0.96,
+          "mean_margin": 7.789
+        },
+        "test_grounded": {
+          "n": 15,
+          "choice_acc": 0.9333,
+          "mean_margin": 7.083
+        },
+        "test_ungrounded": {
+          "n": 10,
+          "choice_acc": 1.0,
+          "mean_margin": 8.847
+        },
+        "test_gold_nll": 0.0108,
+        "valid_gold_nll": 0.0137
+      },
+      "rows": [
+        {
+          "question": "利用できる時間帯は？",
+          "gold_needs_review": false,
+          "gold": "hours",
+          "choice": "hours",
+          "margin": 8.474,
+          "gold_nll": 0.0003
+        },
+        {
+          "question": "平日と土日の開館時間を教えてください",
+          "gold_needs_review": false,
+          "gold": "hours",
+          "choice": "hours",
+          "margin": 7.804,
+          "gold_nll": 0.0007
+        },
+        {
+          "question": "図書館の営業時間は何時から何時までですか",
+          "gold_needs_review": false,
+          "gold": "hours",
+          "choice": "hours",
+          "margin": 9.094,
+          "gold_nll": 0.0003
+        },
+        {
+          "question": "定休日は何曜日ですか",
+          "gold_needs_review": false,
+          "gold": "closed",
+          "choice": "closed",
+          "margin": 11.24,
+          "gold_nll": 0.0006
+        },
+        {
+          "question": "毎月決まって休みになる日はありますか",
+          "gold_needs_review": false,
+          "gold": "closed",
+          "choice": "closed",
+          "margin": 9.138,
+          "gold_nll": 0.0005
+        },
+        {
+          "question": "休館日の曜日を教えてください",
+          "gold_needs_review": false,
+          "gold": "closed",
+          "choice": "closed",
+          "margin": 11.731,
+          "gold_nll": 0.0006
+        },
+        {
+          "question": "本を借りられる期間を教えてください",
+          "gold_needs_review": false,
+          "gold": "loan",
+          "choice": "loan",
+          "margin": 6.887,
+          "gold_nll": 0.0029
+        },
+        {
+          "question": "貸出の上限冊数と期間を教えてください",
+          "gold_needs_review": false,
+          "gold": "loan",
+          "choice": "loan",
+          "margin": 5.693,
+          "gold_nll": 0.0027
+        },
+        {
+          "question": "1 人で何冊まで借りられますか",
+          "gold_needs_review": false,
+          "gold": "loan",
+          "choice": "loan",
+          "margin": 5.949,
+          "gold_nll": 0.0019
+        },
+        {
+          "question": "借りた本の期間を延長したいのですが",
+          "gold_needs_review": false,
+          "gold": "renewal",
+          "choice": "renewal",
+          "margin": 8.885,
+          "gold_nll": 0.0004
+        },
+        {
+          "question": "返却期限の延長は何回できますか",
+          "gold_needs_review": false,
+          "gold": "renewal",
+          "choice": "renewal",
+          "margin": 9.442,
+          "gold_nll": 0.0004
+        },
+        {
+          "question": "予約が入っている本も延長できますか",
+          "gold_needs_review": false,
+          "gold": "renewal",
+          "choice": "renewal",
+          "margin": 7.835,
+          "gold_nll": 0.0004
+        },
+        {
+          "question": "開館時間外に返したいのですが",
+          "gold_needs_review": false,
+          "gold": "return",
+          "choice": "needs_review",
+          "margin": -5.9,
+          "gold_nll": 0.2228
+        },
+        {
+          "question": "閉館後の返却場所はどこですか",
+          "gold_needs_review": false,
+          "gold": "return",
+          "choice": "return",
+          "margin": 5.762,
+          "gold_nll": 0.001
+        },
+        {
+          "question": "ブックポストはどこにありますか",
+          "gold_needs_review": false,
+          "gold": "return",
+          "choice": "return",
+          "margin": 4.217,
+          "gold_nll": 0.0013
+        },
+        {
+          "question": "駐車場はありますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 10.773,
+          "gold_nll": 0.0031
+        },
+        {
+          "question": "CD や DVD は何枚まで借りられますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 9.407,
+          "gold_nll": 0.003
+        },
+        {
+          "question": "閉館時間の何分前まで入館できますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 4.302,
+          "gold_nll": 0.004
+        },
+        {
+          "question": "雑誌の最新号も借りられますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 10.145,
+          "gold_nll": 0.0029
+        },
+        {
+          "question": "返却が遅れたら罰金はありますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 4.23,
+          "gold_nll": 0.0038
+        },
+        {
+          "question": "ブックポストに CD を入れてもいいですか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 6.341,
+          "gold_nll": 0.0027
+        },
+        {
+          "question": "利用カードはどうやって作りますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 10.403,
+          "gold_nll": 0.0034
+        },
+        {
+          "question": "自習室はありますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 9.477,
+          "gold_nll": 0.0032
+        },
+        {
+          "question": "館内で携帯電話は使えますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 11.331,
+          "gold_nll": 0.0033
+        },
+        {
+          "question": "本の寄贈は受け付けていますか",
+          "gold_needs_review": true,
+          "gold": "needs_review",
+          "choice": "needs_review",
+          "margin": 12.065,
+          "gold_nll": 0.0029
+        }
+      ]
+    },
+    "seconds": 77.1
+  },
+  "executed_training_myself": true
+}
