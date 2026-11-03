@@ -1,0 +1,10 @@
+[model] gemini-3.5-flash-lite
+[質問] RLHFとは何ですか？
+用語集には「RLHF」に関する記載はありません。
+
+第4回
+
+--- trace ---
+[tool call]   search_glossary({'query': 'RLHF'})
+[tool return] search_glossary -> 用語集に「RLHF」は見つかりませんでした。…
+[usage] RunUsage(cost=Decimal('0.0003201'), details={'text_prompt_tokens': 792}, input_text_tokens=792, input_tokens=792, output_tokens=33, requests=2, tool_calls=1)

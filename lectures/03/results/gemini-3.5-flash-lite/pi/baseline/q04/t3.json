@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "engine": "pi",
+  "variant": "baseline",
+  "variant_sha256": "9625d153f72defb4cf75229900ee5fbf20f31ee33265deca35282caeaf65b9a7",
+  "qid": "q04",
+  "kind": "question",
+  "question": "RLHFとは何ですか？",
+  "trial": 3,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "pi",
+    "--mode",
+    "json",
+    "--no-session",
+    "--no-context-files",
+    "--tools",
+    "read,grep,find,ls",
+    "--provider",
+    "google",
+    "--model",
+    "gemini-3.5-flash-lite",
+    "RLHFとは何ですか？"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:45:39+00:00",
+  "finished_at": "2026-11-03T16:45:39+00:00",
+  "duration_s": 3.062,
+  "elapsed_s": 3.063,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "**RLHF**とは、「**Reinforcement Learning from Human Feedback**（人間のフィードバックによる強化学習）」の略称です。\n\n大規模言語モデル（LLM）などのAIモデルを、**人間の好みや価値観により沿った出力ができるように微調整（チューニング）する手法**のことです。\n\n---\n\n### なぜRLHFが必要なのか？\n\n通常の事前学習（Pre-training）を行っただけのAIは、「インターネット上の膨大なテキストの続きを予測する」ように訓練されているため、次のような課題があります：\n1. **有害な情報の出力:** 差別的・暴力的な発言や、危険な行為の教示をしてしまう。\n2. **ハルシネーション（嘘の出力）:** もっともらしい嘘をついてしまう。\n3. **ユーザーの意図とのズレ:** 「要約して」と頼んでも、ただの続きの文章を出してしまうなど、指示（プロンプト）にうまく従えない。\n\nこれらを解決するために、人間のフィードバックを取り入れてAIの振る舞いを修正します。\n\n---\n\n### RLHFの一般的な3ステップ\n\nRLHFは通常、以下の3つのステップで進められます：\n\n1. **教師あり微調整（SFT: Supervised Fine-Tuning）**\n   * 人間（専門家）が作成した「模範的なプロンプトと回答のセット」を使って、AIモデルを微調整します。これにより、AIは「人間との対話の形式やマナー」を学びます。\n\n2. **報酬モデル（Reward Model）の学習**\n   * SFTモデルにいくつかの回答を生成させ、人間がそれらの良し悪しを評価（ランキング付けなど）します。\n   * その人間の好み（フィードバック）のデータを学習させ、**「人間がどれくらいその回答を好むか」をスコア化して予測するAI（報酬モデル）**を作ります。\n\n3. **強化学習（PPOなど）による最適化**\n   * 報酬モデルを「審判」として使い、元となるAIモデル（ポリシーモデル）を強化学習（PPO：Proximal Policy Optimizationなど）で訓練します。\n   * AIは、報酬モデルからより高いスコア（人間が好む回答）をもらえるように出力を調整・最適化していきます。\n\n---\n\n### 代表的な活用例\n* **ChatGPT (OpenAI)**\n* **Claude (Anthropic)**\n* **Gemini (Google)**\n\n現代の主要な対話型AIの多くは、このRLHFや、それに類似する手法（AIによるフィードバックを活用するRLAIFなど）を用いて、安全で役立つアシスタントとしてチューニングされています。",
+  "tool_calls": [],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 1,
+    "tool_calls": 0,
+    "input_tokens": 1269,
+    "output_tokens": 579,
+    "cache_read_tokens": 0,
+    "total_tokens": 1848
+  },
+  "events": 38,
+  "skipped_lines": [],
+  "notes": [
+    "Pi は読み取り専用のツール（read,grep,find,ls）だけを持つ。cwd は data/ だけを複製した一時フォルダ"
+  ],
+  "raw_file": "t3.raw.jsonl",
+  "stderr_file": "t3.stderr.txt",
+  "pi_version": "1.5.0",
+  "auto_retries": [],
+  "session": {
+    "type": "session",
+    "version": 3,
+    "id": "01a1a24d-4c4a-7040-a98e-eaa8640f5857",
+    "timestamp": "2026-11-03T16:45:37.228Z",
+    "cwd": "/tmp/compare-pi-h3ul3cm7"
+  }
+}

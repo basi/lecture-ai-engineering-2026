@@ -1,0 +1,15 @@
+[model] gemini-3.5-flash-lite
+[質問] LoRAの復習がしたいので確認問題を1問出して
+LoRAに関する確認問題です！
+
+**【確認問題】**
+事前学習済みの重みは固定したまま、重みの更新分を小さな行列の積（低ランク行列）で表し、その部分だけを学習する手法の名前は何でしょう？また、その主なメリットを1つ答えてください。
+
+（関連：第2回）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool call]   make_quiz({'lecture': 2})
+[tool return] make_quiz -> {"question": "「事前学習」の意味は？", "answer": "大量の汎用テキストで、次のトークンを予測するようにモデルを学習させる最初の段階。言語の知識や一般的な常識の多くはここで身につく。"}…
+[usage] RunUsage(cost=Decimal('0.0008474'), details={'text_prompt_tokens': 1933}, input_text_tokens=1933, input_tokens=1933, output_tokens=107, requests=3, tool_calls=2)

@@ -1,0 +1,39 @@
+[model] gemini-3.5-flash-lite
+[質問] PEFT・LoRA・QLoRA・量子化の関係を説明して
+PEFT・LoRA・QLoRA・量子化の4つの関係性は、大きな言語モデルを効率よく学習・実行するための階層構造（上位概念と具体的手法）として整理できます。
+
+用語集に基づくそれぞれの定義と関係は以下の通りです：
+
+1. **PEFT（Parameter-Efficient Fine-Tuning）**
+   - **定義**: モデルの全パラメータではなく、ごく一部や追加した小さなパラメータだけを学習する手法の**総称**です。必要なGPUメモリと保存容量を大きく減らせます。
+   - **関係**: 最上位の概念（親カテゴリ）です。
+
+2. **LoRA（Low-Rank Adaptation）**
+   - **定義**: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習する**PEFT手法の代表例**です。
+   - **関係**: PEFTという大きな枠組みの中で最も広く使われている具体的な手法の一つです。
+
+3. **量子化**
+   - **定義**: モデルの重みを少ないビット数（例：16ビットから4ビット）で表し、メモリ使用量や計算量を減らす技術です。精度は少し下がることがあります。
+   - **関係**: モデルのサイズやメモリを削減するための独立した技術ベースですが、後述のQLoRAの基盤技術として使われます。
+
+4. **QLoRA（Quantized LoRA）**
+   - **定義**: ベースモデルの重みを4ビットなどに**量子化**してメモリを節約したうえで、**LoRA**で効率的に学習する手法です。より大きなモデルを小さなGPUで扱えるようにします。
+   - **関係**: 「量子化」と「LoRA」を組み合わせた発展形であり、これも「PEFT」の一種に含まれます。
+
+---
+**まとめ**
+* **PEFT**という大きな方針（一部だけ学習する）があり、その実現手法の一つが**LoRA**です。
+* 一方で**量子化**はビット数を減らしてメモリを節約する技術であり、その量子化とLoRAをドッキングさせたのが**QLoRA**という関係になっています。
+
+関係する回：第2回
+
+--- trace ---
+[tool call]   search_glossary({'query': 'PEFT'})
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool call]   search_glossary({'query': 'QLoRA'})
+[tool call]   search_glossary({'query': '量子化'})
+[tool return] search_glossary -> [{"term": "PEFT", "lecture": 2, "definition": "モデルの全パラメータではなく、ごく一部や追加した小さなパラメータだけを学習する手法の総称。必要なGPUメモリと保存容量を大きく減らせる。LoRAが…
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool return] search_glossary -> [{"term": "QLoRA", "lecture": 2, "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2…
+[tool return] search_glossary -> [{"term": "量子化", "lecture": 2, "definition": "モデルの重みを少ないビット数（例：16ビットから4ビット）で表し、メモリ使用量や計算量を減らす技術。精度は少し下がることがある。", "relate…
+[usage] RunUsage(cost=Decimal('0.0019478'), details={'text_prompt_tokens': 1801}, input_text_tokens=1801, input_tokens=1801, output_tokens=563, requests=2, tool_calls=4)

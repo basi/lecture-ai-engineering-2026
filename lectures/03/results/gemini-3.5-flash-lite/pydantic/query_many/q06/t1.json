@@ -1,0 +1,263 @@
+{
+  "schema": 1,
+  "engine": "pydantic",
+  "variant": "query_many",
+  "variant_sha256": "299c1fb8950c9fe1885b60ac4b14c25b86c6c82f504bbd50d864f6a6719ebc05",
+  "qid": "q06",
+  "kind": "question",
+  "question": "PEFT・LoRA・QLoRA・量子化の関係を説明して",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": "q06:t1",
+  "command": "app.agent.run_with_approval(agent, <質問>, model=build_model(), usage_limits=UsageLimits(request_limit=10)) を agent.override(instructions=<変種>, tools=<変種>) の中で実行（variant=query_many）",
+  "compare_args": [
+    "run",
+    "--level",
+    "basic",
+    "--variant",
+    "no_search_rule,query_many,ending_quiz",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:00:13+00:00",
+  "finished_at": "2026-11-03T16:00:13+00:00",
+  "duration_s": 19.142,
+  "elapsed_s": 19.143,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "PEFT・LoRA・QLoRA・量子化の関係について、それぞれを整理しながら分かりやすく解説します。\n\n### 1. 各用語の定義と役割\n\n* **量子化（Quantization）**\n  * **意味**: モデルの重みデータの表現形式（精度）をビット数の少ない形式（例：32ビットから16ビットや8ビット、4ビットなど）に変換すること。\n  * **効果**: モデルが消費するメモリ（VRAM）を大幅に削減し、サイズの大きいモデルを小さなGPUでも動かせるようにします。\n\n* **PEFT（Parameter-Efficient Fine-Tuning）**\n  * **意味**: 大規模言語モデルのすべてのパラメータを調整するのではなく、**ごく一部のパラメータだけを効率的に学習する手法の総称**です。\n  * **効果**: フルスクラッチや全パラメータのファインチューニングに比べて、必要なGPUメモリや計算コストを劇的に抑えられます。\n\n* **LoRA（Low-Rank Adaptation）**\n  * **意味**: PEFTの代表的な手法の1つ。事前学習済みのモデル本体の重みは固定（凍結）し、モデルに追加した小さな低ランク行列（アダプタ）のパラメータだけを学習します。\n  * **効果**: 学習効率が非常に高く、保存するファイル（アダプタ）のサイズも数MB〜数十MB程度と非常に小さくなります。\n\n* **QLoRA（Quantized LoRA）**\n  * **意味**: **「量子化」と「LoRA」を組み合わせた発展的な手法**です。\n  * **仕組み**: ベースモデルの重みを4ビットなどの低ビットに**量子化**してメモリ消費を極限まで抑えつつ、その上で**LoRA**を使って効率的に学習を行います。\n  * **効果**: 通常なら何枚もの高価なGPUが必要になるような巨大なモデルでも、1枚のコンシューマ向けGPU（A100などだけでなく、VRAMが限られた環境でも）でファインチューニングが可能になります。\n\n---\n\n### 2. まとめ（関係性）\n\n1. **PEFT**という大きな「効率的チューニング手法の概念・枠組み」があります。\n2. そのPEFTの中で最も有名な手法の1つが **LoRA** です。\n3. さらに、そのLoRAのベースモデルに **量子化**（4bitなど）を適用して、さらに少ないメモリで学習できるように拡張したのが **QLoRA** です。\n\n---\n\n関連する回：第2回",
+  "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+  "instructions_sha256": "a5d1d16d4181b27d2526845f92ef9ac357f8fae58575295fd51065bbef58aa17",
+  "instructions_match": true,
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\nAIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n答える前に使うこと。query には調べたい用語をまとめて入れる（例: \"LoRA\"）。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    }
+  ],
+  "tools_sha256": "ac3d4179b870db23792833ab4373d8eb87a5af7305ee4387ad60d095dd938ff2",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_38891",
+      "name": "search_glossary",
+      "args": {
+        "query": "PEFT LoRA QLoRA 量子化"
+      },
+      "result": "[{\"term\": \"PEFT\", \"lecture\": 2, \"definition\": \"モデルの全パラメータではなく、ごく一部や追加した小さなパラメータだけを学習する手法の総称。必要なGPUメモリと保存容量を大きく減らせる。LoRAが代表例。\", \"related\": [\"lora\", \"fine-tuning\"]}, {\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}, {\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}]",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "input_tokens": 1150,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 575,
+    "input_audio_tokens": 0,
+    "cache_audio_read_tokens": 0,
+    "output_audio_tokens": 0,
+    "audio_seconds": 0,
+    "details": {
+      "text_prompt_tokens": 1150
+    },
+    "cost": "0.0017825",
+    "requests": 2,
+    "tool_calls": 1
+  },
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "PEFT・LoRA・QLoRA・量子化の関係を説明して",
+          "timestamp": "2026-11-03T15:59:54.643765Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-03T15:59:54.644198Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a223-7311-71fb-a81f-79ced528dbc6",
+      "conversation_id": "01a1a223-7311-71fb-a81f-79cf93d948f8",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "PEFT LoRA QLoRA 量子化"
+          },
+          "tool_call_id": "call_38891",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TnaEEVPkdpK+xDS6ZFJXg5TqhLdZiusV3JBuZXK6wMk8lNvpm9gsnx584GKEFI5ZxzLnqkUFLzPnwwmE3eJBtRkGGDzSv5c8Mqv0x6u6q3Fi4dETlvMEMUv8="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 411,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 26,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 411
+        },
+        "cost": "0.0001883",
+        "input_text_tokens": 411
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:00:01.998674Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "-wTqavVM_q6Y0w_3r-LpBw",
+      "finish_reason": "stop",
+      "run_id": "01a1a223-7311-71fb-a81f-79ced528dbc6",
+      "conversation_id": "01a1a223-7311-71fb-a81f-79cf93d948f8",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "[{\"term\": \"PEFT\", \"lecture\": 2, \"definition\": \"モデルの全パラメータではなく、ごく一部や追加した小さなパラメータだけを学習する手法の総称。必要なGPUメモリと保存容量を大きく減らせる。LoRAが代表例。\", \"related\": [\"lora\", \"fine-tuning\"]}, {\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}, {\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}]",
+          "tool_call_id": "call_38891",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T16:00:02.000524Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T16:00:02.000919Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a223-7311-71fb-a81f-79ced528dbc6",
+      "conversation_id": "01a1a223-7311-71fb-a81f-79cf93d948f8",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "PEFT・LoRA・QLoRA・量子化の関係について、それぞれを整理しながら分かりやすく解説します。\n\n### 1. 各用語の定義と役割\n\n* **量子化（Quantization）**\n  * **意味**: モデルの重みデータの表現形式（精度）をビット数の少ない形式（例：32ビットから16ビットや8ビット、4ビットなど）に変換すること。\n  * **効果**: モデルが消費するメモリ（VRAM）を大幅に削減し、サイズの大きいモデルを小さなGPUでも動かせるようにします。\n\n* **PEFT（Parameter-Efficient Fine-Tuning）**\n  * **意味**: 大規模言語モデルのすべてのパラメータを調整するのではなく、**ごく一部のパラメータだけを効率的に学習する手法の総称**です。\n  * **効果**: フルスクラッチや全パラメータのファインチューニングに比べて、必要なGPUメモリや計算コストを劇的に抑えられます。\n\n* **LoRA（Low-Rank Adaptation）**\n  * **意味**: PEFTの代表的な手法の1つ。事前学習済みのモデル本体の重みは固定（凍結）し、モデルに追加した小さな低ランク行列（アダプタ）のパラメータだけを学習します。\n  * **効果**: 学習効率が非常に高く、保存するファイル（アダプタ）のサイズも数MB〜数十MB程度と非常に小さくなります。\n\n* **QLoRA（Quantized LoRA）**\n  * **意味**: **「量子化」と「LoRA」を組み合わせた発展的な手法**です。\n  * **仕組み**: ベースモデルの重みを4ビットなどの低ビットに**量子化**してメモリ消費を極限まで抑えつつ、その上で**LoRA**を使って効率的に学習を行います。\n  * **効果**: 通常なら何枚もの高価なGPUが必要になるような巨大なモデルでも、1枚のコンシューマ向けGPU（A100などだけでなく、VRAMが限られた環境でも）でファインチューニングが可能になります。\n\n---\n\n### 2. まとめ（関係性）\n\n1. **PEFT**という大きな「効率的チューニング手法の概念・枠組み」があります。\n2. そのPEFTの中で最も有名な手法の1つが **LoRA** です。\n3. さらに、そのLoRAのベースモデルに **量子化**（4bitなど）を適用して、さらに少ないメモリで学習できるように拡張したのが **QLoRA** です。\n\n---\n\n関連する回：第2回",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TnEhDMU4ulqAYQn5UApr7KNnL2y6/JtNvMD6sdx2RHOOUjpSFhuceakZea6AVlEDKttYRxbFn29AmpAsfFZfcaHRcp8VlRG6GQaE5Xdi0nm1QJbXwtsUVz2I="
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 739,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 549,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 739
+        },
+        "cost": "0.0015942",
+        "input_text_tokens": 739
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:00:13.754523Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "AgXqau--E7mIjuMPxeW7-Ag",
+      "finish_reason": "stop",
+      "run_id": "01a1a223-7311-71fb-a81f-79ced528dbc6",
+      "conversation_id": "01a1a223-7311-71fb-a81f-79cf93d948f8",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ]
+}

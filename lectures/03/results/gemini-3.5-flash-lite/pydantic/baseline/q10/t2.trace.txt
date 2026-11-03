@@ -1,0 +1,21 @@
+[model] gemini-3.5-flash-lite
+[質問] LoRAの復習がしたいので確認問題を1問出して
+LoRAについてのご質問ですね！用語集を確認しました。それでは、第2回の内容から確認問題を出題します。
+
+---
+
+**【確認問題】**
+LoRAとは、事前学習済みの重みを固定したまま、重みの更新分をどのような方法で近似して学習する手法でしょうか？
+
+---
+
+（ヒントが必要なときはいつでもお声がけくださいね！）
+
+関連する回：第2回
+
+--- trace ---
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool call]   make_quiz({'lecture': 2})
+[tool return] make_quiz -> {"question": "「LoRA」の意味は？", "answer": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、…
+[usage] RunUsage(cost=Decimal('0.0008947'), details={'text_prompt_tokens': 1974}, input_text_tokens=1974, input_tokens=1974, output_tokens=121, requests=3, tool_calls=2)

@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "engine": "adk",
+  "variant": "baseline",
+  "variant_sha256": "32b08b882faf9c08509886cb48d79589680f6924b6c4ac8bb4c37eb037f7d5a9",
+  "qid": "q01",
+  "kind": "question",
+  "question": "AIE2026の講座の宿題にある「3レベル」とは何ですか？",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "uv",
+    "run",
+    "--with",
+    "google-adk==2.13.0",
+    "adk",
+    "run",
+    "--in_memory",
+    "--jsonl",
+    "--timeout",
+    "180s",
+    "adk_agent/glossary_agent",
+    "AIE2026の講座の宿題にある「3レベル」とは何ですか？"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "adv-a",
+    "--question",
+    "q01",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T15:46:03+00:00",
+  "finished_at": "2026-11-03T15:46:03+00:00",
+  "duration_s": 29.875,
+  "elapsed_s": 29.875,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "AIE2026における「3レベル」とは、宿題の構成を示す言葉です。\n\n宿題には以下の3つの段階（レベル）が用意されており、受講者はどれか1つに取り組めばその回の宿題は完了となります。原則として採点は行われません。\n\n1. **基礎**：講義内容の確認\n2. **実装**：自分でコードを書く\n3. **発展**：調査や試行\n\n（関連：第1回）",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_36486",
+      "name": "search_glossary",
+      "args": {
+        "query": "3レベル"
+      },
+      "result": "[{\"term\": \"宿題の3レベル\", \"lecture\": 1, \"definition\": \"AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。\", \"related\": [\"answer-md\"]}]",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 2,
+    "tool_calls": 1,
+    "input_tokens": 1085,
+    "output_tokens": 122,
+    "candidates_tokens": 122,
+    "thoughts_tokens": 0,
+    "total_tokens": 1207
+  },
+  "events": 3,
+  "skipped_lines": [
+    "Log setup complete: /tmp/agents_log/agent.20261103_154534.log",
+    "To access latest log: tail -F /tmp/agents_log/agent.latest.log"
+  ],
+  "notes": [
+    "make_quiz の乱数は別プロセスなので、random.seed では揃わない"
+  ],
+  "raw_file": "t1.raw.jsonl",
+  "stderr_file": "t1.stderr.txt"
+}

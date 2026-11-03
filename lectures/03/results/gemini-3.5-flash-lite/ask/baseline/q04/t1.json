@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "engine": "ask",
+  "variant": "baseline",
+  "variant_sha256": "3999532969a297867ff70649a66dfc5d14a2d9a78f2953e2830d798abdeb9ce2",
+  "qid": "q04",
+  "kind": "question",
+  "question": "RLHFとは何ですか？",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": "app.ask.ask(<質問>, [], client=<記録用の包み>)",
+  "compare_args": [
+    "run",
+    "--level",
+    "exercise",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T15:53:10+00:00",
+  "finished_at": "2026-11-03T15:53:10+00:00",
+  "duration_s": 8.198,
+  "elapsed_s": 8.199,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "**RLHF（アール・エル・エイチ・エフ）**とは、**「Reinforcement Learning from Human Feedback（人間フィードバックによる強化学習）」**の略称です。\n\n一言で言うと、**「人間の意見（フィードバック）を報酬として利用し、AI（特に大規模言語モデル）の振る舞いを人間の好みに合わせて微調整する機械学習の手法」**です。\n\nChatGPTをはじめとする現代の生成AIが、自然で、役に立ち、かつ安全な回答をするために不可欠な技術となっています。\n\n---\n\n### なぜRLHFが必要なのか？\n\n通常のAI（ベースモデル膨大なテキストを学習しただけの状態）は、「インターネット上にある文章の続きを予測する」ことだけを学んでいます。そのため、以下のような問題がありました。\n\n*   質問の意図と関係ない回答をする\n*   事実ではない嘘（ハルシネーション）を自信満々に言う\n*   攻撃的、差別的、または危険な内容を出力する\n\nこれらを防ぎ、「人間にとって使いやすく安全なAI」にするためにRLHFが使われます。\n\n---\n\n### RLHFの一般的なプロセス（3ステップ）\n\nRLHFは通常、以下の3つのステップで行われます。\n\n1.  **教師あり微調整（SFT: Supervised Fine-Tuning）**\n    人間の専門家が「このような質問には、こう答えるのが正しい」という模範的なデータを作成し、AIに学習させます。これにより、AIは「対話の形式」を理解します。\n\n2.  **報酬モデル（Reward Model）の訓練**\n    AIが生成した複数の回答に対し、人間の評価者が「どれが一番良いか」に順位を付けます。この人間の「好み（価値観）」を学習した別のAIモデル（報酬モデル）を作ります。いわば「人間の代わりの採点者」です。\n\n3.  **強化学習（Reinforcement Learning）**\n    ここからが本番です。「報酬モデル」を高得点にすることを目的に、AI（言語モデル）自身に何度も回答を生成させます。人間の好みに合致した良い回答を出したAIには「ご褒美（報酬）」を与え、悪い回答には罰を与えることで、AIの出力モデルを最適化していきます。\n\n---\n\n### RLHFのメリット\n\n*   **安全性の向上:** 倫理的に問題のある発言や、犯罪・暴力に関する質問への回答を拒否できるようになります。\n*   **利便性の向上:** ユーザーの意図を汲み取り、簡潔で分かりやすい回答ができるようになります。\n*   **調和（アライメント）:** AIの目標と人間の価値観を一致させることができます。\n\n### まとめ\n\nRLHFは、いわば**「AIをしつける調教師」**のような役割を果たします。AIの優れた処理能力と、人間の倫理観や好みを組み合わせることで、今日私たちが使っている安全で便利なAIが成り立っています。",
+  "tool_calls": [],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 1,
+    "tool_calls": 0,
+    "input_tokens": 7,
+    "output_tokens": 639,
+    "candidates_tokens": 639,
+    "thoughts_tokens": 0,
+    "total_tokens": 646
+  },
+  "metrics_output": "[metrics] latency=8181 ms input_tokens=7 output_tokens=639 status=ok\n"
+}

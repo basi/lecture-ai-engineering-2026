@@ -1,0 +1,24 @@
+[model] gemini-3.5-flash-lite
+[質問] LoRAとQLoRAの違いを調べて学習ログに保存して
+[approval] save_learning_log({"title": "LoRAとQLoRAの違い", "content": "# LoRAとQLoRAの違い\n\n用語集に基づくLoRAとQLoRAの定義と違いのまとめです。\n\n## LoRA\n- **定義**: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。\n- **特徴**: 学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。\n\n## QLoRA\n- **定義**: ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。\n- **特徴**: より大きなモデルを小さなGPUで扱える。\n"}) -> deny
+用語集の情報をもとに、LoRAとQLoRAの違いを整理しました。
+
+### 1. LoRA（Low-Rank Adaptation）
+* **概要**: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT（Parameter-Efficient Fine-Tuning）手法です。
+* **特徴**: 学習するパラメータが少なく、学習結果（アダプタ）も小さなファイルで保存できます。
+
+### 2. QLoRA（Quantized LoRA）
+* **概要**: ベースモデルの重みを4ビットなどに**量子化**してメモリを節約したうえで、LoRAによるファインチューニングを行う手法です。
+* **特徴**: メモリ消費を大きく抑えられるため、より大きなモデルを小さなGPU環境でも扱えるようになります。
+
+---
+（関係する回：第2回）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool call]   search_glossary({'query': 'QLoRA'})
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool return] search_glossary -> [{"term": "QLoRA", "lecture": 2, "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2…
+[tool call]   save_learning_log({'title': 'LoRAとQLoRAの違い', 'content': '# LoRAとQLoRAの違い\n\n用語集に基づくLoRAとQLoRAの定義と違いのまとめです。\n\n## LoRA\n- **定義**: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。\n- **特徴**: 学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。\n\n## QLoRA\n- **定義**: ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。\n- **特徴**: より大きなモデルを小さなGPUで扱える。\n'})
+[tool return] save_learning_log -> 利用者が保存を断りました。保存せずに答えてください。…
+[usage] RunUsage(cost=Decimal('0.0019570'), details={'text_prompt_tokens': 2990}, input_text_tokens=2990, input_tokens=2990, output_tokens=424, requests=3, tool_calls=2)

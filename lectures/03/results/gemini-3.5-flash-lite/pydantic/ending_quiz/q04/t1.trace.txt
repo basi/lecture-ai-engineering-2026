@@ -1,0 +1,13 @@
+[model] gemini-3.5-flash-lite
+[質問] RLHFとは何ですか？
+用語集には「RLHF」に関する記載はありませんでした。
+
+---
+
+**【確認問題】**
+AIエンジニアリングにおいて、事前学習済みのLLM（大規模言語モデル）の性能や安全性をさらに向上させるために、人間の嗜好に合わせてモデルを微調整する代表的な手法は何と呼ばれているでしょうか？
+
+--- trace ---
+[tool call]   search_glossary({'query': 'RLHF'})
+[tool return] search_glossary -> 用語集に「RLHF」は見つかりませんでした。…
+[usage] RunUsage(cost=Decimal('0.0004632'), details={'text_prompt_tokens': 844}, input_text_tokens=844, input_tokens=844, output_tokens=84, requests=2, tool_calls=1)

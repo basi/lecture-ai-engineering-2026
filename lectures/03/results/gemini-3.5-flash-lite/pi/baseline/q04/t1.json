@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "engine": "pi",
+  "variant": "baseline",
+  "variant_sha256": "9625d153f72defb4cf75229900ee5fbf20f31ee33265deca35282caeaf65b9a7",
+  "qid": "q04",
+  "kind": "question",
+  "question": "RLHFとは何ですか？",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "pi",
+    "--mode",
+    "json",
+    "--no-session",
+    "--no-context-files",
+    "--tools",
+    "read,grep,find,ls",
+    "--provider",
+    "google",
+    "--model",
+    "gemini-3.5-flash-lite",
+    "RLHFとは何ですか？"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "adv-b",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:20:19+00:00",
+  "finished_at": "2026-11-03T16:20:19+00:00",
+  "duration_s": 5.048,
+  "elapsed_s": 5.048,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "**RLHF**（アールエルエイチエフ：**Reinforcement Learning from Human Feedback** / 人間フィードバックからの強化学習）とは、AI（特に大規模言語モデル：LLMなど）の学習手法の一つで、**人間の価値観や好みに合致した出力を生成できるようにAIを微調整する技術**です。\n\nChatGPT、Claude、Geminiなどのモダンな対話型AIの多くは、このRLHF（またはそれに類する手法）を用いて安全で自然な対話ができるように訓練されています。\n\n---\n\n### なぜRLHFが必要なのか？\n\n通常の事前学習（大規模なテキストデータを使った次単語予測）だけを行ったAIには、以下のような問題点があります。\n1. **有害なコンテンツや不正確な情報**を出力してしまう。\n2. ユーザーの意図を正確に汲み取れず、**見当違いな回答**をする。\n3. 会話のトーンが不自然だったり、命令に従わなかったりする。\n\nRLHFは、人間が「どちらの回答が良いか」「安全か」を評価（フィードバック）することで、AIを望ましい方向へ導くために導入されました。\n\n---\n\n### RLHFの一般的なプロセス（3つのステップ）\n\nRLHFは主に以下の3段階で行われます。\n\n1. **事前学習と指導微調整（SFT: Supervised Fine-Tuning）**\n   * 大量のテキストで学習させたベースモデルに対し、人間が作成した「模範的なプロンプトと回答のペア」を使って教師あり学習を行い、基本的な対話能力を持たせます。\n\n2. **報酬モデル（Reward Model）の訓練**\n   * SFTモデルに様々なプロンプトを入力し、複数の回答を生成させます。\n   * 人間の評価者がそれらの回答を見比べて、どれが良いか（親切か、安全か、正確か）をランク付けします。\n   * この人間の好みのデータを学習させ、**「人間がどれくらいその回答を好むか」を数値（報酬）で予測するAIモデル（報酬モデル）**を作成します。\n\n3. **強化学習（PPOなどによる最適化）**\n   * 報酬モデルを「審判」として使い、言語モデル（方策モデル）のパラメータを強化学習アルゴリズム（PPOなど）で調整します。\n   * より高い報酬（人間が好む回答）を生成するようAI自身が試行錯誤し、モデルを最適化します。\n\n---\n\n### RLHFのメリット\n* **安全性の向上:** 有害、差別的、危険な回答を抑制できる。\n* **有用性の向上:** ユーザーの質問や指示（プロンプト）により的確に応えられるようになる。\n* **好みの調整:** 「丁寧な口調にしてほしい」「簡潔に答えてほしい」といった人間の好みに合わせやすくなる。\n\n### 最近の動向（DPOなど）\n従来のRLHFは、強化学習（PPO）を使うため学習プロセスが複雑で不安定になりやすいという課題がありました。そのため、最近では強化学習の枠組みを使わずに直接人間の好みデータからモデルを最適化する**DPO (Direct Preference Optimization)** など、よりシンプルで効率的な代替手法も広く使われるようになっています。",
+  "tool_calls": [],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 1,
+    "tool_calls": 0,
+    "input_tokens": 1269,
+    "output_tokens": 706,
+    "cache_read_tokens": 0,
+    "total_tokens": 1975
+  },
+  "events": 45,
+  "skipped_lines": [],
+  "notes": [
+    "Pi は読み取り専用のツール（read,grep,find,ls）だけを持つ。cwd は data/ だけを複製した一時フォルダ"
+  ],
+  "raw_file": "t1.raw.jsonl",
+  "stderr_file": "t1.stderr.txt",
+  "pi_version": "1.5.0",
+  "auto_retries": [],
+  "session": {
+    "type": "session",
+    "version": 3,
+    "id": "01a1a236-0fd1-7258-ab71-33ac6143ed9e",
+    "timestamp": "2026-11-03T16:20:14.419Z",
+    "cwd": "/tmp/compare-pi-536vpfa7"
+  }
+}

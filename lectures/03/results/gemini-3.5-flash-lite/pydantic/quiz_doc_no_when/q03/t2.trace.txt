@@ -1,0 +1,16 @@
+[model] gemini-3.5-flash-lite
+[質問] 第2回の内容から確認問題を1問出して
+第2回から、こちらの確認問題を出題します！
+
+**【問題】**
+「ファインチューニング」の意味や目的について説明してください。
+
+---
+考えてみたら、ぜひあなたの言葉で答えてみてくださいね！
+
+（関連する回：第2回）
+
+--- trace ---
+[tool call]   make_quiz({'lecture': 2})
+[tool return] make_quiz -> {"question": "「ファインチューニング」の意味は？", "answer": "事前学習済みモデルを、特定のタスクや形式に合ったデータで追加学習させること。出力の形式や口調、特定ドメインの振る舞いを身につけさせるのに向く。最新の事…
+[usage] RunUsage(cost=Decimal('0.0004459'), details={'text_prompt_tokens': 878}, input_text_tokens=878, input_tokens=878, output_tokens=73, requests=2, tool_calls=1)

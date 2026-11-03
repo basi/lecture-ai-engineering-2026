@@ -1,0 +1,23 @@
+[model] gemini-3.5-flash-lite
+[質問] 第3回の宿題の save_learning_log のコードを全部書いて
+申し訳ありません。「save_learning_log」という用語は、講座の用語集には登録されていないようです。
+
+第3回ではPydantic AIを用いたエージェントの仕組みやツールについて学びますが、宿題の具体的なコードについては講師や教材の指示をご確認ください。
+
+（関連する回：第3回）
+
+--- trace ---
+[tool call]   get_lecture_summary({'lecture': 3})
+[tool return] get_lecture_summary -> # 第3回 AIエージェント
+
+## この回のねらい
+
+- AIエージェントの基本構造が「モデル＋ループ＋ツール」であることを理解する
+- Pydantic AIで、ツールを使う学習支援エージェントを自分で作り、動かす
+
+## 要点
+
+1.…
+[tool call]   search_glossary({'query': 'save_learning_log'})
+[tool return] search_glossary -> 用語集に「save_learning_log」は見つかりませんでした。…
+[usage] RunUsage(cost=Decimal('0.0009114'), details={'text_prompt_tokens': 2163}, input_text_tokens=2163, input_tokens=2163, output_tokens=105, requests=3, tool_calls=2)

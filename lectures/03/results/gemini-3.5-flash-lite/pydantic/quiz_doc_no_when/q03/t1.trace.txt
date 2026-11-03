@@ -1,0 +1,15 @@
+[model] gemini-3.5-flash-lite
+[質問] 第2回の内容から確認問題を1問出して
+第2回の内容から、用語集に登録されている用語を使った確認問題です！
+
+**【確認問題】**
+「過学習」の意味は？
+
+（答えは少し考えてから、あるいは次のように自分の言葉でまとめてみてくださいね。ヒント：学習データに対してどうなり、未知のデータに対してどうなる状態でしょうか？）
+
+第2回
+
+--- trace ---
+[tool call]   make_quiz({'lecture': 2})
+[tool return] make_quiz -> {"question": "「過学習」の意味は？", "answer": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。"}…
+[usage] RunUsage(cost=Decimal('0.0004701'), details={'text_prompt_tokens': 842}, input_text_tokens=842, input_tokens=842, output_tokens=87, requests=2, tool_calls=1)

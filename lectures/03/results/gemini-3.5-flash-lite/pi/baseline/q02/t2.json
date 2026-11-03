@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "engine": "pi",
+  "variant": "baseline",
+  "variant_sha256": "9625d153f72defb4cf75229900ee5fbf20f31ee33265deca35282caeaf65b9a7",
+  "qid": "q02",
+  "kind": "question",
+  "question": "LoRAとQLoRAの違いは？",
+  "trial": 2,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "pi",
+    "--mode",
+    "json",
+    "--no-session",
+    "--no-context-files",
+    "--tools",
+    "read,grep,find,ls",
+    "--provider",
+    "google",
+    "--model",
+    "gemini-3.5-flash-lite",
+    "LoRAとQLoRAの違いは？"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:36:21+00:00",
+  "finished_at": "2026-11-03T16:36:21+00:00",
+  "duration_s": 8.958,
+  "elapsed_s": 8.958,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "**LoRA（Low-Rank Adaptation）**と**QLoRA（Quantized LoRA）**は、どちらも大規模言語モデル（LLM）を効率的にファインチューニング（追加学習）するための手法（PEFT: Parameter-Efficient Fine-Tuning）ですが、**「モデルの重みを量子化するかどうか」**に決定的な違いがあります。\n\nそれぞれの特徴と主な違いを分かりやすく解説します。\n\n---\n\n### 1. LoRA（Low-Rank Adaptation）とは？\nモデル全体の重みを更新する代わりに、**ごく一部の追加パラメータ（低ランク行列）だけを学習させる**手法です。\n\n* **仕組み:** 元の重み行列 $W$ は固定し、その横にパラメータ数を大幅に削減した2つの小さな行列 $A$ と $B$（低ランク分解）を追加して学習します。出力は $W(x) + \\Delta W(x) = W(x) + BA(x)$ となります。\n* **メリット:**\n  * 学習させるパラメータ数が元のモデルに比べて圧倒的に少ない（数％程度）。\n  * フルファインチューニングに比べて、GPUメモリ消費量や計算コストを大幅に削減できる。\n* **デメリット:**\n  * 元のモデルの重み（通常はFP16やBF16など）をそのままの精度でGPUメモリに載せる必要があるため、ベースとなるモデルが大きい場合（例: 70Bモデルなど）、依然として非常に大容量のVRAM（GPUメモリ）が必要になります。\n\n---\n\n### 2. QLoRA（Quantized LoRA）とは？\nLoRAに**「量子化（Quantization）」**の技術を組み合わせることで、さらにメモリ効率を極限まで高めた手法です。\n\n* **仕組み:**\n  1. **ベースモデルの量子化:** 元のモデルの重みを **4ビット（NormalFloat 4 / NF4）** に量子化して圧縮します。これによりモデルサイズとメモリ消費量が劇的に小さくなります。\n  2. **二重量子化（Double Quantization）:** 量子化の際に発生する誤差を抑えるため、量子化定数自体もさらに量子化する工夫がされています。\n  3. **ページド・オプティマイザ（Paged Optimizers）:** GPUのメモリが不足しそうになった際、CPUのメモリ（メインメモリ）に一時退避させることで、学習中のメモリ枯渇（OOMエラー）を防ぎます。\n  4. その上で、LoRAの仕組みを使って少数のパラメータを学習します（学習時は通常の精度に逆量子化して計算）。\n* **メリット:**\n  * **圧倒的な省メモリ:** 70B（700億パラメータ）クラスの巨大なモデルであっても、コンシューマー向けの高スペックGPU（例: RTX 4090やA10Gなど）単体でファインチューニングが可能になります。\n  * **精度が落ちにくい:** 4ビット量子化を行っているにもかかわらず、多くのタスクでフル精度や通常のLoRAと同等の性能を維持できることが論文で示されています。\n* **デメリット:**\n  * 量子化と逆量子化の処理・オーバーヘッドが挟まるため、LoRA単体に比べて**学習速度（スループット）がやや遅くなる**傾向があります。\n\n---\n\n### 比較まとめ表\n\n| 項目 | LoRA | QLoRA |\n| :--- | :--- | :--- |\n| **ベースモデルの精度** | 通常（FP16 / BF16） | **4ビット量子化（NF4など）** |\n| **必要なGPUメモリ（VRAM）** | 中〜大（モデルサイズによる） | **極小**（LoRAよりさらに数分の1） |\n| **学習コスト・速度** | 高速（通常の学習に近い） | やや遅い（量子化・逆量子化のオーバーヘッドあり） |\n| **モデルの性能（精度）** | 高い | LoRAと同等レベルを維持 |\n| **主な用途** | 比較的小さめのモデル、または十分なVRAMがある環境 | 巨大モデル（13B〜70B以上）を限られたGPU環境で回したい場合 |\n\n### 選び方の目安\n* **LoRA:** 十分なVRAM（A100やH100、あるいは比較的小さな7B/8Bモデル）があり、学習速度を優先したい場合。\n* **QLoRA:** 手元にある限られたVRAM（例: 24GBのGPUなど）で、より大きなモデル（13B, 34B, 70Bなど）をファインチューニングしたい場合。",
+  "tool_calls": [],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 1,
+    "tool_calls": 0,
+    "input_tokens": 1272,
+    "output_tokens": 1015,
+    "cache_read_tokens": 0,
+    "total_tokens": 2287
+  },
+  "events": 56,
+  "skipped_lines": [],
+  "notes": [
+    "Pi は読み取り専用のツール（read,grep,find,ls）だけを持つ。cwd は data/ だけを複製した一時フォルダ"
+  ],
+  "raw_file": "t2.raw.jsonl",
+  "stderr_file": "t2.stderr.txt",
+  "pi_version": "1.5.0",
+  "auto_retries": [],
+  "session": {
+    "type": "session",
+    "version": 3,
+    "id": "01a1a244-adbd-7719-8edc-def91c650998",
+    "timestamp": "2026-11-03T16:36:12.351Z",
+    "cwd": "/tmp/compare-pi-y37uppi8"
+  }
+}

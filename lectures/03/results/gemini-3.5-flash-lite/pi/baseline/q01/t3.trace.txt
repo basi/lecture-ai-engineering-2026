@@ -1,0 +1,34 @@
+[model] gemini-3.5-flash-lite
+[質問] AIE2026の講座の宿題にある「3レベル」とは何ですか？
+[command] pi --mode json --no-session --no-context-files --tools read,grep,find,ls --provider google --model gemini-3.5-flash-lite <質問>
+AIE2026の講座における「宿題の3レベル」とは、各回の宿題の構成・難易度の段階を指します。
+
+`data/glossary.json` によると、以下の3段階で構成されています：
+
+1. **基礎**：講義内容の確認
+2. **実装**：自分でコードを書く
+3. **発展**：調査や試行
+
+### 特徴
+- 原則として、**どれか1つに取り組めばその回の宿題は完了**となります。
+- 原則として採点は行われません。
+- 取り組んだレベルや結果、気づきなどは `lectures/NN/answer.md`（解答ファイル）に記入して提出します。
+
+--- trace ---
+[tool call]   find({"pattern": "*"})
+[tool return] find -> data/
+data/glossary.json
+data/lectures/
+data/lectures/01.md
+data/lectures/02.md
+data/lectures/03.md
+data/lectures/05.md…
+[tool call]   grep({"pattern": "3レベル"})
+[tool return] grep -> data/glossary.json:430:       "term": "宿題の3レベル",
+data/glossary.json:431:       "aliases": ["3レベル", "宿題レベル"],…
+[tool call]   read({"limit": 100, "path": "data/glossary.json", "offset": 410})
+[tool return] read ->     {
+      "id": "human-in-the-loop",
+      "term": "Human-in-the-loop",
+      "aliases": ["HITL", "人間による承認", "確認を挟む"],…
+[usage] {'requests': 4, 'tool_calls': 3, 'input_tokens': 7228, 'output_tokens': 216, 'cache_read_tokens': 0, 'total_tokens': 7444}
