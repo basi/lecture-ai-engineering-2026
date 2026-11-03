@@ -716,6 +716,28 @@ def test_git_state_looks_only_at_the_files_that_affect_the_run(tmp_path):
     assert compare.git_state(repo)["dirty"] is True
 
 
+def test_git_state_ignores_the_session_folder_that_adk_run_creates(tmp_path):
+    """対話の adk run は、会話を adk_agent/glossary_agent/.adk/ に保存する。adk_agent/.gitignore が無視するので、確認は止まらない。"""
+    repo = tmp_path / "repo"
+    for name in ("app/agent.py", "adk_agent/glossary_agent/agent.py", "lectures/03/compare.py", "lectures/03/conditions.toml"):
+        (repo / name).parent.mkdir(parents=True, exist_ok=True)
+        (repo / name).write_text("元\n", encoding="utf-8")
+    real_ignore = compare.REPO / "adk_agent" / ".gitignore"  # 本物の .gitignore を、そのまま commit しておく
+    (repo / "adk_agent/.gitignore").write_text(real_ignore.read_text(encoding="utf-8"), encoding="utf-8")
+    git(repo, "init", "-q")
+    git(repo, "add", "-A")
+    git(repo, "commit", "-q", "-m", "init")
+    assert compare.git_state(repo)["dirty"] is False
+
+    session = repo / "adk_agent/glossary_agent/.adk/session.db"
+    session.parent.mkdir(parents=True)
+    session.write_text("会話の中身\n", encoding="utf-8")
+    assert compare.git_state(repo)["dirty"] is False  # .adk/ は無視される
+
+    (repo / "adk_agent/glossary_agent/new.py").write_text("新規\n", encoding="utf-8")
+    assert compare.git_state(repo)["dirty"] is True  # ほかの新しいファイルは、今までどおり未コミットの変更
+
+
 def test_preflight_refuses_a_dirty_tree_unless_allowed_or_dry_run(tmp_path):
     cfg = compare.load_config()
     git_info = {"commit": "abc", "dirty": True, "dirty_files": [" M app/agent.py"]}
@@ -728,6 +750,26 @@ def test_preflight_refuses_a_dirty_tree_unless_allowed_or_dry_run(tmp_path):
 
     compare.preflight(ctx, plan, SimpleNamespace(allow_dirty=True))
     compare.preflight(dataclasses.replace(ctx, dry_run=True), plan, SimpleNamespace(allow_dirty=False))
+
+
+def test_preflight_explains_untracked_files_only_when_there_are_some(tmp_path):
+    cfg = compare.load_config()
+    plan = compare.build_plan(cfg, levels=["exercise"], engines=["ask"])
+    note = "?? は git が追跡していないファイル（実行で作られたものなど）。中身を確かめて、不要なら消してください。"
+
+    def stop_message(dirty_files):
+        git_info = {"commit": "abc", "dirty": True, "dirty_files": dirty_files}
+        ctx = compare.Context(cfg=cfg, out=tmp_path, model="m", pi_model="m", git=git_info)
+        with pytest.raises(compare.StopRun) as stopped:
+            compare.preflight(ctx, plan, SimpleNamespace(allow_dirty=False))
+        assert stopped.value.code == 1  # ?? の行があっても、確認は厳しいまま（止まる）
+        return stopped.value.message
+
+    only_untracked = stop_message(["?? adk_agent/glossary_agent/.adk/"])  # 実際に起きた表示
+    assert note in only_untracked and "?? adk_agent/glossary_agent/.adk/" in only_untracked
+    mixed = stop_message([" M app/agent.py", "?? adk_agent/glossary_agent/new.py"])
+    assert note in mixed and " M app/agent.py" in mixed
+    assert note not in stop_message([" M app/agent.py"])
 
 
 def test_run_without_an_api_key_stops_with_instructions(tmp_path, monkeypatch, capsys):

@@ -151,6 +151,7 @@ PYTHONPATH=. uv run --with google-adk==2.13.0 adk run adk_agent/glossary_agent
 
 - `[user]:` のあとに、演習と同じ質問（例：`AIE2026の講座の宿題にある「3レベル」とは何ですか？`）を入れて Enter を押す。終わるときは `exit` と入力する。
 - 画面の出力は、選んでコピーし、`lectures/03/results/cli/adk_run.txt` に貼って残す（対話なので `tee` は付けない）。
+- 対話の `adk run` は、会話を `adk_agent/glossary_agent/.adk/` に保存する。git では無視する設定（`adk_agent/.gitignore`）なので、commit されず、`compare.py` も止まらない。`compare.py` の ADK は `--in_memory` で動くので、このフォルダは使わない。
 - そのあと、比較用スクリプトでは、まず 1 問だけ流して、記録の形を確かめる。
 
   ```bash
@@ -232,7 +233,7 @@ git push
 | 1 日の上限で止まった（終了コード 2） | そこまでの結果を push し、日本時間 17 時以降に、同じコマンドで続きから実行する |
 | 503（モデルが混み合っている）が続く | 時間をおいて再実行する。それでも続くときは、`AIE_MODEL=gemini-3.1-flash-lite` を付けて実行する（スライドの対処）。ただし、結果は別のモデルのフォルダに入り、表も分かれる。その巡は全部の条件を同じモデルでやり直すことになるので、切り替える前に知らせる |
 | 「環境変数 GEMINI_API_KEY が見つかりません」 | GitHub の Settings → Codespaces → Secrets で、`GEMINI_API_KEY` の Repository access に自分の fork が入っているかを確かめる。登録や変更のあとは、Codespace を開き直す（左下の「Codespaces」→「Stop Current Codespace」→ もう一度開く） |
-| 未コミットの変更があると言われて止まった | `git status` で、`app/`・`adk_agent/`・`compare.py`・`conditions.toml` の変更を確かめる。意図した変更なら commit してから実行する。意図しない変更なら `git restore <ファイル>` で戻す |
+| 未コミットの変更があると言われて止まった | `git status` で、`app/`・`adk_agent/`・`compare.py`・`conditions.toml` の変更を確かめる。意図した変更なら commit してから実行する。意図しない変更なら `git restore <ファイル>` で戻す。`??` の行は、git が追跡していないファイル（実行で作られたものなど）なので、中身を確かめて、不要なら消す。`adk_agent/glossary_agent/.adk/` が出たときは、対話の `adk run` が作った会話のフォルダなので、`git pull --no-rebase` で lec03 を最新にすれば無視される（消さなくてよい） |
 | `variants` で、差分が 1 か所でないと警告が出た | 先に進まずに知らせる（変種の定義を直す） |
 | 手順5で `make_quiz` が呼ばれない | INSTRUCTIONS を書き換える前に知らせる（基礎の基準が変わるため） |
 | ADK の初回が遅い | 初回は ADK の取得に 1 分ほどかかる。2 回目からは速い |

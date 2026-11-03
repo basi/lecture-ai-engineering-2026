@@ -1216,10 +1216,13 @@ def preflight(ctx: Context, plan: list[Condition], args) -> None:
     """API を呼ぶ前に、止めるべきことを確かめる。"""
     if not ctx.dry_run and not args.allow_dirty and ctx.git["dirty"]:
         files = "\n".join(f"  {line}" for line in ctx.git["dirty_files"])
+        untracked = ""
+        if any(line.startswith("??") for line in ctx.git["dirty_files"]):
+            untracked = "\n?? は git が追跡していないファイル（実行で作られたものなど）。中身を確かめて、不要なら消してください。"
         raise StopRun(
             1,
             "app/・adk_agent/・compare.py・conditions.toml に、未コミットの変更があります。\n"
-            f"{files}\n結果がどの commit のものかを確かにするため、commit してから実行してください"
+            f"{files}{untracked}\n結果がどの commit のものかを確かにするため、commit してから実行してください"
             "（確認を省くときは --allow-dirty）。",
         )
     for variant in sorted({c.variant for c in plan if c.engine == "pydantic"}):
