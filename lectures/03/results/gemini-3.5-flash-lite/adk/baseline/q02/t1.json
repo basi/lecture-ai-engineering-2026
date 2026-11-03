@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "engine": "adk",
+  "variant": "baseline",
+  "variant_sha256": "32b08b882faf9c08509886cb48d79589680f6924b6c4ac8bb4c37eb037f7d5a9",
+  "qid": "q02",
+  "kind": "question",
+  "question": "LoRAとQLoRAの違いは？",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "uv",
+    "run",
+    "--with",
+    "google-adk==2.13.0",
+    "adk",
+    "run",
+    "--in_memory",
+    "--jsonl",
+    "--timeout",
+    "180s",
+    "adk_agent/glossary_agent",
+    "LoRAとQLoRAの違いは？"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "adv-a",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:12:06+00:00",
+  "finished_at": "2026-11-03T16:12:06+00:00",
+  "duration_s": 23.152,
+  "elapsed_s": 23.153,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "LoRAとQLoRAの違いは以下の通りです。\n\n* **LoRA**: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列（低ランク行列）で表し、その小さな行列だけを学習してパラメータ数やメモリを抑えるPEFT手法です。\n* **QLoRA**: ベースモデルの重みを4ビットなどに量子化してメモリを大幅に節約したうえで、LoRAによる学習を行う手法です。これにより、さらに大きなモデルを小さなGPU環境でも扱えるようになります。\n\n（第2回）",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_102542",
+      "name": "search_glossary",
+      "args": {
+        "query": "LoRA"
+      },
+      "result": "[{\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}, {\"term\": \"ランク（LoRAのr）\", \"lecture\": 2, \"definition\": \"LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。\", \"related\": [\"lora\"]}, {\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}]",
+      "outcome": "success"
+    },
+    {
+      "order": 2,
+      "response_index": 1,
+      "tool_call_id": "call_102543",
+      "name": "search_glossary",
+      "args": {
+        "query": "QLoRA"
+      },
+      "result": "[{\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}, {\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}]",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 2,
+    "tool_calls": 2,
+    "input_tokens": 1496,
+    "output_tokens": 161,
+    "candidates_tokens": 161,
+    "thoughts_tokens": 0,
+    "total_tokens": 1657
+  },
+  "events": 3,
+  "skipped_lines": [
+    "Log setup complete: /tmp/agents_log/agent.20261103_161143.log",
+    "To access latest log: tail -F /tmp/agents_log/agent.latest.log"
+  ],
+  "notes": [
+    "make_quiz の乱数は別プロセスなので、random.seed では揃わない"
+  ],
+  "raw_file": "t1.raw.jsonl",
+  "stderr_file": "t1.stderr.txt"
+}

@@ -1,0 +1,12 @@
+[model] gemini-3.5-flash-lite
+[質問] RAGとは何ですか？
+用語集にはRAGに関する直接的な定義や記載がありませんでした。（※なお、近接する「ファインチューニング」の用語説明の中には、最新の事実を覚える用途にはRAGで外部データを参照させるほうが向く、という言及があります。）
+
+推測で断定することは避けますが、一般的な概念としてRAG（Retrieval-Augmented Generation / 検索拡張生成）は、大規模言語モデルが文章を生成する際に、外部のデータベースやドキュメントから関連情報を「検索」し、その情報を参考にしてより正確で最新の回答を「生成」する技術のことを指します。
+
+（関連する回については、外部データを扱う文脈として、第2回や周辺の講義が関わることがあります）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'RAG'})
+[tool return] search_glossary -> [{"term": "ファインチューニング", "lecture": 2, "definition": "事前学習済みモデルを、特定のタスクや形式に合ったデータで追加学習させること。出力の形式や口調、特定ドメインの振る舞いを身につけさせるの…
+[usage] RunUsage(cost=Decimal('0.0007301'), details={'text_prompt_tokens': 942}, input_text_tokens=942, input_tokens=942, output_tokens=179, requests=2, tool_calls=1)

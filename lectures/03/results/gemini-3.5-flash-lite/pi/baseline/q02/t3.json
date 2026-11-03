@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "engine": "pi",
+  "variant": "baseline",
+  "variant_sha256": "9625d153f72defb4cf75229900ee5fbf20f31ee33265deca35282caeaf65b9a7",
+  "qid": "q02",
+  "kind": "question",
+  "question": "LoRAとQLoRAの違いは？",
+  "trial": 3,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "pi",
+    "--mode",
+    "json",
+    "--no-session",
+    "--no-context-files",
+    "--tools",
+    "read,grep,find,ls",
+    "--provider",
+    "google",
+    "--model",
+    "gemini-3.5-flash-lite",
+    "LoRAとQLoRAの違いは？"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:45:28+00:00",
+  "finished_at": "2026-11-03T16:45:28+00:00",
+  "duration_s": 3.958,
+  "elapsed_s": 3.958,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "**LoRA (Low-Rank Adaptation)** と **QLoRA (Quantized LoRA)** はどちらも、巨大な言語モデル（LLM）を効率的にファインチューニング（追加学習）するための手法ですが、最大の違いは**「モデルの重みを何ビットで読み込んで学習するか（量子化の有無）」**にあります。\n\n主な違いを分かりやすくまとめました。\n\n---\n\n### 1. 概要と主な違い\n\n| 項目 | LoRA (Low-Rank Adaptation) | QLoRA (Quantized LoRA) |\n| :--- | :--- | :--- |\n| **ベースモデルの精度** | 通常の精度（通常はFP16 / BF16） | **4-bit** に極限まで量子化（圧縮） |\n| **アダプタの精度** | 通常の精度（FP16 / BF16） | 通常の精度（FP16 / BF16）※ここは高精度を維持 |\n| **VRAM（GPUメモリ）消費** | 多い（モデルサイズが大きいと高いGPUが必要） | **非常に少ない**（16分の1などに削減可能） |\n| **学習コスト / 速度** | 高速だが、大きなGPUメモリが必要 | LoRAと同等の速度（量子化解除のオーバーヘッドはごくわずか） |\n| **学習性能（精度）** | フルファインチューニングと同等以上 | 通常のLoRAやフルファインチューニングと**同等の精度を維持** |\n\n---\n\n### 2. それぞれの仕組みと特徴\n\n#### ■ LoRA (Low-Rank Adaptation)\n* **仕組み**: 巨大なモデルの元の重み（パラメータ）は固定（凍結）し、モデルの各層に「低ランク行列（LoRAモジュール）」という小さな追加パラメータだけを挿入してそこだけを学習します。\n* **メモリ消費**: パラメータの数は劇的に減りますが、**モデル本体をそのまま（FP16/BF16など）GPUメモリに載せる必要がある**ため、7B（70億）や13Bといったモデルを動かすにはそれなりのVRAMを持つGPU（A100やRTX 3090/4090など）が必要です。\n\n#### ■ QLoRA (Quantized LoRA)\n* **仕組み**: LoRAの考え方をベースにしつつ、**ベースモデルの重みを4-bit（NormalFloat4という特殊な4ビット形式）に強力に量子化**してメモリを節約します。\n* **工夫点**:\n    * **NF4 (NormalFloat4)**: 情報ロスが少ない4ビット量子化。\n    * **ダブル量子化 (Double Quantization)**: 量子化定数自体も量子化してさらにメモリを節約。\n    * **ページド・オプティマイザ (Paged Optimizers)**: CPUのメモリを賢く使ってGPUメモリのスパイク（OOMエラー）を防ぐ。\n* **メモリ消費**: 7Bモデルであれば約6〜8GB程度のVRAM（コンシューマー向けの一般的なGPUやGoogle Colabの無料・有料枠など）でも学習が可能になります。\n\n---\n\n### 3. まとめ：どちらを選ぶべきか？\n\n* **QLoRAを選ぶべきケース**:\n    * 手元にあるGPUのVRAMが少ない（例：コンシューマー向けGPUで大きめのモデルをファインチューニングしたい）。\n    * コストを抑えて、限られたハードウェア環境で大規模モデル（13Bや70Bなど）を回したい。\n* **LoRAを選ぶべきケース**:\n    * 十分なVRAM（A100やH100など）が潤沢にあり、量子化によるわずかな性能低下やオーバーヘッドを完全に無くしたい場合。",
+  "tool_calls": [],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 1,
+    "tool_calls": 0,
+    "input_tokens": 1273,
+    "output_tokens": 819,
+    "cache_read_tokens": 0,
+    "total_tokens": 2092
+  },
+  "events": 48,
+  "skipped_lines": [],
+  "notes": [
+    "Pi は読み取り専用のツール（read,grep,find,ls）だけを持つ。cwd は data/ だけを複製した一時フォルダ"
+  ],
+  "raw_file": "t3.raw.jsonl",
+  "stderr_file": "t3.stderr.txt",
+  "pi_version": "1.5.0",
+  "auto_retries": [],
+  "session": {
+    "type": "session",
+    "version": 3,
+    "id": "01a1a24d-1d8e-76d8-a29f-c75b6b98f4be",
+    "timestamp": "2026-11-03T16:45:25.265Z",
+    "cwd": "/tmp/compare-pi-p1z2ugb9"
+  }
+}

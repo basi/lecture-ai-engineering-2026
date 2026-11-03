@@ -1,0 +1,24 @@
+[model] gemini-3.5-flash-lite
+[質問] MCP・ADK・Pi はそれぞれ何ですか？
+「MCP」「ADK」「Pi」について、講座の用語集を基にそれぞれ解説します。
+
+* **MCP（Model Context Protocol）**
+  * **定義**: AIアプリと外部のツールやデータソースをつなぐためのオープンな標準プロトコルです。MCPサーバーとして公開したツールは、対応する様々なエージェントやエディタ（MCPクライアント）から共通の方法で使えるようになります。
+  * **関連する回**: 第3回、第5回
+
+* **ADK（Agent Development Kit）**
+  * **定義**: Googleが公開しているオープンソースのエージェント開発フレームワークです。Geminiとの統合が深いのが特徴で、2.0で1.x系から大きな変更が入っています。
+  * **関連する回**: 第3回
+
+* **Pi**
+  * **定義**: ターミナルで動くオープンソース（MITライセンス）のコーディングエージェントです。最小限の機能とシステムプロンプトで構成されており、利用者が拡張して使う設計になっています。2026年10月に1.0が公開されました（npmのパッケージ名は `@earendil-works/pi-coding-agent`）。
+  * **関連する回**: 第3回
+
+（関係する回：第3回、第5回）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'MCP ADK Pi'})
+[tool return] search_glossary -> [{"term": "ADK（Agent Development Kit）", "lecture": 3, "definition": "Googleが公開しているオープンソースのエージェント開発フレームワーク。Geminiとの統合が深い。…
+[tool call]   search_glossary({'query': 'Pi'})
+[tool return] search_glossary -> [{"term": "Pi", "lecture": 3, "definition": "ターミナルで動くオープンソース（MITライセンス）のコーディングエージェント。最小限の機能とシステムプロンプトで構成し、利用者が拡張して使う設計。20…
+[usage] RunUsage(cost=Decimal('0.0013864'), details={'text_prompt_tokens': 1963}, input_text_tokens=1963, input_tokens=1963, output_tokens=319, requests=3, tool_calls=2)

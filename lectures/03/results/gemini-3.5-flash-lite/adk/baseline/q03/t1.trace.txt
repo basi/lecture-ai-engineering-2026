@@ -1,0 +1,16 @@
+[model] gemini-3.5-flash-lite
+[質問] 第2回の内容から確認問題を1問出して
+[command] uv run --with google-adk==2.13.0 adk run --in_memory --jsonl --timeout 180s adk_agent/glossary_agent <質問>
+第2回の内容から確認問題を出題します！
+
+**【確認問題】**
+「事前学習」の意味は何でしょうか？
+
+考えてみてくださいね。分からないときはヒントを出しますので、お気軽に声をかけてください！
+
+（関係する回：第2回）
+
+--- trace ---
+[tool call]   make_quiz({"lecture": 2})
+[tool return] make_quiz -> {"question": "「事前学習」の意味は？", "answer": "大量の汎用テキストで、次のトークンを予測するようにモデルを学習させる最初の段階。言語の知識や一般的な常識の多くはここで身につく。"}…
+[usage] {'requests': 2, 'tool_calls': 1, 'input_tokens': 1021, 'output_tokens': 71, 'candidates_tokens': 71, 'thoughts_tokens': 0, 'total_tokens': 1092}

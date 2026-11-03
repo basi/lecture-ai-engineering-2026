@@ -1,0 +1,17 @@
+[model] gemini-3.5-flash-lite
+[質問] RLHFとは何ですか？
+用語集を検索いたしましたが、用語集には「RLHF」についての記載はありませんでした。
+
+一般のAIエンジニアリングの文脈において、RLHF（Reinforcement Learning from Human Feedback：人間フィードバックによる強化学習）は、人間の好みに合わせて大規模言語モデル（LLM）などのAIの振る舞いを調整するための強化学習手法を指します。人間の評価を報酬シグナルとしてモデルを微調整し、より有用で安全な回答を出力できるようにするために用いられます。
+
+---
+
+それでは、本日の学習内容についての確認問題です。
+
+**【確認問題】**
+AIモデルを人間の好みに合わせるために、人間のフィードバックを活用して強化学習を行う手法の略称は何でしょうか？
+
+--- trace ---
+[tool call]   search_glossary({'query': 'RLHF'})
+[tool return] search_glossary -> 用語集に「RLHF」は見つかりませんでした。…
+[usage] RunUsage(cost=Decimal('0.0006882'), details={'text_prompt_tokens': 844}, input_text_tokens=844, input_tokens=844, output_tokens=174, requests=2, tool_calls=1)

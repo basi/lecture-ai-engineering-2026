@@ -1,0 +1,12 @@
+[model] gemini-3.5-flash-lite
+[質問] 第4回では何を学びますか？
+第4回の要点は現在の講座スケジュールには登録されていないようです（用意されている回：第1〜3回、第5回）。
+
+第4回についてのご案内はできかねますが、他の回の内容であればお答えできますので、気になる回があれば教えてください。
+
+（関連する回：第4回）
+
+--- trace ---
+[tool call]   get_lecture_summary({'lecture': 4})
+[tool return] get_lecture_summary -> 第4回の要点はまだありません。用意されている回: 01, 02, 03, 05…
+[usage] RunUsage(cost=Decimal('0.0004616'), details={'text_prompt_tokens': 872}, input_text_tokens=872, input_tokens=872, output_tokens=80, requests=2, tool_calls=1)

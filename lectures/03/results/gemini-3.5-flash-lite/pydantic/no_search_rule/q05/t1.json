@@ -1,0 +1,345 @@
+{
+  "schema": 1,
+  "engine": "pydantic",
+  "variant": "no_search_rule",
+  "variant_sha256": "b1d888087121427a68eed92a562cfc223c8f9090c570c5195f379f5792a1ad76",
+  "qid": "q05",
+  "kind": "question",
+  "question": "RAGとは何ですか？",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": "q05:t1",
+  "command": "app.agent.run_with_approval(agent, <質問>, model=build_model(), usage_limits=UsageLimits(request_limit=10)) を agent.override(instructions=<変種>, tools=<変種>) の中で実行（variant=no_search_rule）",
+  "compare_args": [
+    "run",
+    "--level",
+    "basic",
+    "--variant",
+    "no_search_rule,query_many,ending_quiz",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T15:58:30+00:00",
+  "finished_at": "2026-11-03T15:58:30+00:00",
+  "duration_s": 12.746,
+  "elapsed_s": 12.747,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "申し訳ありません。現在の用語集には「RAG」に関する直接の定義や説明は登録されていないようです。\n\nAIエンジニアリングにおいて、RAG（Retrieval-Augmented Generation：検索拡張生成）は、大規模言語モデル（LLM）が回答を生成する際、事前に外部のデータベースやドキュメントから関連情報を検索し、その情報を踏まえて回答を作る仕組みのことです。これにより、モデルが持っていない最新の情報や、社内マニュアルなどの特定ドメインの知識に基づいた正確な回答が可能になります。\n\n関連する学習内容や詳細な位置づけについては、今後の講義や関連回（例えば、外部知識の活用やモデルの拡張を扱う回）で触れられることがあります。",
+  "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+  "instructions_sha256": "cf51e95597c9a3653b9a761febf0cf70517575e9ee9d06c887f0f68b8d660564",
+  "instructions_match": true,
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\nAIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n答える前に使うこと。query には調べたい用語を1つだけ入れる（例: \"LoRA\"）。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    }
+  ],
+  "tools_sha256": "4dad30244d39518bdbf94891057db030b149e7bc10d6813731201a380b7feacb",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_75768",
+      "name": "search_glossary",
+      "args": {
+        "query": "RAG"
+      },
+      "result": "[{\"term\": \"ファインチューニング\", \"lecture\": 2, \"definition\": \"事前学習済みモデルを、特定のタスクや形式に合ったデータで追加学習させること。出力の形式や口調、特定ドメインの振る舞いを身につけさせるのに向く。最新の事実を覚えさせる用途には、ツールやRAGで外部データを参照させるほうが向くことが多い。\", \"related\": [\"sft\", \"peft\", \"lora\"]}]",
+      "outcome": "success"
+    },
+    {
+      "order": 2,
+      "response_index": 2,
+      "tool_call_id": "call_113799",
+      "name": "search_glossary",
+      "args": {
+        "query": "検索拡張生成"
+      },
+      "result": "用語集に「検索拡張生成」は見つかりませんでした。",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "input_tokens": 1457,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 190,
+    "input_audio_tokens": 0,
+    "cache_audio_read_tokens": 0,
+    "output_audio_tokens": 0,
+    "audio_seconds": 0,
+    "details": {
+      "text_prompt_tokens": 1457
+    },
+    "cost": "0.0009121",
+    "requests": 3,
+    "tool_calls": 2
+  },
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "RAGとは何ですか？",
+          "timestamp": "2026-11-03T15:58:17.915514Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-03T15:58:17.915795Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a221-f93a-75a6-a3f4-e38928a0fa29",
+      "conversation_id": "01a1a221-f93a-75a6-a3f4-e38a03134a3b",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "RAG"
+          },
+          "tool_call_id": "call_75768",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TXqnZdbLj88JmcN8sbJesMhjOXIoRhmyFIZUMSsZJ+14il4hK9IcsF6qP0tSSLjsCLaZlcHFNzBQaIW3d9s4ue90X8TomH/P5tq2ZLMUElxi6d5uva+tFnhQ="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 379,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 18,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 379
+        },
+        "cost": "0.0001587",
+        "input_text_tokens": 379
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T15:58:22.046059Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "mgTqavPxENrC694P4MjT4Qk",
+      "finish_reason": "stop",
+      "run_id": "01a1a221-f93a-75a6-a3f4-e38928a0fa29",
+      "conversation_id": "01a1a221-f93a-75a6-a3f4-e38a03134a3b",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "[{\"term\": \"ファインチューニング\", \"lecture\": 2, \"definition\": \"事前学習済みモデルを、特定のタスクや形式に合ったデータで追加学習させること。出力の形式や口調、特定ドメインの振る舞いを身につけさせるのに向く。最新の事実を覚えさせる用途には、ツールやRAGで外部データを参照させるほうが向くことが多い。\", \"related\": [\"sft\", \"peft\", \"lora\"]}]",
+          "tool_call_id": "call_75768",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T15:58:22.047913Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T15:58:22.048351Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a221-f93a-75a6-a3f4-e38928a0fa29",
+      "conversation_id": "01a1a221-f93a-75a6-a3f4-e38a03134a3b",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "検索拡張生成"
+          },
+          "tool_call_id": "call_113799",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TWb+hi9HP4X7DP7QGXHv7ynjnHJd8ymJnAn6hBdZk+Rdv8XrXoRcsxAsnew9vNz6dr7KG1fl6YNaPPrlR5hrjbsIabJ6u37lpkD4K910Kd8Bv8pMOCgx6Yn4="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 515,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 19,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 515
+        },
+        "cost": "0.0002020",
+        "input_text_tokens": 515
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T15:58:26.561201Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "ngTqavLbEebg694P9NPywQQ",
+      "finish_reason": "stop",
+      "run_id": "01a1a221-f93a-75a6-a3f4-e38928a0fa29",
+      "conversation_id": "01a1a221-f93a-75a6-a3f4-e38a03134a3b",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "用語集に「検索拡張生成」は見つかりませんでした。",
+          "tool_call_id": "call_113799",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T15:58:26.563023Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T15:58:26.563461Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a221-f93a-75a6-a3f4-e38928a0fa29",
+      "conversation_id": "01a1a221-f93a-75a6-a3f4-e38a03134a3b",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "申し訳ありません。現在の用語集には「RAG」に関する直接の定義や説明は登録されていないようです。\n\nAIエンジニアリングにおいて、RAG（Retrieval-Augmented Generation：検索拡張生成）は、大規模言語モデル（LLM）が回答を生成する際、事前に外部のデータベースやドキュメントから関連情報を検索し、その情報を踏まえて回答を作る仕組みのことです。これにより、モデルが持っていない最新の情報や、社内マニュアルなどの特定ドメインの知識に基づいた正確な回答が可能になります。\n\n関連する学習内容や詳細な位置づけについては、今後の講義や関連回（例えば、外部知識の活用やモデルの拡張を扱う回）で触れられることがあります。",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TXHx5khPIqBjZqdSdE+xx+Q+OYGtABCxv+eYLoUQrNBn93FzA2I7UgWOH+1QNUh5GirzQHFSK0lAtwUAceUXKdu6AJZh+q4WFcPYIindMKD0+2kO9BFP7Xo4="
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 563,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 153,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 563
+        },
+        "cost": "0.0005514",
+        "input_text_tokens": 563
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T15:58:30.643349Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "ogTqavi7M_rt694PvcD2eQ",
+      "finish_reason": "stop",
+      "run_id": "01a1a221-f93a-75a6-a3f4-e38928a0fa29",
+      "conversation_id": "01a1a221-f93a-75a6-a3f4-e38a03134a3b",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ]
+}

@@ -1,0 +1,2616 @@
+{
+  "out": "/workspaces/lecture-ai-engineering-2026/lectures/03/results",
+  "expected_trials": 3,
+  "models": {
+    "gemini-3.5-flash-lite": {
+      "exercise": {
+        "rows": [
+          {
+            "engine": "ask",
+            "variant": "baseline",
+            "label": "ask/baseline",
+            "qids": [
+              "q01",
+              "q02",
+              "q04"
+            ],
+            "reference": false
+          },
+          {
+            "engine": "pydantic",
+            "variant": "baseline",
+            "label": "pydantic/baseline",
+            "qids": [
+              "q01",
+              "q02",
+              "q03"
+            ],
+            "reference": false
+          }
+        ],
+        "questions": [
+          "q01",
+          "q02",
+          "q03",
+          "q04"
+        ],
+        "table_a": {
+          "ask/baseline": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "ツールなし": 3
+              },
+              "tool_calls": [
+                0,
+                0,
+                0
+              ],
+              "requests": [
+                1,
+                1,
+                1
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "ツールなし": 3
+              },
+              "tool_calls": [
+                0,
+                0,
+                0
+              ],
+              "requests": [
+                1,
+                1,
+                1
+              ]
+            },
+            "q04": {
+              "trials": 3,
+              "signatures": {
+                "ツールなし": 3
+              },
+              "tool_calls": [
+                0,
+                0,
+                0
+              ],
+              "requests": [
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          "pydantic/baseline": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q03": {
+              "trials": 3,
+              "signatures": {
+                "make_quiz": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            }
+          }
+        },
+        "table_b": {
+          "ask/baseline": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 0,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 2,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 0,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 0,
+                "total": 3
+              }
+            },
+            "q04": {
+              "「用語集にない」と伝える": {
+                "passed": 0,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          },
+          "pydantic/baseline": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(LoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(QLoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索をちょうど 2 回呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q03": {
+              "make_quiz(2) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          }
+        },
+        "table_c": {
+          "ask/baseline": {
+            "q01": {
+              "in": "21 (21–21)",
+              "out": "526 (492–641)",
+              "sec": "5.9 (5.4–8.8)",
+              "req": "1 (1–1)"
+            },
+            "q02": {
+              "in": "10 (10–10)",
+              "out": "761 (672–829)",
+              "sec": "5.7 (3.5–10.0)",
+              "req": "1 (1–1)"
+            },
+            "q04": {
+              "in": "7 (7–7)",
+              "out": "622 (616–639)",
+              "sec": "7.0 (3.2–8.2)",
+              "req": "1 (1–1)"
+            }
+          },
+          "pydantic/baseline": {
+            "q01": {
+              "in": "959 (959–959)",
+              "out": "141 (118–143)",
+              "sec": "6.1 (2.9–14.9)",
+              "req": "2 (2–2)"
+            },
+            "q02": {
+              "in": "1372 (1372–1372)",
+              "out": "189 (185–199)",
+              "sec": "5.8 (2.2–13.1)",
+              "req": "2 (2–2)"
+            },
+            "q03": {
+              "in": "892 (892–928)",
+              "out": "67 (63–71)",
+              "sec": "4.7 (2.1–11.8)",
+              "req": "2 (2–2)"
+            }
+          }
+        }
+      },
+      "basic": {
+        "rows": [
+          {
+            "engine": "pydantic",
+            "variant": "baseline",
+            "label": "V0 baseline",
+            "qids": [
+              "q01",
+              "q02",
+              "q03",
+              "q04",
+              "q05",
+              "q06",
+              "q07",
+              "q08",
+              "q09",
+              "q10"
+            ],
+            "reference": false
+          },
+          {
+            "engine": "pydantic",
+            "variant": "no_search_rule",
+            "label": "V1 no_search_rule",
+            "qids": [
+              "q01",
+              "q02",
+              "q04",
+              "q05"
+            ],
+            "reference": false
+          },
+          {
+            "engine": "pydantic",
+            "variant": "query_many",
+            "label": "V2 query_many",
+            "qids": [
+              "q01",
+              "q02",
+              "q06",
+              "q07"
+            ],
+            "reference": false
+          },
+          {
+            "engine": "pydantic",
+            "variant": "ending_quiz",
+            "label": "V3 ending_quiz",
+            "qids": [
+              "q01",
+              "q02",
+              "q04"
+            ],
+            "reference": false
+          },
+          {
+            "engine": "pydantic",
+            "variant": "no_notfound_rule",
+            "label": "V4 no_notfound_rule",
+            "qids": [
+              "q01",
+              "q02",
+              "q04",
+              "q05",
+              "q08"
+            ],
+            "reference": false
+          },
+          {
+            "engine": "pydantic",
+            "variant": "doc_no_when",
+            "label": "V5 doc_no_when",
+            "qids": [
+              "q01",
+              "q02",
+              "q04",
+              "q05"
+            ],
+            "reference": false
+          },
+          {
+            "engine": "pydantic",
+            "variant": "no_hint_rule",
+            "label": "V6 no_hint_rule",
+            "qids": [
+              "q09"
+            ],
+            "reference": false
+          },
+          {
+            "engine": "pydantic",
+            "variant": "quiz_doc_no_when",
+            "label": "V7 quiz_doc_no_when",
+            "qids": [
+              "q03",
+              "q10"
+            ],
+            "reference": false
+          }
+        ],
+        "questions": [
+          "q01",
+          "q02",
+          "q03",
+          "q04",
+          "q05",
+          "q06",
+          "q07",
+          "q08",
+          "q09",
+          "q10"
+        ],
+        "table_a": {
+          "V0 baseline": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q03": {
+              "trials": 3,
+              "signatures": {
+                "make_quiz": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q04": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q05": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q06": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×4": 3
+              },
+              "tool_calls": [
+                4,
+                4,
+                4
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q07": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×3": 3
+              },
+              "tool_calls": [
+                3,
+                3,
+                3
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q08": {
+              "trials": 3,
+              "signatures": {
+                "get_lecture_summary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q09": {
+              "trials": 3,
+              "signatures": {
+                "get_lecture_summary": 2,
+                "ツールなし": 1
+              },
+              "tool_calls": [
+                1,
+                0,
+                1
+              ],
+              "requests": [
+                2,
+                1,
+                2
+              ]
+            },
+            "q10": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary→make_quiz": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                3,
+                3,
+                3
+              ]
+            }
+          },
+          "V1 no_search_rule": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q04": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q05": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                3,
+                3,
+                3
+              ]
+            }
+          },
+          "V2 query_many": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q06": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 2,
+                "search_glossary×2": 1
+              },
+              "tool_calls": [
+                1,
+                2,
+                1
+              ],
+              "requests": [
+                2,
+                3,
+                2
+              ]
+            },
+            "q07": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                3,
+                3,
+                3
+              ]
+            }
+          },
+          "V3 ending_quiz": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary→make_quiz": 2,
+                "search_glossary": 1
+              },
+              "tool_calls": [
+                2,
+                1,
+                2
+              ],
+              "requests": [
+                3,
+                2,
+                3
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q04": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            }
+          },
+          "V4 no_notfound_rule": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q04": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×3": 2,
+                "search_glossary×2": 1
+              },
+              "tool_calls": [
+                2,
+                3,
+                3
+              ],
+              "requests": [
+                3,
+                4,
+                4
+              ]
+            },
+            "q05": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×4": 2,
+                "search_glossary×3": 1
+              },
+              "tool_calls": [
+                4,
+                3,
+                4
+              ],
+              "requests": [
+                5,
+                4,
+                5
+              ]
+            },
+            "q08": {
+              "trials": 3,
+              "signatures": {
+                "get_lecture_summary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            }
+          },
+          "V5 doc_no_when": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q04": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q05": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×3": 2,
+                "search_glossary×2": 1
+              },
+              "tool_calls": [
+                3,
+                3,
+                2
+              ],
+              "requests": [
+                4,
+                4,
+                3
+              ]
+            }
+          },
+          "V6 no_hint_rule": {
+            "q09": {
+              "trials": 3,
+              "signatures": {
+                "get_lecture_summary→search_glossary": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                3,
+                3,
+                3
+              ]
+            }
+          },
+          "V7 quiz_doc_no_when": {
+            "q03": {
+              "trials": 3,
+              "signatures": {
+                "make_quiz": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q10": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary→make_quiz": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                3,
+                3,
+                3
+              ]
+            }
+          }
+        },
+        "table_b": {
+          "V0 baseline": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(LoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(QLoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索をちょうど 2 回呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q03": {
+              "make_quiz(2) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q04": {
+              "「用語集にない」と伝える": {
+                "passed": 2,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q05": {
+              "「用語集にない」と伝える": {
+                "passed": 1,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 1,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q06": {
+              "4 語とも回答に出てくる": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索結果に 4 語とも返る": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索結果に「量子化」が返る": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q07": {
+              "Pi をコーディングエージェントと説明する": {
+                "passed": 0,
+                "total": 3
+              },
+              "3 つとも回答に出てくる": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索結果に Pi が返る": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q08": {
+              "get_lecture_summary(4) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "第4回の要点は無いと伝える": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q09": {
+              "コードブロックを書かない": {
+                "passed": 3,
+                "total": 3
+              },
+              "def save_learning_log を書かない": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q10": {
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索のあとに make_quiz(2) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          },
+          "V1 no_search_rule": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(LoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(QLoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索をちょうど 2 回呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q04": {
+              "「用語集にない」と伝える": {
+                "passed": 3,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q05": {
+              "「用語集にない」と伝える": {
+                "passed": 1,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 2,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          },
+          "V2 query_many": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(LoRA) を呼ぶ": {
+                "passed": 0,
+                "total": 3
+              },
+              "search_glossary(QLoRA) を呼ぶ": {
+                "passed": 0,
+                "total": 3
+              },
+              "検索をちょうど 2 回呼ぶ": {
+                "passed": 0,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q06": {
+              "4 語とも回答に出てくる": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索結果に 4 語とも返る": {
+                "passed": 1,
+                "total": 3
+              },
+              "検索結果に「量子化」が返る": {
+                "passed": 1,
+                "total": 3
+              }
+            },
+            "q07": {
+              "Pi をコーディングエージェントと説明する": {
+                "passed": 0,
+                "total": 3
+              },
+              "3 つとも回答に出てくる": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索結果に Pi が返る": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          },
+          "V3 ending_quiz": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 2,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(LoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(QLoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索をちょうど 2 回呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q04": {
+              "「用語集にない」と伝える": {
+                "passed": 2,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          },
+          "V4 no_notfound_rule": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(LoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(QLoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索をちょうど 2 回呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q04": {
+              "「用語集にない」と伝える": {
+                "passed": 0,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 0,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q05": {
+              "「用語集にない」と伝える": {
+                "passed": 0,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 0,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q08": {
+              "get_lecture_summary(4) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "第4回の要点は無いと伝える": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          },
+          "V5 doc_no_when": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(LoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(QLoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索をちょうど 2 回呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q04": {
+              "「用語集にない」と伝える": {
+                "passed": 2,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 1,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q05": {
+              "「用語集にない」と伝える": {
+                "passed": 3,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 0,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          },
+          "V7 quiz_doc_no_when": {
+            "q03": {
+              "make_quiz(2) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q10": {
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索のあとに make_quiz(2) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          },
+          "V6 no_hint_rule": {
+            "q09": {
+              "コードブロックを書かない": {
+                "passed": 3,
+                "total": 3
+              },
+              "def save_learning_log を書かない": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          }
+        },
+        "table_c": {
+          "V0 baseline": {
+            "q01": {
+              "in": "959 (959–959)",
+              "out": "141 (118–143)",
+              "sec": "6.1 (2.9–14.9)",
+              "req": "2 (2–2)"
+            },
+            "q02": {
+              "in": "1372 (1372–1372)",
+              "out": "189 (185–199)",
+              "sec": "5.8 (2.2–13.1)",
+              "req": "2 (2–2)"
+            },
+            "q03": {
+              "in": "892 (892–928)",
+              "out": "67 (63–71)",
+              "sec": "4.7 (2.1–11.8)",
+              "req": "2 (2–2)"
+            },
+            "q04": {
+              "in": "852 (852–852)",
+              "out": "141 (92–166)",
+              "sec": "4.6 (3.4–13.9)",
+              "req": "2 (2–2)"
+            },
+            "q05": {
+              "in": "942 (942–942)",
+              "out": "179 (164–230)",
+              "sec": "5.3 (3.4–13.3)",
+              "req": "2 (2–2)"
+            },
+            "q06": {
+              "in": "1801 (1801–1801)",
+              "out": "410 (358–563)",
+              "sec": "5.5 (4.5–14.2)",
+              "req": "2 (2–2)"
+            },
+            "q07": {
+              "in": "1592 (1592–1592)",
+              "out": "252 (238–255)",
+              "sec": "5.5 (3.4–14.5)",
+              "req": "2 (2–2)"
+            },
+            "q08": {
+              "in": "872 (872–872)",
+              "out": "80 (55–101)",
+              "sec": "8.7 (1.9–11.5)",
+              "req": "2 (2–2)"
+            },
+            "q09": {
+              "in": "1292 (413–1292)",
+              "out": "283 (245–338)",
+              "sec": "3.9 (2.5–14.7)",
+              "req": "2 (1–2)"
+            },
+            "q10": {
+              "in": "1933 (1925–1974)",
+              "out": "121 (107–222)",
+              "sec": "16.3 (4.2–26.0)",
+              "req": "3 (3–3)"
+            }
+          },
+          "V1 no_search_rule": {
+            "q01": {
+              "in": "911 (911–911)",
+              "out": "167 (117–171)",
+              "sec": "4.7 (3.4–12.5)",
+              "req": "2 (2–2)"
+            },
+            "q02": {
+              "in": "1324 (1324–1324)",
+              "out": "173 (158–177)",
+              "sec": "3.2 (3.0–8.1)",
+              "req": "2 (2–2)"
+            },
+            "q04": {
+              "in": "804 (804–804)",
+              "out": "83 (81–162)",
+              "sec": "3.2 (2.7–9.5)",
+              "req": "2 (2–2)"
+            },
+            "q05": {
+              "in": "1457 (1457–1457)",
+              "out": "190 (160–199)",
+              "sec": "10.2 (3.9–12.7)",
+              "req": "3 (3–3)"
+            }
+          },
+          "V2 query_many": {
+            "q01": {
+              "in": "955 (955–955)",
+              "out": "145 (120–154)",
+              "sec": "3.7 (2.8–13.2)",
+              "req": "2 (2–2)"
+            },
+            "q02": {
+              "in": "1061 (1061–1061)",
+              "out": "203 (194–221)",
+              "sec": "7.5 (4.7–15.7)",
+              "req": "2 (2–2)"
+            },
+            "q06": {
+              "in": "1150 (1150–2091)",
+              "out": "544 (480–575)",
+              "sec": "4.2 (3.9–19.1)",
+              "req": "2 (2–3)"
+            },
+            "q07": {
+              "in": "1963 (1963–1963)",
+              "out": "319 (310–319)",
+              "sec": "6.6 (3.2–122.5)",
+              "req": "3 (3–3)"
+            }
+          },
+          "V3 ending_quiz": {
+            "q01": {
+              "in": "1595 (951–1600)",
+              "out": "198 (181–229)",
+              "sec": "4.7 (3.2–60.7)",
+              "req": "3 (2–3)"
+            },
+            "q02": {
+              "in": "1364 (1364–1364)",
+              "out": "234 (211–290)",
+              "sec": "3.1 (2.9–43.3)",
+              "req": "2 (2–2)"
+            },
+            "q04": {
+              "in": "844 (844–844)",
+              "out": "174 (84–276)",
+              "sec": "4.3 (4.2–31.2)",
+              "req": "2 (2–2)"
+            }
+          },
+          "V4 no_notfound_rule": {
+            "q01": {
+              "in": "909 (909–909)",
+              "out": "168 (164–175)",
+              "sec": "8.8 (4.3–37.2)",
+              "req": "2 (2–2)"
+            },
+            "q02": {
+              "in": "1322 (1322–1322)",
+              "out": "222 (216–227)",
+              "sec": "3.1 (3.1–6.9)",
+              "req": "2 (2–2)"
+            },
+            "q04": {
+              "in": "1794 (1272–1794)",
+              "out": "289 (216–303)",
+              "sec": "12.7 (4.9–38.9)",
+              "req": "4 (3–4)"
+            },
+            "q05": {
+              "in": "2986 (2240–3167)",
+              "out": "211 (179–220)",
+              "sec": "17.1 (5.7–27.2)",
+              "req": "5 (4–5)"
+            },
+            "q08": {
+              "in": "822 (822–822)",
+              "out": "77 (63–80)",
+              "sec": "2.7 (2.1–16.0)",
+              "req": "2 (2–2)"
+            }
+          },
+          "V5 doc_no_when": {
+            "q01": {
+              "in": "899 (899–899)",
+              "out": "130 (116–151)",
+              "sec": "6.9 (3.1–12.4)",
+              "req": "2 (2–2)"
+            },
+            "q02": {
+              "in": "1312 (1312–1312)",
+              "out": "185 (178–196)",
+              "sec": "6.3 (3.4–13.6)",
+              "req": "2 (2–2)"
+            },
+            "q04": {
+              "in": "792 (792–792)",
+              "out": "58 (33–61)",
+              "sec": "4.6 (2.5–9.2)",
+              "req": "2 (2–2)"
+            },
+            "q05": {
+              "in": "2237 (1445–2237)",
+              "out": "199 (185–244)",
+              "sec": "10.0 (4.8–25.9)",
+              "req": "4 (3–4)"
+            }
+          },
+          "V6 no_hint_rule": {
+            "q09": {
+              "in": "2163 (2163–2163)",
+              "out": "109 (105–132)",
+              "sec": "4.2 (3.0–7.0)",
+              "req": "3 (3–3)"
+            }
+          },
+          "V7 quiz_doc_no_when": {
+            "q03": {
+              "in": "842 (842–878)",
+              "out": "73 (65–87)",
+              "sec": "6.1 (1.9–9.8)",
+              "req": "2 (2–2)"
+            },
+            "q10": {
+              "in": "1858 (1850–1899)",
+              "out": "140 (131–218)",
+              "sec": "5.5 (4.3–34.5)",
+              "req": "3 (3–3)"
+            }
+          }
+        }
+      },
+      "impl": {
+        "rows": [
+          {
+            "engine": "pydantic",
+            "variant": "impl",
+            "label": "実装 impl",
+            "qids": [
+              "s1",
+              "s2",
+              "s3",
+              "s4",
+              "s5",
+              "s6"
+            ],
+            "reference": false
+          }
+        ],
+        "questions": [
+          "s1",
+          "s2",
+          "s3",
+          "s4",
+          "s5",
+          "s6"
+        ],
+        "table_a": {
+          "実装 impl": {
+            "s1": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2→save_learning_log": 3
+              },
+              "tool_calls": [
+                3,
+                3,
+                3
+              ],
+              "requests": [
+                3,
+                3,
+                3
+              ]
+            },
+            "s2": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2→save_learning_log": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                3,
+                3,
+                3
+              ]
+            },
+            "s3": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "s4": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "s5": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2→save_learning_log×2": 3
+              },
+              "tool_calls": [
+                3,
+                3,
+                3
+              ],
+              "requests": [
+                3,
+                3,
+                3
+              ]
+            },
+            "s6": {
+              "trials": 3,
+              "signatures": {
+                "save_learning_log": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            }
+          }
+        },
+        "table_b": {
+          "実装 impl": {
+            "s1": {
+              "承認待ちが 1 件": {
+                "passed": 3,
+                "total": 3
+              },
+              "ファイルが 1 つできる": {
+                "passed": 3,
+                "total": 3
+              },
+              "learning_log/ の外に書かない": {
+                "passed": 3,
+                "total": 3
+              },
+              "requests が 4 以下": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "s2": {
+              "もう一度保存を求めない（承認待ちが 1 件）": {
+                "passed": 3,
+                "total": 3
+              },
+              "ファイルができない": {
+                "passed": 3,
+                "total": 3
+              },
+              "learning_log/ の外に書かない": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "s3": {
+              "save_learning_log を呼ばない": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "s4": {
+              "save_learning_log を呼ばない": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "s5": {
+              "承認待ちが 2 件": {
+                "passed": 3,
+                "total": 3
+              },
+              "ファイルが 1 つだけできる": {
+                "passed": 3,
+                "total": 3
+              },
+              "learning_log/ の外に書かない": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "s6": {
+              "learning_log/ の外に書かない": {
+                "passed": 3,
+                "total": 3
+              },
+              "保存されたファイルが 1 つ以下": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          }
+        },
+        "table_c": {
+          "実装 impl": {
+            "s1": {
+              "in": "3018 (3017–3059)",
+              "out": "475 (386–486)",
+              "sec": "4.9 (4.3–40.8)",
+              "req": "3 (3–3)"
+            },
+            "s2": {
+              "in": "3006 (2990–3080)",
+              "out": "485 (424–522)",
+              "sec": "5.8 (4.2–49.9)",
+              "req": "3 (3–3)"
+            },
+            "s3": {
+              "in": "1395 (1395–1395)",
+              "out": "158 (142–159)",
+              "sec": "2.3 (2.0–33.5)",
+              "req": "2 (2–2)"
+            },
+            "s4": {
+              "in": "1351 (1351–1351)",
+              "out": "128 (111–143)",
+              "sec": "3.1 (1.9–38.3)",
+              "req": "2 (2–2)"
+            },
+            "s5": {
+              "in": "3063 (3047–3076)",
+              "out": "424 (406–446)",
+              "sec": "7.7 (3.1–44.7)",
+              "req": "3 (3–3)"
+            },
+            "s6": {
+              "in": "1178 (1177–1178)",
+              "out": "48 (45–121)",
+              "sec": "6.6 (2.5–39.8)",
+              "req": "2 (2–2)"
+            }
+          }
+        }
+      },
+      "adv-a": {
+        "rows": [
+          {
+            "engine": "pydantic",
+            "variant": "baseline",
+            "label": "(参考) V0 baseline",
+            "qids": [
+              "q01",
+              "q02",
+              "q03",
+              "q04"
+            ],
+            "reference": true
+          },
+          {
+            "engine": "adk",
+            "variant": "baseline",
+            "label": "adk/baseline",
+            "qids": [
+              "q01",
+              "q02",
+              "q03",
+              "q04"
+            ],
+            "reference": false
+          }
+        ],
+        "questions": [
+          "q01",
+          "q02",
+          "q03",
+          "q04"
+        ],
+        "table_a": {
+          "(参考) V0 baseline": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q03": {
+              "trials": 3,
+              "signatures": {
+                "make_quiz": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q04": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            }
+          },
+          "adk/baseline": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q03": {
+              "trials": 3,
+              "signatures": {
+                "make_quiz": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q04": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            }
+          }
+        },
+        "table_b": {
+          "(参考) V0 baseline": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(LoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(QLoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索をちょうど 2 回呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q03": {
+              "make_quiz(2) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q04": {
+              "「用語集にない」と伝える": {
+                "passed": 2,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          },
+          "adk/baseline": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(LoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(QLoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索をちょうど 2 回呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q03": {
+              "make_quiz(2) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q04": {
+              "「用語集にない」と伝える": {
+                "passed": 3,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          }
+        },
+        "table_c": {
+          "(参考) V0 baseline": {
+            "q01": {
+              "in": "959 (959–959)",
+              "out": "141 (118–143)",
+              "sec": "6.1 (2.9–14.9)",
+              "req": "2 (2–2)"
+            },
+            "q02": {
+              "in": "1372 (1372–1372)",
+              "out": "189 (185–199)",
+              "sec": "5.8 (2.2–13.1)",
+              "req": "2 (2–2)"
+            },
+            "q03": {
+              "in": "892 (892–928)",
+              "out": "67 (63–71)",
+              "sec": "4.7 (2.1–11.8)",
+              "req": "2 (2–2)"
+            },
+            "q04": {
+              "in": "852 (852–852)",
+              "out": "141 (92–166)",
+              "sec": "4.6 (3.4–13.9)",
+              "req": "2 (2–2)"
+            }
+          },
+          "adk/baseline": {
+            "q01": {
+              "in": "1085 (1085–1085)",
+              "out": "122 (118–122)",
+              "sec": "13.4 (5.0–29.9)",
+              "req": "2 (2–2)"
+            },
+            "q02": {
+              "in": "1496 (1496–1496)",
+              "out": "166 (161–196)",
+              "sec": "8.3 (6.1–23.2)",
+              "req": "2 (2–2)"
+            },
+            "q03": {
+              "in": "1018 (1018–1021)",
+              "out": "69 (66–71)",
+              "sec": "5.6 (5.5–21.2)",
+              "req": "2 (2–2)"
+            },
+            "q04": {
+              "in": "978 (978–978)",
+              "out": "40 (36–62)",
+              "sec": "6.4 (6.2–18.3)",
+              "req": "2 (2–2)"
+            }
+          }
+        }
+      },
+      "adv-b": {
+        "rows": [
+          {
+            "engine": "pydantic",
+            "variant": "baseline",
+            "label": "(参考) V0 baseline",
+            "qids": [
+              "q01",
+              "q02",
+              "q04"
+            ],
+            "reference": true
+          },
+          {
+            "engine": "pi",
+            "variant": "baseline",
+            "label": "pi/baseline",
+            "qids": [
+              "q01",
+              "q02",
+              "q04"
+            ],
+            "reference": false
+          }
+        ],
+        "questions": [
+          "q01",
+          "q02",
+          "q04"
+        ],
+        "table_a": {
+          "(参考) V0 baseline": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary×2": 3
+              },
+              "tool_calls": [
+                2,
+                2,
+                2
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            },
+            "q04": {
+              "trials": 3,
+              "signatures": {
+                "search_glossary": 3
+              },
+              "tool_calls": [
+                1,
+                1,
+                1
+              ],
+              "requests": [
+                2,
+                2,
+                2
+              ]
+            }
+          },
+          "pi/baseline": {
+            "q01": {
+              "trials": 3,
+              "signatures": {
+                "find→grep→read→grep→read→grep→find": 1,
+                "find→grep×2→read→grep→read": 1,
+                "find→grep→read": 1
+              },
+              "tool_calls": [
+                7,
+                6,
+                3
+              ],
+              "requests": [
+                8,
+                7,
+                4
+              ]
+            },
+            "q02": {
+              "trials": 3,
+              "signatures": {
+                "ツールなし": 3
+              },
+              "tool_calls": [
+                0,
+                0,
+                0
+              ],
+              "requests": [
+                1,
+                1,
+                1
+              ]
+            },
+            "q04": {
+              "trials": 3,
+              "signatures": {
+                "ツールなし": 3
+              },
+              "tool_calls": [
+                0,
+                0,
+                0
+              ],
+              "requests": [
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "table_b": {
+          "(参考) V0 baseline": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(LoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary(QLoRA) を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "検索をちょうど 2 回呼ぶ": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 3,
+                "total": 3
+              }
+            },
+            "q04": {
+              "「用語集にない」と伝える": {
+                "passed": 2,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 3,
+                "total": 3
+              },
+              "search_glossary を呼ぶ": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          },
+          "pi/baseline": {
+            "q01": {
+              "基礎・実装・発展を全部含む": {
+                "passed": 3,
+                "total": 3
+              },
+              "「どれか1つ」でよいと言う": {
+                "passed": 3,
+                "total": 3
+              },
+              "初級・中級・上級を含まない": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第N回がある": {
+                "passed": 0,
+                "total": 3
+              }
+            },
+            "q02": {
+              "4ビット（4bit）に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "「量子化」に触れる": {
+                "passed": 3,
+                "total": 3
+              },
+              "最後の 2 行に第2回がある": {
+                "passed": 0,
+                "total": 3
+              }
+            },
+            "q04": {
+              "「用語集にない」と伝える": {
+                "passed": 0,
+                "total": 3
+              },
+              "推測で第N回を付けない": {
+                "passed": 3,
+                "total": 3
+              }
+            }
+          }
+        },
+        "table_c": {
+          "(参考) V0 baseline": {
+            "q01": {
+              "in": "959 (959–959)",
+              "out": "141 (118–143)",
+              "sec": "6.1 (2.9–14.9)",
+              "req": "2 (2–2)"
+            },
+            "q02": {
+              "in": "1372 (1372–1372)",
+              "out": "189 (185–199)",
+              "sec": "5.8 (2.2–13.1)",
+              "req": "2 (2–2)"
+            },
+            "q04": {
+              "in": "852 (852–852)",
+              "out": "141 (92–166)",
+              "sec": "4.6 (3.4–13.9)",
+              "req": "2 (2–2)"
+            }
+          },
+          "pi/baseline": {
+            "q01": {
+              "in": "15712 (7228–19438)",
+              "out": "653 (216–997)",
+              "sec": "40.2 (5.2–43.3)",
+              "req": "7 (4–8)"
+            },
+            "q02": {
+              "in": "1272 (1271–1273)",
+              "out": "819 (794–1015)",
+              "sec": "6.3 (4.0–9.0)",
+              "req": "1 (1–1)"
+            },
+            "q04": {
+              "in": "1269 (1267–1269)",
+              "out": "683 (579–706)",
+              "sec": "5.0 (3.1–5.9)",
+              "req": "1 (1–1)"
+            }
+          }
+        }
+      }
+    }
+  }
+}

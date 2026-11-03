@@ -1,0 +1,18 @@
+[model] gemini-3.5-flash-lite
+[質問] RAGとは何ですか？
+「RAG」（Retrieval-Augmented Generation / 検索拡張生成）は、講座の用語集には直接定義が載っていませんが、LLM（大規模言語モデル）の回答精度を高めるための技術として広く知られています。
+
+LLMが自身の学習データに含まれていない最新情報や、特定の組織・個人に特化したデータをあらかじめ持っていない場合、そのままでは「ハルシネーション（事実とは異なる内容をもっともらしく出力する現象）」を起こしやすくなります。これを防ぐため、**質問に関連する外部の文書やデータを検索（Retrieval）し、その情報をプロンプトに組み込んだ上で回答を生成（Generation）させるアプローチ**がRAGです。
+
+講座の文脈では、モデルに最新の事実を覚えさせるための手段として言及されることがあります。
+
+（関係する回：第1回、第2回）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'RAG'})
+[tool return] search_glossary -> [{"term": "ファインチューニング", "lecture": 2, "definition": "事前学習済みモデルを、特定のタスクや形式に合ったデータで追加学習させること。出力の形式や口調、特定ドメインの振る舞いを身につけさせるの…
+[tool call]   search_glossary({'query': 'Retrieval-Augmented Generation'})
+[tool return] search_glossary -> 用語集に「Retrieval-Augmented Generation」は見つかりませんでした。…
+[tool call]   search_glossary({'query': '外部データ'})
+[tool return] search_glossary -> [{"term": "ハルシネーション", "lecture": 1, "definition": "LLMが事実と異なる内容や存在しない情報を、もっともらしく生成してしまう現象。モデルが知らないこと（最新情報、組織や講座に固有の情報など）…
+[usage] RunUsage(cost=Decimal('0.0012811'), details={'text_prompt_tokens': 2237}, input_text_tokens=2237, input_tokens=2237, output_tokens=244, requests=4, tool_calls=3)

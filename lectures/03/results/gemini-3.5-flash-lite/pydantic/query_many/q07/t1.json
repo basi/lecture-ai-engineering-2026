@@ -1,0 +1,345 @@
+{
+  "schema": 1,
+  "engine": "pydantic",
+  "variant": "query_many",
+  "variant_sha256": "299c1fb8950c9fe1885b60ac4b14c25b86c6c82f504bbd50d864f6a6719ebc05",
+  "qid": "q07",
+  "kind": "question",
+  "question": "MCP・ADK・Pi はそれぞれ何ですか？",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": "q07:t1",
+  "command": "app.agent.run_with_approval(agent, <質問>, model=build_model(), usage_limits=UsageLimits(request_limit=10)) を agent.override(instructions=<変種>, tools=<変種>) の中で実行（variant=query_many）",
+  "compare_args": [
+    "run",
+    "--level",
+    "basic",
+    "--variant",
+    "no_search_rule,query_many,ending_quiz",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:02:24+00:00",
+  "finished_at": "2026-11-03T16:02:24+00:00",
+  "duration_s": 122.462,
+  "elapsed_s": 122.463,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "ご質問いただいた用語について、講座の用語集をもとに解説します。\n\n* **MCP（Model Context Protocol）**\n  * **定義:** AIアプリと外部のツールやデータソースをつなぐためのオープンな標準プロトコルです。MCPサーバーとして公開したツールは、対応する様々なエージェントやエディタ（MCPクライアント）から共通の方法で利用できます。\n  * **関連する回:** 第3回（および第5回でもMCPサーバーとして扱います）\n\n* **ADK（Agent Development Kit）**\n  * **定義:** Googleが公開しているオープンソースのエージェント開発フレームワークです。Geminiとの統合が深く、2.0で1.x系から大きな変更が入っています。本講座では第3回の宿題の発展レベルで扱います。\n  * **関連する回:** 第3回\n\n* **Pi**\n  * **定義:** ターミナルで動くオープンソース（MITライセンス）のコーディングエージェントです。最小限の機能とシステムプロンプトで構成されており、利用者が拡張して使う設計になっています（2026年10月に1.0が公開されました）。\n  * **関連する回:** 第3回\n\n（関係する回：第3回）",
+  "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+  "instructions_sha256": "a5d1d16d4181b27d2526845f92ef9ac357f8fae58575295fd51065bbef58aa17",
+  "instructions_match": true,
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\nAIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n答える前に使うこと。query には調べたい用語をまとめて入れる（例: \"LoRA\"）。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    }
+  ],
+  "tools_sha256": "ac3d4179b870db23792833ab4373d8eb87a5af7305ee4387ad60d095dd938ff2",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_798598",
+      "name": "search_glossary",
+      "args": {
+        "query": "MCP ADK Pi"
+      },
+      "result": "[{\"term\": \"ADK（Agent Development Kit）\", \"lecture\": 3, \"definition\": \"Googleが公開しているオープンソースのエージェント開発フレームワーク。Geminiとの統合が深い。2.0で1.x系から大きな変更が入っている。本講座では第3回の宿題の発展レベルで扱う。\", \"related\": [\"pydantic-ai\", \"ai-agent\"]}, {\"term\": \"MCP（Model Context Protocol）\", \"lecture\": 3, \"definition\": \"AIアプリと外部のツールやデータソースをつなぐためのオープンな標準プロトコル。MCPサーバーとして公開したツールは、対応する様々なエージェントやエディタ（MCPクライアント）から共通の方法で使える。第5回で、用語集の検索をMCPサーバーにして体験する。\", \"related\": [\"tool\", \"ai-agent\", \"mcp-server\", \"mcp-client\"]}]",
+      "outcome": "success"
+    },
+    {
+      "order": 2,
+      "response_index": 2,
+      "tool_call_id": "call_1390556",
+      "name": "search_glossary",
+      "args": {
+        "query": "Pi"
+      },
+      "result": "[{\"term\": \"Pi\", \"lecture\": 3, \"definition\": \"ターミナルで動くオープンソース（MITライセンス）のコーディングエージェント。最小限の機能とシステムプロンプトで構成し、利用者が拡張して使う設計。2026年10月に1.0が公開された。npmのパッケージ名は @earendil-works/pi-coding-agent。\", \"related\": [\"harness\", \"coding-agent\"]}, {\"term\": \"API\", \"lecture\": 1, \"definition\": \"プログラムから別のサービスの機能を呼び出すための窓口。本講座ではGemini APIをPythonから呼び出してLLMを使う。\", \"related\": [\"api-key\", \"rate-limit\"]}, {\"term\": \"APIキー\", \"lecture\": 1, \"definition\": \"APIを呼び出す人を識別するための秘密の文字列。漏れると他人に利用枠を使われるため、コードに直接書かない、コミットしない、チャットに貼らない。本講座ではCodespaces secretに登録し、環境変数 GEMINI_API_KEY として読み込む。\", \"related\": [\"codespaces-secret\", \"environment-variable\"]}]",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "input_tokens": 1963,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 310,
+    "input_audio_tokens": 0,
+    "cache_audio_read_tokens": 0,
+    "output_audio_tokens": 0,
+    "audio_seconds": 0,
+    "details": {
+      "text_prompt_tokens": 1963
+    },
+    "cost": "0.0013639",
+    "requests": 3,
+    "tool_calls": 2
+  },
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "MCP・ADK・Pi はそれぞれ何ですか？",
+          "timestamp": "2026-11-03T16:00:21.776932Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-03T16:00:21.777239Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a223-dd0f-776b-a1b8-9567fb00db0c",
+      "conversation_id": "01a1a223-dd0f-776b-a1b8-9568fc369165",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "MCP ADK Pi"
+          },
+          "tool_call_id": "call_798598",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0T6f2WWbq0aYHdi0WtO6fuGjR1EJYngzJMyT5aSwFreiz01nX15Cv87pVYpYK88RtK0Ztm0yK398B59s4z+EfHfpck1RfMmt4HuRIOxADVHThyAsWimVJz9zU="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 406,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 20,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 406
+        },
+        "cost": "0.0001718",
+        "input_text_tokens": 406
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:00:36.463272Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "FgXqarHyBtrC694P4MjT4Qk",
+      "finish_reason": "stop",
+      "run_id": "01a1a223-dd0f-776b-a1b8-9567fb00db0c",
+      "conversation_id": "01a1a223-dd0f-776b-a1b8-9568fc369165",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "[{\"term\": \"ADK（Agent Development Kit）\", \"lecture\": 3, \"definition\": \"Googleが公開しているオープンソースのエージェント開発フレームワーク。Geminiとの統合が深い。2.0で1.x系から大きな変更が入っている。本講座では第3回の宿題の発展レベルで扱う。\", \"related\": [\"pydantic-ai\", \"ai-agent\"]}, {\"term\": \"MCP（Model Context Protocol）\", \"lecture\": 3, \"definition\": \"AIアプリと外部のツールやデータソースをつなぐためのオープンな標準プロトコル。MCPサーバーとして公開したツールは、対応する様々なエージェントやエディタ（MCPクライアント）から共通の方法で使える。第5回で、用語集の検索をMCPサーバーにして体験する。\", \"related\": [\"tool\", \"ai-agent\", \"mcp-server\", \"mcp-client\"]}]",
+          "tool_call_id": "call_798598",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T16:00:36.465103Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T16:00:36.465545Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a223-dd0f-776b-a1b8-9567fb00db0c",
+      "conversation_id": "01a1a223-dd0f-776b-a1b8-9568fc369165",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "Pi"
+          },
+          "tool_call_id": "call_1390556",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TXRpUOl+iKCtdJjhSAuPRW/L9fiNW4SKMomPKuNpP2BPacgWPQZgFr3hgCdBVyOwroTm+Ly+Yem6/8mHfQRn8OY8vbSmVKRtHF/q+on66goIJXWSwwnBKJH8="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 638,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 17,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 638
+        },
+        "cost": "0.0002339",
+        "input_text_tokens": 638
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:02:12.568084Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "JAXqaqvqLb6D694ProDqgQY",
+      "finish_reason": "stop",
+      "run_id": "01a1a223-dd0f-776b-a1b8-9567fb00db0c",
+      "conversation_id": "01a1a223-dd0f-776b-a1b8-9568fc369165",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "[{\"term\": \"Pi\", \"lecture\": 3, \"definition\": \"ターミナルで動くオープンソース（MITライセンス）のコーディングエージェント。最小限の機能とシステムプロンプトで構成し、利用者が拡張して使う設計。2026年10月に1.0が公開された。npmのパッケージ名は @earendil-works/pi-coding-agent。\", \"related\": [\"harness\", \"coding-agent\"]}, {\"term\": \"API\", \"lecture\": 1, \"definition\": \"プログラムから別のサービスの機能を呼び出すための窓口。本講座ではGemini APIをPythonから呼び出してLLMを使う。\", \"related\": [\"api-key\", \"rate-limit\"]}, {\"term\": \"APIキー\", \"lecture\": 1, \"definition\": \"APIを呼び出す人を識別するための秘密の文字列。漏れると他人に利用枠を使われるため、コードに直接書かない、コミットしない、チャットに貼らない。本講座ではCodespaces secretに登録し、環境変数 GEMINI_API_KEY として読み込む。\", \"related\": [\"codespaces-secret\", \"environment-variable\"]}]",
+          "tool_call_id": "call_1390556",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T16:02:12.569996Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T16:02:12.570446Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a223-dd0f-776b-a1b8-9567fb00db0c",
+      "conversation_id": "01a1a223-dd0f-776b-a1b8-9568fc369165",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "ご質問いただいた用語について、講座の用語集をもとに解説します。\n\n* **MCP（Model Context Protocol）**\n  * **定義:** AIアプリと外部のツールやデータソースをつなぐためのオープンな標準プロトコルです。MCPサーバーとして公開したツールは、対応する様々なエージェントやエディタ（MCPクライアント）から共通の方法で利用できます。\n  * **関連する回:** 第3回（および第5回でもMCPサーバーとして扱います）\n\n* **ADK（Agent Development Kit）**\n  * **定義:** Googleが公開しているオープンソースのエージェント開発フレームワークです。Geminiとの統合が深く、2.0で1.x系から大きな変更が入っています。本講座では第3回の宿題の発展レベルで扱います。\n  * **関連する回:** 第3回\n\n* **Pi**\n  * **定義:** ターミナルで動くオープンソース（MITライセンス）のコーディングエージェントです。最小限の機能とシステムプロンプトで構成されており、利用者が拡張して使う設計になっています（2026年10月に1.0が公開されました）。\n  * **関連する回:** 第3回\n\n（関係する回：第3回）",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TV8wefIn6SxAr+TsnBknWirm5g3F72GFBTYTe8sEzgPfSX+j13RG93uX+iuxrvN/1tRhoQSz4DGZJe1DblxlA2D77CFBL6rf+NrzdBCdSRmp78F8mbNfEtG4="
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 919,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 273,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 919
+        },
+        "cost": "0.0009582",
+        "input_text_tokens": 919
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:02:24.220077Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "hAXqat_tNtnt694Pw7Xc0QM",
+      "finish_reason": "stop",
+      "run_id": "01a1a223-dd0f-776b-a1b8-9567fb00db0c",
+      "conversation_id": "01a1a223-dd0f-776b-a1b8-9568fc369165",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ]
+}

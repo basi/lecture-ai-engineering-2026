@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "engine": "ask",
+  "variant": "baseline",
+  "variant_sha256": "3999532969a297867ff70649a66dfc5d14a2d9a78f2953e2830d798abdeb9ce2",
+  "qid": "q02",
+  "kind": "question",
+  "question": "LoRAとQLoRAの違いは？",
+  "trial": 2,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": "app.ask.ask(<質問>, [], client=<記録用の包み>)",
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:23:30+00:00",
+  "finished_at": "2026-11-03T16:23:30+00:00",
+  "duration_s": 5.746,
+  "elapsed_s": 5.747,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "**LoRA（ローラ）**と**QLoRA（キューローラ）**は、どちらも巨大なAIモデル（LLMなど）を効率的にチューニング（学習）するための技術ですが、**「メモリの節約度合い」と「量子化の有無」**に大きな違いがあります。\n\n一言で言うと、**「LoRAの進化系がQLoRA」**です。\n\nそれぞれの特徴と違いを分かりやすく解説します。\n\n---\n\n### 1. LoRA（Low-Rank Adaptation）とは？\n* **コンセプト:** モデル全体のパラメータをいじるのではなく、**一部の「追加パラメータ（軽量な層）」だけを学習**させる方法。\n* **メリット:**\n  * フルチューニング（全パラメータ学習）に比べて、必要なVRAM（GPUメモリ）と学習コストを大幅に削減できる。\n  * 元のモデルの性能を維持したまま、特定のタスクに特化させることができる。\n* **デメリット:**\n  * まだある程度大きなGPUメモリが必要（元のモデルの重みを16ビット（FP16/BF16）で読み込むため）。\n\n### 2. QLoRA（Quantized LoRA）とは？\n* **コンセプト:** LoRAの仕組みに加え、**元のモデルの重みを「4ビット」に超圧縮（量子化）**して学習する方法。\n* **メリット:**\n  * LoRAよりも**さらに圧倒的に少ないVRAM**で学習できる。\n  * これまで高性能なA100などのGPUが必要だった巨大モデル（例: 70Bモデルなど）が、**コンシューマー向けGPU（RTX 4090など）でも学習可能**になった。\n  * 4ビットに圧縮しているにもかかわらず、精度は16ビットモデルとほぼ同等を維持できる。\n* **デメリット:**\n  * 4ビットに圧縮・復元する計算が入るため、LoRAに比べて**学習速度がやや遅くなる**。\n\n---\n\n### 比較まとめ表\n\n| 項目 | LoRA | QLoRA |\n| :--- | :--- | :--- |\n| **元のモデルの精度** | 16ビット (FP16 / BF16) | **4ビット** (NF4という特殊な形式) |\n| **必要なGPUメモリ** | 比較的少ない | **極めて少ない** |\n| **学習速度** | 速い | やや遅い（量子化のオーバーヘッドがあるため） |\n| **モデルの精度（性能）** | 高い | LoRAと同等レベル（劣化が非常に少ない） |\n| **おすすめの用途** | ある程度VRAMに余裕がある場合 | 限られた環境（一般PCのGPUなど）で大規模モデルを学習したい場合 |\n\n### 選び方の目安\n* **PCのスペックに余裕がある（またはクラウドで高性能GPUが使える）：** **LoRA**の方が学習速度が速いためおすすめ。\n* **手元のグラボ（VRAM 16GB〜24GBなど）で大きなモデルを無理なく動かしたい：** **QLoRA**一択。",
+  "tool_calls": [],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 1,
+    "tool_calls": 0,
+    "input_tokens": 10,
+    "output_tokens": 672,
+    "candidates_tokens": 672,
+    "thoughts_tokens": 0,
+    "total_tokens": 682
+  },
+  "metrics_output": "[metrics] latency=5732 ms input_tokens=10 output_tokens=672 status=ok\n"
+}

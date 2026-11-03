@@ -1,0 +1,343 @@
+{
+  "schema": 1,
+  "engine": "pydantic",
+  "variant": "no_notfound_rule",
+  "variant_sha256": "b53c103fd89c4a164a7f935cc2eae353dceff59aba48a5c399cb2dbe85fb56df",
+  "qid": "q04",
+  "kind": "question",
+  "question": "RLHFとは何ですか？",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": "q04:t1",
+  "command": "app.agent.run_with_approval(agent, <質問>, model=build_model(), usage_limits=UsageLimits(request_limit=10)) を agent.override(instructions=<変種>, tools=<変種>) の中で実行（variant=no_notfound_rule）",
+  "compare_args": [
+    "run",
+    "--level",
+    "basic",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:21:26+00:00",
+  "finished_at": "2026-11-03T16:21:26+00:00",
+  "duration_s": 12.701,
+  "elapsed_s": 12.702,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "**RLHF**（Reinforcement Learning from Human Feedback：人間フィードバックによる強化学習）とは、人間の好みに合わせたLLM（大規模言語モデル）の微調整（アライメント）を行う手法のことです。\n\n具体的には、以下の3つのステップで進められます：\n1. **教師あり微調整（SFT）**: モデルに人間の望ましい応答を学習させます。\n2. **報酬モデルの学習**: 人間がどの応答を好ましいと感じるかを評価するモデル（報酬モデル）を作ります。\n3. **強化学習（PPOなど）**: 報酬モデルが高く評価する応答を生成できるように、モデルを強化学習で最適化します。\n\nこれにより、モデルがより安全で、役に立ち、ユーザーの意図に沿った回答ができるようになります。\n\n（第11回）",
+  "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+  "instructions_sha256": "de89cc842305b24faa23c8af8a05b2e43b8ec430abc6a303b7a5d4432bd531cd",
+  "instructions_match": true,
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\nAIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n答える前に使うこと。query には調べたい用語を1つだけ入れる（例: \"LoRA\"）。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    }
+  ],
+  "tools_sha256": "4dad30244d39518bdbf94891057db030b149e7bc10d6813731201a380b7feacb",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_960072",
+      "name": "search_glossary",
+      "args": {
+        "query": "RLHF"
+      },
+      "result": "用語集に「RLHF」は見つかりませんでした。",
+      "outcome": "success"
+    },
+    {
+      "order": 2,
+      "response_index": 2,
+      "tool_call_id": "call_1291911",
+      "name": "search_glossary",
+      "args": {
+        "query": "報酬モデル"
+      },
+      "result": "用語集に「報酬モデル」は見つかりませんでした。",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "input_tokens": 1272,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 216,
+    "input_audio_tokens": 0,
+    "cache_audio_read_tokens": 0,
+    "output_audio_tokens": 0,
+    "audio_seconds": 0,
+    "details": {
+      "text_prompt_tokens": 1272
+    },
+    "cost": "0.0009216",
+    "requests": 3,
+    "tool_calls": 2
+  },
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "RLHFとは何ですか？",
+          "timestamp": "2026-11-03T16:21:13.332681Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-03T16:21:13.332970Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a236-f5f3-7562-bcd1-acdd55b99061",
+      "conversation_id": "01a1a236-f5f3-7562-bcd1-acdee6d92571",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "RLHF"
+          },
+          "tool_call_id": "call_960072",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TI/9WJCwjLV3wyNfF2B9Q/WJkfSQF+N7xitm/Dr1RlzR0PMaT1PbDRJYhAULUVSKYUK37LnYIJ9BUhKdGXdZA2cOo7uwD7x88LL6XPDKqG91Vtla8Mn03fYk="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 378,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 18,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 378
+        },
+        "cost": "0.0001584",
+        "input_text_tokens": 378
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:21:16.790114Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "-Qnqav78Jrft694Pwd3p2AM",
+      "finish_reason": "stop",
+      "run_id": "01a1a236-f5f3-7562-bcd1-acdd55b99061",
+      "conversation_id": "01a1a236-f5f3-7562-bcd1-acdee6d92571",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "用語集に「RLHF」は見つかりませんでした。",
+          "tool_call_id": "call_960072",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T16:21:16.791977Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T16:21:16.792432Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a236-f5f3-7562-bcd1-acdd55b99061",
+      "conversation_id": "01a1a236-f5f3-7562-bcd1-acdee6d92571",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "報酬モデル"
+          },
+          "tool_call_id": "call_1291911",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TPdbtMxgeNq0nsQ5Ki6CJFmLUKtq8qGBq9nl6X4RsVhZTYuoiqaOxpuwjjYp+r+nxkobpTzUkTh4YhlfTuGKt3j7lNv29eOnlEuDIZF9VkEfOLhnDDOk3bpM="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 424,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 18,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 424
+        },
+        "cost": "0.0001722",
+        "input_text_tokens": 424
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:21:22.050021Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "_Qnqaq6JCaCN694P2vKbSQ",
+      "finish_reason": "stop",
+      "run_id": "01a1a236-f5f3-7562-bcd1-acdd55b99061",
+      "conversation_id": "01a1a236-f5f3-7562-bcd1-acdee6d92571",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "用語集に「報酬モデル」は見つかりませんでした。",
+          "tool_call_id": "call_1291911",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T16:21:22.051882Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T16:21:22.052321Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a236-f5f3-7562-bcd1-acdd55b99061",
+      "conversation_id": "01a1a236-f5f3-7562-bcd1-acdee6d92571",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "**RLHF**（Reinforcement Learning from Human Feedback：人間フィードバックによる強化学習）とは、人間の好みに合わせたLLM（大規模言語モデル）の微調整（アライメント）を行う手法のことです。\n\n具体的には、以下の3つのステップで進められます：\n1. **教師あり微調整（SFT）**: モデルに人間の望ましい応答を学習させます。\n2. **報酬モデルの学習**: 人間がどの応答を好ましいと感じるかを評価するモデル（報酬モデル）を作ります。\n3. **強化学習（PPOなど）**: 報酬モデルが高く評価する応答を生成できるように、モデルを強化学習で最適化します。\n\nこれにより、モデルがより安全で、役に立ち、ユーザーの意図に沿った回答ができるようになります。\n\n（第11回）",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0Tb4OCbPD9KtHzxHkwpYALq7WY1pTesQ4sN/6jxUPKgz8R9ulhY/ypzBy9bJsITmBQYVRX2ZxKdC6V7YehFfZO1P64kyvAoWfW6QsvJAKDu9iW10XpdgTHo+U="
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 470,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 180,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 470
+        },
+        "cost": "0.000591",
+        "input_text_tokens": 470
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:21:26.011745Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "AgrqaqDiF5XD694P7Oj9uAM",
+      "finish_reason": "stop",
+      "run_id": "01a1a236-f5f3-7562-bcd1-acdd55b99061",
+      "conversation_id": "01a1a236-f5f3-7562-bcd1-acdee6d92571",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ]
+}

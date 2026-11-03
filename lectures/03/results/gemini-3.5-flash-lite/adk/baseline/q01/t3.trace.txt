@@ -1,0 +1,17 @@
+[model] gemini-3.5-flash-lite
+[質問] AIE2026の講座の宿題にある「3レベル」とは何ですか？
+[command] uv run --with google-adk==2.13.0 adk run --in_memory --jsonl --timeout 180s adk_agent/glossary_agent <質問>
+AIE2026の講座における「3レベル」とは、宿題の構成を表す以下の3つの段階のことです。
+
+1. **基礎**：講義内容の確認
+2. **実装**：自分でコードを書く
+3. **発展**：調査や試行
+
+この3つのレベルのうち、どれか1つに取り組めばその回の宿題は完了となります。なお、原則として採点は行われません。
+
+（第1回）
+
+--- trace ---
+[tool call]   search_glossary({"query": "3レベル"})
+[tool return] search_glossary -> [{"term": "宿題の3レベル", "lecture": 1, "definition": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組…
+[usage] {'requests': 2, 'tool_calls': 1, 'input_tokens': 1085, 'output_tokens': 118, 'candidates_tokens': 118, 'thoughts_tokens': 0, 'total_tokens': 1203}

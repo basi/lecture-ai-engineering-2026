@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "engine": "pi",
+  "variant": "baseline",
+  "variant_sha256": "9625d153f72defb4cf75229900ee5fbf20f31ee33265deca35282caeaf65b9a7",
+  "qid": "q01",
+  "kind": "question",
+  "question": "AIE2026の講座の宿題にある「3レベル」とは何ですか？",
+  "trial": 3,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "pi",
+    "--mode",
+    "json",
+    "--no-session",
+    "--no-context-files",
+    "--tools",
+    "read,grep,find,ls",
+    "--provider",
+    "google",
+    "--model",
+    "gemini-3.5-flash-lite",
+    "AIE2026の講座の宿題にある「3レベル」とは何ですか？"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:45:16+00:00",
+  "finished_at": "2026-11-03T16:45:16+00:00",
+  "duration_s": 5.228,
+  "elapsed_s": 5.228,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "AIE2026の講座における「宿題の3レベル」とは、各回の宿題の構成・難易度の段階を指します。\n\n`data/glossary.json` によると、以下の3段階で構成されています：\n\n1. **基礎**：講義内容の確認\n2. **実装**：自分でコードを書く\n3. **発展**：調査や試行\n\n### 特徴\n- 原則として、**どれか1つに取り組めばその回の宿題は完了**となります。\n- 原則として採点は行われません。\n- 取り組んだレベルや結果、気づきなどは `lectures/NN/answer.md`（解答ファイル）に記入して提出します。",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_71525",
+      "name": "find",
+      "args": {
+        "pattern": "*"
+      },
+      "result": "data/\ndata/glossary.json\ndata/lectures/\ndata/lectures/01.md\ndata/lectures/02.md\ndata/lectures/03.md\ndata/lectures/05.md",
+      "outcome": "success"
+    },
+    {
+      "order": 2,
+      "response_index": 2,
+      "tool_call_id": "call_600756",
+      "name": "grep",
+      "args": {
+        "pattern": "3レベル"
+      },
+      "result": "data/glossary.json:430:       \"term\": \"宿題の3レベル\",\ndata/glossary.json:431:       \"aliases\": [\"3レベル\", \"宿題レベル\"],",
+      "outcome": "success"
+    },
+    {
+      "order": 3,
+      "response_index": 3,
+      "tool_call_id": "call_629320",
+      "name": "read",
+      "args": {
+        "limit": 100,
+        "path": "data/glossary.json",
+        "offset": 410
+      },
+      "result": "    {\n      \"id\": \"human-in-the-loop\",\n      \"term\": \"Human-in-the-loop\",\n      \"aliases\": [\"HITL\", \"人間による承認\", \"確認を挟む\"],\n      \"lecture\": 3,\n      \"category\": \"エージェント\",\n      \"definition\": \"エージェントの処理の途中に人の確認や承認を組み込むこと。データの書き込みや送信など、取り消しにくい操作の前に使う。Pydantic AIでは requires_approval=True を指定したツールで実現できる。\",\n      \"related\": [\"guardrail\", \"tool\"]\n    },\n    {\n      \"id\": \"test-model\",\n      \"term\": \"TestModel\",\n      \"aliases\": [\"テスト用モデル\"],\n      \"lecture\": 3,\n      \"category\": \"エージェント\",\n      \"definition\": \"Pydantic AIに含まれるテスト用の偽モデル。実際のLLMを呼ばずに、ツールを呼び出してダミーの回答を返す。APIキーや利用枠を使わずに、エージェントの配線（ツールが登録され、呼ばれ、結果が返るか）をテストできる。\",\n      \"related\": [\"pydantic-ai\", \"rate-limit\"]\n    },\n    {\n      \"id\": \"homework-levels\",\n      \"term\": \"宿題の3レベル\",\n      \"aliases\": [\"3レベル\", \"宿題レベル\"],\n      \"lecture\": 1,\n      \"category\": \"講座\",\n      \"definition\": \"AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。\",\n      \"related\": [\"answer-md\"]\n    },\n    {\n      \"id\": \"answer-md\",\n      \"term\": \"answer.md\",\n      \"aliases\": [\"解答ファイル\"],\n      \"lecture\": 1,\n      \"category\": \"講座\",\n      \"definition\": \"AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。\",\n      \"related\": [\"pull-request\", \"homework-levels\"]\n    },\n    {\n      \"id\": \"lec-start-tag\",\n      \"term\": \"lecNN-start タグ\",\n      \"aliases\": [\"開始タグ\", \"lec03-start\"],\n      \"lecture\": 1,\n      \"category\": \"講座\",\n      \"definition\": \"AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。\",\n      \"related\": [\"branch\"]\n    },\n    {\n      \"id\": \"default-model\",\n      \"term\": \"既定モデル\",\n      \"aliases\": [\"デフォルトモデル\", \"gemini-3.5-flash-lite\"],\n      \"lecture\": 1,\n      \"category\": \"講座\",\n      \"definition\": \"AIE2026の演習と宿題で標準に使うモデルは gemini-3.5-flash-lite。無料枠のレート制限と講座運営の安定性を考えて選んでいる。環境変数 AIE_MODEL で他のモデルに切り替えてよく、自分で契約したAPIを使ってもよい。\",\n      \"related\": [\"rate-limit\", \"api-key\"]\n    },\n    {\n      \"id\": \"external-tool\",\n      \"term\": \"外部ツール\",\n      \"aliases\": [\"external tool\", \"外部サービス\"],\n      \"lecture\": 5,\n      \"category\": \"MCP\",\n      \"definition\": \"Webページの取得、ファイル操作、データベース、他社のAPIなど、エージェントのプログラムの外にある機能をツールとして使うこと。第3回の関数ツールは同じプロセスの中で動くが、外部ツールはプロセスや機械をまたいで呼び出す。MCPはそのための共通の規約。\",\n      \"related\": [\"tool\", \"mcp\", \"mcp-server\"]\n    },\n    {\n      \"id\": \"mcp-server\",\n      \"term\": \"MCPサーバー\",\n      \"aliases\": [\"MCP server\"],\n      \"lecture\": 5,\n      \"category\": \"MCP\",\n      \"definition\": \"MCPでツール（やリソース、プロンプト）を公開する側のプログラム。公開するのはツールの名前・説明文・引数のスキーマで、クライアントの要求に応じてツールを実行し結果を返す。本講座では用語集の検索をMCPサーバーにする（app/mcp_server.py）。公開されている既製のサーバー（fetch、filesystem、GitHubなど）も多い。\",\n      \"related\": [\"mcp\", \"mcp-client\", \"mcp-transport\", \"fetch-server\"]\n    },\n    {\n      \"id\": \"mcp-client\",\n      \"term\": \"MCPクライアント\",\n      \"aliases\": [\"MCP client\", \"MCPホスト\"],\n      \"lecture\": 5,\n      \"category\": \"MCP\",\n      \"definition\": \"MCPサーバーに接続し、公開されたツールをモデルに渡して、モデルの指示でツールを呼び出す側。エージェントのプログラム（Pydantic AIの MCPToolset）や、Copilot Chat・Claude Desktop・Cursorなどのエディタやアプリがクライアントになる。同じサーバーをどのクライアントからも使えるのがMCPの利点。\",\n      \"related\": [\"mcp\", \"mcp-server\", \"mcp-config\"]\n    },\n    {\n      \"id\": \"mcp-transport\",\n      \"term\": \"トランスポート（stdio・Streamable HTTP）\",\n      \"aliases\": [\"stdio\", \"Streamable HTTP\", \"transport\", \"MCPのトランスポート\"],\n      \"lecture\": 5,\n      \"category\": \"MCP\",\n      \"definition\": \"MCPのクライアントとサーバーがやりとりする経路。stdioでは、クライアントがサーバーをサブプロセスとして起動し、標準入出力でメッセージを交換する（手軽で、同じ機械の中で使う）。Streamable HTTPでは、サーバーがURLで待ち受け、別のプロセスや別の機械から接続できる（公開範囲と認証を考える必要がある）。\",\n      \"related\": [\"mcp-server\", \"mcp-client\"]\n    },\n    {\n      \"id\": \"mcp-config\",\n      \"term\": \"mcpServers設定\",\n      \"aliases\": [\"mcpServers\", \"MCPの設定ファイル\", \"mcp_servers.json\", \"mcp.json\"],\n      \"lecture\": 5,\n      \"category\": \"MCP\",\n      \"definition\": \"使うMCPサーバーを列挙する設定ファイル。サーバーごとに名前と、起動コマンド（stdio）または接続先URL（HTTP）を書く。Claude Desktop、Cursor、Pydantic AIなどが同じ mcpServers 形式を読む（VS Code / Copilot Chatは servers 形式）。本講座では app/mcp_servers.json。設定を数行足すだけでツールが増えるのがMCPの体験の核心。\",\n      \"related\": [\"mcp-client\", \"tool-namespace\"]\n    },\n    {\n\n[20 more lines in file. Use offset=510 to continue.]",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 4,
+    "tool_calls": 3,
+    "input_tokens": 7228,
+    "output_tokens": 216,
+    "cache_read_tokens": 0,
+    "total_tokens": 7444
+  },
+  "events": 65,
+  "skipped_lines": [],
+  "notes": [
+    "Pi は読み取り専用のツール（read,grep,find,ls）だけを持つ。cwd は data/ だけを複製した一時フォルダ"
+  ],
+  "raw_file": "t3.raw.jsonl",
+  "stderr_file": "t3.stderr.txt",
+  "pi_version": "1.5.0",
+  "auto_retries": [],
+  "session": {
+    "type": "session",
+    "version": 3,
+    "id": "01a1a24c-e9fb-743e-b0e7-5d627a5cfe3e",
+    "timestamp": "2026-11-03T16:45:12.061Z",
+    "cwd": "/tmp/compare-pi-smyq6y0k"
+  }
+}

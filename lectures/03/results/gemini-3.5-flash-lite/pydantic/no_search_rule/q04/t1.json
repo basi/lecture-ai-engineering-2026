@@ -1,0 +1,263 @@
+{
+  "schema": 1,
+  "engine": "pydantic",
+  "variant": "no_search_rule",
+  "variant_sha256": "b1d888087121427a68eed92a562cfc223c8f9090c570c5195f379f5792a1ad76",
+  "qid": "q04",
+  "kind": "question",
+  "question": "RLHFとは何ですか？",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": "q04:t1",
+  "command": "app.agent.run_with_approval(agent, <質問>, model=build_model(), usage_limits=UsageLimits(request_limit=10)) を agent.override(instructions=<変種>, tools=<変種>) の中で実行（variant=no_search_rule）",
+  "compare_args": [
+    "run",
+    "--level",
+    "basic",
+    "--variant",
+    "no_search_rule,query_many,ending_quiz",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T15:58:09+00:00",
+  "finished_at": "2026-11-03T15:58:09+00:00",
+  "duration_s": 9.533,
+  "elapsed_s": 9.533,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "「RLHF」という用語は、現在の講座の用語集には登録されていないようです。そのため、一般的な意味でお答えします。\n\nRLHF（Reinforcement Learning from Human Feedback：人間のフィードバックによる強化学習）は、大規模言語モデル（LLM）などのAIモデルを人間の好みに合わせて調整（アライメント）するための手法です。\n\n人間がAIの出力結果を評価し、そのフィードバックを報酬として強化学習を行うことで、AIがより安全で、自然で、役に立つ回答を出力できるように訓練します。\n\nこの内容に関連する詳細や位置づけについては、アライメント手法などを扱う回（該当する講義）をご参照ください。",
+  "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+  "instructions_sha256": "cf51e95597c9a3653b9a761febf0cf70517575e9ee9d06c887f0f68b8d660564",
+  "instructions_match": true,
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\nAIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n答える前に使うこと。query には調べたい用語を1つだけ入れる（例: \"LoRA\"）。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    }
+  ],
+  "tools_sha256": "4dad30244d39518bdbf94891057db030b149e7bc10d6813731201a380b7feacb",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_759998",
+      "name": "search_glossary",
+      "args": {
+        "query": "RLHF"
+      },
+      "result": "用語集に「RLHF」は見つかりませんでした。",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "input_tokens": 804,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 162,
+    "input_audio_tokens": 0,
+    "cache_audio_read_tokens": 0,
+    "output_audio_tokens": 0,
+    "audio_seconds": 0,
+    "details": {
+      "text_prompt_tokens": 804
+    },
+    "cost": "0.0006462",
+    "requests": 2,
+    "tool_calls": 1
+  },
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "RLHFとは何ですか？",
+          "timestamp": "2026-11-03T15:58:00.382595Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-03T15:58:00.382892Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a221-b4bc-77b8-8d19-438d657b1dce",
+      "conversation_id": "01a1a221-b4bc-77b8-8d19-438e0be5a2e2",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "RLHF"
+          },
+          "tool_call_id": "call_759998",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0Trp80004QuQUFpTBICUFuJmpzr/OwFA8dZF85gMXLmSKOpU34GcTGvGFA2ecYR0uJw9mBR6LMkv3zzEOfnb00FlBuDNfOrTjHl7tiw3ll74WNsWrze7gotuU="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 379,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 18,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 379
+        },
+        "cost": "0.0001587",
+        "input_text_tokens": 379
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T15:58:04.889191Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "iATqaviTKvSE694PveL8EA",
+      "finish_reason": "stop",
+      "run_id": "01a1a221-b4bc-77b8-8d19-438d657b1dce",
+      "conversation_id": "01a1a221-b4bc-77b8-8d19-438e0be5a2e2",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "用語集に「RLHF」は見つかりませんでした。",
+          "tool_call_id": "call_759998",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T15:58:04.891021Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T15:58:04.891464Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a221-b4bc-77b8-8d19-438d657b1dce",
+      "conversation_id": "01a1a221-b4bc-77b8-8d19-438e0be5a2e2",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "「RLHF」という用語は、現在の講座の用語集には登録されていないようです。そのため、一般的な意味でお答えします。\n\nRLHF（Reinforcement Learning from Human Feedback：人間のフィードバックによる強化学習）は、大規模言語モデル（LLM）などのAIモデルを人間の好みに合わせて調整（アライメント）するための手法です。\n\n人間がAIの出力結果を評価し、そのフィードバックを報酬として強化学習を行うことで、AIがより安全で、自然で、役に立つ回答を出力できるように訓練します。\n\nこの内容に関連する詳細や位置づけについては、アライメント手法などを扱う回（該当する講義）をご参照ください。",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TnKWzRa2ToVe8eFBe8C30FFC6ZLeV4YhrqSr2aCeuLSNlxrkcJhprKJvnvVDcZfo+s3UUj2DU/CzjOq86ZZgNc5fROoW1Q1F1Q2Z/xQwcYEUzi3tI1jXRotM="
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 425,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 144,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 425
+        },
+        "cost": "0.0004875",
+        "input_text_tokens": 425
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T15:58:09.894494Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "jQTqasLnB-Cl694PgZCi8Q4",
+      "finish_reason": "stop",
+      "run_id": "01a1a221-b4bc-77b8-8d19-438d657b1dce",
+      "conversation_id": "01a1a221-b4bc-77b8-8d19-438e0be5a2e2",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ]
+}

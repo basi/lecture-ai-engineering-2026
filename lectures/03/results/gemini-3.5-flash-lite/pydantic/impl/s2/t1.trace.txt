@@ -1,0 +1,22 @@
+[model] gemini-3.5-flash-lite
+[質問] LoRAとQLoRAの違いを調べて学習ログに保存して
+[approval] save_learning_log({"title": "LoRAとQLoRAの違い", "content": "# LoRAとQLoRAの違い\n\n用語集に基づくLoRAとQLoRAの定義と違いを整理します。\n\n## LoRA\n- **定義**: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法です。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できます。\n- **関連回**: 第2回\n\n## QLoRA\n- **定義**: ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法です。より大きなモデルを小さなGPUで扱うことができます。\n- **関連回**: 第2回\n\n## 主な違い\n- **重みの量子化**: LoRAは通常の精度（フル精度など）のままベースモデルを固定しますが、QLoRAはベースモデルの重みを4ビット等に量子化してメモリを大幅に節約します。\n- **GPU要件**: QLoRAのほうがより小さなGPUで大規模なモデルを扱えるようになります。\n"}) -> deny
+LoRAとQLoRAの違いについて、講座の用語集を基にまとめました。
+
+* **LoRA（Low-Rank Adaptation）**
+  * 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT（Parameter-Efficient Fine-Tuning）手法です。学習パラメータが少なく、アダプタと呼ばれる小さなファイルとして保存できます。
+* **QLoRA（Quantized LoRA）**
+  * ベースモデルの重みを4ビットなどに量子化してメモリを大幅に節約したうえで、LoRAによる学習を行う手法です。これにより、より大きなモデルを小さなGPU環境でも扱えるようになります。
+
+**主な違い**は、ベースモデルの重みをそのまま（またはフル精度等で）扱うか、4ビットなどに**量子化してメモリを削減するか**という点にあります。
+
+（関連回：第2回）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool call]   search_glossary({'query': 'QLoRA'})
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool return] search_glossary -> [{"term": "QLoRA", "lecture": 2, "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2…
+[tool call]   save_learning_log({'title': 'LoRAとQLoRAの違い', 'content': '# LoRAとQLoRAの違い\n\n用語集に基づくLoRAとQLoRAの定義と違いを整理します。\n\n## LoRA\n- **定義**: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法です。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できます。\n- **関連回**: 第2回\n\n## QLoRA\n- **定義**: ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法です。より大きなモデルを小さなGPUで扱うことができます。\n- **関連回**: 第2回\n\n## 主な違い\n- **重みの量子化**: LoRAは通常の精度（フル精度など）のままベースモデルを固定しますが、QLoRAはベースモデルの重みを4ビット等に量子化してメモリを大幅に節約します。\n- **GPU要件**: QLoRAのほうがより小さなGPUで大規模なモデルを扱えるようになります。\n'})
+[tool return] save_learning_log -> 利用者が保存を断りました。保存せずに答えてください。…
+[usage] RunUsage(cost=Decimal('0.0022290'), details={'text_prompt_tokens': 3080}, input_text_tokens=3080, input_tokens=3080, output_tokens=522, requests=3, tool_calls=2)

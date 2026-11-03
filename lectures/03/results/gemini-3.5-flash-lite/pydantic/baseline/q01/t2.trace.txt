@@ -1,0 +1,18 @@
+[model] gemini-3.5-flash-lite
+[質問] AIE2026の講座の宿題にある「3レベル」とは何ですか？
+「3レベル」とは、AIE2026の宿題における構成のことです。
+
+宿題には以下の3つの段階が用意されており、受講者はどれか1つに取り組めばその回の宿題完了となります：
+
+1. **基礎**：講義内容の確認
+2. **実装**：自分でコードを書く
+3. **発展**：調査や試行
+
+原則として採点は行われませんので、ご自身の理解度や目的に合わせて、いずれかのレベルを選んで取り組んでみてください。
+
+（関連する回：第1回）
+
+--- trace ---
+[tool call]   search_glossary({'query': '3レベル'})
+[tool return] search_glossary -> [{"term": "宿題の3レベル", "lecture": 1, "definition": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組…
+[usage] RunUsage(cost=Decimal('0.0006402'), details={'text_prompt_tokens': 959}, input_text_tokens=959, input_tokens=959, output_tokens=141, requests=2, tool_calls=1)
