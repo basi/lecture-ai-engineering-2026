@@ -105,21 +105,22 @@ uv run python lectures/03/compare.py status                     # 予定・済�
 
 | 順 | 状態 | 内容 | コマンド（`uv run python lectures/03/compare.py` の後） | LLM リクエストの目安 | 時間の目安 |
 |---:|---|---|---|---:|---:|
-| 0 | | 最初の確認（上の節） | 上の 6 つ | 0 | 約 3 分 |
-| 1 | | 演習：CLI の 3 つの質問と、素の LLM（`ask`） | 下の「演習の CLI」と `run --level exercise --trials 1` | 約 20 | 約 3 分 |
-| 2 | | 基礎の基準（V0 `baseline`、10 問） | `run --level basic --variant baseline --trials 1` | 約 20 | 約 2 分 |
-| 3 | | 基礎の変種 V1〜V3。ここまでで基礎を提出できる | `run --level basic --variant no_search_rule,query_many,ending_quiz --trials 1` | 約 30 | 約 3 分 |
-| 4 | | 実装（s1〜s6） | `run --level impl --trials 1` | 約 20 | 約 2 分 |
-| 5 | | 発展(a) ADK（q01〜q04） | 下の「adk run を手で 1 回」と `run --level adv-a --trials 1` | 約 15 | 約 4 分 |
-| 6 | | 発展(b) Pi（q01・q02・q04） | 下の「Pi を手で 1 回」と `run --level adv-b --trials 1` | 約 25 | 約 5 分 |
-| 7 | | 基礎の変種 V4・V5 | `run --level basic --trials 1` | 約 20 | 約 2 分 |
-| 8 | | 2・3 回目（全部） | `run --level all --trials 3` | 約 270 | 約 25 分 |
+| 0 | ☆ 実験済み | 最初の確認（上の節） | 上の 6 つ | 0 | 約 3 分 |
+| 1 | ☆ 実験済み | 演習：CLI の 3 つの質問と、素の LLM（`ask`） | 下の「演習の CLI」と `run --level exercise --trials 1` | 約 20 | 約 3 分 |
+| 2 | ☆ 実験済み | 基礎の基準（V0 `baseline`、10 問） | `run --level basic --variant baseline --trials 1` | 約 20 | 約 2 分 |
+| 3 | ☆ 実験済み | 基礎の変種 V1〜V3。ここまでで基礎を提出できる | `run --level basic --variant no_search_rule,query_many,ending_quiz --trials 1` | 約 30 | 約 3 分 |
+| 4 | ☆ 実験済み | 実装（s1〜s6） | `run --level impl --trials 1` | 約 20 | 約 2 分 |
+| 5 | ☆ 実験済み | 発展(a) ADK（q01〜q04） | 下の「adk run を手で 1 回」と `run --level adv-a --trials 1` | 約 15 | 約 4 分 |
+| 6 | ☆ 実験済み | 発展(b) Pi（q01・q02・q04） | 下の「Pi を手で 1 回」と `run --level adv-b --trials 1` | 約 25 | 約 5 分 |
+| 7 | ☆ 実験済み | 基礎の変種 V4・V5 | `run --level basic --trials 1` | 約 20 | 約 2 分 |
+| 8 | ☆ 実験済み | 2・3 回目（全部） | `run --level all --trials 3` | 約 270 | 約 25 分 |
 
-- 1 巡で約 135、3 巡で約 400 リクエスト（再試行を含めると約 450）。時間は、実行の間の待ち（既定 8 秒）を含めた見積もりで、429 で待つと延びる（1 巡目の実測で直す）。
+- 1 巡で約 135、3 巡で約 400 リクエスト（再試行を含めると約 450）。時間は、実行の間の待ち（既定 8 秒）を含めた見積もりで、429 で待つと延びる。
+- 実測：147 回（3 巡と、任意の V6・V7）で、LLM リクエストは 336（1 巡あたり 110〜114）、時間は約 63 分だった（日本時間 2026-11-04 00:46〜01:49。実行の間の待ち 8 秒を含む。再試行は 503 の 1 回だけ）。
 - `--variant`・`--question`・`--engine` には、名前を `,` で区切って複数指定できる。
 - 7 番の `run --level basic --trials 1` は、V0〜V5 を順に回す。V0〜V3 は済んでいるので飛ばされ、V4・V5 だけが実行される。
 - 1 番の `--level exercise` は、`ask`（q01・q02・q04）と、V0 の q01〜q03 を実行する。V0 の q01〜q03 は 2 番と同じ結果を使うので、2 番では残りの 7 問だけが実行される。
-- 任意の変種 V6・V7 は、8 番のあとに `run --level basic --include-optional --trials 3` で足す。
+- 任意の変種 V6・V7 は、8 番のあとに `run --level basic --include-optional --trials 3` で足す（☆ 実験済み）。
 - 各段の終わりに `status` で「済み」が増えたことを確かめ、下の「結果の保存と受け渡し」で push する（段ごとに push すると、途中の結果から answer.md に書き写せる）。
 
 ### 演習の CLI（1 番）
