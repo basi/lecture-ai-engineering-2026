@@ -1,0 +1,282 @@
+{
+  "schema": 1,
+  "engine": "pydantic",
+  "variant": "impl",
+  "variant_sha256": "3f6ed4952119aab1dbafbf11a7ab361272758409fbcb3f0e29549f59ec55857f",
+  "qid": "s4",
+  "kind": "scenario",
+  "question": "今日はQLoRAの4bit量子化を勉強した",
+  "trial": 3,
+  "model": "gemini-3.5-flash-lite",
+  "seed": "s4:t3",
+  "command": "app.agent.run_with_approval(agent, <質問>, model=build_model(), usage_limits=UsageLimits(request_limit=10)) を agent.override(instructions=<変種>, tools=<変種>) の中で実行（variant=impl）",
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:43:44+00:00",
+  "finished_at": "2026-11-03T16:43:44+00:00",
+  "duration_s": 1.933,
+  "elapsed_s": 1.933,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "QLoRAの4bit量子化の学習、お疲れ様です！\n\nQLoRAは、ベースモデルの重みを4bitに量子化してメモリを大幅に節約しつつ、LoRAを使って効率的に学習する非常に強力な手法ですね。大きなモデルでも小さなGPUで扱えるようになるため、実務や研究でもよく使われます。\n\n用語集を確認すると、この内容は**第2回**で扱っています。\n\nもしQLoRAや関連する用語についてさらに詳しく知りたい点があれば、いつでも聞いてくださいね！\n\n（関連する回：第2回）",
+  "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+  "instructions_sha256": "a5d1d16d4181b27d2526845f92ef9ac357f8fae58575295fd51065bbef58aa17",
+  "instructions_match": true,
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\nAIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n答える前に使うこと。query には調べたい用語を1つだけ入れる（例: \"LoRA\"）。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "save_learning_log",
+      "description": "学習の記録を learning_log/ フォルダに Markdown ファイルとして保存する。\n\n利用者に学習の記録や保存を頼まれたときだけ使うこと。title は記録の題名、content は本文（Markdown）。\n保存は取り消しにくいので、このツールを呼ぶと、保存の前にプログラムが利用者に承認を求める\n（会話の中で先に確認を取らなくてよい）。承認されなかったときは保存しない。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "content"
+        ],
+        "type": "object"
+      },
+      "kind": "unapproved"
+    }
+  ],
+  "tools_sha256": "d85cf40d8eaaad69a3726337d5eaa91b4742777c8fb45d21b11aac91a3535960",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_818215",
+      "name": "search_glossary",
+      "args": {
+        "query": "QLoRA"
+      },
+      "result": "[{\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}, {\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}]",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "input_tokens": 1351,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 143,
+    "input_audio_tokens": 0,
+    "cache_audio_read_tokens": 0,
+    "output_audio_tokens": 0,
+    "audio_seconds": 0,
+    "details": {
+      "text_prompt_tokens": 1351
+    },
+    "cost": "0.0007628",
+    "requests": 2,
+    "tool_calls": 1
+  },
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "今日はQLoRAの4bit量子化を勉強した",
+          "timestamp": "2026-11-03T16:43:42.852718Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-03T16:43:42.853002Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a24b-8d83-74d7-b9f9-642601a47b34",
+      "conversation_id": "01a1a24b-8d83-74d7-b9f9-642756252120",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "QLoRA"
+          },
+          "tool_call_id": "call_818215",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TxvLao0do0r62V9AVqUDFoOJsYc84NNgKJJzfTNRJhW283PZGtfU5QXTvOkY0U9r98hUpkCMNJSPuKJbMkYP/MsgScxp47a+HSbJwDLQUSu0uFtXKcLKz7lo="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 550,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 19,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 550
+        },
+        "cost": "0.0002125",
+        "input_text_tokens": 550
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:43:43.540059Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "Pw_qasiZDsXB0r4PoonC4QY",
+      "finish_reason": "stop",
+      "run_id": "01a1a24b-8d83-74d7-b9f9-642601a47b34",
+      "conversation_id": "01a1a24b-8d83-74d7-b9f9-642756252120",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "[{\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}, {\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}]",
+          "tool_call_id": "call_818215",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T16:43:43.541955Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T16:43:43.542400Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a24b-8d83-74d7-b9f9-642601a47b34",
+      "conversation_id": "01a1a24b-8d83-74d7-b9f9-642756252120",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "QLoRAの4bit量子化の学習、お疲れ様です！\n\nQLoRAは、ベースモデルの重みを4bitに量子化してメモリを大幅に節約しつつ、LoRAを使って効率的に学習する非常に強力な手法ですね。大きなモデルでも小さなGPUで扱えるようになるため、実務や研究でもよく使われます。\n\n用語集を確認すると、この内容は**第2回**で扱っています。\n\nもしQLoRAや関連する用語についてさらに詳しく知りたい点があれば、いつでも聞いてくださいね！\n\n（関連する回：第2回）",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TyCDzB08380UNTzEXQYWkZ32Y9gapsf4UsUJwsfThYb+0fEfpP/U4Am4S8uNfePFQnlnhU3bOv6kuNaoafAGe4JP9oogNAA+pSy9e0yw1MhUlMIFFg8TKKNQ="
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 801,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 124,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 801
+        },
+        "cost": "0.0005503",
+        "input_text_tokens": 801
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:43:44.767291Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "Pw_qavajM4qK694Pp9bHwAQ",
+      "finish_reason": "stop",
+      "run_id": "01a1a24b-8d83-74d7-b9f9-642601a47b34",
+      "conversation_id": "01a1a24b-8d83-74d7-b9f9-642756252120",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ]
+}

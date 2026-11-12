@@ -1,0 +1,10 @@
+[model] gemini-3.5-flash-lite
+[質問] RLHFとは何ですか？
+AIエンジニアリング講座（AIE2026）の用語集を調べましたが、「RLHF」という用語は登録されていませんでした。
+
+推測での回答は控えさせていただきますが、関連する学習内容について気になる回などがあれば、講義の要点や用語集の別の言葉をお調べできますので、お気軽にお申し付けください。
+
+--- trace ---
+[tool call]   search_glossary({'query': 'RLHF'})
+[tool return] search_glossary -> 用語集に「RLHF」は見つかりませんでした。…
+[usage] RunUsage(cost=Decimal('0.0004856'), details={'text_prompt_tokens': 852}, input_text_tokens=852, input_tokens=852, output_tokens=92, requests=2, tool_calls=1)

@@ -1,0 +1,18 @@
+[model] gemini-3.5-flash-lite
+[質問] LoRAの復習がしたいので確認問題を1問出して
+LoRAに関する確認問題です！
+
+**【確認問題】**
+事前学習済みの重みを固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法のことを何と呼ぶでしょうか？
+
+（ヒント：第2回で学ぶ、学習コストやパラメータ数を大幅に削減できる効率的なチューニング手法です）
+
+---
+関係する回：第2回
+
+--- trace ---
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool call]   make_quiz({'lecture': 2})
+[tool return] make_quiz -> {"question": "「LoRA」の意味は？", "answer": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、…
+[usage] RunUsage(cost=Decimal('0.0008972'), details={'text_prompt_tokens': 1899}, input_text_tokens=1899, input_tokens=1899, output_tokens=131, requests=3, tool_calls=2)

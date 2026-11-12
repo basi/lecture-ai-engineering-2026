@@ -1,0 +1,12 @@
+[model] gemini-3.5-flash-lite
+第2回の内容から確認問題を1問出します。
+
+**【確認問題】**
+「エポック」の意味は何でしょうか？学習における役割も含めて考えてみてください。
+
+（第2回）
+
+--- trace ---
+[tool call]   make_quiz({'lecture': 2})
+[tool return] make_quiz -> {"question": "「エポック」の意味は？", "answer": "学習データ全体を1周学習することを1エポックと数える。回数を増やしすぎると過学習しやすい。"}…
+[usage] RunUsage(cost=Decimal('0.0004957'), details={'text_prompt_tokens': 1169}, input_text_tokens=1169, input_tokens=1169, output_tokens=58, requests=2, tool_calls=1)

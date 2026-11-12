@@ -1,0 +1,12 @@
+[model] gemini-3.5-flash-lite
+[質問] 今日はQLoRAの4bit量子化を勉強した
+QLoRA（Quantized LoRA）の4bit量子化の学習、お疲れ様です！
+
+QLoRAを使うと、ベースモデルの重みを4bitに量子化してメモリを大幅に節約しながら、LoRAによって効率的にファインチューニングを行うことができますよね。大きなモデルを限られたGPU環境でも動かせるようにする、非常に実用的な手法です。
+
+（関連する回：第2回）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'QLoRA'})
+[tool return] search_glossary -> [{"term": "QLoRA", "lecture": 2, "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2…
+[usage] RunUsage(cost=Decimal('0.0006828'), details={'text_prompt_tokens': 1351}, input_text_tokens=1351, input_tokens=1351, output_tokens=111, requests=2, tool_calls=1)

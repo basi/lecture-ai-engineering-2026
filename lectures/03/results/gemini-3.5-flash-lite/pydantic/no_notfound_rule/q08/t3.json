@@ -1,0 +1,261 @@
+{
+  "schema": 1,
+  "engine": "pydantic",
+  "variant": "no_notfound_rule",
+  "variant_sha256": "b53c103fd89c4a164a7f935cc2eae353dceff59aba48a5c399cb2dbe85fb56df",
+  "qid": "q08",
+  "kind": "question",
+  "question": "第4回では何を学びますか？",
+  "trial": 3,
+  "model": "gemini-3.5-flash-lite",
+  "seed": "q08:t3",
+  "command": "app.agent.run_with_approval(agent, <質問>, model=build_model(), usage_limits=UsageLimits(request_limit=10)) を agent.override(instructions=<変種>, tools=<変種>) の中で実行（variant=no_notfound_rule）",
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:42:13+00:00",
+  "finished_at": "2026-11-03T16:42:13+00:00",
+  "duration_s": 2.15,
+  "elapsed_s": 2.151,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "第4回の講義要点は、現在用意されていないようです（登録されているのは第1〜3回、および第5回です）。もし他の回の内容や用語について気になることがありましたら、お気軽にお尋ねください！",
+  "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+  "instructions_sha256": "de89cc842305b24faa23c8af8a05b2e43b8ec430abc6a303b7a5d4432bd531cd",
+  "instructions_match": true,
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\nAIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n答える前に使うこと。query には調べたい用語を1つだけ入れる（例: \"LoRA\"）。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    }
+  ],
+  "tools_sha256": "4dad30244d39518bdbf94891057db030b149e7bc10d6813731201a380b7feacb",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_1217243",
+      "name": "get_lecture_summary",
+      "args": {
+        "lecture": 4
+      },
+      "result": "第4回の要点はまだありません。用意されている回: 01, 02, 03, 05",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "input_tokens": 822,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 63,
+    "input_audio_tokens": 0,
+    "cache_audio_read_tokens": 0,
+    "output_audio_tokens": 0,
+    "audio_seconds": 0,
+    "details": {
+      "text_prompt_tokens": 822
+    },
+    "cost": "0.0004041",
+    "requests": 2,
+    "tool_calls": 1
+  },
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "第4回では何を学びますか？",
+          "timestamp": "2026-11-03T16:42:11.670394Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-03T16:42:11.670790Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a24a-2954-714b-850b-86ec021b60b5",
+      "conversation_id": "01a1a24a-2954-714b-850b-86edd741e19e",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "get_lecture_summary",
+          "args": {
+            "lecture": 4
+          },
+          "tool_call_id": "call_1217243",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TQaeEaDsxamAgCMYZTV8T1gKMUJHuOGno8KxCjUCKLV+qfq+Kfvk9y7iQ2jcTndLLDq0Ab3PWjSsKBtJNW7KOQEhtf5AcENTNaoWYVEO/3W3Gy2ua+nWOn0k="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 381,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 16,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 381
+        },
+        "cost": "0.0001543",
+        "input_text_tokens": 381
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:42:13.012782Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "5A7qaqvFAoz6694Plbfq4AM",
+      "finish_reason": "stop",
+      "run_id": "01a1a24a-2954-714b-850b-86ec021b60b5",
+      "conversation_id": "01a1a24a-2954-714b-850b-86edd741e19e",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "get_lecture_summary",
+          "content": "第4回の要点はまだありません。用意されている回: 01, 02, 03, 05",
+          "tool_call_id": "call_1217243",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T16:42:13.014630Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T16:42:13.015036Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a24a-2954-714b-850b-86ec021b60b5",
+      "conversation_id": "01a1a24a-2954-714b-850b-86edd741e19e",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "第4回の講義要点は、現在用意されていないようです（登録されているのは第1〜3回、および第5回です）。もし他の回の内容や用語について気になることがありましたら、お気軽にお尋ねください！",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TpFyZi8qjC8zRdsnSUdvaiX7uhWoFmY5T+TRCCaNIE+VLBZDVlIusIWCFwyZtbYH6eRLsk8kT4RIoPQlAkA5VdyerzhvFjzEQ+61O6bXL1FiHgAvCSB5JC/I="
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 441,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 47,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 441
+        },
+        "cost": "0.0002498",
+        "input_text_tokens": 441
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:42:13.799963Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "5Q7qauv4EZvt694Pxdam2QM",
+      "finish_reason": "stop",
+      "run_id": "01a1a24a-2954-714b-850b-86ec021b60b5",
+      "conversation_id": "01a1a24a-2954-714b-850b-86edd741e19e",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ]
+}

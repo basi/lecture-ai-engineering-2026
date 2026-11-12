@@ -1,0 +1,261 @@
+{
+  "schema": 1,
+  "engine": "pydantic",
+  "variant": "no_notfound_rule",
+  "variant_sha256": "b53c103fd89c4a164a7f935cc2eae353dceff59aba48a5c399cb2dbe85fb56df",
+  "qid": "q01",
+  "kind": "question",
+  "question": "AIE2026の講座の宿題にある「3レベル」とは何ですか？",
+  "trial": 3,
+  "model": "gemini-3.5-flash-lite",
+  "seed": "q01:t3",
+  "command": "app.agent.run_with_approval(agent, <質問>, model=build_model(), usage_limits=UsageLimits(request_limit=10)) を agent.override(instructions=<変種>, tools=<変種>) の中で実行（variant=no_notfound_rule）",
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:41:25+00:00",
+  "finished_at": "2026-11-03T16:41:25+00:00",
+  "duration_s": 4.339,
+  "elapsed_s": 4.339,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "AIE2026の講座における「3レベル」とは、宿題の構成を表す3つの段階のことです。\n\n具体的には以下の3つのレベルに分かれており、**どれか1つに取り組めばその回の宿題は完了**となります。\n\n1. **基礎**：講義内容の確認（知識の定着を目的とした問題など）\n2. **実装**：自分でコードを書く（実際に手を動かして実装する課題）\n3. **発展**：調査や試行（より踏み込んだ調査や発展的な実験など）\n\n自分の興味や理解度、使える時間に合わせて、お好みのレベルを選んで取り組んでみてくださいね。\n\n（関連する回：第1回）",
+  "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+  "instructions_sha256": "de89cc842305b24faa23c8af8a05b2e43b8ec430abc6a303b7a5d4432bd531cd",
+  "instructions_match": true,
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\nAIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n答える前に使うこと。query には調べたい用語を1つだけ入れる（例: \"LoRA\"）。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    }
+  ],
+  "tools_sha256": "4dad30244d39518bdbf94891057db030b149e7bc10d6813731201a380b7feacb",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_636809",
+      "name": "search_glossary",
+      "args": {
+        "query": "3レベル"
+      },
+      "result": "[{\"term\": \"宿題の3レベル\", \"lecture\": 1, \"definition\": \"AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。\", \"related\": [\"answer-md\"]}]",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "input_tokens": 909,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 175,
+    "input_audio_tokens": 0,
+    "cache_audio_read_tokens": 0,
+    "output_audio_tokens": 0,
+    "audio_seconds": 0,
+    "details": {
+      "text_prompt_tokens": 909
+    },
+    "cost": "0.0007102",
+    "requests": 2,
+    "tool_calls": 1
+  },
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "AIE2026の講座の宿題にある「3レベル」とは何ですか？",
+          "timestamp": "2026-11-03T16:41:21.685173Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-03T16:41:21.685657Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a249-6613-7423-b199-4a4ec62cdaa1",
+      "conversation_id": "01a1a249-6613-7423-b199-4a4f387315df",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "3レベル"
+          },
+          "tool_call_id": "call_636809",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0Tl4u4dAX3RpZXt5vHTs4brw+Ghbq9/V8gYTBPpZ7v//JCP9lJSL4gQD82TR/kCbL1esyIwl/6zO9HShupyjrqlpb/TmfIUszGGsJX9AZz3ZMR3+N6NvyucPE="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 392,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 18,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 392
+        },
+        "cost": "0.0001626",
+        "input_text_tokens": 392
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:41:23.101507Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "sg7qaoe2A_TNjuMP1tDYsQk",
+      "finish_reason": "stop",
+      "run_id": "01a1a249-6613-7423-b199-4a4ec62cdaa1",
+      "conversation_id": "01a1a249-6613-7423-b199-4a4f387315df",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "[{\"term\": \"宿題の3レベル\", \"lecture\": 1, \"definition\": \"AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。\", \"related\": [\"answer-md\"]}]",
+          "tool_call_id": "call_636809",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T16:41:23.103346Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T16:41:23.103776Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a249-6613-7423-b199-4a4ec62cdaa1",
+      "conversation_id": "01a1a249-6613-7423-b199-4a4f387315df",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "AIE2026の講座における「3レベル」とは、宿題の構成を表す3つの段階のことです。\n\n具体的には以下の3つのレベルに分かれており、**どれか1つに取り組めばその回の宿題は完了**となります。\n\n1. **基礎**：講義内容の確認（知識の定着を目的とした問題など）\n2. **実装**：自分でコードを書く（実際に手を動かして実装する課題）\n3. **発展**：調査や試行（より踏み込んだ調査や発展的な実験など）\n\n自分の興味や理解度、使える時間に合わせて、お好みのレベルを選んで取り組んでみてくださいね。\n\n（関連する回：第1回）",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TdSGQsADXTr4LCUtIkYxedXBZ/42IeDOE0ZZj7DUBriF8OS3by+6PfKUSJOni1LmVGTcmrW9rG3MTe8qoYm0MuqeH7axctIIwp8GGDIkvYd8DBgaS5kWbV+w="
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 517,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 157,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 517
+        },
+        "cost": "0.0005476",
+        "input_text_tokens": 517
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:41:25.996643Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "sw7qaseVGL7K4-EPnJyB4Qk",
+      "finish_reason": "stop",
+      "run_id": "01a1a249-6613-7423-b199-4a4ec62cdaa1",
+      "conversation_id": "01a1a249-6613-7423-b199-4a4f387315df",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ]
+}

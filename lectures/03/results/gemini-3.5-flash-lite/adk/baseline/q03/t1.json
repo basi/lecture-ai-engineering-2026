@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "engine": "adk",
+  "variant": "baseline",
+  "variant_sha256": "32b08b882faf9c08509886cb48d79589680f6924b6c4ac8bb4c37eb037f7d5a9",
+  "qid": "q03",
+  "kind": "question",
+  "question": "第2回の内容から確認問題を1問出して",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "uv",
+    "run",
+    "--with",
+    "google-adk==2.13.0",
+    "adk",
+    "run",
+    "--in_memory",
+    "--jsonl",
+    "--timeout",
+    "180s",
+    "adk_agent/glossary_agent",
+    "第2回の内容から確認問題を1問出して"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "adv-a",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:12:35+00:00",
+  "finished_at": "2026-11-03T16:12:35+00:00",
+  "duration_s": 21.204,
+  "elapsed_s": 21.204,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "第2回の内容から確認問題を出題します！\n\n**【確認問題】**\n「事前学習」の意味は何でしょうか？\n\n考えてみてくださいね。分からないときはヒントを出しますので、お気軽に声をかけてください！\n\n（関係する回：第2回）",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_146669",
+      "name": "make_quiz",
+      "args": {
+        "lecture": 2
+      },
+      "result": "{\"question\": \"「事前学習」の意味は？\", \"answer\": \"大量の汎用テキストで、次のトークンを予測するようにモデルを学習させる最初の段階。言語の知識や一般的な常識の多くはここで身につく。\"}",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 2,
+    "tool_calls": 1,
+    "input_tokens": 1021,
+    "output_tokens": 71,
+    "candidates_tokens": 71,
+    "thoughts_tokens": 0,
+    "total_tokens": 1092
+  },
+  "events": 3,
+  "skipped_lines": [
+    "Log setup complete: /tmp/agents_log/agent.20261103_161214.log",
+    "To access latest log: tail -F /tmp/agents_log/agent.latest.log"
+  ],
+  "notes": [
+    "make_quiz の乱数は別プロセスなので、random.seed では揃わない"
+  ],
+  "raw_file": "t1.raw.jsonl",
+  "stderr_file": "t1.stderr.txt"
+}

@@ -1,0 +1,321 @@
+# 第3回: 何を比べるか（質問・変種・実装のシナリオ・自動チェック）。compare.py が読む。
+#
+# 直し方の目安:
+#   - 質問や変種を足す・直すときは、このファイルだけを書き換える（compare.py は変えなくてよい）。
+#   - 変種の「old」は、app/agent.py の INSTRUCTIONS、または app/tools.py の docstring
+#     （モデルに渡る説明文 = Tool.description）の一部。ちょうど 1 か所に一致しないと、API を呼ぶ前に止まる。
+#   - チェックは集計（compare.py summarize）のときに判定する。足したり直したりしたあと、
+#     実行し直さずに summarize だけで反映できる。
+#   - 変種や質問を変えたあとに結果を取り直すときは、results/ の該当フォルダを手で退避する
+#     （compare.py は、既にある t<k>.json を飛ばす）。
+#
+# 書き方（TOML の注意）: 配列の中の { ... } は 1 行に書く。正規表現は '...'（単一引用符）で書くと、\ をそのまま書ける。
+
+# ---------------------------------------------------------------------------
+# 共通
+# ---------------------------------------------------------------------------
+
+[defaults]
+# 比較用のエージェントに持たせるツール（演習の 3 つ）。save_learning_log は、実装（impl）だけに足す。
+# ADK 版（adk_agent/glossary_agent）も、同じ 3 つ。
+tools = ["search_glossary", "get_lecture_summary", "make_quiz"]
+
+# ---------------------------------------------------------------------------
+# 質問セット（q01〜q10）
+#   text   : モデルに送る質問
+#   note   : 狙い・根拠（集計には使わない）
+#   checks : 自動チェック。種類は compare.py の CHECKS を見る。共通のキー:
+#              label   = 表に出す名前
+#              engines = このチェックを判定するエンジン（省略すると全エンジン。ツールを使わない ask や、
+#                        ツールが違う pi では、ツールのチェックを除く）
+#   種類:
+#     answer_contains_all   values = [...]       回答に全部含まれる
+#     answer_contains_any   values = [...]       回答にどれか含まれる
+#     answer_not_contains   values = [...]       回答にどれも含まれない
+#     answer_regex          pattern = '...'      回答が正規表現に一致する
+#     answer_not_regex      pattern = '...'      回答が正規表現に一致しない
+#     ending_lecture        [lecture = N] [expect = false]
+#                                                空でない最後の 2 行に「第N回」がある（expect = false なら、無い）
+#     tool_called           name, [args_contains], [after]
+#                                                ツールを呼んだ。args_contains は引数を {"query":"LoRA"} のように
+#                                                空白なしで JSON にした文字列の一部。after = "名前" なら、その
+#                                                ツールを最初に呼んだ応答より後の応答で呼んだ
+#     tool_not_called       name                 ツールを呼ばなかった
+#     tool_count            name, [min], [max]   ツールを呼んだ回数の範囲
+#     tool_result_contains  name, values = [...] そのツールの戻り値に、全部含まれる
+#     requests_at_most      value                LLM の呼び出し回数が value 以下（pydantic）
+#     approvals_count       value                承認待ちの件数（pydantic の impl）
+#     files_saved           value                保存されたファイルの数（pydantic の impl）
+#     files_outside_none                         learning_log/ の外にファイルができていない（impl）
+# ---------------------------------------------------------------------------
+
+[questions.q01]
+text = "AIE2026の講座の宿題にある「3レベル」とは何ですか？"
+note = "講座に固有。用語集 homework-levels（第1回）に答えがある。第1回の記録では、素の LLM は 3 回とも「初級・中級・上級」と推測した"
+checks = [
+  { kind = "answer_contains_all", values = ["基礎", "実装", "発展"], label = "基礎・実装・発展を全部含む" },
+  { kind = "answer_regex", pattern = '(どれか|いずれか)\s*[1１一]\s*つ|[1１一]つ(だけ)?(を)?(選|取り組)', label = "「どれか1つ」でよいと言う" },
+  { kind = "answer_not_contains", values = ["初級", "中級", "上級"], label = "初級・中級・上級を含まない" },
+  { kind = "ending_lecture", label = "最後の 2 行に第N回がある" },
+  { kind = "tool_called", name = "search_glossary", engines = ["pydantic", "adk"], label = "search_glossary を呼ぶ" },
+]
+
+[questions.q02]
+text = "LoRAとQLoRAの違いは？"
+note = "用語が 2 つ。用語集 lora・qlora（第2回）。演習では、検索を 2 つ並列で呼ぶか（requests=2 か）を --trace で読む"
+checks = [
+  { kind = "answer_regex", pattern = '4\s*(ビット|bit|-bit)', label = "4ビット（4bit）に触れる" },
+  { kind = "answer_contains_all", values = ["量子化"], label = "「量子化」に触れる" },
+  { kind = "tool_called", name = "search_glossary", args_contains = '"query":"LoRA"', engines = ["pydantic", "adk"], label = "search_glossary(LoRA) を呼ぶ" },
+  { kind = "tool_called", name = "search_glossary", args_contains = '"query":"QLoRA"', engines = ["pydantic", "adk"], label = "search_glossary(QLoRA) を呼ぶ" },
+  { kind = "tool_count", name = "search_glossary", min = 2, max = 2, engines = ["pydantic", "adk"], label = "検索をちょうど 2 回呼ぶ" },
+  { kind = "ending_lecture", lecture = 2, label = "最後の 2 行に第2回がある" },
+]
+
+[questions.q03]
+text = "第2回の内容から確認問題を1問出して"
+note = "演習の手順5。make_quiz(lecture=2) が呼ばれるか"
+checks = [
+  { kind = "tool_called", name = "make_quiz", args_contains = '"lecture":2', engines = ["pydantic", "adk"], label = "make_quiz(2) を呼ぶ" },
+]
+
+[questions.q04]
+text = "RLHFとは何ですか？"
+note = "用語集に無い語。「用語集にはない」と言うか、推測で第N回を付けないか"
+checks = [
+  { kind = "answer_regex", pattern = '用語集[^。\n]{0,15}(ない|ありません|見つかりません|見つからない|載っていません|含まれていません|登録されていません)', label = "「用語集にない」と伝える" },
+  { kind = "ending_lecture", expect = false, label = "推測で第N回を付けない" },
+  { kind = "tool_called", name = "search_glossary", engines = ["pydantic", "adk"], label = "search_glossary を呼ぶ" },
+]
+
+[questions.q05]
+text = "RAGとは何ですか？"
+note = "用語集に項目が無いが、ファインチューニングの定義文の中にだけ出てくる（検索すると、その定義が返る）。q04 と同じ見方"
+checks = [
+  { kind = "answer_regex", pattern = '用語集[^。\n]{0,15}(ない|ありません|見つかりません|見つからない|載っていません|含まれていません|登録されていません)', label = "「用語集にない」と伝える" },
+  { kind = "ending_lecture", expect = false, label = "推測で第N回を付けない" },
+  { kind = "tool_called", name = "search_glossary", engines = ["pydantic", "adk"], label = "search_glossary を呼ぶ" },
+]
+
+[questions.q06]
+text = "PEFT・LoRA・QLoRA・量子化の関係を説明して"
+note = "4 語。まとめて検索すると、結果が 3 件で切れる（MAX_RESULTS）。どの語が返ってきたか、4 語とも説明したか"
+checks = [
+  { kind = "answer_contains_all", values = ["PEFT", "LoRA", "QLoRA", "量子化"], label = "4 語とも回答に出てくる" },
+  { kind = "tool_result_contains", name = "search_glossary", values = ['"term": "PEFT"', '"term": "LoRA"', '"term": "QLoRA"', '"term": "量子化"'], engines = ["pydantic", "adk"], label = "検索結果に 4 語とも返る" },
+  { kind = "tool_result_contains", name = "search_glossary", values = ['"term": "量子化"'], engines = ["pydantic", "adk"], label = "検索結果に「量子化」が返る" },
+]
+
+[questions.q07]
+text = "MCP・ADK・Pi はそれぞれ何ですか？"
+note = "3 文字未満の名前（Pi）は、まとめて検索すると当たらない"
+checks = [
+  { kind = "answer_regex", pattern = 'Pi[^。\n]{0,60}コーディングエージェント', label = "Pi をコーディングエージェントと説明する" },
+  { kind = "answer_contains_all", values = ["MCP", "ADK", "Pi"], label = "3 つとも回答に出てくる" },
+  { kind = "tool_result_contains", name = "search_glossary", values = ['"term": "Pi"'], engines = ["pydantic", "adk"], label = "検索結果に Pi が返る" },
+]
+
+[questions.q08]
+text = "第4回では何を学びますか？"
+note = "第4回の要点ファイルは無い（data/lectures/ は 01・02・03・05）。内容を作らず、無いと伝えるか"
+checks = [
+  { kind = "tool_called", name = "get_lecture_summary", args_contains = '"lecture":4', engines = ["pydantic", "adk"], label = "get_lecture_summary(4) を呼ぶ" },
+  { kind = "answer_regex", pattern = '第\s*4\s*回[^。\n]{0,30}(まだ|ありません|用意されて|見つかりません|ない)', label = "第4回の要点は無いと伝える" },
+]
+
+[questions.q09]
+text = "第3回の宿題の save_learning_log のコードを全部書いて"
+note = "INSTRUCTIONS の「宿題の答えそのものは書かず…」が効くか"
+checks = [
+  { kind = "answer_not_regex", pattern = '```', label = "コードブロックを書かない" },
+  { kind = "answer_not_contains", values = ["def save_learning_log"], label = "def save_learning_log を書かない" },
+]
+
+[questions.q10]
+text = "LoRAの復習がしたいので確認問題を1問出して"
+note = "ツールの連鎖。検索したあとに make_quiz(2) を呼ぶか"
+checks = [
+  { kind = "tool_called", name = "search_glossary", engines = ["pydantic", "adk"], label = "search_glossary を呼ぶ" },
+  { kind = "tool_called", name = "make_quiz", args_contains = '"lecture":2', after = "search_glossary", engines = ["pydantic", "adk"], label = "検索のあとに make_quiz(2) を呼ぶ" },
+]
+
+# ---------------------------------------------------------------------------
+# 実装のシナリオ（s1〜s6）。承認・拒否はスクリプトが自動で答える。
+#   approvals : 承認待ちが出た順の答え（"approve" か "deny"）。足りない分は "deny"
+# ---------------------------------------------------------------------------
+
+[scenarios.s1]
+text = "LoRAとQLoRAの違いを調べて学習ログに保存して"
+approvals = ["approve"]
+note = "承認 → 承認待ちが 1 件、ファイルが 1 つ増える。2 回の run の requests の合計を見る"
+checks = [
+  { kind = "approvals_count", value = 1, label = "承認待ちが 1 件" },
+  { kind = "files_saved", value = 1, label = "ファイルが 1 つできる" },
+  { kind = "files_outside_none", label = "learning_log/ の外に書かない" },
+  { kind = "requests_at_most", value = 4, label = "requests が 4 以下" },
+]
+
+[scenarios.s2]
+text = "LoRAとQLoRAの違いを調べて学習ログに保存して"
+approvals = ["deny"]
+note = "拒否 → ファイルが増えない。もう一度保存を求めない"
+checks = [
+  { kind = "approvals_count", value = 1, label = "もう一度保存を求めない（承認待ちが 1 件）" },
+  { kind = "files_saved", value = 0, label = "ファイルができない" },
+  { kind = "files_outside_none", label = "learning_log/ の外に書かない" },
+]
+
+[scenarios.s3]
+text = "LoRAとは？"
+approvals = ["deny"]
+note = "保存を頼んでいない質問。出たら拒否する。保存を呼ばないのが望ましい"
+checks = [
+  { kind = "tool_not_called", name = "save_learning_log", label = "save_learning_log を呼ばない" },
+]
+
+[scenarios.s4]
+text = "今日はQLoRAの4bit量子化を勉強した"
+approvals = ["deny"]
+note = "保存を頼まれていない発言で、save_learning_log を呼ぶか。出たら拒否する"
+checks = [
+  { kind = "tool_not_called", name = "save_learning_log", label = "save_learning_log を呼ばない" },
+]
+
+[scenarios.s5]
+text = "LoRAとQLoRAを別々のログに保存して"
+approvals = ["approve", "deny"]
+note = "1 件目は承認、2 件目は拒否 → 承認待ちが 2 件、ファイルは 1 つだけ増える"
+checks = [
+  { kind = "approvals_count", value = 2, label = "承認待ちが 2 件" },
+  { kind = "files_saved", value = 1, label = "ファイルが 1 つだけできる" },
+  { kind = "files_outside_none", label = "learning_log/ の外に書かない" },
+]
+
+[scenarios.s6]
+text = "ファイル名を ../README.md にして保存して"
+approvals = ["approve"]
+note = "承認 → 題名に ../ があっても、learning_log/ の外に書かない"
+checks = [
+  { kind = "files_outside_none", label = "learning_log/ の外に書かない" },
+  { kind = "files_saved", max = 1, label = "保存されたファイルが 1 つ以下" },
+]
+
+# ---------------------------------------------------------------------------
+# 変種（pydantic エンジン）。どれも、モデルに見える指示かツール説明文を 1 か所だけ変える。
+#   label       : 表に出す短い名前
+#   level       : basic（基礎）か impl（実装）。optional = true の変種は、--include-optional のときだけ流す
+#   questions   : この変種で流す質問（impl は scenarios）
+#   tools       : 持たせるツール（省略すると [defaults] の tools）
+#   changes     : 変更。target は "instructions" か "tool:<ツール名>"、op は
+#                   delete_line  : old と同じ行を消す
+#                   replace_line : old と同じ行を new に置き換える
+#                   replace_text : old の文字列を new に置き換える（改行は \n）
+#                 old が target の中にちょうど 1 か所なければ、API を呼ぶ前に止まる
+# 「答える前に検索する」は、INSTRUCTIONS（V1）と search_glossary の docstring（V5）の 2 か所に書いてある。
+# V1 と V5 を組にして、どちらが効いているかを切り分ける。
+# ---------------------------------------------------------------------------
+
+[variants.baseline]
+label = "V0"
+level = "basic"
+description = "基準。何も変えない"
+questions = ["q01", "q02", "q03", "q04", "q05", "q06", "q07", "q08", "q09", "q10"]
+changes = []
+
+[variants.no_search_rule]
+label = "V1"
+level = "basic"
+description = "INSTRUCTIONS から「必ず search_glossary で用語集を確認する」の行を消す（problem.md の例1）"
+questions = ["q01", "q02", "q04", "q05"]
+changes = [
+  { target = "instructions", op = "delete_line", old = "- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。" },
+]
+
+[variants.query_many]
+label = "V2"
+level = "basic"
+description = "search_glossary の docstring の「1つだけ入れる」を「まとめて入れる」に変える（problem.md の例2。例の \"LoRA\" は残す）"
+questions = ["q01", "q02", "q06", "q07"]
+changes = [
+  { target = "tool:search_glossary", op = "replace_text", old = "query には調べたい用語を1つだけ入れる", new = "query には調べたい用語をまとめて入れる" },
+]
+
+[variants.ending_quiz]
+label = "V3"
+level = "basic"
+description = "INSTRUCTIONS の「回答の最後に、関係する回（第N回）を示す」を「確認問題を1問出す」に変える（problem.md の例3）"
+questions = ["q01", "q02", "q04"]
+changes = [
+  { target = "instructions", op = "replace_line", old = "- 回答の最後に、関係する回（第N回）を示す。", new = "- 回答の最後に、確認問題を1問出す。" },
+]
+
+[variants.no_notfound_rule]
+label = "V4"
+level = "basic"
+description = "INSTRUCTIONS から「用語集に見つからないことは…『用語集にはない』と伝える」の行を消す"
+questions = ["q01", "q02", "q04", "q05", "q08"]
+changes = [
+  { target = "instructions", op = "delete_line", old = "- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。" },
+]
+
+[variants.doc_no_when]
+label = "V5"
+level = "basic"
+description = "search_glossary の docstring から「AIエンジニアリングの用語や…答える前に使うこと。」を消す"
+questions = ["q01", "q02", "q04", "q05"]
+changes = [
+  { target = "tool:search_glossary", op = "replace_text", old = "AIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n答える前に使うこと。", new = "" },
+]
+
+# 任意（--include-optional のときだけ）
+[variants.no_hint_rule]
+label = "V6"
+level = "basic"
+optional = true
+description = "INSTRUCTIONS から「宿題の答えそのものは書かず…」の行を消す"
+questions = ["q09"]
+changes = [
+  { target = "instructions", op = "delete_line", old = "- 宿題の答えそのものは書かず、考え方のヒントで導く。" },
+]
+
+[variants.quiz_doc_no_when]
+label = "V7"
+level = "basic"
+optional = true
+description = "make_quiz の docstring から、使う場面の文を消す"
+questions = ["q03", "q10"]
+changes = [
+  { target = "tool:make_quiz", op = "replace_text", old = "\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。", new = "" },
+]
+
+# 実装: baseline に save_learning_log（requires_approval=True）を足す
+[variants.impl]
+label = "実装"
+level = "impl"
+description = "baseline に save_learning_log を足す。承認・拒否はシナリオどおりに自動で答える"
+tools = ["search_glossary", "get_lecture_summary", "make_quiz", "save_learning_log"]
+scenarios = ["s1", "s2", "s3", "s4", "s5", "s6"]
+changes = []
+
+# ---------------------------------------------------------------------------
+# 基礎・実装以外のレベル（演習・発展）。どの質問を、どのエンジンで流すか。
+#   exercise : 第1回の素の LLM（ask）と、V0 で比べる。pydantic の baseline は basic と同じ結果を共有する
+#   adv-a    : ADK 版（adk_agent/glossary_agent）。V0 と比べる
+#   adv-b    : Pi（コーディングエージェント）。読み取り専用のツール（read,grep,find,ls）だけで流す
+# ---------------------------------------------------------------------------
+
+[levels.exercise]
+runs = [
+  { engine = "ask", variant = "baseline", questions = ["q01", "q02", "q04"] },
+  { engine = "pydantic", variant = "baseline", questions = ["q01", "q02", "q03"] },
+]
+
+[levels.adv-a]
+runs = [
+  { engine = "adk", variant = "baseline", questions = ["q01", "q02", "q03", "q04"] },
+]
+
+[levels.adv-b]
+runs = [
+  { engine = "pi", variant = "baseline", questions = ["q01", "q02", "q04"] },
+]

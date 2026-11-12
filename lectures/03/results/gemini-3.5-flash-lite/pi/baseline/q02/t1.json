@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "engine": "pi",
+  "variant": "baseline",
+  "variant_sha256": "9625d153f72defb4cf75229900ee5fbf20f31ee33265deca35282caeaf65b9a7",
+  "qid": "q02",
+  "kind": "question",
+  "question": "LoRAとQLoRAの違いは？",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "pi",
+    "--mode",
+    "json",
+    "--no-session",
+    "--no-context-files",
+    "--tools",
+    "read,grep,find,ls",
+    "--provider",
+    "google",
+    "--model",
+    "gemini-3.5-flash-lite",
+    "LoRAとQLoRAの違いは？"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "adv-b",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:20:06+00:00",
+  "finished_at": "2026-11-03T16:20:06+00:00",
+  "duration_s": 6.317,
+  "elapsed_s": 6.318,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "**LoRA（Low-Rank Adaptation）**と**QLoRA（Quantized Low-Rank Adaptation）**は、どちらも大規模言語モデル（LLM）などの巨大なニューラルネットワークを効率的にファインチューニング（追加学習）するための手法です。\n\n最大の違いは、**「ベースモデルを何ビットでロードし、メモリをどれくらい節約できるか」**にあります。\n\n---\n\n### 1. LoRA（Low-Rank Adaptation）\nLoRAは、巨大なモデルの重み行列自体はそのまま（通常はFP16やBF16といった16ビット精度のまま）固定し、その横に**「低ランク行列（Rank decomposition matrices）」と呼ばれる小さな追加のパラメータ（バイパス回路のようなもの）だけを挿入して学習**する手法です。\n\n* **仕組み**: 全パラメータのわずか数％（1%未満など）だけを学習対象にするため、GPUメモリ（VRAM）の消費量を大幅に削減できます。\n* **メモリ効率**: 16ビット（FP16/BF16）のモデルをそのままメモリに載せるため、モデルサイズが数千億〜数十億ある場合、それなりのGPUメモリ（VRAM）が必要です。\n\n---\n\n### 2. QLoRA（Quantized Low-Rank Adaptation）\nQLoRAは、LoRAの手法をさらに進化させ、**ベースモデルを極限まで軽量化（量子化）してメモリ節約を極めた手法**です。\n\n* **仕組み**: \n  1. ベースモデルの重みを**4ビット（4-bit NormalFloat: NF4）**に量子化して読み込みます（サイズを約4分の1に圧縮）。\n  2. 量子化によって精度が落ちるのを防ぐため、「二重量子化（Double Quantization）」や「ページドオプティマイザ（Paged Optimizers）」といった技術を組み合わせています。\n  3. その上で、学習部分にはLoRAと同様の低ランク行列を追加し、そこを学習します。\n* **メモリ効率**: 16ビットのLoRAに比べて、さらにVRAMの消費量を激減させることができます。例えば、通常ならA100のようなハイエンドGPUが複数必要なモデルを、一般的なコンシューマー向けGPU（RTX 3090/4090など）1枚でファインチューニングできるようになります。\n\n---\n\n### 比較まとめ\n\n| 項目 | LoRA | QLoRA |\n| :--- | :--- | :--- |\n| **ベースモデルの精度** | 16-bit (FP16 / BF16) | **4-bit (NF4)** |\n| **VRAM消費量** | 中〜大（モデルサイズによる） | **極めて少ない** |\n| **必要なGPU** | 大規模なVRAMが必要（A100など） | 一般的なGPU1枚でも可能（RTX 3090/4090等） |\n| **学習速度** | やや速い | 量子化・逆量子化のオーバーヘッド分、やや遅い |\n| **モデルの性能（精度）** | ほぼ元のモデルと同等 | LoRAとほぼ同等の性能を維持 |\n\n**選び方の目安：**\n* 十分なVRAMを持つGPU（A100やH100など）が潤沢にある場合、学習速度がやや速い **LoRA** が選ばれることが多いです。\n* 限られたハードウェア（手元のGPUや安価なクラウドGPU）で巨大なモデルを効率よく訓練したい場合は、デファクトスタンダードとして **QLoRA** がよく使われます。",
+  "tool_calls": [],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 1,
+    "tool_calls": 0,
+    "input_tokens": 1271,
+    "output_tokens": 794,
+    "cache_read_tokens": 0,
+    "total_tokens": 2065
+  },
+  "events": 46,
+  "skipped_lines": [],
+  "notes": [
+    "Pi は読み取り専用のツール（read,grep,find,ls）だけを持つ。cwd は data/ だけを複製した一時フォルダ"
+  ],
+  "raw_file": "t1.raw.jsonl",
+  "stderr_file": "t1.stderr.txt",
+  "pi_version": "1.5.0",
+  "auto_retries": [],
+  "session": {
+    "type": "session",
+    "version": 3,
+    "id": "01a1a235-d78d-7346-89c5-2d14cafcc5a1",
+    "timestamp": "2026-11-03T16:20:00.015Z",
+    "cwd": "/tmp/compare-pi-7_lal6ay"
+  }
+}

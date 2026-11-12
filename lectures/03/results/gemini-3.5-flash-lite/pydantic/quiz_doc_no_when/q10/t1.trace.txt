@@ -1,0 +1,23 @@
+[model] gemini-3.5-flash-lite
+[質問] LoRAの復習がしたいので確認問題を1問出して
+LoRA（Low-Rank Adaptation）は、事前学習済みの重みを固定したまま、重みの更新分を小さな2つの低ランク行列の積で表してそこだけを学習するPEFT（Parameter-Efficient Fine-Tuning）の手法です。
+
+今回は用語集の「LoRA」が扱われている**第2回**から、LoRAに関する確認問題を1問出題しますね。
+
+---
+
+**【確認問題】**
+事前学習済みの大規模言語モデルの重みをそのまま固定し、追加の小さな行列の積（低ランク行列）だけを効率よく学習する手法を何と呼びますか？また、その大きな特徴（メリット）を1つ答えてください。
+
+---
+
+考えてみてください！答えが分かったら教えてくださいね。（必要ならヒントも出せますよ）
+
+【関係する回】第2回
+
+--- trace ---
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool call]   make_quiz({'lecture': 2})
+[tool return] make_quiz -> {"question": "「エポック」の意味は？", "answer": "学習データ全体を1周学習することを1エポックと数える。回数を増やしすぎると過学習しやすい。"}…
+[usage] RunUsage(cost=Decimal('0.0011000'), details={'text_prompt_tokens': 1850}, input_text_tokens=1850, input_tokens=1850, output_tokens=218, requests=3, tool_calls=2)

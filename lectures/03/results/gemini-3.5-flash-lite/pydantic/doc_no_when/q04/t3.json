@@ -1,0 +1,261 @@
+{
+  "schema": 1,
+  "engine": "pydantic",
+  "variant": "doc_no_when",
+  "variant_sha256": "e438623693f557ae481f71a1ba4bf520dfa845ea25bfe14982ae464f1fcfd74c",
+  "qid": "q04",
+  "kind": "question",
+  "question": "RLHFとは何ですか？",
+  "trial": 3,
+  "model": "gemini-3.5-flash-lite",
+  "seed": "q04:t3",
+  "command": "app.agent.run_with_approval(agent, <質問>, model=build_model(), usage_limits=UsageLimits(request_limit=10)) を agent.override(instructions=<変種>, tools=<変種>) の中で実行（variant=doc_no_when）",
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:42:46+00:00",
+  "finished_at": "2026-11-03T16:42:46+00:00",
+  "duration_s": 2.54,
+  "elapsed_s": 2.541,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "講座の用語集を確認しましたが、「RLHF」という用語は用語集には登録されていないため、お答えすることができません。\n\n関連する回：第1回〜最終回（該当なし）",
+  "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+  "instructions_sha256": "a5d1d16d4181b27d2526845f92ef9ac357f8fae58575295fd51065bbef58aa17",
+  "instructions_match": true,
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\nquery には調べたい用語を1つだけ入れる（例: \"LoRA\"）。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    }
+  ],
+  "tools_sha256": "c27a63abd8c9b7e51d653d5e66d85987ce0e7f44c36df38726bf2ccbfce61728",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_138878",
+      "name": "search_glossary",
+      "args": {
+        "query": "RLHF"
+      },
+      "result": "用語集に「RLHF」は見つかりませんでした。",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "input_tokens": 792,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 58,
+    "input_audio_tokens": 0,
+    "cache_audio_read_tokens": 0,
+    "output_audio_tokens": 0,
+    "audio_seconds": 0,
+    "details": {
+      "text_prompt_tokens": 792
+    },
+    "cost": "0.0003826",
+    "requests": 2,
+    "tool_calls": 1
+  },
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "RLHFとは何ですか？",
+          "timestamp": "2026-11-03T16:42:44.392432Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-03T16:42:44.392716Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a24a-a927-74d9-8f23-7ee8cecab8e5",
+      "conversation_id": "01a1a24a-a927-74d9-8f23-7ee93d0aaa05",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "args": {
+            "query": "RLHF"
+          },
+          "tool_call_id": "call_138878",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TuF3GLesg8zczzxPqmg4SVEixtsjAZ1Uzp9xc3qb+DAVvoMpknHkKfBrw5JNMOjFb1AK0dqfmC+YvpGjy2hI33F4SHjQrvOzFsONhBfZvFh14w4V4yXxTzRk="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 373,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 18,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 373
+        },
+        "cost": "0.0001569",
+        "input_text_tokens": 373
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:42:45.916100Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "BA_qapfsKKbh694Pr473CA",
+      "finish_reason": "stop",
+      "run_id": "01a1a24a-a927-74d9-8f23-7ee8cecab8e5",
+      "conversation_id": "01a1a24a-a927-74d9-8f23-7ee93d0aaa05",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search_glossary",
+          "content": "用語集に「RLHF」は見つかりませんでした。",
+          "tool_call_id": "call_138878",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T16:42:45.917982Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T16:42:45.918425Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a24a-a927-74d9-8f23-7ee8cecab8e5",
+      "conversation_id": "01a1a24a-a927-74d9-8f23-7ee93d0aaa05",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "講座の用語集を確認しましたが、「RLHF」という用語は用語集には登録されていないため、お答えすることができません。\n\n関連する回：第1回〜最終回（該当なし）",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TALoDuV/H8S+6YayHaGsEBkQtvcVZBr8+Cl5E1jNbtVhBsch1dFTu0a4rrGTbZ6f1ZCfomL8vEOduVv+BQvIvdt1KGF55VObv9q2uN8zcRFiVOaKAgn9KVUI="
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 419,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 40,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 419
+        },
+        "cost": "0.0002257",
+        "input_text_tokens": 419
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T16:42:46.914924Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "Bg_qarjRDdnIv_gP362TkQc",
+      "finish_reason": "stop",
+      "run_id": "01a1a24a-a927-74d9-8f23-7ee8cecab8e5",
+      "conversation_id": "01a1a24a-a927-74d9-8f23-7ee93d0aaa05",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+[model] gemini-3.5-flash-lite
+[質問] PEFT・LoRA・QLoRA・量子化の関係を説明して
+PEFT（Parameter-Efficient Fine-Tuning）、LoRA、QLoRA、そして量子化は、それぞれ独立した技術ではなく、包含関係や組み合わせによって成り立っています。それぞれの関係を整理して説明します。
+
+1. **PEFT（効率的なファインチューニング）**
+   - モデルの全パラメータではなく、ごく一部や追加した小さなパラメータだけを学習する手法の**総称**です。必要なGPUメモリや保存容量を大きく減らせます。
+
+2. **LoRA（ローラ）**
+   - PEFTの代表的な**具体的な手法の1つ**です。事前学習済みの重みを固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習します。
+
+3. **量子化**
+   - モデルの重みを表現するビット数（例: 16ビットから4ビットなど）を減らし、モデルのサイズや必要なメモリを圧縮する技術です。PEFTやLoRAとは別の軸（データ表現の圧縮）の技術ですが、組み合わせることで大きな効果を発揮します。
+
+4. **QLoRA（キューローラ）**
+   - ベースモデルの重みを**量子化**（4ビットなどへ圧縮）してメモリを大きく節約したうえで、その上に**LoRA**の仕組みを適用して学習を行う手法です。つまり、QLoRAは「量子化」と「LoRA（＝PEFTの一種）」を組み合わせた発展形と言えます。
+
+---
+関連する回：第2回
+
+--- trace ---
+[tool call]   search_glossary({'query': 'PEFT'})
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool call]   search_glossary({'query': 'QLoRA'})
+[tool call]   search_glossary({'query': '量子化'})
+[tool return] search_glossary -> [{"term": "PEFT", "lecture": 2, "definition": "モデルの全パラメータではなく、ごく一部や追加した小さなパラメータだけを学習する手法の総称。必要なGPUメモリと保存容量を大きく減らせる。LoRAが…
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool return] search_glossary -> [{"term": "QLoRA", "lecture": 2, "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2…
+[tool return] search_glossary -> [{"term": "量子化", "lecture": 2, "definition": "モデルの重みを少ないビット数（例：16ビットから4ビット）で表し、メモリ使用量や計算量を減らす技術。精度は少し下がることがある。", "relate…
+[usage] RunUsage(cost=Decimal('0.0015653'), details={'text_prompt_tokens': 1801}, input_text_tokens=1801, input_tokens=1801, output_tokens=410, requests=2, tool_calls=4)

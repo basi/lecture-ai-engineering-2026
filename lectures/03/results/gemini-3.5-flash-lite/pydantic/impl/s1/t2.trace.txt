@@ -1,0 +1,24 @@
+[model] gemini-3.5-flash-lite
+[質問] LoRAとQLoRAの違いを調べて学習ログに保存して
+[approval] save_learning_log({"content": "# LoRAとQLoRAの違い\n\n用語集に基づくLoRAとQLoRAの定義と違いのまとめです。\n\n## LoRA\n- **定義**: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。\n- **特徴**: 学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。\n\n## QLoRA\n- **定義**: ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。\n- **特徴**: より大きなモデルを小さなGPUで扱える。\n\n## まとめ\nLoRAは低ランク行列の追加により効率的に微調整を行う手法であり、QLoRAはそのベースモデルの重みを量子化（4ビットなど）して省メモリ化をさらに進めた発展形の手法です。", "title": "LoRAとQLoRAの違い"}) -> approve
+講座の用語集に基づき、LoRAとQLoRAの違いをまとめます。
+
+* **LoRA（Low-Rank Adaptation）**
+  * 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法です。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できます。
+* **QLoRA（Quantized LoRA）**
+  * ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法です。より大きなモデルを小さなGPUで扱えるようになります。
+
+つまり、LoRAは「低ランク行列の追加による効率的な微調整」、QLoRAは「ベースモデルの量子化を組み合わせてさらに省メモリ化したLoRA」という関係になります。
+
+ご要望の学習ログの保存を行いました。
+
+（関係する回：第2回）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool call]   search_glossary({'query': 'QLoRA'})
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool return] search_glossary -> [{"term": "QLoRA", "lecture": 2, "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2…
+[tool call]   save_learning_log({'content': '# LoRAとQLoRAの違い\n\n用語集に基づくLoRAとQLoRAの定義と違いのまとめです。\n\n## LoRA\n- **定義**: 事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。\n- **特徴**: 学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。\n\n## QLoRA\n- **定義**: ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。\n- **特徴**: より大きなモデルを小さなGPUで扱える。\n\n## まとめ\nLoRAは低ランク行列の追加により効率的に微調整を行う手法であり、QLoRAはそのベースモデルの重みを量子化（4ビットなど）して省メモリ化をさらに進めた発展形の手法です。', 'title': 'LoRAとQLoRAの違い'})
+[tool return] save_learning_log -> 学習ログを保存しました: 20261103-163305-LoRAとQLoRAの違い.md…
+[usage] RunUsage(cost=Decimal('0.0021327'), details={'text_prompt_tokens': 3059}, input_text_tokens=3059, input_tokens=3059, output_tokens=486, requests=3, tool_calls=3)

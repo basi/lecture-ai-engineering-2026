@@ -1,0 +1,10 @@
+[model] gemini-3.5-flash-lite
+[質問] RLHFとは何ですか？
+講座の用語集を確認しましたが、「RLHF」という用語は用語集には登録されていないため、お答えすることができません。
+
+関連する回：第1回〜最終回（該当なし）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'RLHF'})
+[tool return] search_glossary -> 用語集に「RLHF」は見つかりませんでした。…
+[usage] RunUsage(cost=Decimal('0.0003826'), details={'text_prompt_tokens': 792}, input_text_tokens=792, input_tokens=792, output_tokens=58, requests=2, tool_calls=1)

@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "engine": "ask",
+  "variant": "baseline",
+  "variant_sha256": "3999532969a297867ff70649a66dfc5d14a2d9a78f2953e2830d798abdeb9ce2",
+  "qid": "q04",
+  "kind": "question",
+  "question": "RLHFとは何ですか？",
+  "trial": 2,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": "app.ask.ask(<質問>, [], client=<記録用の包み>)",
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:23:45+00:00",
+  "finished_at": "2026-11-03T16:23:45+00:00",
+  "duration_s": 6.981,
+  "elapsed_s": 6.982,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "**RLHF**とは、**「Reinforcement Learning from Human Feedback（人間フィードバックによる強化学習）」**の略称です。\n\n一言で言うと、**「人間の好みに合わせてAI（特にChatGPTのような生成AI）の受け答えをチューニングする（調整する）ための機械学習の手法」**です。\n\nChatGPTなどの大規模言語モデル（LLM）を人間にとってより役立つ、安全で、自然なものにするために不可欠な技術となっています。\n\n---\n\n### なぜRLHFが必要なのか？\n\nAIの初期段階の学習（事前学習）では、インターネット上の膨大なテキストを読ませて「次に来る単語を予測する」訓練をします。この状態のAIは、質問に対して「それっぽい文章」を返しますが、以下のような問題点があります。\n\n*   嘘をつく（ハルシネーション）\n*   失礼な言葉遣いをする\n*   有害な情報（暴力や犯罪の助長など）を出力してしまう\n*   ユーザーの意図からズレた回答をする\n\nそこで、**「人間がどれだけその出力を気に入ったか（フィードバック）」をAIに学習させ、人間の価値観に合わせる**ためにRLHFが使われます。\n\n---\n\n### RLHFの具体的な3つのステップ\n\n一般的に、RLHFは以下の流れで行われます。\n\n1.  **ベースモデルの準備**\n    インターネット上のデータで事前に学習されたAIモデルを用意します。\n2.  **報酬モデル（Reward Model）の訓練**\n    AIにいくつかの回答を出力させ、人間の評価者（プロのトレーダーや専門家など）が「どれが一番良い回答か」を順位付けします。この人間の好みのデータをAIに学習させ、**「人間が何を良いと感じるか」を判断する基準（報酬モデル）**を作ります。\n3.  **強化学習（PPOなど）による最適化**\n    ステップ2で作った報酬モデルを教師役にして、AI自身に大量の文章を出力させます。「人間が高得点をつけそうな回答」を生成するように、AIのパラメータを微調整（強化学習）します。\n\n---\n\n### RLHFによって得られるメリット\n\n*   **安全性（Safetyの向上）：** 差別的な発言や危険な質問への回答を拒否できるようになります。\n*   **有用性（Helpfulnessの向上）：** ユーザーの質問の意図を正確に汲み取り、わかりやすく丁寧な回答ができるようになります。\n*   **自然な対話：** まるで人間と会話しているような、文脈に合った返答が可能になります。\n\n### まとめ\nRLHFは、AIが単なる「確率的に単語をつなげる機械」から、**「人間の意図を理解し、役に立ち、害のないアシスタント」に進化するための一番の功労者**と言える技術です。",
+  "tool_calls": [],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 1,
+    "tool_calls": 0,
+    "input_tokens": 7,
+    "output_tokens": 622,
+    "candidates_tokens": 622,
+    "thoughts_tokens": 0,
+    "total_tokens": 629
+  },
+  "metrics_output": "[metrics] latency=6962 ms input_tokens=7 output_tokens=622 status=ok\n"
+}

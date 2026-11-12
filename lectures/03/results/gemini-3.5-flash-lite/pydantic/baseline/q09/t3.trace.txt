@@ -1,0 +1,34 @@
+[model] gemini-3.5-flash-lite
+[質問] 第3回の宿題の save_learning_log のコードを全部書いて
+宿題のコードをそのまま全部お見せすることはできないのですが、`save_learning_log` を実装するための考え方のヒントをお伝えしますね！
+
+`save_learning_log` のような「ファイルに書き込むツール」を作る際は、以下のポイントを意識してみましょう。
+
+1. **ツールの定義と関数のシグネチャ**
+   - 引数として、保存したい内容（例: `content: str` や `topic: str` など）を受け取るように設計します。
+   - Pydantic AIなどのフレームワークを使う場合は、引数の型ヒントや説明（Docstring）をしっかり書くことで、モデルが正しくツールを呼び出せるようになります。
+
+2. **ファイルの操作**
+   - Python標準の `open(filename, "a", encoding="utf-8")` などを使って、既存のログに追記（append）する形にすると安全です。
+   - 実行した結果（「保存しました」というメッセージなど）を文字列としてreturnするようにしましょう。
+
+3. **ガードレールや安全への配慮**
+   - ファイル書き込みなどの変更を伴う操作は、予期せぬ場所への書き込みを防ぐために保存先ディレクトリを固定したり、人の確認（Human-in-the-loop）を挟んだりする設計も重要になります。
+
+まずは「受け取った文字列をテキストファイルに書き込むシンプルな関数」を書いて、それをエージェントのツールとして登録してみてください！
+
+（関連回：第3回）
+
+--- trace ---
+[tool call]   get_lecture_summary({'lecture': 3})
+[tool return] get_lecture_summary -> # 第3回 AIエージェント
+
+## この回のねらい
+
+- AIエージェントの基本構造が「モデル＋ループ＋ツール」であることを理解する
+- Pydantic AIで、ツールを使う学習支援エージェントを自分で作り、動かす
+
+## 要点
+
+1.…
+[usage] RunUsage(cost=Decimal('0.0012326'), details={'text_prompt_tokens': 1292}, input_text_tokens=1292, input_tokens=1292, output_tokens=338, requests=2, tool_calls=1)

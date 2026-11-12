@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "engine": "pi",
+  "variant": "baseline",
+  "variant_sha256": "9625d153f72defb4cf75229900ee5fbf20f31ee33265deca35282caeaf65b9a7",
+  "qid": "q04",
+  "kind": "question",
+  "question": "RLHFとは何ですか？",
+  "trial": 2,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "pi",
+    "--mode",
+    "json",
+    "--no-session",
+    "--no-context-files",
+    "--tools",
+    "read,grep,find,ls",
+    "--provider",
+    "google",
+    "--model",
+    "gemini-3.5-flash-lite",
+    "RLHFとは何ですか？"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:36:34+00:00",
+  "finished_at": "2026-11-03T16:36:34+00:00",
+  "duration_s": 5.931,
+  "elapsed_s": 5.931,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "**RLHF（Reinforcement Learning from Human Feedback：人間フィードバックによる強化学習）**とは、AI（特に大規模言語モデル：LLMなど）のモデル学習手法の一つで、**人間の価値観や好みに合致した応答ができるように微調整（チューニング）するプロセス**のことです。\n\nChatGPTなどの生成AIが、単に不自然な文章をつなぎ合わせるだけでなく、安全で、礼儀正しく、ユーザーの意図に沿った自然な対話ができるのは、このRLHFが重要な役割を果たしているためです。\n\n---\n\n### RLHFの一般的な3ステップ\n\nRLHFは通常、以下の3つのステップで行われます。\n\n1. **教師あり微調整（SFT: Supervised Fine-Tuning）**\n   * 人間の専門家が作成した「模範的なプロンプトと回答のペア」を用いて、ベースとなるモデルを訓練します。これにより、モデルは人間のように文章を組み立てる基礎を学びます。\n\n2. **報酬モデル（Reward Model）の訓練**\n   * モデルが生成した複数の回答に対して、人間が「どれが良いか」の優劣を評価（ランキング）付けします。\n   * そのデータを基に、**「人間にとって良い回答」を数値（報酬）でスコア化して予測する別のAIモデル（報酬モデル）**を訓練します。\n\n3. **強化学習（PPOなど: Proximal Policy Optimization）**\n   * ここでメインの言語モデルを強化学習させます。\n   * モデルが生成した回答に対し、ステップ2で作った「報酬モデル」がスコアを与えます。モデルはこのスコアがより高くなる（＝人間が好む回答を出力する）ように、自身のパラメータを継続的に調整・最適化します。\n\n---\n\n### RLHFの主な目的・メリット\n\n* **有用性（Helpfulness）の向上**：ユーザーの質問や指示に対して、的確でわかりやすい回答を出せるようにする。\n* **無害性（Harmlessness）の確保**：差別的、暴力的な発言、違法行為の助長、プライバシー侵害などの有害な出力を避けるようにする。\n* **誠実さ（Honesty / Hallucinationの削減）**：嘘の情報を自信満々に答える「ハルシネーション（幻覚）」を減らし、正確性を高める。\n\n### RLHFの課題\n\n* **コストと労力**：高品質な人間のフィードバック（アノテーション）を集めるには、多くの時間とコストがかかります。\n* **ハッキング（報酬ハッキング）**：AIが「人間が好みやすいフレーズ（例えば、丁寧な挨拶や長めの謝罪など）」を学習するあまり、肝心の事実関係がおろそかになる現象が起きることがあります。\n* **主観性の問題**：何が「良い・正しい」かは文化や個人によって異なるため、誰の基準でフィードバックするかというバイアスの問題が残ります。\n\n最近では、人間だけでなくAI自身に別のAIを評価させる手法（RLAIF: Reinforcement Learning from AI Feedback）なども研究・導入されており、RLHFの進化形として注目されています。",
+  "tool_calls": [],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 1,
+    "tool_calls": 0,
+    "input_tokens": 1267,
+    "output_tokens": 683,
+    "cache_read_tokens": 0,
+    "total_tokens": 1950
+  },
+  "events": 43,
+  "skipped_lines": [],
+  "notes": [
+    "Pi は読み取り専用のツール（read,grep,find,ls）だけを持つ。cwd は data/ だけを複製した一時フォルダ"
+  ],
+  "raw_file": "t2.raw.jsonl",
+  "stderr_file": "t2.stderr.txt",
+  "pi_version": "1.5.0",
+  "auto_retries": [],
+  "session": {
+    "type": "session",
+    "version": 3,
+    "id": "01a1a244-f001-7195-812a-eab05d990f9e",
+    "timestamp": "2026-11-03T16:36:29.316Z",
+    "cwd": "/tmp/compare-pi-osavdjah"
+  }
+}

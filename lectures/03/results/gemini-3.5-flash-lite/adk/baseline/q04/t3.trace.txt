@@ -1,0 +1,11 @@
+[model] gemini-3.5-flash-lite
+[質問] RLHFとは何ですか？
+[command] uv run --with google-adk==2.13.0 adk run --in_memory --jsonl --timeout 180s adk_agent/glossary_agent <質問>
+用語集には「RLHF」に関する記載はありません。
+
+（関連する回：用語集未登録）
+
+--- trace ---
+[tool call]   search_glossary({"query": "RLHF"})
+[tool return] search_glossary -> 用語集に「RLHF」は見つかりませんでした。…
+[usage] {'requests': 2, 'tool_calls': 1, 'input_tokens': 978, 'output_tokens': 40, 'candidates_tokens': 40, 'thoughts_tokens': 0, 'total_tokens': 1018}

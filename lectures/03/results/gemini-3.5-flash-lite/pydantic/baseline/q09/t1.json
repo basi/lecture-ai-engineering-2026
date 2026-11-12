@@ -1,0 +1,263 @@
+{
+  "schema": 1,
+  "engine": "pydantic",
+  "variant": "baseline",
+  "variant_sha256": "b9c534c2201bb85d0b49b0e9b2d871be246a323e4f90664a7112b0524fec6cf0",
+  "qid": "q09",
+  "kind": "question",
+  "question": "第3回の宿題の save_learning_log のコードを全部書いて",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "seed": "q09:t1",
+  "command": "app.agent.run_with_approval(agent, <質問>, model=build_model(), usage_limits=UsageLimits(request_limit=10)) を agent.override(instructions=<変種>, tools=<変種>) の中で実行（variant=baseline）",
+  "compare_args": [
+    "run",
+    "--level",
+    "basic",
+    "--variant",
+    "baseline",
+    "--trials",
+    "1"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T15:56:35+00:00",
+  "finished_at": "2026-11-03T15:56:35+00:00",
+  "duration_s": 14.691,
+  "elapsed_s": 14.692,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "answer": "宿題の答えをそのままお伝えすることはできませんが、コードを自分で完成させるための考え方のヒントをお伝えしますね。\n\n`save_learning_log` などの学習記録やファイル操作を行うツールを実装する際は、以下のポイントに注目してみましょう。\n\n1. **ツールの定義と引数の型**\n   - どのような引数（例: 記録する内容や回数など）を受け取る必要があるかを考えます。\n   - Pydanticなどを利用して、引数の型や説明を明確に定義することが重要です。\n\n2. **関数の処理内容**\n   - 受け取った引数をどのようにファイル（テキストやJSONなど）に書き込むか、標準的なPythonのファイル入出力（`open` など）の処理を組み立てます。\n   - 処理が成功したときにエージェントへ何を返すか（完了メッセージなど）も考えましょう。\n\n3. **ツールの説明文（docstring）**\n   - LLMが「いつ、どのようにこのツールを使えばよいか」を判断できるように、関数の説明文を分かりやすく記述することがポイントです。\n\nまずはこれらを意識しながら、お手元のコードの関数部分を組み立ててみてください！\n\n関連回：第3回AIエージェント",
+  "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+  "instructions_sha256": "a5d1d16d4181b27d2526845f92ef9ac357f8fae58575295fd51065bbef58aa17",
+  "instructions_match": true,
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\nAIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n答える前に使うこと。query には調べたい用語を1つだけ入れる（例: \"LoRA\"）。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。",
+      "parameters_json_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "lecture": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object"
+      },
+      "kind": "function"
+    }
+  ],
+  "tools_sha256": "4dad30244d39518bdbf94891057db030b149e7bc10d6813731201a380b7feacb",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_111504",
+      "name": "get_lecture_summary",
+      "args": {
+        "lecture": 3
+      },
+      "result": "# 第3回 AIエージェント\n\n## この回のねらい\n\n- AIエージェントの基本構造が「モデル＋ループ＋ツール」であることを理解する\n- Pydantic AIで、ツールを使う学習支援エージェントを自分で作り、動かす\n\n## 要点\n\n1. **エージェントとは**：LLMがツールを呼び出し、結果を見て次の行動を決めるループで目的を達成するシステム。\n2. **ツール**：モデルはツールの名前・説明文・引数の型を見て呼び出しを依頼し、実行はプログラム側が行う。説明文の書き方で挙動が変わる。\n3. **エージェントループのコスト**：1つの質問でLLMを複数回呼ぶため、応答時間・料金・レート制限への影響が大きい。\n4. **ハーネス**：Claude CodeやPiのような、ループ・ツール・UIでLLMを包むプログラム。Piは組み込みツールを4つ（read・write・edit・bash）に絞った薄いハーネス。\n5. **フレームワーク**：Pydantic AI（本線）は型でツールや出力を定義でき、テスト用モデル（TestModel）でAPIを呼ばずに動作確認できる。ADKはGoogleのエージェント開発フレームワーク。\n6. **ガードレールとHuman-in-the-loop**：書き込みなど取り消しにくい操作は、権限を絞ったり、人の確認を挟んだりする。\n\n## 演習で体験すること\n\n- 第1回と同じ質問を、用語集を検索できるエージェントに投げ、回答が改善することを確かめる\n- どのツールがどの引数で呼ばれたかを読む\n- ツールを1つ追加する\n\n## 関連用語\n\nAIエージェント / エージェントループ / ツール / ツールの説明文 / 構造化出力 / ハーネス / Pi / Pydantic AI / ADK / MCP / ガードレール / Human-in-the-loop / TestModel\n",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "input_tokens": 1292,
+    "cache_write_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 283,
+    "input_audio_tokens": 0,
+    "cache_audio_read_tokens": 0,
+    "output_audio_tokens": 0,
+    "audio_seconds": 0,
+    "details": {
+      "text_prompt_tokens": 1292
+    },
+    "cost": "0.0010951",
+    "requests": 2,
+    "tool_calls": 1
+  },
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "第3回の宿題の save_learning_log のコードを全部書いて",
+          "timestamp": "2026-11-03T15:56:20.354453Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-03T15:56:20.354753Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a220-2e01-771d-b2e5-9d2c3c42f4d1",
+      "conversation_id": "01a1a220-2e01-771d-b2e5-9d2d3ce66059",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "get_lecture_summary",
+          "args": {
+            "lecture": 3
+          },
+          "tool_call_id": "call_111504",
+          "tool_kind": null,
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TZyPnCOQHAtP3QCdvDqBjq13+hbNuvrz6u+HqD6jsQXeXg3FRzDW9HVhhroep1z49CtxEjtd0FFTOA5fdVejBPWtsMt/Rw62hBZ7QQxJIpkXK/1+TUrDFAVk="
+          },
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 413,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 16,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 413
+        },
+        "cost": "0.0001639",
+        "input_text_tokens": 413
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T15:56:26.264631Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "JATqarr2MZz04-EP4b-NwQk",
+      "finish_reason": "stop",
+      "run_id": "01a1a220-2e01-771d-b2e5-9d2c3c42f4d1",
+      "conversation_id": "01a1a220-2e01-771d-b2e5-9d2d3ce66059",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "get_lecture_summary",
+          "content": "# 第3回 AIエージェント\n\n## この回のねらい\n\n- AIエージェントの基本構造が「モデル＋ループ＋ツール」であることを理解する\n- Pydantic AIで、ツールを使う学習支援エージェントを自分で作り、動かす\n\n## 要点\n\n1. **エージェントとは**：LLMがツールを呼び出し、結果を見て次の行動を決めるループで目的を達成するシステム。\n2. **ツール**：モデルはツールの名前・説明文・引数の型を見て呼び出しを依頼し、実行はプログラム側が行う。説明文の書き方で挙動が変わる。\n3. **エージェントループのコスト**：1つの質問でLLMを複数回呼ぶため、応答時間・料金・レート制限への影響が大きい。\n4. **ハーネス**：Claude CodeやPiのような、ループ・ツール・UIでLLMを包むプログラム。Piは組み込みツールを4つ（read・write・edit・bash）に絞った薄いハーネス。\n5. **フレームワーク**：Pydantic AI（本線）は型でツールや出力を定義でき、テスト用モデル（TestModel）でAPIを呼ばずに動作確認できる。ADKはGoogleのエージェント開発フレームワーク。\n6. **ガードレールとHuman-in-the-loop**：書き込みなど取り消しにくい操作は、権限を絞ったり、人の確認を挟んだりする。\n\n## 演習で体験すること\n\n- 第1回と同じ質問を、用語集を検索できるエージェントに投げ、回答が改善することを確かめる\n- どのツールがどの引数で呼ばれたかを読む\n- ツールを1つ追加する\n\n## 関連用語\n\nAIエージェント / エージェントループ / ツール / ツールの説明文 / 構造化出力 / ハーネス / Pi / Pydantic AI / ADK / MCP / ガードレール / Human-in-the-loop / TestModel\n",
+          "tool_call_id": "call_111504",
+          "tool_kind": null,
+          "metadata": null,
+          "timestamp": "2026-11-03T15:56:26.266338Z",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-11-03T15:56:26.266770Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。",
+      "kind": "request",
+      "run_id": "01a1a220-2e01-771d-b2e5-9d2c3c42f4d1",
+      "conversation_id": "01a1a220-2e01-771d-b2e5-9d2d3ce66059",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "宿題の答えをそのままお伝えすることはできませんが、コードを自分で完成させるための考え方のヒントをお伝えしますね。\n\n`save_learning_log` などの学習記録やファイル操作を行うツールを実装する際は、以下のポイントに注目してみましょう。\n\n1. **ツールの定義と引数の型**\n   - どのような引数（例: 記録する内容や回数など）を受け取る必要があるかを考えます。\n   - Pydanticなどを利用して、引数の型や説明を明確に定義することが重要です。\n\n2. **関数の処理内容**\n   - 受け取った引数をどのようにファイル（テキストやJSONなど）に書き込むか、標準的なPythonのファイル入出力（`open` など）の処理を組み立てます。\n   - 処理が成功したときにエージェントへ何を返すか（完了メッセージなど）も考えましょう。\n\n3. **ツールの説明文（docstring）**\n   - LLMが「いつ、どのようにこのツールを使えばよいか」を判断できるように、関数の説明文を分かりやすく記述することがポイントです。\n\nまずはこれらを意識しながら、お手元のコードの関数部分を組み立ててみてください！\n\n関連回：第3回AIエージェント",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EmAKXgFpFH0TAAotejMWcaq4R1kwYjQXW8RVwAthvokKJyUeBSK+rKAJRHYqM6Z3aztwwO4UNqPBWiCUS7LvcRiStVIKznCGzVN9kFBJHAZQMirFg6rvBLE9u2MDmQIF7wA="
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 879,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 267,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 879
+        },
+        "cost": "0.0009312",
+        "input_text_tokens": 879
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-03T15:56:35.026647Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "KgTqap-1JOnHjuMPg-vvuQg",
+      "finish_reason": "stop",
+      "run_id": "01a1a220-2e01-771d-b2e5-9d2c3c42f4d1",
+      "conversation_id": "01a1a220-2e01-771d-b2e5-9d2d3ce66059",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ]
+}

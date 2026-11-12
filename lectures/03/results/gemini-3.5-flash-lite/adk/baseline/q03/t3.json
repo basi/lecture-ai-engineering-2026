@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "engine": "adk",
+  "variant": "baseline",
+  "variant_sha256": "32b08b882faf9c08509886cb48d79589680f6924b6c4ac8bb4c37eb037f7d5a9",
+  "qid": "q03",
+  "kind": "question",
+  "question": "第2回の内容から確認問題を1問出して",
+  "trial": 3,
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "command": [
+    "uv",
+    "run",
+    "--with",
+    "google-adk==2.13.0",
+    "adk",
+    "run",
+    "--in_memory",
+    "--jsonl",
+    "--timeout",
+    "180s",
+    "adk_agent/glossary_agent",
+    "第2回の内容から確認問題を1問出して"
+  ],
+  "compare_args": [
+    "run",
+    "--level",
+    "all",
+    "--trials",
+    "3"
+  ],
+  "dry_run": false,
+  "git": {
+    "commit": "8ce078e885542a9685c96943f2e44a99b73bd057",
+    "dirty": false
+  },
+  "started_at": "2026-11-03T16:44:49+00:00",
+  "finished_at": "2026-11-03T16:44:49+00:00",
+  "duration_s": 5.597,
+  "elapsed_s": 5.597,
+  "status": "ok",
+  "error": null,
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "exit_code": 0,
+  "answer": "それでは、第2回の内容から確認問題を出題します！\n\n**【問題】**\n「過学習」の意味は？\n\n（答えを知りたいときや、自分の答えが合っているか確認したいときはいつでも聞いてくださいね！）\n\n（第2回）",
+  "tool_calls": [
+    {
+      "order": 1,
+      "response_index": 1,
+      "tool_call_id": "call_160562",
+      "name": "make_quiz",
+      "args": {
+        "lecture": 2
+      },
+      "result": "{\"question\": \"「過学習」の意味は？\", \"answer\": \"学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。\"}",
+      "outcome": "success"
+    }
+  ],
+  "approvals": [],
+  "saved_files": [],
+  "outside_files": [],
+  "usage": {
+    "requests": 2,
+    "tool_calls": 1,
+    "input_tokens": 1018,
+    "output_tokens": 69,
+    "candidates_tokens": 69,
+    "thoughts_tokens": 0,
+    "total_tokens": 1087
+  },
+  "events": 3,
+  "skipped_lines": [
+    "Log setup complete: /tmp/agents_log/agent.20261103_164443.log",
+    "To access latest log: tail -F /tmp/agents_log/agent.latest.log"
+  ],
+  "notes": [
+    "make_quiz の乱数は別プロセスなので、random.seed では揃わない"
+  ],
+  "raw_file": "t3.raw.jsonl",
+  "stderr_file": "t3.stderr.txt"
+}

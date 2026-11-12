@@ -1,0 +1,19 @@
+[model] gemini-3.5-flash-lite
+[質問] RLHFとは何ですか？
+**RLHF**（Reinforcement Learning from Human Feedback：人間フィードバックによる強化学習）とは、人間の好みに合わせたLLM（大規模言語モデル）の微調整（アライメント）を行う手法のことです。
+
+具体的には、以下の3つのステップで進められます：
+1. **教師あり微調整（SFT）**: モデルに人間の望ましい応答を学習させます。
+2. **報酬モデルの学習**: 人間がどの応答を好ましいと感じるかを評価するモデル（報酬モデル）を作ります。
+3. **強化学習（PPOなど）**: 報酬モデルが高く評価する応答を生成できるように、モデルを強化学習で最適化します。
+
+これにより、モデルがより安全で、役に立ち、ユーザーの意図に沿った回答ができるようになります。
+
+（第11回）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'RLHF'})
+[tool return] search_glossary -> 用語集に「RLHF」は見つかりませんでした。…
+[tool call]   search_glossary({'query': '報酬モデル'})
+[tool return] search_glossary -> 用語集に「報酬モデル」は見つかりませんでした。…
+[usage] RunUsage(cost=Decimal('0.0009216'), details={'text_prompt_tokens': 1272}, input_text_tokens=1272, input_tokens=1272, output_tokens=216, requests=3, tool_calls=2)

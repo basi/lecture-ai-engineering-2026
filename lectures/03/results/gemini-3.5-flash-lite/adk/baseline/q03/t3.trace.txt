@@ -1,0 +1,16 @@
+[model] gemini-3.5-flash-lite
+[質問] 第2回の内容から確認問題を1問出して
+[command] uv run --with google-adk==2.13.0 adk run --in_memory --jsonl --timeout 180s adk_agent/glossary_agent <質問>
+それでは、第2回の内容から確認問題を出題します！
+
+**【問題】**
+「過学習」の意味は？
+
+（答えを知りたいときや、自分の答えが合っているか確認したいときはいつでも聞いてくださいね！）
+
+（第2回）
+
+--- trace ---
+[tool call]   make_quiz({"lecture": 2})
+[tool return] make_quiz -> {"question": "「過学習」の意味は？", "answer": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。"}…
+[usage] {'requests': 2, 'tool_calls': 1, 'input_tokens': 1018, 'output_tokens': 69, 'candidates_tokens': 69, 'thoughts_tokens': 0, 'total_tokens': 1087}

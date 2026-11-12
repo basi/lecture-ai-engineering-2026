@@ -1,0 +1,12 @@
+[model] gemini-3.5-flash-lite
+[質問] RAGとは何ですか？
+「RAG」について用語集を検索しましたが、用語集には登録されていないようです。
+
+AIエンジニアリングの文脈において、RAG（Retrieval-Augmented Generation：検索拡張生成）は、大規模言語モデル（LLM）が外部のデータベースやドキュメントから関連情報を「検索（Retrieval）」し、その情報を基にして回答を「生成（Generation）」する技術のことです。これにより、LLMが学習していない最新の情報や、社内文書などの固有の知識に基づいた正確な回答を得られるようになります。
+
+（関係する回：用語集に登録がないため特定できませんが、外部知識の活用や検索技術に関連する回で扱われる内容です）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'RAG'})
+[tool return] search_glossary -> [{"term": "ファインチューニング", "lecture": 2, "definition": "事前学習済みモデルを、特定のタスクや形式に合ったデータで追加学習させること。出力の形式や口調、特定ドメインの振る舞いを身につけさせるの…
+[usage] RunUsage(cost=Decimal('0.0006926'), details={'text_prompt_tokens': 942}, input_text_tokens=942, input_tokens=942, output_tokens=164, requests=2, tool_calls=1)

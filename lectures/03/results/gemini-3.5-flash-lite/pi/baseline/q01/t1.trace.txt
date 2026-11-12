@@ -1,0 +1,52 @@
+[model] gemini-3.5-flash-lite
+[質問] AIE2026の講座の宿題にある「3レベル」とは何ですか？
+[command] pi --mode json --no-session --no-context-files --tools read,grep,find,ls --provider google --model gemini-3.5-flash-lite <質問>
+AIE2026の講座の宿題における**「3レベル」**とは、各回の宿題の取り組み方の構成（3段階の難易度・アプローチ）のことです。
+
+具体的には以下の3つのレベルに分かれています：
+
+1. **基礎**：講義内容の確認や復習（内容を理解・追体験する）
+2. **実装**：自分で実際にコードを書く・手を動かす
+3. **発展**：さらに踏み込んだ調査や試行、別アプローチの検証など
+
+### ポイント
+- **どれか1つに取り組めば、その回の宿題は完了**となります（すべてをこなす必要はありません）。
+- 原則として厳密な**採点は行いません**。
+- 取り組んだレベルやその結果、気づきなどは各回の `lectures/NN/answer.md` に記入して提出します。
+
+--- trace ---
+[tool call]   find({"pattern": "*"})
+[tool return] find -> data/
+data/glossary.json
+data/lectures/
+data/lectures/01.md
+data/lectures/02.md
+data/lectures/03.md
+data/lectures/05.md…
+[tool call]   grep({"pattern": "レベル"})
+[tool return] grep -> data/glossary.json:389:       "definition": "Googleが公開しているオープンソースのエージェント開発フレームワーク。Geminiとの統合が深い。2.0で1.x系から大きな変更が入っている。本講…
+[tool call]   read({"limit": 50, "offset": 410, "path": "data/glossary.json"})
+[tool return] read ->     {
+      "id": "human-in-the-loop",
+      "term": "Human-in-the-loop",
+      "aliases": ["HITL", "人間による承認", "確認を挟む"],…
+[tool call]   grep({"pattern": "レベル", "path": "data/lectures"})
+[tool return] grep -> No matches found…
+[tool call]   read({"path": "data/lectures/01.md", "limit": 100, "offset": 1})
+[tool return] read -> # 第1回 AIエンジニアリング概論と開発環境
+
+## この回のねらい
+
+- AIエンジニアリングが「モデルを作る」ことより「モデルを部品として使い、評価と改善を回す」ことに重心がある領域だと理解する
+- 講座を通して使う開発環境（GitH…
+[tool call]   grep({"pattern": "宿題|レベル|answer", "path": "data/lectures"})
+[tool return] grep -> 01.md:15: 6. **提出の流れ**：講座repoをfork → 回ごとの作業ブランチで作業 → lectures/NN/answer.md を書く → 自分のforkの main へPR。…
+[tool call]   find({"pattern": "*"})
+[tool return] find -> data/
+data/glossary.json
+data/lectures/
+data/lectures/01.md
+data/lectures/02.md
+data/lectures/03.md
+data/lectures/05.md…
+[usage] {'requests': 8, 'tool_calls': 7, 'input_tokens': 19438, 'output_tokens': 997, 'cache_read_tokens': 0, 'total_tokens': 20435}
