@@ -63,7 +63,7 @@ TBD
   - 実装・発展：TBD
 - 結果：TBD
 - 気づき・疑問：TBD
-- 共通の条件：採点は、配布の `app/judge.py` の関数（`build_judge`・`judge_prompt`）をそのまま使う。条件の切り替えと記録は、比較用のスクリプト `lectures/04/compare.py` が行う。モデルは `gemini-3.5-flash-lite`（V2 だけ `gemini-3.5-flash`）。同じ条件を 3 回ずつ実行する。手順は [experiment.md](experiment.md) にまとめる（TBD）。
+- 共通の条件：採点は、配布の `app/judge.py` の関数（`build_judge`・`judge_prompt`）をそのまま使う。条件の切り替えと記録は、比較用のスクリプト `lectures/04/compare.py` が行う。モデルは `gemini-3.5-flash-lite`（V2 だけ `gemini-3.5-flash`）。同じ条件を 3 回ずつ実行する。手順は [experiment.md](experiment.md) にまとめた。
 
   <details><summary>共通の条件の詳細（ラベル、採点、変種の作り方、記録、環境）</summary>
 
