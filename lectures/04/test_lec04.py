@@ -429,6 +429,7 @@ def test_generate_dry_run_stops_like_the_real_command_when_answers_exist(tmp_pat
 
 
 def test_generate_dry_run_does_not_need_an_api_key_or_the_network(tmp_path, monkeypatch):
+    make_root(tmp_path, monkeypatch)  # 本物の評価セットには、生成の後で回答が入る（入っていると、予行も --force なしでは止まる）
     monkeypatch.delenv("GEMINI_API_KEY")
 
     def never():
