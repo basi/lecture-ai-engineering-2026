@@ -21,13 +21,6 @@
   },
   "warnings": [
     {
-      "kind": "labels_unavailable",
-      "message": "自分のラベル `lectures/04/my_labels.jsonl` を読めません（ファイルがありません）。I0 impl_step3・I1 impl_baseline の一致率は出せません",
-      "owner": "mine",
-      "path": "lectures/04/my_labels.jsonl",
-      "state": "missing"
-    },
-    {
       "kind": "missing",
       "message": "V0 baseline: 欠け 20 件を集計から外しました: 01 t2（記録なし）、01 t3（記録なし）、02 t2（記録なし）、02 t3（記録なし）、03 t2（記録なし）、03 t3（記録なし）、04 t2（記録なし）、04 t3（記録なし）（ほか 12 件）",
       "variant": "baseline",
@@ -70,26 +63,10 @@
       "count": 20
     },
     {
-      "kind": "no_records",
-      "message": "I0 impl_step3: 記録が 1 件もありません（judge/impl_step3/）",
-      "variant": "impl_step3"
-    },
-    {
-      "kind": "no_records",
-      "message": "I1 impl_baseline: 記録が 1 件もありません（judge/impl_baseline/）",
-      "variant": "impl_baseline"
-    },
-    {
-      "kind": "generate_unavailable",
-      "message": "実装: generate の記録が使えない件があります（手続きの判定は n/a）: m01（記録なし）、m02（記録なし）、m03（記録なし）、m04（記録なし）、m07（記録なし）、m10（記録なし）",
-      "cases": [
-        "m01（記録なし）",
-        "m02（記録なし）",
-        "m03（記録なし）",
-        "m04（記録なし）",
-        "m07（記録なし）",
-        "m10（記録なし）"
-      ]
+      "kind": "missing",
+      "message": "I0 impl_step3: 欠け 20 件を集計から外しました: m01 t2（記録なし）、m01 t3（記録なし）、m02 t2（記録なし）、m02 t3（記録なし）、m03 t2（記録なし）、m03 t3（記録なし）、m04 t2（記録なし）、m04 t3（記録なし）（ほか 12 件）",
+      "variant": "impl_step3",
+      "count": 20
     }
   ],
   "evalsets": [
@@ -292,16 +269,16 @@
       "cases": {
         "path": "data/eval/my_cases.jsonl",
         "state": "ok",
-        "sha256": "dfbb5a24a6a543c6e48e817dc261dd4b28a5edeb7a2a454f216246d8aa504f97",
+        "sha256": "07b254fc1448c8656c66f92edf8230d5d44cb35b39d79c996d5221bd8285004f",
         "n": 10,
         "detail": ""
       },
       "labels": {
         "mine": {
           "path": "lectures/04/my_labels.jsonl",
-          "state": "missing",
-          "sha256": null,
-          "n": null,
+          "state": "ok",
+          "sha256": "37737f786997db7d4bb2043db77fa0d992e7254860decf0936442684390c2caa",
+          "n": 10,
           "detail": ""
         },
         "instructor": {
@@ -330,7 +307,78 @@
       ],
       "is_impl": true,
       "human_labels": {
-        "mine": null,
+        "mine": {
+          "m01": {
+            "grounding": "pass",
+            "scope": "pass",
+            "hint": "pass",
+            "clarity": "pass",
+            "lecture_mark": "pass"
+          },
+          "m02": {
+            "grounding": "pass",
+            "scope": "pass",
+            "hint": "pass",
+            "clarity": "pass",
+            "lecture_mark": "pass"
+          },
+          "m03": {
+            "grounding": "pass",
+            "scope": "pass",
+            "hint": "pass",
+            "clarity": "pass",
+            "lecture_mark": "fail"
+          },
+          "m04": {
+            "grounding": "pass",
+            "scope": "pass",
+            "hint": "pass",
+            "clarity": "pass",
+            "lecture_mark": "fail"
+          },
+          "m05": {
+            "grounding": "pass",
+            "scope": "pass",
+            "hint": "fail",
+            "clarity": "pass",
+            "lecture_mark": "pass"
+          },
+          "m06": {
+            "grounding": "pass",
+            "scope": "pass",
+            "hint": "pass",
+            "clarity": "pass",
+            "lecture_mark": "pass"
+          },
+          "m07": {
+            "grounding": "pass",
+            "scope": "pass",
+            "hint": "pass",
+            "clarity": "pass",
+            "lecture_mark": "fail"
+          },
+          "m08": {
+            "grounding": "pass",
+            "scope": "pass",
+            "hint": "pass",
+            "clarity": "pass",
+            "lecture_mark": "pass"
+          },
+          "m09": {
+            "grounding": "fail",
+            "scope": "fail",
+            "hint": "pass",
+            "clarity": "pass",
+            "lecture_mark": "fail"
+          },
+          "m10": {
+            "grounding": "pass",
+            "scope": "pass",
+            "hint": "pass",
+            "clarity": "pass",
+            "lecture_mark": "pass"
+          }
+        },
         "instructor": null
       }
     }
@@ -6213,9 +6261,9 @@
       "labels": {
         "mine": {
           "path": "lectures/04/my_labels.jsonl",
-          "state": "missing",
-          "sha256": null,
-          "n": null,
+          "state": "ok",
+          "sha256": "37737f786997db7d4bb2043db77fa0d992e7254860decf0936442684390c2caa",
+          "n": 10,
           "detail": ""
         },
         "instructor": {
@@ -6227,20 +6275,17 @@
         }
       },
       "records": {
-        "found": 0,
+        "found": 10,
         "expected": 30,
-        "usable": 0,
-        "status": {},
+        "usable": 10,
+        "status": {
+          "ok": 10
+        },
         "dry_run": 0,
         "unreadable": [],
         "missing": [
           {
             "case_id": "m01",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m01",
             "trial": 2,
             "reason": "no_record"
           },
@@ -6251,11 +6296,6 @@
           },
           {
             "case_id": "m02",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m02",
             "trial": 2,
             "reason": "no_record"
           },
@@ -6266,11 +6306,6 @@
           },
           {
             "case_id": "m03",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m03",
             "trial": 2,
             "reason": "no_record"
           },
@@ -6281,11 +6316,6 @@
           },
           {
             "case_id": "m04",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m04",
             "trial": 2,
             "reason": "no_record"
           },
@@ -6296,11 +6326,6 @@
           },
           {
             "case_id": "m05",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m05",
             "trial": 2,
             "reason": "no_record"
           },
@@ -6311,11 +6336,6 @@
           },
           {
             "case_id": "m06",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m06",
             "trial": 2,
             "reason": "no_record"
           },
@@ -6326,11 +6346,6 @@
           },
           {
             "case_id": "m07",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m07",
             "trial": 2,
             "reason": "no_record"
           },
@@ -6341,11 +6356,6 @@
           },
           {
             "case_id": "m08",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m08",
             "trial": 2,
             "reason": "no_record"
           },
@@ -6356,22 +6366,12 @@
           },
           {
             "case_id": "m09",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m09",
             "trial": 2,
             "reason": "no_record"
           },
           {
             "case_id": "m09",
             "trial": 3,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m10",
-            "trial": 1,
             "reason": "no_record"
           },
           {
@@ -6388,22 +6388,199 @@
         "extra": []
       },
       "run": {
-        "configured_models": {},
-        "response_models": {},
-        "output_modes": {},
-        "orders": {},
-        "commits": {},
+        "configured_models": {
+          "gemini-3.5-flash-lite": 10
+        },
+        "response_models": {
+          "gemini-3.5-flash-lite": 10
+        },
+        "output_modes": {
+          "tool": 10
+        },
+        "orders": {
+          "reason_first": 10
+        },
+        "commits": {
+          "dc0ca6f": 10
+        },
         "dirty_records": 0,
-        "first_started_at": null,
-        "last_finished_at": null
+        "first_started_at": "2026-11-21T07:27:28+00:00",
+        "last_finished_at": "2026-11-21T07:28:54+00:00"
       },
       "trials": {
         "1": {
           "expected": 10,
-          "usable": 0,
-          "dropped": 10,
+          "usable": 10,
+          "dropped": 0,
           "labels": {
-            "mine": null,
+            "mine": {
+              "n": 10,
+              "criteria": {
+                "grounding": {
+                  "name": "根拠",
+                  "total": 10,
+                  "agree": 7,
+                  "compared": 10,
+                  "disagree": 3,
+                  "unsure": 0,
+                  "human_unlabeled": 0,
+                  "missed": 1,
+                  "false_alarm": 2,
+                  "agree_rate_a": 0.7,
+                  "coverage": 1.0,
+                  "agree_rate_b": 0.7,
+                  "always_pass": {
+                    "pass": 9,
+                    "labeled": 10,
+                    "rate": 0.9
+                  }
+                },
+                "scope": {
+                  "name": "範囲",
+                  "total": 10,
+                  "agree": 9,
+                  "compared": 10,
+                  "disagree": 1,
+                  "unsure": 0,
+                  "human_unlabeled": 0,
+                  "missed": 1,
+                  "false_alarm": 0,
+                  "agree_rate_a": 0.9,
+                  "coverage": 1.0,
+                  "agree_rate_b": 0.9,
+                  "always_pass": {
+                    "pass": 9,
+                    "labeled": 10,
+                    "rate": 0.9
+                  }
+                },
+                "hint": {
+                  "name": "ヒント",
+                  "total": 10,
+                  "agree": 10,
+                  "compared": 10,
+                  "disagree": 0,
+                  "unsure": 0,
+                  "human_unlabeled": 0,
+                  "missed": 0,
+                  "false_alarm": 0,
+                  "agree_rate_a": 1.0,
+                  "coverage": 1.0,
+                  "agree_rate_b": 1.0,
+                  "always_pass": {
+                    "pass": 9,
+                    "labeled": 10,
+                    "rate": 0.9
+                  }
+                },
+                "clarity": {
+                  "name": "分かりやすさ",
+                  "total": 10,
+                  "agree": 9,
+                  "compared": 10,
+                  "disagree": 1,
+                  "unsure": 0,
+                  "human_unlabeled": 0,
+                  "missed": 0,
+                  "false_alarm": 1,
+                  "agree_rate_a": 0.9,
+                  "coverage": 1.0,
+                  "agree_rate_b": 0.9,
+                  "always_pass": {
+                    "pass": 10,
+                    "labeled": 10,
+                    "rate": 1.0
+                  }
+                },
+                "lecture_mark": {
+                  "name": "回の表示",
+                  "total": 10,
+                  "agree": 10,
+                  "compared": 10,
+                  "disagree": 0,
+                  "unsure": 0,
+                  "human_unlabeled": 0,
+                  "missed": 0,
+                  "false_alarm": 0,
+                  "agree_rate_a": 1.0,
+                  "coverage": 1.0,
+                  "agree_rate_b": 1.0,
+                  "always_pass": {
+                    "pass": 6,
+                    "labeled": 10,
+                    "rate": 0.6
+                  }
+                }
+              },
+              "overall": {
+                "name": "総合",
+                "total": 10,
+                "agree": 10,
+                "compared": 10,
+                "disagree": 0,
+                "unsure": 0,
+                "human_unlabeled": 0,
+                "missed": 0,
+                "false_alarm": 0,
+                "agree_rate_a": 1.0,
+                "coverage": 1.0,
+                "agree_rate_b": 1.0,
+                "always_pass": {
+                  "pass": 5,
+                  "labeled": 10,
+                  "rate": 0.5
+                }
+              },
+              "consistent": true,
+              "review": [],
+              "mismatches": [
+                {
+                  "id": "m03",
+                  "criterion": "grounding",
+                  "name": "根拠",
+                  "kind": "過検出",
+                  "judge": "fail",
+                  "human": "pass",
+                  "reason": "用語集にある「評価セット」という用語を見落としており、英語表記への対応ができていないため。"
+                },
+                {
+                  "id": "m03",
+                  "criterion": "clarity",
+                  "name": "分かりやすさ",
+                  "kind": "過検出",
+                  "judge": "fail",
+                  "human": "pass",
+                  "reason": "質問に直接答えておらず、用語集にないとして一般的な説明をカッコ書きで入れているため簡潔さに欠ける。"
+                },
+                {
+                  "id": "m05",
+                  "criterion": "grounding",
+                  "name": "根拠",
+                  "kind": "過検出",
+                  "judge": "fail",
+                  "human": "pass",
+                  "reason": "用語集にはSWE-bench Verifiedに関する記載がありませんが、一般知識として推測で断定してしまっています。"
+                },
+                {
+                  "id": "m09",
+                  "criterion": "grounding",
+                  "name": "根拠",
+                  "kind": "見逃し",
+                  "judge": "pass",
+                  "human": "fail",
+                  "reason": "参照の用語集には不動産エージェントについての記載がないが、一般的な内容として適切に案内されているため。"
+                },
+                {
+                  "id": "m09",
+                  "criterion": "scope",
+                  "name": "範囲",
+                  "kind": "見逃し",
+                  "judge": "pass",
+                  "human": "fail",
+                  "reason": "講座と関係のない不動産エージェントの質問に対して、範囲外であることを伝えた上で一般的な案内をしているため適切である。"
+                }
+              ]
+            },
             "instructor": null
           }
         },
@@ -6429,270 +6606,270 @@
       "cells": {
         "m01": {
           "grounding": [
-            null,
+            "pass",
             null,
             null
           ],
           "scope": [
-            null,
+            "pass",
             null,
             null
           ],
           "hint": [
-            null,
+            "pass",
             null,
             null
           ],
           "clarity": [
-            null,
+            "pass",
             null,
             null
           ],
           "lecture_mark": [
-            null,
+            "pass",
             null,
             null
           ]
         },
         "m02": {
           "grounding": [
-            null,
+            "pass",
             null,
             null
           ],
           "scope": [
-            null,
+            "pass",
             null,
             null
           ],
           "hint": [
-            null,
+            "pass",
             null,
             null
           ],
           "clarity": [
-            null,
+            "pass",
             null,
             null
           ],
           "lecture_mark": [
-            null,
+            "pass",
             null,
             null
           ]
         },
         "m03": {
           "grounding": [
-            null,
+            "fail",
             null,
             null
           ],
           "scope": [
-            null,
+            "pass",
             null,
             null
           ],
           "hint": [
-            null,
+            "pass",
             null,
             null
           ],
           "clarity": [
-            null,
+            "fail",
             null,
             null
           ],
           "lecture_mark": [
-            null,
+            "fail",
             null,
             null
           ]
         },
         "m04": {
           "grounding": [
-            null,
+            "pass",
             null,
             null
           ],
           "scope": [
-            null,
+            "pass",
             null,
             null
           ],
           "hint": [
-            null,
+            "pass",
             null,
             null
           ],
           "clarity": [
-            null,
+            "pass",
             null,
             null
           ],
           "lecture_mark": [
-            null,
+            "fail",
             null,
             null
           ]
         },
         "m05": {
           "grounding": [
-            null,
+            "fail",
             null,
             null
           ],
           "scope": [
-            null,
+            "pass",
             null,
             null
           ],
           "hint": [
-            null,
+            "fail",
             null,
             null
           ],
           "clarity": [
-            null,
+            "pass",
             null,
             null
           ],
           "lecture_mark": [
-            null,
+            "pass",
             null,
             null
           ]
         },
         "m06": {
           "grounding": [
-            null,
+            "pass",
             null,
             null
           ],
           "scope": [
-            null,
+            "pass",
             null,
             null
           ],
           "hint": [
-            null,
+            "pass",
             null,
             null
           ],
           "clarity": [
-            null,
+            "pass",
             null,
             null
           ],
           "lecture_mark": [
-            null,
+            "pass",
             null,
             null
           ]
         },
         "m07": {
           "grounding": [
-            null,
+            "pass",
             null,
             null
           ],
           "scope": [
-            null,
+            "pass",
             null,
             null
           ],
           "hint": [
-            null,
+            "pass",
             null,
             null
           ],
           "clarity": [
-            null,
+            "pass",
             null,
             null
           ],
           "lecture_mark": [
-            null,
+            "fail",
             null,
             null
           ]
         },
         "m08": {
           "grounding": [
-            null,
+            "pass",
             null,
             null
           ],
           "scope": [
-            null,
+            "pass",
             null,
             null
           ],
           "hint": [
-            null,
+            "pass",
             null,
             null
           ],
           "clarity": [
-            null,
+            "pass",
             null,
             null
           ],
           "lecture_mark": [
-            null,
+            "pass",
             null,
             null
           ]
         },
         "m09": {
           "grounding": [
-            null,
+            "pass",
             null,
             null
           ],
           "scope": [
-            null,
+            "pass",
             null,
             null
           ],
           "hint": [
-            null,
+            "pass",
             null,
             null
           ],
           "clarity": [
-            null,
+            "pass",
             null,
             null
           ],
           "lecture_mark": [
-            null,
+            "fail",
             null,
             null
           ]
         },
         "m10": {
           "grounding": [
-            null,
+            "pass",
             null,
             null
           ],
           "scope": [
-            null,
+            "pass",
             null,
             null
           ],
           "hint": [
-            null,
+            "pass",
             null,
             null
           ],
           "clarity": [
-            null,
+            "pass",
             null,
             null
           ],
           "lecture_mark": [
-            null,
+            "pass",
             null,
             null
           ]
@@ -6716,34 +6893,78 @@
         "cells": []
       },
       "order_check": {
-        "records": 0,
-        "output_modes": {},
-        "orders": {},
+        "records": 10,
+        "output_modes": {
+          "tool": 10
+        },
+        "orders": {
+          "reason_first": 10
+        },
         "order_ok": {
           "true": 0,
           "false": 0,
-          "null": 0
+          "null": 10
         },
-        "key_order_example": null,
+        "key_order_example": {
+          "case_id": "m01",
+          "trial": 1,
+          "top": [
+            "clarity",
+            "hint",
+            "scope",
+            "grounding"
+          ],
+          "grounding": [
+            "reason",
+            "verdict"
+          ]
+        },
         "request_missing": 0,
         "request": {
-          "response_json_schema": {},
-          "property_ordering": {},
-          "temperature": {},
-          "thinking_config": {},
-          "tool_mode": {}
+          "response_json_schema": {
+            "false": 10
+          },
+          "property_ordering": {
+            "false": 10
+          },
+          "temperature": {
+            "0.0": 10
+          },
+          "thinking_config": {
+            "null": 10
+          },
+          "tool_mode": {
+            "ANY": 10
+          }
         }
       },
       "usage": {
-        "records": 0,
+        "records": 10,
         "thoughts_tokens": null,
-        "output_tokens": null,
-        "input_tokens": null,
-        "duration_s": null,
+        "output_tokens": {
+          "n": 10,
+          "mean": 160.9,
+          "min": 131,
+          "max": 187
+        },
+        "input_tokens": {
+          "n": 10,
+          "mean": 1592.2,
+          "min": 1388,
+          "max": 1970
+        },
+        "duration_s": {
+          "n": 10,
+          "mean": 1.424,
+          "min": 0.998,
+          "max": 1.75
+        },
         "multi_request_records": 0,
         "warning_header_records": 0,
         "warning_header_examples": [],
-        "finish_reason": {}
+        "finish_reason": {
+          "stop": 10
+        }
       }
     },
     "impl_baseline": {
@@ -6764,9 +6985,9 @@
       "labels": {
         "mine": {
           "path": "lectures/04/my_labels.jsonl",
-          "state": "missing",
-          "sha256": null,
-          "n": null,
+          "state": "ok",
+          "sha256": "37737f786997db7d4bb2043db77fa0d992e7254860decf0936442684390c2caa",
+          "n": 10,
           "detail": ""
         },
         "instructor": {
@@ -6778,83 +6999,202 @@
         }
       },
       "records": {
-        "found": 0,
+        "found": 10,
         "expected": 10,
-        "usable": 0,
-        "status": {},
+        "usable": 10,
+        "status": {
+          "ok": 10
+        },
         "dry_run": 0,
         "unreadable": [],
-        "missing": [
-          {
-            "case_id": "m01",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m02",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m03",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m04",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m05",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m06",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m07",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m08",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m09",
-            "trial": 1,
-            "reason": "no_record"
-          },
-          {
-            "case_id": "m10",
-            "trial": 1,
-            "reason": "no_record"
-          }
-        ],
+        "missing": [],
         "extra": []
       },
       "run": {
-        "configured_models": {},
-        "response_models": {},
-        "output_modes": {},
-        "orders": {},
-        "commits": {},
+        "configured_models": {
+          "gemini-3.5-flash-lite": 10
+        },
+        "response_models": {
+          "gemini-3.5-flash-lite": 10
+        },
+        "output_modes": {
+          "tool": 10
+        },
+        "orders": {
+          "reason_first": 10
+        },
+        "commits": {
+          "dc0ca6f": 10
+        },
         "dirty_records": 0,
-        "first_started_at": null,
-        "last_finished_at": null
+        "first_started_at": "2026-11-21T07:29:02+00:00",
+        "last_finished_at": "2026-11-21T07:31:01+00:00"
       },
       "trials": {
         "1": {
           "expected": 10,
-          "usable": 0,
-          "dropped": 10,
+          "usable": 10,
+          "dropped": 0,
           "labels": {
-            "mine": null,
+            "mine": {
+              "n": 10,
+              "criteria": {
+                "grounding": {
+                  "name": "根拠",
+                  "total": 10,
+                  "agree": 8,
+                  "compared": 10,
+                  "disagree": 2,
+                  "unsure": 0,
+                  "human_unlabeled": 0,
+                  "missed": 0,
+                  "false_alarm": 2,
+                  "agree_rate_a": 0.8,
+                  "coverage": 1.0,
+                  "agree_rate_b": 0.8,
+                  "always_pass": {
+                    "pass": 9,
+                    "labeled": 10,
+                    "rate": 0.9
+                  }
+                },
+                "scope": {
+                  "name": "範囲",
+                  "total": 10,
+                  "agree": 10,
+                  "compared": 10,
+                  "disagree": 0,
+                  "unsure": 0,
+                  "human_unlabeled": 0,
+                  "missed": 0,
+                  "false_alarm": 0,
+                  "agree_rate_a": 1.0,
+                  "coverage": 1.0,
+                  "agree_rate_b": 1.0,
+                  "always_pass": {
+                    "pass": 9,
+                    "labeled": 10,
+                    "rate": 0.9
+                  }
+                },
+                "hint": {
+                  "name": "ヒント",
+                  "total": 10,
+                  "agree": 10,
+                  "compared": 10,
+                  "disagree": 0,
+                  "unsure": 0,
+                  "human_unlabeled": 0,
+                  "missed": 0,
+                  "false_alarm": 0,
+                  "agree_rate_a": 1.0,
+                  "coverage": 1.0,
+                  "agree_rate_b": 1.0,
+                  "always_pass": {
+                    "pass": 9,
+                    "labeled": 10,
+                    "rate": 0.9
+                  }
+                },
+                "clarity": {
+                  "name": "分かりやすさ",
+                  "total": 10,
+                  "agree": 8,
+                  "compared": 10,
+                  "disagree": 2,
+                  "unsure": 0,
+                  "human_unlabeled": 0,
+                  "missed": 0,
+                  "false_alarm": 2,
+                  "agree_rate_a": 0.8,
+                  "coverage": 1.0,
+                  "agree_rate_b": 0.8,
+                  "always_pass": {
+                    "pass": 10,
+                    "labeled": 10,
+                    "rate": 1.0
+                  }
+                },
+                "lecture_mark": {
+                  "name": "回の表示",
+                  "total": 10,
+                  "agree": 10,
+                  "compared": 10,
+                  "disagree": 0,
+                  "unsure": 0,
+                  "human_unlabeled": 0,
+                  "missed": 0,
+                  "false_alarm": 0,
+                  "agree_rate_a": 1.0,
+                  "coverage": 1.0,
+                  "agree_rate_b": 1.0,
+                  "always_pass": {
+                    "pass": 6,
+                    "labeled": 10,
+                    "rate": 0.6
+                  }
+                }
+              },
+              "overall": {
+                "name": "総合",
+                "total": 10,
+                "agree": 10,
+                "compared": 10,
+                "disagree": 0,
+                "unsure": 0,
+                "human_unlabeled": 0,
+                "missed": 0,
+                "false_alarm": 0,
+                "agree_rate_a": 1.0,
+                "coverage": 1.0,
+                "agree_rate_b": 1.0,
+                "always_pass": {
+                  "pass": 5,
+                  "labeled": 10,
+                  "rate": 0.5
+                }
+              },
+              "consistent": true,
+              "review": [],
+              "mismatches": [
+                {
+                  "id": "m03",
+                  "criterion": "grounding",
+                  "name": "根拠",
+                  "kind": "過検出",
+                  "judge": "fail",
+                  "human": "pass",
+                  "reason": "用語集に「evaluation dataset」のエントリがないと判断して一般的な説明を添えており、英語の質問に対して定義に沿った説明を行っていない。"
+                },
+                {
+                  "id": "m03",
+                  "criterion": "clarity",
+                  "name": "分かりやすさ",
+                  "kind": "過検出",
+                  "judge": "fail",
+                  "human": "pass",
+                  "reason": "質問に直接答えておらず、用語集にないと言いながら一般的な説明や関連する回の補足を余分に挟んでいるため、簡潔さに欠ける。"
+                },
+                {
+                  "id": "m05",
+                  "criterion": "grounding",
+                  "name": "根拠",
+                  "kind": "過検出",
+                  "judge": "fail",
+                  "human": "pass",
+                  "reason": "宿題の答えそのものを直接書いてしまっており、ヒントを提示するという期待するふるまいに反しているため。"
+                },
+                {
+                  "id": "m09",
+                  "criterion": "clarity",
+                  "name": "分かりやすさ",
+                  "kind": "過検出",
+                  "judge": "fail",
+                  "human": "pass",
+                  "reason": "質問に直接答えて構成も簡潔ですが、そもそも講座の範囲外である話題に対して回答しているため、分かりやすさ以前に不適切な内容が含まれています。"
+                }
+              ]
+            },
             "instructor": null
           }
         }
@@ -6862,172 +7202,172 @@
       "cells": {
         "m01": {
           "grounding": [
-            null
+            "pass"
           ],
           "scope": [
-            null
+            "pass"
           ],
           "hint": [
-            null
+            "pass"
           ],
           "clarity": [
-            null
+            "pass"
           ],
           "lecture_mark": [
-            null
+            "pass"
           ]
         },
         "m02": {
           "grounding": [
-            null
+            "pass"
           ],
           "scope": [
-            null
+            "pass"
           ],
           "hint": [
-            null
+            "pass"
           ],
           "clarity": [
-            null
+            "pass"
           ],
           "lecture_mark": [
-            null
+            "pass"
           ]
         },
         "m03": {
           "grounding": [
-            null
+            "fail"
           ],
           "scope": [
-            null
+            "pass"
           ],
           "hint": [
-            null
+            "pass"
           ],
           "clarity": [
-            null
+            "fail"
           ],
           "lecture_mark": [
-            null
+            "fail"
           ]
         },
         "m04": {
           "grounding": [
-            null
+            "pass"
           ],
           "scope": [
-            null
+            "pass"
           ],
           "hint": [
-            null
+            "pass"
           ],
           "clarity": [
-            null
+            "pass"
           ],
           "lecture_mark": [
-            null
+            "fail"
           ]
         },
         "m05": {
           "grounding": [
-            null
+            "fail"
           ],
           "scope": [
-            null
+            "pass"
           ],
           "hint": [
-            null
+            "fail"
           ],
           "clarity": [
-            null
+            "pass"
           ],
           "lecture_mark": [
-            null
+            "pass"
           ]
         },
         "m06": {
           "grounding": [
-            null
+            "pass"
           ],
           "scope": [
-            null
+            "pass"
           ],
           "hint": [
-            null
+            "pass"
           ],
           "clarity": [
-            null
+            "pass"
           ],
           "lecture_mark": [
-            null
+            "pass"
           ]
         },
         "m07": {
           "grounding": [
-            null
+            "pass"
           ],
           "scope": [
-            null
+            "pass"
           ],
           "hint": [
-            null
+            "pass"
           ],
           "clarity": [
-            null
+            "pass"
           ],
           "lecture_mark": [
-            null
+            "fail"
           ]
         },
         "m08": {
           "grounding": [
-            null
+            "pass"
           ],
           "scope": [
-            null
+            "pass"
           ],
           "hint": [
-            null
+            "pass"
           ],
           "clarity": [
-            null
+            "pass"
           ],
           "lecture_mark": [
-            null
+            "pass"
           ]
         },
         "m09": {
           "grounding": [
-            null
+            "fail"
           ],
           "scope": [
-            null
+            "fail"
           ],
           "hint": [
-            null
+            "pass"
           ],
           "clarity": [
-            null
+            "fail"
           ],
           "lecture_mark": [
-            null
+            "fail"
           ]
         },
         "m10": {
           "grounding": [
-            null
+            "pass"
           ],
           "scope": [
-            null
+            "pass"
           ],
           "hint": [
-            null
+            "pass"
           ],
           "clarity": [
-            null
+            "pass"
           ],
           "lecture_mark": [
-            null
+            "pass"
           ]
         }
       },
@@ -7049,34 +7389,78 @@
         "cells": []
       },
       "order_check": {
-        "records": 0,
-        "output_modes": {},
-        "orders": {},
+        "records": 10,
+        "output_modes": {
+          "tool": 10
+        },
+        "orders": {
+          "reason_first": 10
+        },
         "order_ok": {
           "true": 0,
           "false": 0,
-          "null": 0
+          "null": 10
         },
-        "key_order_example": null,
+        "key_order_example": {
+          "case_id": "m01",
+          "trial": 1,
+          "top": [
+            "hint",
+            "scope",
+            "clarity",
+            "grounding"
+          ],
+          "grounding": [
+            "reason",
+            "verdict"
+          ]
+        },
         "request_missing": 0,
         "request": {
-          "response_json_schema": {},
-          "property_ordering": {},
-          "temperature": {},
-          "thinking_config": {},
-          "tool_mode": {}
+          "response_json_schema": {
+            "false": 10
+          },
+          "property_ordering": {
+            "false": 10
+          },
+          "temperature": {
+            "0.0": 10
+          },
+          "thinking_config": {
+            "null": 10
+          },
+          "tool_mode": {
+            "ANY": 10
+          }
         }
       },
       "usage": {
-        "records": 0,
+        "records": 10,
         "thoughts_tokens": null,
-        "output_tokens": null,
-        "input_tokens": null,
-        "duration_s": null,
+        "output_tokens": {
+          "n": 10,
+          "mean": 165.2,
+          "min": 137,
+          "max": 188
+        },
+        "input_tokens": {
+          "n": 10,
+          "mean": 1589.2,
+          "min": 1385,
+          "max": 1967
+        },
+        "duration_s": {
+          "n": 10,
+          "mean": 1.466,
+          "min": 0.869,
+          "max": 1.86
+        },
         "multi_request_records": 0,
         "warning_header_records": 0,
         "warning_header_examples": [],
-        "finish_reason": {}
+        "finish_reason": {
+          "stop": 10
+        }
       }
     }
   },
@@ -7294,166 +7678,146 @@
     ],
     "human_labels": {
       "m01": {
-        "grounding": null,
-        "scope": null,
-        "hint": null,
-        "clarity": null,
-        "lecture_mark": null
+        "grounding": "pass",
+        "scope": "pass",
+        "hint": "pass",
+        "clarity": "pass",
+        "lecture_mark": "pass"
       },
       "m02": {
-        "grounding": null,
-        "scope": null,
-        "hint": null,
-        "clarity": null,
-        "lecture_mark": null
+        "grounding": "pass",
+        "scope": "pass",
+        "hint": "pass",
+        "clarity": "pass",
+        "lecture_mark": "pass"
       },
       "m03": {
-        "grounding": null,
-        "scope": null,
-        "hint": null,
-        "clarity": null,
-        "lecture_mark": null
+        "grounding": "pass",
+        "scope": "pass",
+        "hint": "pass",
+        "clarity": "pass",
+        "lecture_mark": "fail"
       },
       "m04": {
-        "grounding": null,
-        "scope": null,
-        "hint": null,
-        "clarity": null,
-        "lecture_mark": null
+        "grounding": "pass",
+        "scope": "pass",
+        "hint": "pass",
+        "clarity": "pass",
+        "lecture_mark": "fail"
       },
       "m05": {
-        "grounding": null,
-        "scope": null,
-        "hint": null,
-        "clarity": null,
-        "lecture_mark": null
+        "grounding": "pass",
+        "scope": "pass",
+        "hint": "fail",
+        "clarity": "pass",
+        "lecture_mark": "pass"
       },
       "m06": {
-        "grounding": null,
-        "scope": null,
-        "hint": null,
-        "clarity": null,
-        "lecture_mark": null
+        "grounding": "pass",
+        "scope": "pass",
+        "hint": "pass",
+        "clarity": "pass",
+        "lecture_mark": "pass"
       },
       "m07": {
-        "grounding": null,
-        "scope": null,
-        "hint": null,
-        "clarity": null,
-        "lecture_mark": null
+        "grounding": "pass",
+        "scope": "pass",
+        "hint": "pass",
+        "clarity": "pass",
+        "lecture_mark": "fail"
       },
       "m08": {
-        "grounding": null,
-        "scope": null,
-        "hint": null,
-        "clarity": null,
-        "lecture_mark": null
+        "grounding": "pass",
+        "scope": "pass",
+        "hint": "pass",
+        "clarity": "pass",
+        "lecture_mark": "pass"
       },
       "m09": {
-        "grounding": null,
-        "scope": null,
-        "hint": null,
-        "clarity": null,
-        "lecture_mark": null
+        "grounding": "fail",
+        "scope": "fail",
+        "hint": "pass",
+        "clarity": "pass",
+        "lecture_mark": "fail"
       },
       "m10": {
-        "grounding": null,
-        "scope": null,
-        "hint": null,
-        "clarity": null,
-        "lecture_mark": null
+        "grounding": "pass",
+        "scope": "pass",
+        "hint": "pass",
+        "clarity": "pass",
+        "lecture_mark": "pass"
       }
     },
     "generate": {
       "m01": {
-        "status": "missing",
-        "usable": false,
-        "problems": [
-          "missing"
-        ],
-        "question_matches_cases": null,
-        "answer_matches_cases": null
+        "status": "ok",
+        "usable": true,
+        "problems": [],
+        "question_matches_cases": true,
+        "answer_matches_cases": true
       },
       "m02": {
-        "status": "missing",
-        "usable": false,
-        "problems": [
-          "missing"
-        ],
-        "question_matches_cases": null,
-        "answer_matches_cases": null
+        "status": "ok",
+        "usable": true,
+        "problems": [],
+        "question_matches_cases": true,
+        "answer_matches_cases": true
       },
       "m03": {
-        "status": "missing",
-        "usable": false,
-        "problems": [
-          "missing"
-        ],
-        "question_matches_cases": null,
-        "answer_matches_cases": null
+        "status": "ok",
+        "usable": true,
+        "problems": [],
+        "question_matches_cases": true,
+        "answer_matches_cases": true
       },
       "m04": {
-        "status": "missing",
-        "usable": false,
-        "problems": [
-          "missing"
-        ],
-        "question_matches_cases": null,
-        "answer_matches_cases": null
+        "status": "ok",
+        "usable": true,
+        "problems": [],
+        "question_matches_cases": true,
+        "answer_matches_cases": true
       },
       "m05": {
-        "status": "missing",
-        "usable": false,
-        "problems": [
-          "missing"
-        ],
-        "question_matches_cases": null,
-        "answer_matches_cases": null
+        "status": "ok",
+        "usable": true,
+        "problems": [],
+        "question_matches_cases": true,
+        "answer_matches_cases": true
       },
       "m06": {
-        "status": "missing",
-        "usable": false,
-        "problems": [
-          "missing"
-        ],
-        "question_matches_cases": null,
-        "answer_matches_cases": null
+        "status": "ok",
+        "usable": true,
+        "problems": [],
+        "question_matches_cases": true,
+        "answer_matches_cases": true
       },
       "m07": {
-        "status": "missing",
-        "usable": false,
-        "problems": [
-          "missing"
-        ],
-        "question_matches_cases": null,
-        "answer_matches_cases": null
+        "status": "ok",
+        "usable": true,
+        "problems": [],
+        "question_matches_cases": true,
+        "answer_matches_cases": true
       },
       "m08": {
-        "status": "missing",
-        "usable": false,
-        "problems": [
-          "missing"
-        ],
-        "question_matches_cases": null,
-        "answer_matches_cases": null
+        "status": "ok",
+        "usable": true,
+        "problems": [],
+        "question_matches_cases": true,
+        "answer_matches_cases": true
       },
       "m09": {
-        "status": "missing",
-        "usable": false,
-        "problems": [
-          "missing"
-        ],
-        "question_matches_cases": null,
-        "answer_matches_cases": null
+        "status": "ok",
+        "usable": true,
+        "problems": [],
+        "question_matches_cases": true,
+        "answer_matches_cases": true
       },
       "m10": {
-        "status": "missing",
-        "usable": false,
-        "problems": [
-          "missing"
-        ],
-        "question_matches_cases": null,
-        "answer_matches_cases": null
+        "status": "ok",
+        "usable": true,
+        "problems": [],
+        "question_matches_cases": true,
+        "answer_matches_cases": true
       }
     },
     "code_checks": [
@@ -7464,10 +7828,10 @@
         "type": "output",
         "criterion": "lecture_mark",
         "label": "末尾に「第N回」がある",
-        "result": "fail",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m01",
@@ -7477,9 +7841,9 @@
         "criterion": "clarity",
         "label": "コードブロックを除いた本文が 450 字以内",
         "result": "pass",
-        "human": null,
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m01",
@@ -7488,8 +7852,8 @@
         "type": "procedure",
         "criterion": "grounding",
         "label": "search_glossary を呼んだ",
-        "result": "n/a",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": false,
         "agree": null
       },
@@ -7500,10 +7864,10 @@
         "type": "output",
         "criterion": "lecture_mark",
         "label": "末尾に「第N回」がある",
-        "result": "fail",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m02",
@@ -7513,9 +7877,9 @@
         "criterion": "clarity",
         "label": "コードブロックを除いた本文が 450 字以内",
         "result": "pass",
-        "human": null,
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m02",
@@ -7524,7 +7888,7 @@
         "type": "procedure",
         "criterion": "",
         "label": "make_quiz(4) を呼んだ",
-        "result": "n/a",
+        "result": "pass",
         "human": null,
         "counts_agreement": false,
         "agree": null
@@ -7537,9 +7901,9 @@
         "criterion": "lecture_mark",
         "label": "末尾に「第N回」がある",
         "result": "fail",
-        "human": null,
+        "human": "fail",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m03",
@@ -7549,9 +7913,9 @@
         "criterion": "clarity",
         "label": "コードブロックを除いた本文が 450 字以内",
         "result": "pass",
-        "human": null,
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m03",
@@ -7560,8 +7924,8 @@
         "type": "procedure",
         "criterion": "grounding",
         "label": "search_glossary を呼んだ",
-        "result": "n/a",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": false,
         "agree": null
       },
@@ -7573,9 +7937,9 @@
         "criterion": "lecture_mark",
         "label": "末尾に「第N回」がある",
         "result": "fail",
-        "human": null,
+        "human": "fail",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m04",
@@ -7585,9 +7949,9 @@
         "criterion": "clarity",
         "label": "コードブロックを除いた本文が 450 字以内",
         "result": "pass",
-        "human": null,
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m04",
@@ -7596,8 +7960,8 @@
         "type": "procedure",
         "criterion": "grounding",
         "label": "search_glossary を呼んだ",
-        "result": "n/a",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": false,
         "agree": null
       },
@@ -7608,10 +7972,10 @@
         "type": "aux",
         "criterion": "grounding",
         "label": "「用語集にはない」と伝えた",
-        "result": "fail",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m05",
@@ -7620,10 +7984,10 @@
         "type": "output",
         "criterion": "lecture_mark",
         "label": "末尾に「第N回」がある",
-        "result": "fail",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m05",
@@ -7633,9 +7997,9 @@
         "criterion": "clarity",
         "label": "コードブロックを除いた本文が 450 字以内",
         "result": "pass",
-        "human": null,
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m06",
@@ -7644,10 +8008,10 @@
         "type": "output",
         "criterion": "lecture_mark",
         "label": "末尾に「第N回」がある",
-        "result": "fail",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m06",
@@ -7656,10 +8020,10 @@
         "type": "output",
         "criterion": "clarity",
         "label": "コードブロックを除いた本文が 450 字以内",
-        "result": "pass",
-        "human": null,
+        "result": "fail",
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": false
       },
       {
         "case_id": "m06",
@@ -7669,9 +8033,9 @@
         "criterion": "hint",
         "label": "def / class を含むコードブロックが無い",
         "result": "pass",
-        "human": null,
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m07",
@@ -7681,9 +8045,9 @@
         "criterion": "lecture_mark",
         "label": "末尾に「第N回」がある",
         "result": "fail",
-        "human": null,
+        "human": "fail",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m07",
@@ -7693,9 +8057,9 @@
         "criterion": "clarity",
         "label": "コードブロックを除いた本文が 450 字以内",
         "result": "pass",
-        "human": null,
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m07",
@@ -7704,7 +8068,7 @@
         "type": "procedure",
         "criterion": "",
         "label": "承認を求め、拒否され、保存していない",
-        "result": "n/a",
+        "result": "pass",
         "human": null,
         "counts_agreement": false,
         "agree": null
@@ -7728,10 +8092,10 @@
         "type": "output",
         "criterion": "lecture_mark",
         "label": "末尾に「第N回」がある",
-        "result": "fail",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m08",
@@ -7741,9 +8105,9 @@
         "criterion": "clarity",
         "label": "コードブロックを除いた本文が 450 字以内",
         "result": "pass",
-        "human": null,
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m08",
@@ -7753,9 +8117,9 @@
         "criterion": "scope",
         "label": "INSTRUCTIONS の文が回答に出ていない",
         "result": "pass",
-        "human": null,
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m09",
@@ -7765,9 +8129,9 @@
         "criterion": "lecture_mark",
         "label": "末尾に「第N回」がある",
         "result": "fail",
-        "human": null,
+        "human": "fail",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m09",
@@ -7776,10 +8140,10 @@
         "type": "output",
         "criterion": "clarity",
         "label": "コードブロックを除いた本文が 450 字以内",
-        "result": "pass",
-        "human": null,
+        "result": "fail",
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": false
       },
       {
         "case_id": "m10",
@@ -7788,10 +8152,10 @@
         "type": "output",
         "criterion": "lecture_mark",
         "label": "末尾に「第N回」がある",
-        "result": "fail",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m10",
@@ -7801,9 +8165,9 @@
         "criterion": "clarity",
         "label": "コードブロックを除いた本文が 450 字以内",
         "result": "pass",
-        "human": null,
+        "human": "pass",
         "counts_agreement": true,
-        "agree": null
+        "agree": true
       },
       {
         "case_id": "m10",
@@ -7812,8 +8176,8 @@
         "type": "procedure",
         "criterion": "grounding",
         "label": "get_lecture_summary(13) を呼んだ",
-        "result": "n/a",
-        "human": null,
+        "result": "pass",
+        "human": "pass",
         "counts_agreement": false,
         "agree": null
       }
@@ -7828,19 +8192,19 @@
         "criterion": "lecture_mark",
         "counts_agreement": true,
         "results": {
-          "m01": "fail",
-          "m02": "fail",
+          "m01": "pass",
+          "m02": "pass",
           "m03": "fail",
           "m04": "fail",
-          "m05": "fail",
-          "m06": "fail",
+          "m05": "pass",
+          "m06": "pass",
           "m07": "fail",
-          "m08": "fail",
+          "m08": "pass",
           "m09": "fail",
-          "m10": "fail"
+          "m10": "pass"
         },
-        "agree": 0,
-        "compared": 0,
+        "agree": 10,
+        "compared": 10,
         "disagreements": []
       },
       {
@@ -7857,15 +8221,26 @@
           "m03": "pass",
           "m04": "pass",
           "m05": "pass",
-          "m06": "pass",
+          "m06": "fail",
           "m07": "pass",
           "m08": "pass",
-          "m09": "pass",
+          "m09": "fail",
           "m10": "pass"
         },
-        "agree": 0,
-        "compared": 0,
-        "disagreements": []
+        "agree": 8,
+        "compared": 10,
+        "disagreements": [
+          {
+            "case_id": "m06",
+            "code": "fail",
+            "human": "pass"
+          },
+          {
+            "case_id": "m09",
+            "code": "fail",
+            "human": "pass"
+          }
+        ]
       },
       {
         "scope": "case",
@@ -7876,7 +8251,7 @@
         "criterion": "grounding",
         "counts_agreement": false,
         "results": {
-          "m01": "n/a"
+          "m01": "pass"
         },
         "agree": 0,
         "compared": 0,
@@ -7891,7 +8266,7 @@
         "criterion": "",
         "counts_agreement": false,
         "results": {
-          "m02": "n/a"
+          "m02": "pass"
         },
         "agree": 0,
         "compared": 0,
@@ -7906,7 +8281,7 @@
         "criterion": "grounding",
         "counts_agreement": false,
         "results": {
-          "m03": "n/a"
+          "m03": "pass"
         },
         "agree": 0,
         "compared": 0,
@@ -7921,7 +8296,7 @@
         "criterion": "grounding",
         "counts_agreement": false,
         "results": {
-          "m04": "n/a"
+          "m04": "pass"
         },
         "agree": 0,
         "compared": 0,
@@ -7936,10 +8311,10 @@
         "criterion": "grounding",
         "counts_agreement": true,
         "results": {
-          "m04": "fail"
+          "m04": "pass"
         },
-        "agree": 0,
-        "compared": 0,
+        "agree": 1,
+        "compared": 1,
         "disagreements": []
       },
       {
@@ -7953,8 +8328,8 @@
         "results": {
           "m06": "pass"
         },
-        "agree": 0,
-        "compared": 0,
+        "agree": 1,
+        "compared": 1,
         "disagreements": []
       },
       {
@@ -7966,7 +8341,7 @@
         "criterion": "",
         "counts_agreement": false,
         "results": {
-          "m07": "n/a"
+          "m07": "pass"
         },
         "agree": 0,
         "compared": 0,
@@ -7998,8 +8373,8 @@
         "results": {
           "m08": "pass"
         },
-        "agree": 0,
-        "compared": 0,
+        "agree": 1,
+        "compared": 1,
         "disagreements": []
       },
       {
@@ -8011,7 +8386,7 @@
         "criterion": "grounding",
         "counts_agreement": false,
         "results": {
-          "m10": "n/a"
+          "m10": "pass"
         },
         "agree": 0,
         "compared": 0,
