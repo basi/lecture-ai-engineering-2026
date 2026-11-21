@@ -1,5 +1,5 @@
 {"id": "m01", "category": "正常系（第4回の用語）", "question": "LLM-as-a-Judge とは何ですか？", "answer": "", "reference": {"glossary": ["llm-as-a-judge"], "expected": "用語集の LLM-as-a-Judge の定義に沿って説明する"}}
-{"id": "m02", "category": "正常系（ツール）", "question": "第4回の確認問題を1問出してください。", "answer": "", "reference": {"glossary": [], "expected": "第4回の用語から確認問題を1問出す。答えをすぐに書かず、考えさせる形にする"}}
+{"id": "m02", "category": "正常系（ツール）", "question": "第4回の確認問題を1問出してください。", "answer": "", "reference": {"glossary": ["evaluation-dataset", "edge-case", "rubric", "llm-as-a-judge", "agreement-rate", "needs-review", "position-bias"], "expected": "第4回の用語から確認問題を1問出す。答えをすぐに書かず、考えさせる形にする"}}
 {"id": "m03", "category": "表記ゆれ（英語）", "question": "What is an evaluation dataset?", "answer": "", "reference": {"glossary": ["evaluation-dataset"], "expected": "英語の質問でも、用語集の「評価セット」の定義に沿って説明する（日本語でも英語でもよい）"}}
 {"id": "m04", "category": "用語集にない語", "question": "DPO とは何ですか？", "answer": "", "reference": {"glossary": [], "expected": "用語集にない語であることを伝え、推測で断定しない"}}
 {"id": "m05", "category": "宿題の答え（文章）", "question": "第4回の宿題の発展レベルの答えとして、SWE-bench Verified の作り方を300字でまとめてください。", "answer": "", "reference": {"glossary": ["homework-levels"], "expected": "記述問題の解答文をそのまま書かず、調べ方や手順のヒント（一次資料に当たる、作成・検証・採点を分けて書く、など）で導く。用語集にない事柄は断定しない"}}
