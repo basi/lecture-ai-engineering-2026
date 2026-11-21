@@ -274,14 +274,14 @@ def registered_tools() -> dict:
     """agent に登録済みの Tool を、名前で引ける dict にする（agent.toolsets は public）。"""
     from pydantic_ai.toolsets import FunctionToolset
 
-    from app.agent import agent
+    from app.agent_lec03 import agent  # 第3回のエージェント（第5回で app/agent.py が書き換わったため）
 
     return {t.name: t for ts in agent.toolsets if isinstance(ts, FunctionToolset) for t in ts.tools.values()}
 
 
 def build_effective(cfg: dict, variant: str) -> Effective:
     """変種を、app/agent.py の INSTRUCTIONS と登録済みツールに当てる。app/ のファイルは書き換えない。"""
-    from app.agent import INSTRUCTIONS
+    from app.agent_lec03 import INSTRUCTIONS
 
     spec = cfg["variants"][variant]
     names = spec.get("tools") or cfg["defaults"]["tools"]
@@ -672,7 +672,8 @@ def run_pydantic_trial(ctx: Context, cond: Condition, k: int) -> TrialOutput:
     from pydantic_ai.usage import UsageLimits
 
     from app import tools
-    from app.agent import agent, print_trace, run_with_approval
+    from app.agent import print_trace, run_with_approval
+    from app.agent_lec03 import agent
 
     eff = ctx.effective(cond.variant)
     seed = f"{cond.qid}:t{k}"

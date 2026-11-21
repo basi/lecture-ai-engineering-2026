@@ -102,7 +102,7 @@ def test_every_variant_changes_exactly_one_place():
 
 
 def test_variants_change_the_copy_not_the_app():
-    from app.agent import INSTRUCTIONS
+    from app.agent_lec03 import INSTRUCTIONS
 
     cfg = compare.load_config()
     quiet = compare.build_effective(cfg, "no_search_rule")
@@ -469,7 +469,7 @@ def test_the_instructions_the_model_saw_are_recorded(tmp_path, monkeypatch):
 
 
 def test_instructions_match_is_false_when_the_variant_did_not_reach_the_model(tmp_path, monkeypatch):
-    from app.agent import agent
+    from app.agent_lec03 import agent
 
     real_override = agent.override
     # 指示の上書きだけが効かなかった、という状況にする

@@ -21,7 +21,8 @@ from pydantic_ai.models.test import TestModel
 
 from app import agent as agent_module
 from app import tools
-from app.agent import agent, ask_approval, run_with_approval
+from app.agent import ask_approval, run_with_approval
+from app.agent_lec03 import agent  # 第3回のエージェント（第5回で app/agent.py が書き換わったため）
 
 
 @pytest.fixture
@@ -277,5 +278,5 @@ def test_cli_asks_for_approval_and_shows_the_total_usage(monkeypatch, capsys, lo
     shown = capsys.readouterr().out
     assert "[承認待ち] save_learning_log" in shown
     assert "[tool call]   save_learning_log" in shown
-    assert "requests=2" in shown  # [usage] は2回の合計
+    assert "モデル応答 2 回" in shown  # [usage] は2回の合計（第5回で print_trace の表示が「モデル応答 N 回」になった）
     assert len(list(log_dir.glob("*.md"))) == 1
