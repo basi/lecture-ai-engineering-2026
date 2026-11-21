@@ -157,7 +157,7 @@ uv run python lectures/04/compare.py status           # 予定・済み・残り
 | 1 | ☆ | 講師と違った項目のメモ | `results/cli/compare_instructor.txt` を見て、notes.md の 1 に書く | 0 | 約 10 分 |
 | 2 | ☆ | 演習 STEP 2・3。ここまでで演習を提出できる | `app.judge`（STEP 2）→ rubric を 1 か所直して commit → `app.judge`（STEP 3） | 20 | 約 15 分 |
 | 3 | ☆ | 基礎の 1 試行目。ここまでで基礎を提出できる | `run --level exercise,basic --trials 1`、`status`、`summarize` | 65 | 約 15 分 |
-| 4 | | 実装（回答の生成・ラベル付け・採点）。ここまでで全レベルを提出できる | `generate`、ラベル付け、`app.judge`（my_cases）、`run --level impl --trials 1` | 約 60 | 約 40 分 |
+| 4 | ☆ | 実装（回答の生成・ラベル付け・採点）。ここまでで全レベルを提出できる | `generate`、ラベル付け、`app.judge`（my_cases）、`run --level impl --trials 1` | 約 60 | 約 40 分 |
 | 5 | | 残りの試行（t2・t3）。3 試行がそろう | `run --level exercise,basic,impl` | 約 160 | 約 35 分 |
 | 6 | | 集計と発展（問題と記事を読む） | `summarize`、ブラウザで読む | 0 | 約 30 分 |
 | 7 | | 受け渡し | `grep`、`git add`・commit・pull・push | 0 | 約 5 分 |
@@ -305,8 +305,10 @@ uv run --with streamlit==1.66.1 streamlit run tools/annotate.py
 - 自分の知識ではなく、参照（用語集のエントリと期待するふるまい）と基準に照らして判定する。迷ったら「迷った」にチェックして、メモに迷った基準と理由を書く。
 - ラベルを commit するまでは、`app.judge` と `run --level impl` を実行しない（LLM の判定を見る前に、ラベルを凍結するため）。
 - 10 件目まで「保存して次へ」を押すと、「10 件すべて保存しました → lectures/04/my_labels.jsonl」と出る。Ctrl+C で止める。迷った件は、notes.md の 3 に書く。
+- 保存先の欄の末尾に空白が入ると、`my_labels.jsonl `（末尾に空白）という名前で保存され、次の `git add` も `app.judge` も、ファイルを見つけられない。下の `ls -Q` で、引用符の中に空白が無いことを確かめる。
 
 ```bash
+ls -Q lectures/04/ | grep my_labels    # "my_labels.jsonl" と出ること。末尾に空白があれば mv lectures/04/my_labels.jsonl?* lectures/04/my_labels.jsonl で直す
 git status --short lectures/04/labels.jsonl lectures/04/my_labels.jsonl    # my_labels.jsonl だけが ?? で出ること（labels.jsonl は出ない）
 git add lectures/04/my_labels.jsonl
 git commit -m "Lecture 04: Add my labels for my eval cases"
@@ -472,6 +474,7 @@ git push
 | 「設定エラー: …」で止まった | `--variant`・`--level`・`--case` の打ち間違いなら、メッセージに使える名前が出る。打ち間違いでなければ、`conditions.toml` の問題なので知らせる |
 | annotate.py の「作問（宿題・実装）」で、`my_cases.jsonl` に件を足してしまった（id が `01` から振られる） | 作問の画面は使わない。`git restore data/eval/my_cases.jsonl` で、commit 済みの状態に戻す（段 4 の 1 の commit の前なら、足した行をエディタで消す） |
 | `my_cases.jsonl` の質問を大きく変えた | 知らせる。`conditions.toml` のコードの判定が id ごとに書いてあるため、質問と対応しなくなる |
+| ラベルを付けたのに「lectures/04/my_labels.jsonl がありません」（`git status` には `my_labels.jsonl` が出ている） | 保存先の欄の末尾に空白が入り、`my_labels.jsonl `（末尾に空白）で保存されている。`ls -Q lectures/04/ \| grep my_labels` で確かめ、`mv lectures/04/my_labels.jsonl?* lectures/04/my_labels.jsonl` で名前を直してから、add と commit をする。`app.judge` はラベルの確認で止まり、API は呼んでいない |
 | やり直したい実行がある | その `t<k>.json` を別のフォルダに移してから、同じコマンドを実行する |
 
 </details>
