@@ -1,0 +1,273 @@
+# 第5回: 何を比べるか（質問・条件・自動チェック）。compare.py が読む。
+#
+# 直し方の目安:
+#   - 質問や条件を足す・直すときは、このファイルだけを書き換える（compare.py は変えなくてよい）。
+#   - 条件の changes の「old」は、app/agent.py の指示文（INSTRUCTIONS など）、または app/tools.py の docstring
+#     （モデルに渡る説明文 = Tool.description）の一部。ちょうど 1 か所に一致しないと、API を呼ぶ前に止まる。
+#   - チェックと gold・acceptable は、集計（compare.py summarize）のときに判定する。足したり直したりしたあと、
+#     実行し直さずに summarize だけで反映できる（質問の text と条件の中身を変えたときは別。次の項目）。
+#   - 質問の text・条件の中身（指示・ツール・取得処理・設定・対象資料・上限）・app/ のコード（agent・tools・retrieval・config、
+#     取得処理に retrieval_lec05 を使う条件はそれも）を変えたあとに結果を取り直すときは、別の --out に書く。
+#     compare.py は、既にある t<k>.json の条件の sha256 と質問の文が、今と違うと止まる。
+#   - 条件を足したら、order にも足す（mode = "full" の条件どうしを隣り合わせにしない）。
+#
+# 書き方（TOML の注意）: 配列の中の { ... } は 1 行に書く。正規表現は '...'（単一引用符）で書くと、\ をそのまま書ける。
+#
+# 回答のチェック（answer_regex・answer_not_regex）は、回答を次のようにそろえてから re.search する。
+#   re.sub(r"\s+", "", unicodedata.normalize("NFKC", 回答).casefold())
+# つまり、全角と半角・大文字と小文字・空白と改行の違いは、パターンに書かなくてよい（英字は小文字で書く）。
+# 肯定の語の直後に否定が付くと意味が逆になる言い回し（「固定しません」「置き換えません」「アダプタは学習しません」）は、否定先読み (?!…) で除く。
+# 否定の語尾は、下の [fragments] の部品にまとめてある。pattern の中の <<名前>> は、その部品（(?:…) で包んだもの）に置き換わる（入れ子も可）。
+# 回答は丁寧形（です・ます調）で書かれることが多い。否定は「更新しない」だけでなく「更新しません」「更新されません」にも
+# 一致するように書く（「見当たらません」ではなく「見当たりません」のように、丁寧形の活用は語幹が変わる）。
+# 結果を見たあとは、規則を直さない約束（結果に合わせた規則になってしまうため。summarize だけで反映はできるが、直さない）。
+# 直すなら、実行の前に、test_compare.py の正答・誤答の例も足す。
+
+# ---------------------------------------------------------------------------
+# 共通
+#   trials       : 1 条件の試行の回数（--trials で変えられる）
+#   interval     : 試行と試行の間の秒数（--interval で変えられる）
+#   request_limit: 1 回の run の LLM 呼び出しの上限（ループの暴走を防ぐ）。全条件で 20 にそろえる（打ち切りの基準が方式で違わないように。条件ごとの上書きはしない）
+#   tpm_budget   : 直近 60 秒の入力トークンの上限の目安。mode = "full" の試行の前に、超えないよう待つ。0 で無効
+#   order        : 1 つの質問の中で、条件を流す順（全部の条件を 1 回ずつ書く。mode = "full" の条件どうしを
+#                  隣り合わせにしない。先頭と末尾のつながりも同じ）。順番は、試行 → 質問 → この順
+#   order_shift  : 試行 k では、order を order_shift × (k − 1) 個、先頭から巡回させる（k = 1 は order のまま、k = 2 は 3 つ、k = 3 は 6 つずらす）。
+#                  全条件が、試行ごとに違う順で流れるので、時間帯や API の混み具合の影響と、条件の効果を区別しやすい。
+#                  巡回しても、全文投入どうしが隣り合わないことは変わらない（order の環状の検証が、先頭と末尾のつながりまで保証している）。
+#                  各試行の記録の position に、その試行での位置が入る
+# ---------------------------------------------------------------------------
+
+[defaults]
+trials = 3
+interval = 8
+request_limit = 20
+tpm_budget = 200000
+order = ["full", "vector", "tree", "full_aligned", "graph", "doc_hint", "neighbors", "topk15", "term_graph", "term_graph_cap3"]
+order_shift = 3
+
+# ---------------------------------------------------------------------------
+# 部品。チェックの正規表現（pattern）の中の <<名前>> が、ここの文字列に置き換わる。名前は大文字・数字・_ だけ。
+# 否定先読み (?!<<NEG_…>>) は、肯定の語の直後に、その語の否定（〜しない・〜しません・〜されない・〜されません・〜せず・〜ではない）が付くものを除く。
+# ---------------------------------------------------------------------------
+
+[fragments]
+NA = 'な(い|かっ|く)'                                                     # ない・なかった・なく
+TE = 'て(い|お)(<<NA>>|ませ|ず|らず|りませ)'                                # ていない・ていません・ておらず・ておりません
+NEG_SURU = '(し|され)(<<NA>>|ませ|ず|<<TE>>)|せず|でき(<<NA>>|ませ)|(では|じゃ)(<<NA>>|あり)'   # 固定・凍結・量子化・要約・圧縮・置換・除外・排除・マスク・優先・保存・確認・点検・レビュー・チェック・学習 の直後
+NEG_E = 'え(<<NA>>|ませ|ず|られ(<<NA>>|ませ|ず)|<<TE>>)|わ(ら(な|ず)|りませ)'   # 置き換・差し替 の直後（置き換えない・置き換えません・置き換わらない）
+NEG_ME = '<<NA>>|ませ|ず|られ(<<NA>>|ませ|ず)|<<TE>>'                        # 詰め・確かめ の直後
+NEG_SU = 'さ(<<NA>>|ず)|しませ|せ(<<NA>>|ませ)|され(<<NA>>|ませ|ず)|し<<TE>>'  # 書き出・読み戻・見直 の直後（書き出さない・書き出しません）
+NEG_TORI = 'か(れ)?(<<NA>>|ず|れませ)|きませ|け(<<NA>>|ませ)|い<<TE>>'        # 取り除 の直後
+NEG_HAZUSHI = 'ませ|<<TE>>'                                              # 外し の直後（外しません・外していない）
+NEG_HAZUSARE = '<<NA>>|ませ|ず|<<TE>>'                                    # 外され の直後
+NEG_NOKO = 'ら(<<NA>>|ず)|りませ|せ(<<NA>>|ませ)|され(<<NA>>|ませ|ず)'        # 残 の直後（残らない・残りません・残されません）
+NEG_HATARAKU = 'か(<<NA>>|ず)|きませ|け(<<NA>>|ませ)'                       # 働・効 の直後
+NEG_TSUKAWA = '<<NA>>|ず|れ(<<NA>>|ませ|ず)'                               # 使わ・扱わ の直後
+NEG_KAKU = 'か(<<NA>>|ず)|きませ|け(<<NA>>|ませ)'                           # ファイルに書 の直後
+TRAIN_OBJ = '低ランク|小さ(な|い)(追加)?(行列|部分)|差分|変化分|アダプタ|(?<![a-z])a(・|、|,|と|および|及び|and|&|/)b(?![a-z])|追加(した|された|する)?(部分|パラメータ|行列)'   # 学習する対象（q1_train）
+LEARNING = '学習(?!<<NEG_SURU>>|の?対象(外|では(<<NA>>|あり)|じゃ<<NA>>))'   # 肯定の「学習」。直後に否定が付くもの（学習しません・学習されない・学習対象外・学習の対象ではない）は除く
+REVIEW = '見直(?!<<NEG_SU>>)|確認(?!<<NEG_SURU>>)|確かめ(?!<<NEG_ME>>)|点検(?!<<NEG_SURU>>)|レビュー(?!<<NEG_SURU>>)|チェック(?!<<NEG_SURU>>)'   # メモリを見直す・確かめる（qa2_review）
+AS_INSTRUCTION = '残(?!<<NEG_NOKO>>)|働(?!<<NEG_HATARAKU>>)|効(?!<<NEG_HATARAKU>>)|使わ(?!<<NEG_TSUKAWA>>)|扱わ(?!<<NEG_TSUKAWA>>)'   # 指示として残る・働く・効く・使われる・扱われる
+AS_INSTRUCTION_NEG = '残<<NEG_NOKO>>|働<<NEG_HATARAKU>>|効<<NEG_HATARAKU>>|使わ<<NEG_TSUKAWA>>|扱わ<<NEG_TSUKAWA>>'   # その否定（指示として残りません）
+
+# ---------------------------------------------------------------------------
+# 質問セット
+#   text       : モデルに送る質問（q1・q2・q3 は problem.md と一字一句同じ）
+#   gold       : 答えを支えるページの ID（資料 ID-pページ番号 3 桁。data/rag_data/lectures.json にあるもの）。空なら、答えが資料にない質問
+#   acceptable : gold の代わりになる、補助のページの ID（gold と重ならない）
+#   note       : 狙い・根拠（集計には使わない）
+#   checks     : 自動チェック。共通のキー:
+#                  label   = 表に出す名前（質問の中で重ならない）
+#                  kind    = 種類（下）
+#                  role    = required（正答の条件）／bonus（加点）／flag（一致したら目視で確かめる）／reference（参考）
+#   自動の判定は 3 つ（flag のチェックは「通れば問題なし」の形で書く。flag が一致した = そのチェックが通らなかった）:
+#     自動の正答 = その質問の required がすべて一致し、flag が一致しない。
+#     要確認     = required がすべて一致し、flag も一致した。回答を読んで決める（正答にも誤答にも数えない）。
+#     自動の誤答 = required のどれかが一致しない（flag は問わない）。
+#   bonus と reference は、判定に入れない。
+#   種類:
+#     answer_regex          pattern = '...'      そろえた回答が正規表現に一致する
+#     answer_not_regex      pattern = '...'      そろえた回答が正規表現に一致しない
+#     answer_contains_all   values = [...]       そろえた回答に全部含まれる
+#     answer_contains_any   values = [...]       そろえた回答にどれか含まれる
+#     answer_not_contains   values = [...]       そろえた回答にどれも含まれない
+#     tool_called           name, [args_contains], [after]   ツールを呼んだ（args_contains は引数を空白なしの JSON にした文字列の一部）
+#     tool_not_called       name                 ツールを呼ばなかった
+#     tool_count            name, [min], [max]   ツールを呼んだ回数の範囲
+#     tool_result_contains  name, values = [...] そのツールの戻り値に、全部含まれる
+#     requests_at_most      value                LLM の呼び出し回数が value 以下
+# ---------------------------------------------------------------------------
+
+[questions.q1]
+text = "第2回の説明では、LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？"
+gold = ["lec02-main-p052"]
+acceptable = ["lec02-main-p051", "lec02-exercise-p021"]
+note = "1 ページ（第2回 p.52）で答えがそろう質問。演習 STEP 1〜4 の質問。全文投入でも正しく答えられることがある。lec02-exercise-p021 は演習資料の「LoRA と QLoRA の違い」（重みは固定・adapter だけ学習・QLoRA は 4bit で保持）"
+checks = [
+  { label = "q1_fix", kind = "answer_regex", role = "required", pattern = '(重み|パラメータ|本体|weight|(?<![a-z])w(?![a-z]))[^。]{0,15}((固定|凍結|フリーズ)(?!<<NEG_SURU>>)|freeze|frozen|更新(し|せ|され)(ない|ず|ません)|学習(し|せ|され)(ない|ず|ません)|変え(ない|ず|ません)|変更(し|せ|され)(ない|ず|ません))|(固定|凍結)(?!<<NEG_SURU>>)[^。]{0,10}(重み|パラメータ|本体|(?<![a-z])w(?![a-z]))' },
+  { label = "q1_train", kind = "answer_regex", role = "required", pattern = '<<TRAIN_OBJ>>[^。]{0,12}<<LEARNING>>|<<LEARNING>>[^。]{0,12}<<TRAIN_OBJ>>|(追加|足し)[^。]{0,15}(だけ|のみ)[^。]{0,10}<<LEARNING>>' },
+  { label = "q1_qlora", kind = "answer_regex", role = "required", pattern = '4-?(bit|ビット)|量子化(?!<<NEG_SURU>>)|quantiz' },
+]
+
+[questions.q2]
+text = "第3回の例では、コンパクションとセッションをまたぐメモリはどう違いますか。日々のメモはすべて長期メモリに入りますか"
+gold = ["lec03-main-p013", "lec03-main-p039", "lec03-main-p040"]
+acceptable = ["lec03-main-p065"]
+note = "複数ページ（第3回 p.13・39・40）の質問。コンパクション（履歴を要約して詰める）と、外の保存先に書き出すメモリの違い、日々のメモは基準を超えたものだけが長期メモリに移ること、の 3 点"
+checks = [
+  { label = "q2_summary", kind = "answer_regex", role = "required", pattern = '要約[^。]{0,20}(置き換(?!<<NEG_E>>)|置換(?!<<NEG_SURU>>)|差し替(?!<<NEG_E>>)|詰め(?!<<NEG_ME>>)|圧縮(?!<<NEG_SURU>>))|(古い|過去の|これまでの)(履歴|会話|やり取り|メッセージ)[^。]{0,20}要約(?!<<NEG_SURU>>|[^。]{0,5}(置き換<<NEG_E>>|置換<<NEG_SURU>>|差し替<<NEG_E>>))' },
+  # q2_persist は、質問文をなぞるだけの「セッションをまたいで使えます」には一致させない（要点は、書き出し・読み戻し・メモリツール）
+  { label = "q2_persist", kind = "answer_regex", role = "required", pattern = '書き出(?!<<NEG_SU>>)|読み戻(?!<<NEG_SU>>)|外部?の?保存先|メモリツール|自動メモリ|/memories|ファイルに(保存(?!<<NEG_SURU>>)|書(?!<<NEG_KAKU>>))|次回の?(会話|セッション|コンテキスト)|新しい(チャット|セッション|会話)' },
+  { label = "q2_daily", kind = "answer_regex", role = "required", pattern = '(すべて|全て|全部)[^。]{0,25}(わけではな|わけではありません|ではな|ではありません|入るわけでは|入らな|入りません|残さな|残しません|残され(な|ません)|移さな|移しません|移され(な|ません))|基準を(超|満た)|残すものだけ|一度きり|dreaming|ドリーミング' },
+  { label = "q2_scope", kind = "answer_regex", role = "reference", pattern = '(同じ|1つの|一つの|ひとつの|単一の|同一の?)(セッション|会話|チャット)|(セッション|会話|チャット|コンテキスト)の?(中|内)' },
+]
+
+[questions.q3]
+text = "今回作ったRAGの実測平均応答時間と正答率を教えてください"
+gold = []
+acceptable = []
+note = "資料にない質問（講義資料には、今回のシステムの実測ログがない）。「確認できない」と答えるか。数字を作っていないか（flag は、秒・%・割が回答に出たら目視で確かめる）"
+checks = [
+  { label = "q3_refuse", kind = "answer_regex", role = "required", pattern = '確認(する)?(こと)?(が|は)?でき(ない|ません|なかった)|見当たら(ない|ません|なかった)|見当たりません|見つから(ない|なかった)|見つかりません|記載(が|は)?(ない|なかった|ありません|ございません|されてい(ない|ません)|がなく)|(資料|講義資料)(に|の中に|には|から|からは)[^。]{0,40}(ない|ありません|ございません|含まれてい(ない|ません)|見つかりません|載ってい(ない|ません))|(分|わ)かりません|不明(です|でした)|答え(られ|でき|ること(が|は)でき)(ない|ません)' },
+  { label = "q3_numflag", kind = "answer_not_regex", role = "flag", pattern = '\d+(\.\d+)?(秒|ms|ミリ秒)|\d+(\.\d+)?(%|割)' },
+]
+
+[questions.qa1]
+text = "回答を決まったJSON形式で返させたいとき、第2回で学んだファインチューニングと第3回の構造化出力は、どう使い分ければよいですか。構造化出力はどうやって形式を守らせるのですか"
+gold = ["lec02-main-p053", "lec03-main-p035"]
+acceptable = ["lec02-main-p057", "lec03-main-p034", "lec03-main-p062"]
+note = "回をまたぐ質問（第2回 p.53 と 第3回 p.35）。実務では構造化出力が先、ファインチューニングは口調・根拠の付け方など書式で縛れない振る舞い。形式は制約付きデコーディング（スキーマに合わない候補を外す）で守らせる。lec03-main-p062 は構造化出力の最新動向（後半の「どうやって守らせるか」の補助。使い分けの補助にはならない）"
+checks = [
+  { label = "qa1_first", kind = "answer_regex", role = "required", pattern = '構造化出力[^。]{0,30}((?<!優)先|まず|優先(?!<<NEG_SURU>>)|最初)|(まず|先に|最初に)[^。]{0,30}(構造化出力|プロンプト|api)' },
+  { label = "qa1_decode", kind = "answer_regex", role = "required", pattern = '制約付き(デコーディング|生成)|(スキーマ|形式)に合わない[^。]{0,20}(候補|トークン|文字|出力)|(候補|トークン)[^。]{0,20}(除外(?!<<NEG_SURU>>)|外(す|し(?!<<NEG_HAZUSHI>>)|され(?!<<NEG_HAZUSARE>>))|マスク(?!<<NEG_SURU>>)|取り除(?!<<NEG_TORI>>)|排除(?!<<NEG_SURU>>)|選ばれ(な|ません)|選ばない|選びません|出させ(ない|ません)|生成され(ない|ません))' },
+  { label = "qa1_ftuse", kind = "answer_regex", role = "bonus", pattern = '口調|根拠の付け方|書式で縛れない|形式で縛れない' },
+]
+
+[questions.qa2]
+text = "第3回の講義では、エージェントのメモリにはどんな危険があると説明されていますか。防ぐには何をすればよいですか"
+gold = ["lec03-main-p050", "lec03-main-p051"]
+acceptable = ["lec03-main-p039", "lec03-main-p038", "lec03-main-p065"]
+note = "同じ回の連続したページ（第3回 p.50・51）。悪意ある入力がメモリに残って後の会話でも指示として働く（モデルは指示とデータを区別できない）。防ぐには、メモリをときどき見直す"
+checks = [
+  { label = "qa2_persist_or_cannot", kind = "answer_regex", role = "required", pattern = '(後|次|以降|あと)の(会話|セッション|やり取り|チャット)[^。]{0,25}(指示(?!として<<AS_INSTRUCTION_NEG>>)|残(?!<<NEG_NOKO>>))|指示として<<AS_INSTRUCTION>>|区別(が|は)?(でき(な|ず|ません)|(つ|付)(か(な|ず)|きません)|し(ない|ません)|すること(が|は)でき(ない|ません))|見分け(ること)?(が|は)?(でき(ない|ません)|られ(な|ません)|(つ|付)(か(な|ず)|きません))|同じ文字列' },
+  { label = "qa2_review", kind = "answer_regex", role = "required", pattern = '(メモリ|中身)[^。]{0,20}<<REVIEW>>|<<REVIEW>>[^。]{0,10}(メモリ|中身)' },
+]
+
+# ---------------------------------------------------------------------------
+# 条件（変種）。1 つの条件は、基準と比べて 1 か所だけ違う（演習の full・tree・graph は、方式そのものが違う）。
+#   label       : 表に出す短い名前（条件どうしで重ならない）
+#   level       : exercise（演習）・basic（基礎）・impl（実装）・adv（発展）
+#   description : 何を変えるか
+#   mode        : full（全文投入）・vector（ベクトル検索）・tree（目次をたどる）・graph（検索からグラフをたどる）。
+#                 app.agent.main() の --full-context・（なし）・--tree・--graph と同じ指示・ツール・prompt が既定になる
+#   base        : 別の条件を土台にして、mode・documents・retrieval・changes・settings・request_limit を引き継ぐ
+#   documents   : mode = "full" のときの対象資料。"all"（lectures.json の全 9 資料 438 ページ）か、資料 ID の配列
+#   retrieval   : ツールの取得処理の差し替え。ツール名 = "module:attr"。名前・説明文・引数のスキーマは元のツールと同じでなければならない
+#   changes     : 指示文かツールの説明文の変更。target は "instructions" か "tool:<ツール名>"、op は
+#                   delete_line  : old と同じ行を消す
+#                   replace_line : old と同じ行を new に置き換える
+#                   replace_text : old の文字列を new に置き換える（改行は \n）
+#   settings    : 試行の間だけ書き換える設定（名前は compare.py の許可した一覧のどれか）。終われば戻す
+#   request_limit: この条件の LLM 呼び出しの上限（省略すると [defaults]。打ち切りの基準をそろえるため、全条件で書かない）
+#   questions   : この条件で流す質問
+# 当てる順は、base → mode → retrieval → changes → settings → documents → request_limit。
+# ---------------------------------------------------------------------------
+
+[variants.full]
+label = "F"
+level = "exercise"
+mode = "full"
+documents = "all"
+description = "全文投入。教材 JSON の全 9 資料 438 ページを一度に渡す（app.agent の --full-context と同じ）"
+questions = ["q1", "q2", "q3"]
+
+[variants.full_aligned]
+label = "F214"
+level = "exercise"
+mode = "full"
+documents = ["lec01-main", "lec02-main", "lec03-main"]
+description = "全文投入で、対象資料を検索系と同じ第1〜3回の本講義 214 ページにそろえる（F との差は対象資料だけ）"
+questions = ["q1", "q2", "q3"]
+
+[variants.vector]
+label = "V0"
+level = "exercise"
+mode = "vector"
+description = "基本形。ツールは search_materials だけ（upstream の基本形。fork の agent が持つ make_quiz と承認付き save_learning_log は入れない）"
+questions = ["q1", "q2", "q3", "qa1", "qa2"]
+
+[variants.tree]
+label = "T"
+level = "exercise"
+mode = "tree"
+description = "目次をたどる。指示は TREE_INSTRUCTIONS、ツールは browse_tree（app.agent の --tree と同じ）"
+questions = ["q1", "q2", "q3"]
+
+[variants.graph]
+label = "G"
+level = "exercise"
+mode = "graph"
+description = "検索からグラフをたどる。指示は GRAPH_INSTRUCTIONS、ツールは search_graph（app.agent の --graph と同じ）"
+questions = ["q1", "q2", "q3", "qa1", "qa2"]
+
+[variants.doc_hint]
+label = "B1"
+level = "basic"
+base = "vector"
+description = "search_materials の説明文に、1 回で返る件数と、論点ごとに分けて呼ぶ書き方を足す（ツールの説明文だけを変える）"
+changes = [
+  { target = "tool:search_materials", op = "replace_text", old = "queryに調べたい内容を指定する。", new = '1回の呼び出しで返るのは、queryに意味が近い最大5ページだけ。queryには論点を1つだけ、資料に出てきそうな短い語句で書く（例: "MCP 権限"）。比べる質問や、問いが2つ以上ある質問では、論点ごとに分けて呼ぶ。' },
+]
+questions = ["q1", "q2", "q3", "qa1", "qa2"]
+
+[variants.neighbors]
+label = "I1"
+level = "impl"
+base = "vector"
+description = "検索で見つけたページの前後 1 ページも返す（取得処理だけを変える。名前・説明文・引数は search_materials と同じ）"
+retrieval = { search_materials = "app.retrieval_lec05:search_materials_with_neighbors" }
+questions = ["q1", "q2", "q3", "qa1", "qa2"]
+
+[variants.topk15]
+label = "I2"
+level = "impl"
+base = "vector"
+description = "ベクトル検索で返す件数を 5 から 15 にする（設定 RAG_TOP_K だけを変える）"
+settings = { RAG_TOP_K = 15 }
+questions = ["q1", "q2", "q3", "qa1", "qa2"]
+
+[variants.term_graph]
+label = "A1"
+level = "adv"
+base = "vector"
+description = "質問の用語と「第N回」を手がかりに、章ごとの上限をつけて 5 ページを選ぶ（取得処理だけを変える）"
+retrieval = { search_materials = "app.retrieval_lec05:search_materials_term_graph" }
+questions = ["q1", "q2", "q3", "qa1", "qa2"]
+
+[variants.term_graph_cap3]
+label = "A2"
+level = "adv"
+base = "term_graph"
+description = "A1 の、同じ章から選ぶ上限を 2 から 3 にする（章の上限の感度の確認）"
+settings = { TERM_GRAPH_SECTION_CAP = 3 }
+questions = ["q1", "q2", "q3", "qa1", "qa2"]
+
+# ---------------------------------------------------------------------------
+# レベル。reference は、集計の表で先頭に並べる行（比べる相手）。追加の実行はしない
+#   （vector と graph は、exercise の条件として全部の質問を流す）。
+# ---------------------------------------------------------------------------
+
+[levels.exercise]
+description = "演習: 全文投入・ベクトル検索・Tree・Graph を、同じ質問で比べる"
+
+[levels.basic]
+description = "基礎: 説明文を 1 か所だけ変える"
+reference = ["vector"]
+
+[levels.impl]
+description = "実装: 取得処理か設定を 1 つ変える"
+reference = ["vector"]
+
+[levels.adv]
+description = "発展: 用語から始める Graph 検索"
+reference = ["vector", "graph"]
