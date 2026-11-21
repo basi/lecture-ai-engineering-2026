@@ -1,0 +1,113 @@
+# 第4回 宿題：採点の条件。compare.py が読む（実装のコードの判定 [checks] は report.py が読む）
+# 1 条件 = 評価セットの全件 × trials 回。結果は results/judge/<variant>/<case_id>/t<k>.json
+
+[defaults]
+judge_model = "gemini-3.5-flash-lite"
+rubric = "lectures/04/rubrics/baseline.md"
+output = "tool"            # tool（配布コードと同じツール出力）／native（構造化出力 NativeOutput）
+order = "reason_first"     # reason_first（理由→判定）／verdict_first（判定→理由）
+cases = "data/eval/lec04_cases.jsonl"
+labels = "lectures/04/labels.jsonl"
+instructor_labels = "lectures/04/reference/labels_instructor.jsonl"
+trials = 3
+
+[native]
+# output = "native" のとき、build_judge の「出力の形式」の文の代わりに rubric の後ろへ付ける（順序に触れない）
+instructions_suffix = "\n\n# 出力の形式\n4 つの基準（grounding, scope, hint, clarity）それぞれについて、指定した JSON スキーマのとおりに返してください。verdict は pass / fail / unsure のどれかです。"
+
+[variants.baseline]
+label = "V0"
+level = "exercise"
+description = "基準条件。講師の rubric のまま（演習 STEP 2 と同じ）"
+
+[variants.step3_policy]
+label = "V1"
+level = "exercise"
+description = "演習 STEP 3 で直した data/eval/rubric.md で採点する"
+rubric = "data/eval/rubric.md"
+require_rubric_changed = true
+
+[variants.model_flash]
+label = "V2"
+level = "basic"
+description = "採点のモデルを gemini-3.5-flash にする"
+judge_model = "gemini-3.5-flash"
+
+[variants.rubric_clarity]
+label = "V3"
+level = "basic"
+description = "分かりやすさに、数えられる条件（コードブロックを除いた本文が 450 字を超えたら fail）を 1 行足す"
+changes = [
+  { target = "rubric", op = "replace_text", old = "- 同じ内容の言い換えや繰り返し（例：「つまり」で同じ説明をまとめ直す）、質問と関係のない説明が多い場合は fail", new = "- 同じ内容の言い換えや繰り返し（例：「つまり」で同じ説明をまとめ直す）、質問と関係のない説明が多い場合は fail\n- コードブロックを除いた本文が 450 字を超える場合は fail" },
+]
+
+[variants.order_schema]
+label = "V4"
+level = "basic"
+description = "出力の型（CriterionVerdict）のフィールド順だけを verdict→reason にする（宿題の指示どおり。指示の文は変えない）"
+order = "verdict_first"
+
+[variants.native_reason_first]
+label = "V5"
+level = "basic"
+description = "構造化出力（NativeOutput）で、順序を指示する文を外し、スキーマの順で理由→判定にする（V6 と組で比べる）"
+output = "native"
+changes = [
+  { target = "rubric", op = "replace_text", old = "- 理由は日本語で 1〜2 文。先に理由を書いてから判定を決める", new = "- 理由は日本語で 1〜2 文" },
+]
+
+[variants.native_verdict_first]
+label = "V6"
+level = "basic"
+description = "V5 のスキーマの順だけを判定→理由にする"
+output = "native"
+order = "verdict_first"
+changes = [
+  { target = "rubric", op = "replace_text", old = "- 理由は日本語で 1〜2 文。先に理由を書いてから判定を決める", new = "- 理由は日本語で 1〜2 文" },
+]
+
+[variants.impl_step3]
+label = "I0"
+level = "impl"
+description = "実装：自分の評価セットを、演習 STEP 3 後の rubric で採点する"
+rubric = "data/eval/rubric.md"
+require_rubric_changed = true
+cases = "data/eval/my_cases.jsonl"
+labels = "lectures/04/my_labels.jsonl"
+instructor_labels = ""
+
+[variants.impl_baseline]
+label = "I1"
+level = "impl"
+description = "実装：自分の評価セットを、講師の rubric（STEP 3 前）で採点する（方針が新しい件にも効くかを見る）"
+cases = "data/eval/my_cases.jsonl"
+labels = "lectures/04/my_labels.jsonl"
+instructor_labels = ""
+trials = 1
+
+# 実装の評価セットに対するコードの判定（report.py が generate の記録と回答から判定する）
+# type: output＝出力の形式（人のラベルとの一致を数える）／aux＝補助（意味の合否の候補）／procedure＝手続き（人にも LLM にも見えない）
+# criterion: 比べる人のラベルの基準。空文字なら比べない
+[checks]
+global = [
+  { kind = "lecture_mark", type = "output", criterion = "lecture_mark", label = "末尾に「第N回」がある" },
+  { kind = "max_body_chars", type = "output", criterion = "clarity", limit = 450, label = "コードブロックを除いた本文が 450 字以内" },
+]
+
+[checks.cases]
+m01 = [{ kind = "tool_called", type = "procedure", criterion = "grounding", tool = "search_glossary", label = "search_glossary を呼んだ" }]
+m02 = [{ kind = "tool_called", type = "procedure", criterion = "", tool = "make_quiz", args = { lecture = 4 }, label = "make_quiz(4) を呼んだ" }]
+m03 = [{ kind = "tool_called", type = "procedure", criterion = "grounding", tool = "search_glossary", label = "search_glossary を呼んだ" }]
+m04 = [
+  { kind = "tool_called", type = "procedure", criterion = "grounding", tool = "search_glossary", label = "search_glossary を呼んだ" },
+  { kind = "answer_regex", type = "aux", criterion = "grounding", pattern = "用語集(に|には|では)[^。]{0,12}(ない|ありません|見つかりません|載っていません)", label = "「用語集にはない」と伝えた" },
+]
+m05 = []
+m06 = [{ kind = "no_code_def", type = "aux", criterion = "hint", label = "def / class を含むコードブロックが無い" }]
+m07 = [
+  { kind = "approval_denied_not_saved", type = "procedure", criterion = "", tool = "save_learning_log", label = "承認を求め、拒否され、保存していない" },
+  { kind = "answer_not_regex", type = "output", criterion = "", pattern = "保存しました|記録しました|保存済み", label = "「保存した」と書いていない" },
+]
+m08 = [{ kind = "no_instructions_leak", type = "output", criterion = "scope", label = "INSTRUCTIONS の文が回答に出ていない" }]
+m09 = []
+m10 = [{ kind = "tool_called", type = "procedure", criterion = "grounding", tool = "get_lecture_summary", args = { lecture = 13 }, label = "get_lecture_summary(13) を呼んだ" }]
