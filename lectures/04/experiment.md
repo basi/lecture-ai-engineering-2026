@@ -103,11 +103,11 @@ git push
 
 ```bash
 git switch lec04
-git pull --no-rebase
+git pull --no-rebase --no-edit
 ```
 
 - `git switch lec04` で止まる場合は、変更が残っている。`git status` を見て、知らせる。
-- `git pull --no-rebase` は、Claude が push した分を取り込むため。マージのメッセージの画面が開いたら、そのまま保存して閉じる。
+- `git pull --no-rebase --no-edit` は、Claude が push した分を取り込むため。`--no-edit` で、マージのメッセージの編集画面（vi）を開かずに取り込む。
 - `CONFLICT` と出たら、`git merge --abort` で元に戻してから知らせる（元に戻すので、自分の変更は消えない）。
 
 ### 2. 依存を確かめる
@@ -153,10 +153,10 @@ uv run python lectures/04/compare.py status           # 予定・済み・残り
 
 | 順 | 状態 | 内容 | コマンド（要点） | API の目安 | 時間の目安 |
 |---:|---|---|---|---:|---:|
-| 0 | | 準備と確認、1 件だけ試す（V0・V2・V4・V5・V6 の case 01）。**失敗したら止めて知らせる** | `git pull`・`uv sync`・`pytest`・`variants`・`status`、`run --variant V0,V2,V4,V5,V6 --case 01 --trials 1`、`summarize` | 5 | 約 10 分 |
-| 1 | | 講師と違った項目のメモ | `results/cli/compare_instructor.txt` を見て、notes.md の 1 に書く | 0 | 約 10 分 |
-| 2 | | 演習 STEP 2・3。ここまでで演習を提出できる | `app.judge`（STEP 2）→ rubric を 1 か所直して commit → `app.judge`（STEP 3） | 20 | 約 15 分 |
-| 3 | | 基礎の 1 試行目。ここまでで基礎を提出できる | `run --level exercise,basic --trials 1`、`status`、`summarize` | 65 | 約 15 分 |
+| 0 | ☆ | 準備と確認、1 件だけ試す（V0・V2・V4・V5・V6 の case 01）。**失敗したら止めて知らせる** | `git pull`・`uv sync`・`pytest`・`variants`・`status`、`run --variant V0,V2,V4,V5,V6 --case 01 --trials 1`、`summarize` | 5 | 約 10 分 |
+| 1 | ☆ | 講師と違った項目のメモ | `results/cli/compare_instructor.txt` を見て、notes.md の 1 に書く | 0 | 約 10 分 |
+| 2 | ☆ | 演習 STEP 2・3。ここまでで演習を提出できる | `app.judge`（STEP 2）→ rubric を 1 か所直して commit → `app.judge`（STEP 3） | 20 | 約 15 分 |
+| 3 | ☆ | 基礎の 1 試行目。ここまでで基礎を提出できる | `run --level exercise,basic --trials 1`、`status`、`summarize` | 65 | 約 15 分 |
 | 4 | | 実装（回答の生成・ラベル付け・採点）。ここまでで全レベルを提出できる | `generate`、ラベル付け、`app.judge`（my_cases）、`run --level impl --trials 1` | 約 60 | 約 40 分 |
 | 5 | | 残りの試行（t2・t3）。3 試行がそろう | `run --level exercise,basic,impl` | 約 160 | 約 35 分 |
 | 6 | | 集計と発展（問題と記事を読む） | `summarize`、ブラウザで読む | 0 | 約 30 分 |
@@ -186,6 +186,7 @@ ls lectures/04/results/judge/*/request_sample.json
 - `lectures/04/results/summary.md` を Codespaces で開き（右上のプレビューのアイコンで見ると読みやすい）、「表E 順序の操作の確認」の V5・V6 の行で、`order_ok` が `true 1 / false 0 / null 0` であること。V0・V2・V4 はツール出力なので `null` になる（参考値。正常）。
 - `request_sample.json` が、5 つの変種（`baseline`・`model_flash`・`order_schema`・`native_reason_first`・`native_verdict_first`）に 1 つずつあること。
 - `summary.md` の「警告」に、まだ流していない変種の「記録が 1 件もありません」と、流した 5 変種の「欠け 29 件を集計から外しました（記録なし）」が出るのは正常（段 3 以降で減る）。
+- 段 4 の前は、「自分のラベル `lectures/04/my_labels.jsonl` を読めません（ファイルがありません）」と「実装: generate の記録が使えない件があります」も正常（実装のラベルと回答は、段 4 で作る）。
 - **失敗したら、ここで止めて知らせる。** エラーの文をそのまま知らせる。
   - 400（`API エラーで止めます（400）`）なら、V5・V6 を外して進める。
   - 404（`API エラーで止めます（404）`）なら、V2 を外して進める。
@@ -200,6 +201,7 @@ cat lectures/04/results/cli/compare_instructor.txt
 
 - 見るところ：基準別の一致率（自分と講師、10 件）、「判定が違う項目 N 件」（`#id 基準 自分=… 講師=…（講師のメモ: …）`）、「自分が『迷った』を付けた項目」。
 - 違った項目ごとに、自分はどう読んで、その判定にしたかを、[results/notes.md](results/notes.md) の 1 に書く。違いが 0 件のときは、「迷った」を付けた項目と、迷った理由を書く。
+  - ラベル付けのときに annotate.py のメモ欄へ理由を書いていれば、`lectures/04/labels.jsonl` の `note` に残っている（講師のラベルを見る前の記録）。書き直さず、notes.md にはそれを写すか、補足だけを書けばよい。
 - 講師のラベルは正解ではない（人同士でも割れる）。
 - notes.md は、段 2 の commit で一緒に add する。
 
@@ -219,6 +221,7 @@ uv run python -m app.judge --out lectures/04/results/cli/step2.json | tee lectur
 **方針を決める**
 
 1. 要確認の項目から、1 つ選ぶ。要確認が 0 件なら、STEP 1 で「迷った」を付けた項目を選び、基準の文言を 1 行変える。
+   - 回の表示の項目は選ばない。回の表示はコード（`check_lecture_mark`）が判定するので、rubric を直しても判定は変わらない。
 2. その項目を、合格にするか不合格にするかを決める（どちらでもよい）。
 3. `data/eval/rubric.md` の該当する基準の下に、決めた方針を 1〜2 行で書き足し、最後の「まだ決めていないこと」から、その論点を消す。
    - **一度に直すのは 1 か所だけ。** 2 か所直すと、V1 が V0 との差を 1 か所で比べられなくなる。
@@ -232,6 +235,8 @@ git commit -m "Lecture 04: Decide the policy for STEP 3"
 ```
 
 **STEP 3**
+
+rubric を直して commit する前に、STEP 3 のコマンドを実行しない（STEP 2 と同じ rubric で採点することになる）。実行してしまったら、上書きされる前に `step3.json`・`step3.txt` の名前を `step2_rerun.json`・`step2_rerun.txt` に変えて残す（同じ rubric での 2 回目として使える）。
 
 ```bash
 uv run python -m app.judge --out lectures/04/results/cli/step3.json | tee lectures/04/results/cli/step3.txt
@@ -430,7 +435,7 @@ grep -rnEI "AIza[0-9A-Za-z_-]{30,}" lectures/04 data/eval || echo キーなし
 git status --short
 git add lectures/04/results lectures/04/my_judge_result.json
 git commit -m "Lecture 04: Add results"
-git pull --no-rebase
+git pull --no-rebase --no-edit
 git push
 ```
 
@@ -461,7 +466,7 @@ git push
 | `generate` が「…には、もう回答が入っています」で止まった | 回答は既に入っている。作り直すとラベルとずれるので、`--force` は使わない。作り直したいときは知らせる |
 | annotate.py で `IndexError` が出る、または表示がおかしい（前の評価セットの件が出る、件数がずれる） | ブラウザを再読み込みする。サイドバーの「評価セット」と「ラベルの保存先」を確かめて、もう一度入力して Enter を押す。評価セットが 10 件あることも確かめる（段 4 の 1 の `variants --variant I0`） |
 | annotate.py の保存先を変え忘れて、保存してしまった（`git status --short` に `M lectures/04/labels.jsonl` が出る） | `git restore lectures/04/labels.jsonl` で、commit 済みの演習のラベルに戻す。そのうえで、保存先を直して、ラベル付けをやり直す |
-| `summary.md` の「警告」に何か出た | 次は正常：「記録が 1 件もありません」（まだ流していない変種）、「欠け N 件を集計から外しました」の `（記録なし）`（まだ流していない試行）。次は知らせる：「ラベルを読めません」、「dry_run の記録が混ざっています」、「ラベルが実行後に変わりました」、「generate の記録の answer と評価セットの answer が違う件があります」、「同じ変種の記録で … がそろっていません」、`（invalid_output）`・`（error）` の欠け。`summary.md` は手で直さない（`summarize` で何度でも作り直せる） |
+| `summary.md` の「警告」に何か出た | 次は正常：「記録が 1 件もありません」（まだ流していない変種）、「欠け N 件を集計から外しました」の `（記録なし）`（まだ流していない試行）。段 4 の前の「自分のラベル `lectures/04/my_labels.jsonl` を読めません（ファイルがありません）」と、「generate の記録が使えない件があります」の `（記録なし）` も正常。次は知らせる：演習のラベル（`labels.jsonl`）の「ラベルを読めません」、「dry_run の記録が混ざっています」、「ラベルが実行後に変わりました」、「generate の記録の answer と評価セットの answer が違う件があります」、「同じ変種の記録で … がそろっていません」、`（invalid_output）`・`（error）` の欠け。`summary.md` は手で直さない（`summarize` で何度でも作り直せる） |
 | 「…t1.json が、いまの条件と違います（違う項目: …）」で止まった | 同じ変種の結果に、違う条件の試行を混ぜないための停止。採点した後に、rubric・`conditions.toml`・評価セットのどれかを書き換えた。書き換えを `git restore` で戻してから、もう一度実行する。結果を取り直すなら、知らせる（自分では消さない） |
 | 「環境変数 GEMINI_API_KEY が見つかりません」 | GitHub の Settings → Codespaces → Secrets で、`GEMINI_API_KEY` の Repository access に自分の fork が入っているかを確かめる。登録や変更のあとは、Codespace を開き直す（左下の「Codespaces」→「Stop Current Codespace」→ もう一度開く） |
 | 「設定エラー: …」で止まった | `--variant`・`--level`・`--case` の打ち間違いなら、メッセージに使える名前が出る。打ち間違いでなければ、`conditions.toml` の問題なので知らせる |
