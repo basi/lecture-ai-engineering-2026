@@ -1,0 +1,40 @@
+[model] gemini-3.5-flash-lite
+[variant] A2 term_graph_cap3
+[質問] qa2
+第3回の講義では、エージェントのメモリについて以下の危険性や注意点が説明されています。
+
+* **古い情報や誤りの混入**
+  * すべての情報をそのまま蓄積してしまうと、古い情報や誤りも一緒にコンテキストへ戻されてしまう危険があります（第3回・PDF p.38）。
+
+これらの危険を防ぐためや適切に管理するために、次のような設計や工夫を行うべきと説明されています。
+
+* **何を残し、何を消すかの設計**
+  * すべてを溜め込むのではなく、何を残し、何を消すかを設計する必要があります（第3回・PDF p.38）。
+  * 例えば、日々のメモから重要で繰り返し出てくるテーマを選別し、長期メモリへ移すような仕組み（OpenClawの例など）を取り入れることで、長期メモリが膨らまないように工夫されています（第3回・PDF p.40）。
+
+--- trace ---
+[tool call]   search_materials({'query': 'エージェント メモリ 危険'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[tool call]   search_materials({'query': 'すべてを蓄積すると 古い情報 危険'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[time] 回答完了まで 3.77 秒（検索・埋め込みを含む）
+[usage] 入力 6,706 tokens / 出力 246 tokens / モデル応答 3 回
+[cost] 生成APIの推定コスト: $0.002627 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[term_graph] query='エージェント メモリ 危険' params={"top_k": 5, "cap": 3, "vector_pool": 5, "hub_terms": 9}
+  用語: AIエージェント、メモリ／回の指定: なし
+  選択: lec03-main-p038 d=0.291 確保:用語:メモリ
+  選択: lec03-main-p013 d=0.311 距離
+  選択: lec03-main-p065 d=0.314 距離
+  選択: lec03-main-p040 d=0.315 距離
+  選択: lec03-main-p039 d=0.317 確保:用語:AIエージェント
+  章の上限で外した: なし
+[term_graph] query='すべてを蓄積すると 古い情報 危険' params={"top_k": 5, "cap": 3, "vector_pool": 5, "hub_terms": 9}
+  用語: なし／回の指定: なし
+  選択: lec03-main-p038 d=0.325 距離
+  選択: lec02-main-p022 d=0.331 距離
+  選択: lec03-main-p065 d=0.339 距離
+  選択: lec03-main-p071 d=0.345 距離
+  選択: lec01-main-p045 d=0.349 距離
+  章の上限で外した: なし

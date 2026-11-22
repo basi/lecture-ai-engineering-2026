@@ -1,0 +1,24 @@
+[model] gemini-3.5-flash-lite
+[variant] V0 vector
+[質問] qa2
+第3回の講義資料によると、エージェントのメモリに関する危険性や課題、およびそれを防ぐための設計方針について次のように説明されています。
+
+### メモリの危険性・課題
+* **古い情報や誤りが混入する**：すべてを蓄積しようとすると、古い情報や誤りも一緒にメモリから戻ってくる危険があります（第3回・PDF p.38）。
+* **外部からの書き込みによるリスク**：外からメモリが書き込まれる危険性もあります（第3回・PDF p.39）。
+
+### 防ぐために何をすればよいか
+* **「何を残し、何を消すか」を設計する**：情報をただすべて蓄積するのではなく、適切に取捨選択する仕組みを設計する必要があります（第3回・PDF p.38）。
+* **絞り込みや見直しの仕組みを取り入れる**：
+  * 例えば、日々のメモをそのまま長期メモリに蓄積し続けるのではなく、自動の見直し（dreaming）などによって重複を除いたり、何度も出てくるテーマに絞ったりして、基準を超えたものだけを長期メモリに残すアプローチがあります（第3回・PDF p.40）。
+
+--- trace ---
+[tool call]   search_materials({'query': 'エージェント メモリ 危険'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[tool call]   search_materials({'query': 'すべてを蓄積すると 古い情報 危険 防ぐ'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[tool call]   search_materials({'query': '長期メモリ OpenClaw Dreaming'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p040", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[time] 回答完了まで 5.98 秒（検索・埋め込みを含む）
+[usage] 入力 12,136 tokens / 出力 324 tokens / モデル応答 4 回
+[cost] 生成APIの推定コスト: $0.004451 USD（埋め込み・索引構築分は含まない）

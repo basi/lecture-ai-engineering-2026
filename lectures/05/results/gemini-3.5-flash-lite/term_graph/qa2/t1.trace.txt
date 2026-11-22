@@ -1,0 +1,43 @@
+[model] gemini-3.5-flash-lite
+[variant] A1 term_graph
+[質問] qa2
+第3回の講義資料では、エージェントのメモリに関する危険性やリスク、およびその対策として以下の点が説明されています。
+
+### 1. メモリの危険性
+- **情報が蓄積しすぎることによる弊害**
+  - すべてを蓄積しようとすると、古い情報や誤りも一緒に（次の会話などに）戻ってきてしまうという問題が生じます（第3回・PDF p.38）。
+- **悪意ある入力の残留**
+  - メモリに記録を保存し、後のコンテキストに戻す仕組みにおいて、「紛れ込んだ悪意ある入力が、後の会話でも指示として残る」というリスクが挙げられています（第3回・PDF p.50）。
+
+### 2. 防ぐために何をすべきか
+- **「何を残し、何を消すか」の設計**
+  - すべての情報をそのまま溜め込むのではなく、何をメモリに残し、何を消すかをしっかりと設計することが重要とされています（第3回・PDF p.38）。
+- **選択的な整理・長期メモリへの移行（実装例の工夫）**
+  - 例えば「OpenClaw」のような実装例では、日々のメモ（一時的な記録）から不要な重複を除き、見比べて基準を超えたものだけを長期メモリ（MEMORY.md）に移すことで、一度きりの調べものが長期メモリを圧迫しないような仕組みが取られています（第3回・PDF p.40）。
+
+--- trace ---
+[tool call]   search_materials({'query': 'メモリ 危険 防ぐ'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[tool call]   search_materials({'query': 'メモリ 残す 消す 設計'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p013", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[time] 回答完了まで 5.10 秒（検索・埋め込みを含む）
+[usage] 入力 6,663 tokens / 出力 358 tokens / モデル応答 3 回
+[cost] 生成APIの推定コスト: $0.002894 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[term_graph] query='メモリ 危険 防ぐ' params={"top_k": 5, "cap": 2, "vector_pool": 5, "hub_terms": 9}
+  用語: メモリ／回の指定: なし
+  選択: lec03-main-p038 d=0.305 確保:用語:メモリ
+  選択: lec03-main-p040 d=0.309 距離
+  選択: lec03-main-p065 d=0.324 距離
+  選択: lec03-main-p050 d=0.328 距離
+  選択: lec03-main-p013 d=0.329 距離
+  章の上限で外した: lec03-main-p037, lec03-main-p039, lec03-main-p041
+[term_graph] query='メモリ 残す 消す 設計' params={"top_k": 5, "cap": 2, "vector_pool": 5, "hub_terms": 9}
+  用語: メモリ／回の指定: なし
+  選択: lec03-main-p013 d=0.270 確保:用語:メモリ
+  選択: lec03-main-p040 d=0.271 距離
+  選択: lec03-main-p038 d=0.271 距離
+  選択: lec03-main-p065 d=0.300 距離
+  選択: lec03-main-p003 d=0.358 距離
+  章の上限で外した: lec03-main-p039, lec03-main-p041, lec03-main-p037

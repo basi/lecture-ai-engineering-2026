@@ -1,0 +1,25 @@
+[model] gemini-3.5-flash-lite
+[variant] A1 term_graph
+[質問] q3
+提供された第1〜3回の講義資料を確認しましたが、今回作成したRAGの実測平均応答時間や正答率に関する具体的な数値やデータは記載されていません。
+
+講義資料（第2回）では、LLMやRAGの評価に関して「1回試して動いたは評価にならない」「同じ質問を複数回聞いて、ばらつきごと測る（例：『RAGって何ですか？』を5回聞く）」といった評価の重要性や考え方が解説されています（第2回・PDF p.13）。
+
+そのため、現時点の資料からは具体的な実測値を確認することはできません。ご自身で実装・計測された環境におけるテスト結果やログなどを再度ご確認いただくか、同様の手法で複数回試行した際のばらつきを評価してみてください。
+
+--- trace ---
+[tool call]   search_materials({'query': '実測平均応答時間 正答率 RAG'})
+[tool return] search_materials -> {"results": [{"page_id": "lec02-main-p013", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "s…
+[time] 回答完了まで 2.89 秒（検索・埋め込みを含む）
+[usage] 入力 3,205 tokens / 出力 195 tokens / モデル応答 2 回
+[cost] 生成APIの推定コスト: $0.001449 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[term_graph] query='実測平均応答時間 正答率 RAG' params={"top_k": 5, "cap": 2, "vector_pool": 5, "hub_terms": 9}
+  用語: RAG／回の指定: なし
+  選択: lec02-main-p013 d=0.295 確保:用語:RAG
+  選択: lec03-main-p064 d=0.305 距離
+  選択: lec03-main-p019 d=0.324 距離
+  選択: lec01-main-p019 d=0.331 距離
+  選択: lec02-main-p024 d=0.332 距離
+  章の上限で外した: なし

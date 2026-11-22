@@ -1,0 +1,20 @@
+[model] gemini-3.5-flash-lite
+[variant] I1 neighbors
+[質問] q1
+第2回の講義資料によると、LoRAとQLoRAの仕組みについて以下のように説明されています。
+
+* **LoRA（Low-Rank Adaptation）**
+  * **固定するもの：** モデルの本体（元の重み $W$）は固定し、学習しません（第2回・PDF p.51, 52）。
+  * **学習するもの：** 重みの変化分を表す、細長い2つの小さな行列の積（低ランクの追加部分、行列 $A$ と $B$）だけを学習します（第2回・PDF p.51, 52）。
+* **QLoRA（Quantized LoRA）**
+  * **加えるもの：** LoRAの仕組み（小さな追加部分の学習）に加え、**元の重みを4bitに圧縮（量子化）**する処理を加えます（第2回・PDF p.51, 52）。これにより、さらに少ないメモリ（GPU 1台など）での調整を可能にしています（第2回・PDF p.51, 52）。
+
+--- trace ---
+[tool call]   search_materials({'query': 'LoRA QLoRA 固定 学習'})
+[tool return] search_materials -> {"results": [{"page_id": "lec02-main-p050", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "s…
+[time] 回答完了まで 2.32 秒（検索・埋め込みを含む）
+[usage] 入力 5,471 tokens / 出力 254 tokens / モデル応答 2 回
+[cost] 生成APIの推定コスト: $0.002276 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[neighbors] query='LoRA QLoRA 固定 学習' window=1 hits=['lec02-main-p052', 'lec02-main-p051', 'lec02-main-p060', 'lec02-main-p061', 'lec02-main-p047'] neighbors=['lec02-main-p050', 'lec02-main-p053', 'lec02-main-p059', 'lec02-main-p062', 'lec02-main-p046', 'lec02-main-p048'] pages=11

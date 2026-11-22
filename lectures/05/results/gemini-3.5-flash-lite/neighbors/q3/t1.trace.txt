@@ -1,0 +1,21 @@
+[model] gemini-3.5-flash-lite
+[variant] I1 neighbors
+[質問] q3
+講義資料（第1〜3回）を確認いたしましたが、本講義資料の中には、今回作成されたRAGシステムの具体的な実測平均応答時間や正答率の数値データは記載されていません。
+
+そのため、お手元の環境で実際に計測された平均応答時間や正答率については、私の方では確認することができない状況です。
+
+お手元のテスト結果やログをご確認いただくか、ご自身で評価セットを用いて計測を行っていただく必要がございます。評価を行う際は、以下のような講義での考え方を参考に進めてみてください。
+
+- 1回の試行の正解を鵜呑みにせず、同じ質問を複数回聞いて揺れやばらつきを含めて評価する（第2回・PDF p.13, p.17-18）
+- 公開ベンチマークの順位ではなく、自身の用途に合わせた独自の評価セット（答えられない質問なども含めたもの）を用いて測る（第2回・PDF p.39）
+
+--- trace ---
+[tool call]   search_materials({'query': '実測平均応答時間 正答率'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p063", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[time] 回答完了まで 3.09 秒（検索・埋め込みを含む）
+[usage] 入力 6,843 tokens / 出力 230 tokens / モデル応答 2 回
+[cost] 生成APIの推定コスト: $0.002628 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[neighbors] query='実測平均応答時間 正答率' window=1 hits=['lec03-main-p064', 'lec03-main-p019', 'lec02-main-p039', 'lec02-main-p013', 'lec02-main-p017'] neighbors=['lec03-main-p063', 'lec03-main-p065', 'lec03-main-p018', 'lec03-main-p020', 'lec02-main-p038', 'lec02-main-p040', 'lec02-main-p012', 'lec02-main-p014', 'lec02-main-p016', 'lec02-main-p018'] pages=15

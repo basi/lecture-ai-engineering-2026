@@ -1,0 +1,23 @@
+[model] gemini-3.5-flash-lite
+[variant] A2 term_graph_cap3
+[質問] q3
+提供いただいた第1〜3回の講義資料を確認しましたが、今回作成された具体的なRAGにおける「実測平均応答時間」や「正答率」の数値についての記載はありません。
+
+講義資料では、1回の試行だけでなく、同じ質問を複数回行ってばらつきや平均を見ることの重要性が解説されています（第2回・PDF p.13）。ご自身で実装・計測された環境での数値をご確認ください。
+
+--- trace ---
+[tool call]   search_materials({'query': '実測平均応答時間 正答率 RAG'})
+[tool return] search_materials -> {"results": [{"page_id": "lec02-main-p013", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "s…
+[time] 回答完了まで 3.02 秒（検索・埋め込みを含む）
+[usage] 入力 3,205 tokens / 出力 118 tokens / モデル応答 2 回
+[cost] 生成APIの推定コスト: $0.001256 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[term_graph] query='実測平均応答時間 正答率 RAG' params={"top_k": 5, "cap": 3, "vector_pool": 5, "hub_terms": 9}
+  用語: RAG／回の指定: なし
+  選択: lec02-main-p013 d=0.295 確保:用語:RAG
+  選択: lec03-main-p064 d=0.305 距離
+  選択: lec03-main-p019 d=0.324 距離
+  選択: lec01-main-p019 d=0.331 距離
+  選択: lec02-main-p024 d=0.332 距離
+  章の上限で外した: なし

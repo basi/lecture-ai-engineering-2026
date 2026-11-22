@@ -1,0 +1,21 @@
+[model] gemini-3.5-flash-lite
+[variant] I1 neighbors
+[質問] q3
+申し訳ありませんが、提供されている第1〜3回の講義資料内には、「今回作ったRAGの実測平均応答時間と正答率」に該当する具体的な計測データは記載されていません。
+
+講義資料では、正答率や性能を評価する際の考え方について以下のように説明されています。
+
+* LLMは確率で次の言葉を選ぶため、1回試して「動いた」は評価にならない。同じ質問を複数回（例: 5回）聞いてばらつきごと測る必要がある（第2回・PDF p.13）。
+* 評価は同じ質問を複数回行い、平均とばらつきを見る（第2回・PDF p.13）。
+
+ご自身で作られたRAGの測定結果を確認される際は、上記の考え方に沿って複数回テストを行い、平均値や正答率を算出してみてください。
+
+--- trace ---
+[tool call]   search_materials({'query': 'RAG 実測平均応答時間 正答率'})
+[tool return] search_materials -> {"results": [{"page_id": "lec02-main-p012", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "s…
+[time] 回答完了まで 2.82 秒（検索・埋め込みを含む）
+[usage] 入力 7,430 tokens / 出力 210 tokens / モデル応答 2 回
+[cost] 生成APIの推定コスト: $0.002754 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[neighbors] query='RAG 実測平均応答時間 正答率' window=1 hits=['lec02-main-p013', 'lec03-main-p064', 'lec03-main-p019', 'lec02-main-p024', 'lec02-main-p047'] neighbors=['lec02-main-p012', 'lec02-main-p014', 'lec03-main-p063', 'lec03-main-p065', 'lec03-main-p018', 'lec03-main-p020', 'lec02-main-p023', 'lec02-main-p025', 'lec02-main-p046', 'lec02-main-p048'] pages=15

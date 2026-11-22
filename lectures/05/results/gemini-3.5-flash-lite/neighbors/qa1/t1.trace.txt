@@ -1,0 +1,46 @@
+[model] gemini-3.5-flash-lite
+[variant] I1 neighbors
+[質問] qa1
+決まったJSON形式で出力させる際の「ファインチューニング（第2回）」と「構造化出力（第3回）」の使い分け、および構造化出力で形式を守らせる仕組みについて、講義資料をもとにヒントをまとめました。
+
+---
+
+### 1. ファインチューニングと構造化出力の使い分け
+
+講義では、出力形式を整えるアプローチとしてそれぞれの特徴や優先順位が解説されています。
+
+* **ファインチューニング（第2回）が向いているケース・注意点**
+  * **振る舞いの調整：** 形式・口調・手順といった「振る舞い」は、良質な手本を用いてファインチューニング（FT）で変えることができます（第2回・PDF p.46, p.57）。
+  * **FTの落とし穴：** FTを行うと、何を聞いても決まったJSONで返すようになるなど手本に寄りすぎてしまい、普通の質問への答えや日本語の自然さが落ちる（壊れる）といった副作用が起きることがあります（第2回・PDF p.55）。
+  * **実務での位置づけ：** 実務ではまずプロンプトや構造化出力で試すべきであり、FTはコスト削減など他の目的も含めてチェックリストの条件を満たした場合に小さく始めるものとされています（第2回・PDF p.57, p.58）。
+
+* **構造化出力（第3回）を使う場面**
+  * 文書から項目を抜き出す、選択肢から分類・判定する、あるいはツールを呼び出すといった場面では、あらかじめ決めたスキーマ（項目と型の決まり）に沿って返す仕組み（構造化出力）が利用されます（第3回・PDF p.34）。
+
+---
+
+### 2. 構造化出力はどうやって形式を守らせるのか
+
+構造化出力では、**「制約付きデコーディング」**という仕組みを使って形式を守らせています（第3回・PDF p.35）。
+
+* **仕組みのヒント：**
+  * LLMがテキストの次のトークンを1つずつ選んで生成していく際、あらかじめ定義されたスキーマ（JSON Schemaなど）に合わない候補をトークン選定の段階で除外します（第3回・PDF p.35）。
+  * これにより、形式に合わない文字や出力はそもそも生成されなくなります（第3回・PDF p.35）。
+* **主なAPIでの指定例：**
+  * Claude：`output_config.format` やツールの `strict: true`（第3回・PDF p.35, p.62）
+  * OpenAI：`json_schema` 形式と `strict: true`（第3回・PDF p.35, p.62）
+  * Gemini：JSON Schemaを指定（第3回・PDF p.35, p.62）
+  * ※ただし、形式の崩れはほぼなくせますが、拒否や長さ上限での打ち切りといった例外ケースではスキーマに合わない出力が返る場合もあるため、検証の手順は残すとされています（第3回・PDF p.35, p.62）。
+
+--- trace ---
+[tool call]   search_materials({'query': 'ファインチューニング'})
+[tool call]   search_materials({'query': '構造化出力'})
+[tool return] search_materials -> {"results": [{"page_id": "lec02-main-p055", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "s…
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p032", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[time] 回答完了まで 4.73 秒（検索・埋め込みを含む）
+[usage] 入力 7,610 tokens / 出力 740 tokens / モデル応答 2 回
+[cost] 生成APIの推定コスト: $0.004133 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[neighbors] query='ファインチューニング' window=1 hits=['lec02-main-p057', 'lec02-main-p056', 'lec02-main-p046', 'lec02-main-p058', 'lec02-main-p045'] neighbors=['lec02-main-p055', 'lec02-main-p059', 'lec02-main-p044', 'lec02-main-p047'] pages=9
+[neighbors] query='構造化出力' window=1 hits=['lec03-main-p034', 'lec03-main-p033', 'lec03-main-p062', 'lec03-main-p035', 'lec03-main-p036'] neighbors=['lec03-main-p032', 'lec03-main-p037', 'lec03-main-p061', 'lec03-main-p063'] pages=9
