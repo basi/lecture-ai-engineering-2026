@@ -1,0 +1,37 @@
+[model] gemini-3.5-flash-lite
+[variant] A2 term_graph_cap3
+[質問] qa2
+第3回講義資料では、エージェントのメモリにおける危険性として、情報をすべて蓄積してしまうことで**「古い情報や誤りも一緒に戻ってくる」**ことが挙げられています（第3回・PDF p.38）。
+
+これを防ぐための設計・対策としては、以下のようなアプローチが説明されています。
+
+* **何を残し、何を消すかを設計する**（第3回・PDF p.38）
+* **自動で見直し（整理）を行う仕組みを入れる**
+  * 例として紹介されている実装（OpenClawなど）では、毎晩自動でやり取りを見直し（1. 集める、2. 見比べる、3. 移す）、基準を超えた重要なものだけを長期メモリに残し、一度きりの調べものは日々のメモに留めて長期メモリが膨らまないようにしています（第3回・PDF p.40）。
+
+--- trace ---
+[tool call]   search_materials({'query': 'エージェント メモリ 危険 防ぐ'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[tool call]   search_materials({'query': 'すべてを蓄積すると 古い情報 や 誤り'})
+[tool return] search_materials -> {"results": [{"page_id": "lec02-main-p022", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "s…
+[time] 回答完了まで 12.05 秒（検索・埋め込みを含む）
+[usage] 入力 6,400 tokens / 出力 244 tokens / モデル応答 3 回
+[cost] 生成APIの推定コスト: $0.002530 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[term_graph] query='エージェント メモリ 危険 防ぐ' params={"top_k": 5, "cap": 3, "vector_pool": 5, "hub_terms": 9}
+  用語: AIエージェント、メモリ／回の指定: なし
+  選択: lec03-main-p038 d=0.278 確保:用語:メモリ
+  選択: lec03-main-p013 d=0.283 距離
+  選択: lec03-main-p040 d=0.284 距離
+  選択: lec03-main-p039 d=0.287 確保:用語:AIエージェント
+  選択: lec03-main-p065 d=0.294 距離
+  章の上限で外した: lec03-main-p041
+[term_graph] query='すべてを蓄積すると 古い情報 や 誤り' params={"top_k": 5, "cap": 3, "vector_pool": 5, "hub_terms": 9}
+  用語: なし／回の指定: なし
+  選択: lec02-main-p022 d=0.333 距離
+  選択: lec03-main-p038 d=0.336 距離
+  選択: lec01-main-p045 d=0.349 距離
+  選択: lec03-main-p018 d=0.351 距離
+  選択: lec03-main-p019 d=0.355 距離
+  章の上限で外した: なし

@@ -118,12 +118,14 @@
               "opened": null
             },
             "q3": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                0,
                 0,
                 0
               ],
               "requests": [
+                1,
                 1,
                 1
               ],
@@ -178,26 +180,30 @@
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                2,
                 2,
                 2
               ],
               "requests": [
                 2,
-                3
+                3,
+                2
               ],
               "args_t1": "search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力)",
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 3,
+                2,
                 2
               ],
               "requests": [
                 4,
+                3,
                 3
               ],
               "args_t1": "search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming)",
@@ -244,17 +250,20 @@
               ]
             },
             "q3": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                4,
                 4,
                 4
               ],
               "requests": [
                 3,
+                3,
                 3
               ],
               "args_t1": "browse_tree(（引数なし）) ／ browse_tree(lec01-main) ／ browse_tree(lec02-main) ／ browse_tree(lec03-main)",
               "opened": [
+                0,
                 0,
                 0
               ]
@@ -292,39 +301,45 @@
               "opened": null
             },
             "q3": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 2,
-                1
+                1,
+                2
               ],
               "requests": [
                 3,
-                2
+                2,
+                3
               ],
               "args_t1": "search_graph(RAG 実測平均応答時間 正答率) ／ search_graph(RAG 実測)",
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 2,
-                2
+                2,
+                1
               ],
               "requests": [
                 3,
-                3
+                3,
+                2
               ],
               "args_t1": "search_graph(ファインチューニング 構造化出力 使い分け 第2回 第3回) ／ search_graph(第3回 構造化出力 形式を守らせる)",
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 1,
+                2,
                 2
               ],
               "requests": [
                 2,
+                3,
                 3
               ],
               "args_t1": "search_graph(エージェント メモリ 危険)",
@@ -572,17 +587,24 @@
                 {
                   "hit": [],
                   "total": 0
+                },
+                {
+                  "hit": [],
+                  "total": 0
                 }
               ],
               "full_pages": [
+                214,
                 214,
                 214
               ],
               "chars": [
                 109817,
+                109817,
                 109817
               ],
               "ranks": [
+                {},
                 {},
                 {}
               ]
@@ -732,15 +754,23 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 10,
-                9
+                9,
+                10
               ],
               "chars": [
                 3951,
-                4279
+                4279,
+                3989
               ],
               "ranks": [
                 {
@@ -750,6 +780,10 @@
                 {
                   "lec02-main-p053": 1,
                   "lec03-main-p035": 2
+                },
+                {
+                  "lec02-main-p053": null,
+                  "lec03-main-p035": 4
                 }
               ]
             },
@@ -762,17 +796,27 @@
                 {
                   "hit": [],
                   "total": 2
+                },
+                {
+                  "hit": [],
+                  "total": 2
                 }
               ],
               "full_pages": [
+                10,
                 10,
                 10
               ],
               "chars": [
                 7004,
+                3581,
                 3581
               ],
               "ranks": [
+                {
+                  "lec03-main-p050": null,
+                  "lec03-main-p051": null
+                },
                 {
                   "lec03-main-p050": null,
                   "lec03-main-p051": null
@@ -889,17 +933,24 @@
                 {
                   "hit": [],
                   "total": 0
+                },
+                {
+                  "hit": [],
+                  "total": 0
                 }
               ],
               "full_pages": [
+                0,
                 0,
                 0
               ],
               "chars": [
                 0,
+                0,
                 0
               ],
               "ranks": [
+                {},
                 {},
                 {}
               ]
@@ -1010,17 +1061,24 @@
                 {
                   "hit": [],
                   "total": 0
+                },
+                {
+                  "hit": [],
+                  "total": 0
                 }
               ],
               "full_pages": [
                 13,
-                10
+                10,
+                13
               ],
               "chars": [
                 10739,
-                5067
+                5067,
+                10262
               ],
               "ranks": [
+                {},
                 {},
                 {}
               ]
@@ -1040,15 +1098,24 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec02-main-p053",
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 20,
-                20
+                20,
+                10
               ],
               "chars": [
                 10420,
-                10420
+                10420,
+                4525
               ],
               "ranks": [
                 {
@@ -1058,6 +1125,10 @@
                 {
                   "lec02-main-p053": 2,
                   "lec03-main-p035": null
+                },
+                {
+                  "lec02-main-p053": null,
+                  "lec03-main-p035": 2
                 }
               ]
             },
@@ -1070,17 +1141,27 @@
                 {
                   "hit": [],
                   "total": 2
+                },
+                {
+                  "hit": [],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 10,
-                16
+                16,
+                13
               ],
               "chars": [
                 4682,
-                9802
+                9802,
+                8090
               ],
               "ranks": [
+                {
+                  "lec03-main-p050": null,
+                  "lec03-main-p051": null
+                },
                 {
                   "lec03-main-p050": null,
                   "lec03-main-p051": null
@@ -1311,9 +1392,14 @@
               "q3": {
                 "pages": [
                   5,
-                  3
+                  3,
+                  5
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 0
+                  },
                   {
                     "cited": 0,
                     "total": 0
@@ -1325,13 +1411,16 @@
                 ],
                 "acceptable": [
                   0,
+                  0,
                   0
                 ],
                 "other": [
                   5,
-                  3
+                  3,
+                  5
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -1473,7 +1562,8 @@
               "qa1": {
                 "pages": [
                   7,
-                  5
+                  5,
+                  6
                 ],
                 "gold": [
                   {
@@ -1483,33 +1573,45 @@
                   {
                     "cited": 2,
                     "total": 2
+                  },
+                  {
+                    "cited": 1,
+                    "total": 2
                   }
                 ],
                 "acceptable": [
                   3,
-                  2
+                  2,
+                  3
                 ],
                 "other": [
                   3,
-                  1
+                  1,
+                  2
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 3,
+                  "retrieved_cited": 4,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 1
+                  "neither": 2
                 }
               },
               "qa2": {
                 "pages": [
                   3,
+                  2,
                   2
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 2
+                  },
                   {
                     "cited": 0,
                     "total": 2
@@ -1521,13 +1623,16 @@
                 ],
                 "acceptable": [
                   2,
+                  1,
                   1
                 ],
                 "other": [
                   1,
+                  1,
                   1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -1535,7 +1640,7 @@
                   "retrieved_cited": 0,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 4
+                  "neither": 6
                 }
               }
             },
@@ -1627,9 +1732,14 @@
               "q3": {
                 "pages": [
                   0,
+                  0,
                   0
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 0
+                  },
                   {
                     "cited": 0,
                     "total": 0
@@ -1641,13 +1751,16 @@
                 ],
                 "acceptable": [
                   0,
+                  0,
                   0
                 ],
                 "other": [
                   0,
+                  0,
                   0
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -1747,9 +1860,14 @@
               "q3": {
                 "pages": [
                   1,
+                  1,
                   1
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 0
+                  },
                   {
                     "cited": 0,
                     "total": 0
@@ -1761,13 +1879,16 @@
                 ],
                 "acceptable": [
                   0,
+                  0,
                   0
                 ],
                 "other": [
                   1,
+                  1,
                   1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -1781,9 +1902,14 @@
               "qa1": {
                 "pages": [
                   7,
-                  5
+                  5,
+                  4
                 ],
                 "gold": [
+                  {
+                    "cited": 2,
+                    "total": 2
+                  },
                   {
                     "cited": 2,
                     "total": 2
@@ -1795,18 +1921,21 @@
                 ],
                 "acceptable": [
                   2,
+                  2,
                   2
                 ],
                 "other": [
                   3,
-                  1
+                  1,
+                  0
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 4,
+                  "retrieved_cited": 6,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
                   "neither": 0
@@ -1815,9 +1944,14 @@
               "qa2": {
                 "pages": [
                   3,
-                  3
+                  3,
+                  2
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 2
+                  },
                   {
                     "cited": 0,
                     "total": 2
@@ -1829,13 +1963,16 @@
                 ],
                 "acceptable": [
                   2,
-                  2
+                  2,
+                  1
                 ],
                 "other": [
+                  1,
                   1,
                   1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -1843,7 +1980,7 @@
                   "retrieved_cited": 0,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 4
+                  "neither": 6
                 }
               }
             }
@@ -1935,17 +2072,17 @@
               },
               "q3": {
                 "checks": {
-                  "q3_refuse": "2/2",
-                  "q3_numflag": "2/2"
+                  "q3_refuse": "3/3",
+                  "q3_numflag": "2/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "2/3",
+                "review": "1/3",
+                "wrong": "0/3",
                 "counts": {
                   "correct": 2,
-                  "review": 0,
+                  "review": 1,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               }
             },
@@ -2000,33 +2137,33 @@
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "2/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "0/2",
-                  "qa2_review": "2/2"
+                  "qa2_persist_or_cannot": "0/3",
+                  "qa2_review": "2/3"
                 },
-                "correct": "0/2",
-                "review": "0/2",
-                "wrong": "2/2",
+                "correct": "0/3",
+                "review": "0/3",
+                "wrong": "3/3",
                 "counts": {
                   "correct": 0,
                   "review": 0,
-                  "wrong": 2,
-                  "trials": 2
+                  "wrong": 3,
+                  "trials": 3
                 }
               }
             },
@@ -2066,17 +2203,17 @@
               },
               "q3": {
                 "checks": {
-                  "q3_refuse": "2/2",
-                  "q3_numflag": "2/2"
+                  "q3_refuse": "3/3",
+                  "q3_numflag": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               }
             },
@@ -2116,48 +2253,48 @@
               },
               "q3": {
                 "checks": {
-                  "q3_refuse": "1/2",
-                  "q3_numflag": "2/2"
+                  "q3_refuse": "2/3",
+                  "q3_numflag": "3/3"
                 },
-                "correct": "1/2",
-                "review": "0/2",
-                "wrong": "1/2",
+                "correct": "2/3",
+                "review": "0/3",
+                "wrong": "1/3",
                 "counts": {
-                  "correct": 1,
+                  "correct": 2,
                   "review": 0,
                   "wrong": 1,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "1/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "2/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "0/2",
-                  "qa2_review": "1/2"
+                  "qa2_persist_or_cannot": "0/3",
+                  "qa2_review": "1/3"
                 },
-                "correct": "0/2",
-                "review": "0/2",
-                "wrong": "2/2",
+                "correct": "0/3",
+                "review": "0/3",
+                "wrong": "3/3",
                 "counts": {
                   "correct": 0,
                   "review": 0,
-                  "wrong": 2,
-                  "trials": 2
+                  "wrong": 3,
+                  "trials": 3
                 }
               }
             }
@@ -2213,13 +2350,13 @@
               "cost_usd": "0.018539 (0.018319–0.018657)"
             },
             "q3": {
-              "trials": 2,
-              "seconds": "2.6 (2.5–2.7)",
+              "trials": 3,
+              "seconds": "2.7 (2.5–4.6)",
               "input": "58916 (58916–58916)",
-              "output": "270 (261–278)",
+              "output": "278 (261–330)",
               "thoughts": "0 (0–0)",
               "requests": "1 (1–1)",
-              "cost_usd": "0.018349 (0.018327–0.018370)"
+              "cost_usd": "0.018370 (0.018327–0.018500)"
             }
           },
           "V0 vector": {
@@ -2251,22 +2388,22 @@
               "cost_usd": "0.001336 (0.001282–0.001347)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "4.9 (4.4–5.4)",
-              "input": "5250 (4082–6417)",
-              "output": "708 (700–717)",
+              "trials": 3,
+              "seconds": "4.4 (3.7–5.4)",
+              "input": "4136 (4082–6417)",
+              "output": "700 (459–717)",
               "thoughts": "0 (0–0)",
               "requests": "2 (2–3)",
-              "cost_usd": "0.003346 (0.003017–0.003675)"
+              "cost_usd": "0.003017 (0.002388–0.003675)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "5.6 (5.2–6.0)",
-              "input": "8946 (5756–12136)",
-              "output": "308 (293–324)",
+              "trials": 3,
+              "seconds": "6.0 (5.2–9.7)",
+              "input": "5756 (5756–12136)",
+              "output": "293 (261–324)",
               "thoughts": "0 (0–0)",
-              "requests": "4 (3–4)",
-              "cost_usd": "0.003455 (0.002459–0.004451)"
+              "requests": "3 (3–4)",
+              "cost_usd": "0.002459 (0.002379–0.004451)"
             }
           },
           "T tree": {
@@ -2289,13 +2426,13 @@
               "cost_usd": "0.004764 (0.003788–0.004876)"
             },
             "q3": {
-              "trials": 2,
-              "seconds": "3.6 (3.5–3.6)",
+              "trials": 3,
+              "seconds": "3.5 (2.5–3.6)",
               "input": "3066 (3066–3066)",
-              "output": "332 (322–341)",
+              "output": "322 (205–341)",
               "thoughts": "0 (0–0)",
               "requests": "3 (3–3)",
-              "cost_usd": "0.001749 (0.001725–0.001772)"
+              "cost_usd": "0.001725 (0.001432–0.001772)"
             }
           },
           "G graph": {
@@ -2318,31 +2455,31 @@
               "cost_usd": "0.002620 (0.002620–0.002785)"
             },
             "q3": {
-              "trials": 2,
-              "seconds": "3.7 (3.2–4.3)",
-              "input": "10324 (5334–15313)",
-              "output": "216 (187–244)",
+              "trials": 3,
+              "seconds": "4.3 (3.2–4.5)",
+              "input": "15303 (5334–15313)",
+              "output": "208 (187–244)",
               "thoughts": "0 (0–0)",
-              "requests": "2 (2–3)",
-              "cost_usd": "0.003086 (0.002210–0.003962)"
+              "requests": "3 (2–3)",
+              "cost_usd": "0.003962 (0.002210–0.004012)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "6.1 (6.0–6.2)",
-              "input": "15113 (15113–15113)",
-              "output": "741 (736–746)",
+              "trials": 3,
+              "seconds": "6.0 (4.5–6.2)",
+              "input": "15113 (4867–15113)",
+              "output": "736 (555–746)",
               "thoughts": "0 (0–0)",
-              "requests": "3 (3–3)",
-              "cost_usd": "0.005288 (0.005275–0.005300)"
+              "requests": "3 (2–3)",
+              "cost_usd": "0.005275 (0.002301–0.005300)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "3.8 (3.1–4.5)",
-              "input": "9167 (4752–13582)",
-              "output": "268 (241–294)",
+              "trials": 3,
+              "seconds": "4.5 (3.1–9.0)",
+              "input": "12685 (4752–13582)",
+              "output": "241 (237–294)",
               "thoughts": "0 (0–0)",
-              "requests": "2 (2–3)",
-              "cost_usd": "0.002870 (0.002161–0.003579)"
+              "requests": "3 (2–3)",
+              "cost_usd": "0.003300 (0.002161–0.003579)"
             }
           }
         }
@@ -2415,26 +2552,30 @@
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                2,
                 2,
                 2
               ],
               "requests": [
                 2,
-                3
+                3,
+                2
               ],
               "args_t1": "search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力)",
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 3,
+                2,
                 2
               ],
               "requests": [
                 4,
+                3,
                 3
               ],
               "args_t1": "search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming)",
@@ -2473,12 +2614,14 @@
               "opened": null
             },
             "q3": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                1,
                 1,
                 1
               ],
               "requests": [
+                2,
                 2,
                 2
               ],
@@ -2486,25 +2629,29 @@
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                2,
                 2,
                 2
               ],
               "requests": [
                 2,
-                2
+                2,
+                3
               ],
               "args_t1": "search_materials(ファインチューニング) ／ search_materials(構造化出力)",
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                2,
                 2,
                 2
               ],
               "requests": [
+                3,
                 3,
                 3
               ],
@@ -2658,15 +2805,23 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 10,
-                9
+                9,
+                10
               ],
               "chars": [
                 3951,
-                4279
+                4279,
+                3989
               ],
               "ranks": [
                 {
@@ -2676,6 +2831,10 @@
                 {
                   "lec02-main-p053": 1,
                   "lec03-main-p035": 2
+                },
+                {
+                  "lec02-main-p053": null,
+                  "lec03-main-p035": 4
                 }
               ]
             },
@@ -2688,17 +2847,27 @@
                 {
                   "hit": [],
                   "total": 2
+                },
+                {
+                  "hit": [],
+                  "total": 2
                 }
               ],
               "full_pages": [
+                10,
                 10,
                 10
               ],
               "chars": [
                 7004,
+                3581,
                 3581
               ],
               "ranks": [
+                {
+                  "lec03-main-p050": null,
+                  "lec03-main-p051": null
+                },
                 {
                   "lec03-main-p050": null,
                   "lec03-main-p051": null
@@ -2818,17 +2987,24 @@
                 {
                   "hit": [],
                   "total": 0
+                },
+                {
+                  "hit": [],
+                  "total": 0
                 }
               ],
               "full_pages": [
+                5,
                 5,
                 5
               ],
               "chars": [
                 3189,
+                2445,
                 2445
               ],
               "ranks": [
+                {},
                 {},
                 {}
               ]
@@ -2846,15 +3022,24 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec02-main-p053",
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 10,
-                10
+                10,
+                9
               ],
               "chars": [
                 3989,
-                3989
+                3989,
+                4020
               ],
               "ranks": [
                 {
@@ -2863,6 +3048,10 @@
                 },
                 {
                   "lec02-main-p053": null,
+                  "lec03-main-p035": 4
+                },
+                {
+                  "lec02-main-p053": 2,
                   "lec03-main-p035": 4
                 }
               ]
@@ -2876,17 +3065,27 @@
                 {
                   "hit": [],
                   "total": 2
+                },
+                {
+                  "hit": [],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 6,
+                7,
                 7
               ],
               "chars": [
                 4047,
+                4531,
                 4531
               ],
               "ranks": [
+                {
+                  "lec03-main-p050": null,
+                  "lec03-main-p051": null
+                },
                 {
                   "lec03-main-p050": null,
                   "lec03-main-p051": null
@@ -3031,7 +3230,8 @@
               "qa1": {
                 "pages": [
                   7,
-                  5
+                  5,
+                  6
                 ],
                 "gold": [
                   {
@@ -3041,33 +3241,45 @@
                   {
                     "cited": 2,
                     "total": 2
+                  },
+                  {
+                    "cited": 1,
+                    "total": 2
                   }
                 ],
                 "acceptable": [
                   3,
-                  2
+                  2,
+                  3
                 ],
                 "other": [
                   3,
-                  1
+                  1,
+                  2
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 3,
+                  "retrieved_cited": 4,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 1
+                  "neither": 2
                 }
               },
               "qa2": {
                 "pages": [
                   3,
+                  2,
                   2
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 2
+                  },
                   {
                     "cited": 0,
                     "total": 2
@@ -3079,13 +3291,16 @@
                 ],
                 "acceptable": [
                   2,
+                  1,
                   1
                 ],
                 "other": [
                   1,
+                  1,
                   1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -3093,7 +3308,7 @@
                   "retrieved_cited": 0,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 4
+                  "neither": 6
                 }
               }
             },
@@ -3185,9 +3400,14 @@
               "q3": {
                 "pages": [
                   1,
+                  3,
                   3
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 0
+                  },
                   {
                     "cited": 0,
                     "total": 0
@@ -3199,13 +3419,16 @@
                 ],
                 "acceptable": [
                   0,
+                  0,
                   0
                 ],
                 "other": [
                   1,
+                  3,
                   3
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -3219,6 +3442,7 @@
               "qa1": {
                 "pages": [
                   6,
+                  5,
                   5
                 ],
                 "gold": [
@@ -3229,22 +3453,29 @@
                   {
                     "cited": 1,
                     "total": 2
+                  },
+                  {
+                    "cited": 2,
+                    "total": 2
                   }
                 ],
                 "acceptable": [
                   3,
-                  3
+                  3,
+                  2
                 ],
                 "other": [
                   2,
+                  1,
                   1
                 ],
                 "unresolved": [
                   0,
+                  0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 2,
+                  "retrieved_cited": 4,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
                   "neither": 2
@@ -3253,9 +3484,14 @@
               "qa2": {
                 "pages": [
                   3,
+                  2,
                   2
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 2
+                  },
                   {
                     "cited": 0,
                     "total": 2
@@ -3267,13 +3503,16 @@
                 ],
                 "acceptable": [
                   2,
+                  1,
                   1
                 ],
                 "other": [
                   1,
+                  1,
                   1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -3281,7 +3520,7 @@
                   "retrieved_cited": 0,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 4
+                  "neither": 6
                 }
               }
             }
@@ -3338,33 +3577,33 @@
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "2/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "0/2",
-                  "qa2_review": "2/2"
+                  "qa2_persist_or_cannot": "0/3",
+                  "qa2_review": "2/3"
                 },
-                "correct": "0/2",
-                "review": "0/2",
-                "wrong": "2/2",
+                "correct": "0/3",
+                "review": "0/3",
+                "wrong": "3/3",
                 "counts": {
                   "correct": 0,
                   "review": 0,
-                  "wrong": 2,
-                  "trials": 2
+                  "wrong": 3,
+                  "trials": 3
                 }
               }
             },
@@ -3404,48 +3643,48 @@
               },
               "q3": {
                 "checks": {
-                  "q3_refuse": "2/2",
-                  "q3_numflag": "2/2"
+                  "q3_refuse": "3/3",
+                  "q3_numflag": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "2/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "0/2",
-                  "qa2_review": "1/2"
+                  "qa2_persist_or_cannot": "0/3",
+                  "qa2_review": "1/3"
                 },
-                "correct": "0/2",
-                "review": "0/2",
-                "wrong": "2/2",
+                "correct": "0/3",
+                "review": "0/3",
+                "wrong": "3/3",
                 "counts": {
                   "correct": 0,
                   "review": 0,
-                  "wrong": 2,
-                  "trials": 2
+                  "wrong": 3,
+                  "trials": 3
                 }
               }
             }
@@ -3481,22 +3720,22 @@
               "cost_usd": "0.001336 (0.001282–0.001347)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "4.9 (4.4–5.4)",
-              "input": "5250 (4082–6417)",
-              "output": "708 (700–717)",
+              "trials": 3,
+              "seconds": "4.4 (3.7–5.4)",
+              "input": "4136 (4082–6417)",
+              "output": "700 (459–717)",
               "thoughts": "0 (0–0)",
               "requests": "2 (2–3)",
-              "cost_usd": "0.003346 (0.003017–0.003675)"
+              "cost_usd": "0.003017 (0.002388–0.003675)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "5.6 (5.2–6.0)",
-              "input": "8946 (5756–12136)",
-              "output": "308 (293–324)",
+              "trials": 3,
+              "seconds": "6.0 (5.2–9.7)",
+              "input": "5756 (5756–12136)",
+              "output": "293 (261–324)",
               "thoughts": "0 (0–0)",
-              "requests": "4 (3–4)",
-              "cost_usd": "0.003455 (0.002459–0.004451)"
+              "requests": "3 (3–4)",
+              "cost_usd": "0.002459 (0.002379–0.004451)"
             }
           },
           "B1 doc_hint": {
@@ -3519,31 +3758,31 @@
               "cost_usd": "0.003011 (0.001803–0.003132)"
             },
             "q3": {
-              "trials": 2,
-              "seconds": "3.0 (2.9–3.0)",
-              "input": "3064 (2890–3238)",
-              "output": "166 (156–175)",
+              "trials": 3,
+              "seconds": "3.0 (2.9–3.7)",
+              "input": "2890 (2890–3238)",
+              "output": "175 (156–261)",
               "thoughts": "0 (0–0)",
               "requests": "2 (2–2)",
-              "cost_usd": "0.001333 (0.001257–0.001409)"
+              "cost_usd": "0.001409 (0.001257–0.001520)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "4.0 (3.7–4.2)",
-              "input": "4254 (4254–4254)",
-              "output": "618 (529–708)",
+              "trials": 3,
+              "seconds": "4.2 (3.7–5.6)",
+              "input": "4254 (4254–6296)",
+              "output": "656 (529–708)",
               "thoughts": "0 (0–0)",
-              "requests": "2 (2–2)",
-              "cost_usd": "0.002822 (0.002599–0.003046)"
+              "requests": "2 (2–3)",
+              "cost_usd": "0.003046 (0.002599–0.003529)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "4.7 (4.5–4.9)",
-              "input": "6232 (6076–6387)",
-              "output": "273 (261–285)",
+              "trials": 3,
+              "seconds": "4.9 (4.5–9.6)",
+              "input": "6387 (6076–6387)",
+              "output": "261 (254–285)",
               "thoughts": "0 (0–0)",
               "requests": "3 (3–3)",
-              "cost_usd": "0.002552 (0.002535–0.002569)"
+              "cost_usd": "0.002551 (0.002535–0.002569)"
             }
           }
         }
@@ -3621,26 +3860,30 @@
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                2,
                 2,
                 2
               ],
               "requests": [
                 2,
-                3
+                3,
+                2
               ],
               "args_t1": "search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力)",
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 3,
+                2,
                 2
               ],
               "requests": [
                 4,
+                3,
                 3
               ],
               "args_t1": "search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming)",
@@ -3694,12 +3937,14 @@
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 2,
-                1
+                1,
+                2
               ],
               "requests": [
+                2,
                 2,
                 2
               ],
@@ -3707,14 +3952,16 @@
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 1,
-                1
+                1,
+                2
               ],
               "requests": [
                 2,
-                2
+                2,
+                3
               ],
               "args_t1": "search_materials(エージェントのメモリ 危険 防ぐ)",
               "opened": null
@@ -3767,12 +4014,14 @@
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 2,
-                1
+                1,
+                2
               ],
               "requests": [
+                2,
                 2,
                 2
               ],
@@ -3780,12 +4029,14 @@
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                2,
                 2,
                 2
               ],
               "requests": [
+                3,
                 3,
                 3
               ],
@@ -3939,15 +4190,23 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 10,
-                9
+                9,
+                10
               ],
               "chars": [
                 3951,
-                4279
+                4279,
+                3989
               ],
               "ranks": [
                 {
@@ -3957,6 +4216,10 @@
                 {
                   "lec02-main-p053": 1,
                   "lec03-main-p035": 2
+                },
+                {
+                  "lec02-main-p053": null,
+                  "lec03-main-p035": 4
                 }
               ]
             },
@@ -3969,17 +4232,27 @@
                 {
                   "hit": [],
                   "total": 2
+                },
+                {
+                  "hit": [],
+                  "total": 2
                 }
               ],
               "full_pages": [
+                10,
                 10,
                 10
               ],
               "chars": [
                 7004,
+                3581,
                 3581
               ],
               "ranks": [
+                {
+                  "lec03-main-p050": null,
+                  "lec03-main-p051": null
+                },
                 {
                   "lec03-main-p050": null,
                   "lec03-main-p051": null
@@ -4135,15 +4408,23 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 18,
-                15
+                15,
+                18
               ],
               "chars": [
                 8134,
-                6988
+                6988,
+                8134
               ],
               "ranks": [
                 {
@@ -4153,6 +4434,10 @@
                 {
                   "lec02-main-p053": 1,
                   "lec03-main-p035": null
+                },
+                {
+                  "lec02-main-p053": null,
+                  "lec03-main-p035": 4
                 }
               ]
             },
@@ -4168,19 +4453,29 @@
                 {
                   "hit": [],
                   "total": 2
+                },
+                {
+                  "hit": [],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 11,
-                12
+                12,
+                22
               ],
               "chars": [
                 3824,
-                5571
+                5571,
+                9562
               ],
               "ranks": [
                 {
                   "lec03-main-p050": 4,
+                  "lec03-main-p051": null
+                },
+                {
+                  "lec03-main-p050": null,
                   "lec03-main-p051": null
                 },
                 {
@@ -4335,15 +4630,24 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec02-main-p053",
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 29,
-                15
+                15,
+                29
               ],
               "chars": [
                 13589,
-                6263
+                6263,
+                12942
               ],
               "ranks": [
                 {
@@ -4353,6 +4657,10 @@
                 {
                   "lec02-main-p053": 1,
                   "lec03-main-p035": 8
+                },
+                {
+                  "lec02-main-p053": 7,
+                  "lec03-main-p035": 4
                 }
               ]
             },
@@ -4369,15 +4677,24 @@
                     "lec03-main-p050"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec03-main-p050",
+                    "lec03-main-p051"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 22,
-                27
+                27,
+                18
               ],
               "chars": [
                 13686,
-                13892
+                13892,
+                15070
               ],
               "ranks": [
                 {
@@ -4387,6 +4704,10 @@
                 {
                   "lec03-main-p050": 8,
                   "lec03-main-p051": null
+                },
+                {
+                  "lec03-main-p050": 6,
+                  "lec03-main-p051": 5
                 }
               ]
             }
@@ -4524,7 +4845,8 @@
               "qa1": {
                 "pages": [
                   7,
-                  5
+                  5,
+                  6
                 ],
                 "gold": [
                   {
@@ -4534,33 +4856,45 @@
                   {
                     "cited": 2,
                     "total": 2
+                  },
+                  {
+                    "cited": 1,
+                    "total": 2
                   }
                 ],
                 "acceptable": [
                   3,
-                  2
+                  2,
+                  3
                 ],
                 "other": [
                   3,
-                  1
+                  1,
+                  2
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 3,
+                  "retrieved_cited": 4,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 1
+                  "neither": 2
                 }
               },
               "qa2": {
                 "pages": [
                   3,
+                  2,
                   2
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 2
+                  },
                   {
                     "cited": 0,
                     "total": 2
@@ -4572,13 +4906,16 @@
                 ],
                 "acceptable": [
                   2,
+                  1,
                   1
                 ],
                 "other": [
                   1,
+                  1,
                   1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -4586,7 +4923,7 @@
                   "retrieved_cited": 0,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 4
+                  "neither": 6
                 }
               }
             },
@@ -4720,7 +5057,8 @@
               "qa1": {
                 "pages": [
                   7,
-                  6
+                  6,
+                  7
                 ],
                 "gold": [
                   {
@@ -4730,31 +5068,39 @@
                   {
                     "cited": 2,
                     "total": 2
+                  },
+                  {
+                    "cited": 1,
+                    "total": 2
                   }
                 ],
                 "acceptable": [
                   3,
-                  2
+                  2,
+                  3
                 ],
                 "other": [
                   3,
-                  2
+                  2,
+                  3
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 3,
+                  "retrieved_cited": 4,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 1
+                  "neither": 2
                 }
               },
               "qa2": {
                 "pages": [
                   5,
-                  4
+                  4,
+                  3
                 ],
                 "gold": [
                   {
@@ -4764,17 +5110,24 @@
                   {
                     "cited": 0,
                     "total": 2
+                  },
+                  {
+                    "cited": 0,
+                    "total": 2
                   }
                 ],
                 "acceptable": [
+                  2,
                   2,
                   2
                 ],
                 "other": [
                   1,
-                  2
+                  2,
+                  1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -4782,7 +5135,7 @@
                   "retrieved_cited": 2,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 2
+                  "neither": 4
                 }
               }
             },
@@ -4916,9 +5269,14 @@
               "qa1": {
                 "pages": [
                   8,
-                  7
+                  7,
+                  5
                 ],
                 "gold": [
+                  {
+                    "cited": 2,
+                    "total": 2
+                  },
                   {
                     "cited": 2,
                     "total": 2
@@ -4930,18 +5288,21 @@
                 ],
                 "acceptable": [
                   2,
-                  3
+                  3,
+                  1
                 ],
                 "other": [
                   4,
+                  2,
                   2
                 ],
                 "unresolved": [
                   0,
+                  0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 4,
+                  "retrieved_cited": 6,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
                   "neither": 0
@@ -4950,7 +5311,8 @@
               "qa2": {
                 "pages": [
                   4,
-                  4
+                  4,
+                  5
                 ],
                 "gold": [
                   {
@@ -4960,22 +5322,29 @@
                   {
                     "cited": 1,
                     "total": 2
+                  },
+                  {
+                    "cited": 2,
+                    "total": 2
                   }
                 ],
                 "acceptable": [
+                  2,
                   2,
                   2
                 ],
                 "other": [
                   2,
+                  1,
                   1
                 ],
                 "unresolved": [
                   0,
+                  0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 1,
+                  "retrieved_cited": 3,
                   "retrieved_not_cited": 1,
                   "not_retrieved_cited": 0,
                   "neither": 2
@@ -5035,33 +5404,33 @@
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "2/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "0/2",
-                  "qa2_review": "2/2"
+                  "qa2_persist_or_cannot": "0/3",
+                  "qa2_review": "2/3"
                 },
-                "correct": "0/2",
-                "review": "0/2",
-                "wrong": "2/2",
+                "correct": "0/3",
+                "review": "0/3",
+                "wrong": "3/3",
                 "counts": {
                   "correct": 0,
                   "review": 0,
-                  "wrong": 2,
-                  "trials": 2
+                  "wrong": 3,
+                  "trials": 3
                 }
               }
             },
@@ -5116,33 +5485,33 @@
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "2/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "1/2",
-                  "qa2_review": "2/2"
+                  "qa2_persist_or_cannot": "1/3",
+                  "qa2_review": "3/3"
                 },
-                "correct": "1/2",
-                "review": "0/2",
-                "wrong": "1/2",
+                "correct": "1/3",
+                "review": "0/3",
+                "wrong": "2/3",
                 "counts": {
                   "correct": 1,
                   "review": 0,
-                  "wrong": 1,
-                  "trials": 2
+                  "wrong": 2,
+                  "trials": 3
                 }
               }
             },
@@ -5197,33 +5566,33 @@
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "2/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "1/2",
-                  "qa2_review": "0/2"
+                  "qa2_persist_or_cannot": "2/3",
+                  "qa2_review": "1/3"
                 },
-                "correct": "0/2",
-                "review": "0/2",
-                "wrong": "2/2",
+                "correct": "1/3",
+                "review": "0/3",
+                "wrong": "2/3",
                 "counts": {
-                  "correct": 0,
+                  "correct": 1,
                   "review": 0,
                   "wrong": 2,
-                  "trials": 2
+                  "trials": 3
                 }
               }
             }
@@ -5259,22 +5628,22 @@
               "cost_usd": "0.001336 (0.001282–0.001347)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "4.9 (4.4–5.4)",
-              "input": "5250 (4082–6417)",
-              "output": "708 (700–717)",
+              "trials": 3,
+              "seconds": "4.4 (3.7–5.4)",
+              "input": "4136 (4082–6417)",
+              "output": "700 (459–717)",
               "thoughts": "0 (0–0)",
               "requests": "2 (2–3)",
-              "cost_usd": "0.003346 (0.003017–0.003675)"
+              "cost_usd": "0.003017 (0.002388–0.003675)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "5.6 (5.2–6.0)",
-              "input": "8946 (5756–12136)",
-              "output": "308 (293–324)",
+              "trials": 3,
+              "seconds": "6.0 (5.2–9.7)",
+              "input": "5756 (5756–12136)",
+              "output": "293 (261–324)",
               "thoughts": "0 (0–0)",
-              "requests": "4 (3–4)",
-              "cost_usd": "0.003455 (0.002459–0.004451)"
+              "requests": "3 (3–4)",
+              "cost_usd": "0.002459 (0.002379–0.004451)"
             }
           },
           "I1 neighbors": {
@@ -5306,22 +5675,22 @@
               "cost_usd": "0.002754 (0.002628–0.002784)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "4.3 (4.0–4.7)",
-              "input": "7103 (6596–7610)",
-              "output": "686 (631–740)",
+              "trials": 3,
+              "seconds": "4.7 (4.0–8.6)",
+              "input": "7610 (6596–7610)",
+              "output": "689 (631–740)",
               "thoughts": "0 (0–0)",
               "requests": "2 (2–2)",
-              "cost_usd": "0.003845 (0.003556–0.004133)"
+              "cost_usd": "0.004006 (0.003556–0.004133)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "3.5 (3.1–3.8)",
-              "input": "4544 (3982–5106)",
-              "output": "371 (346–396)",
+              "trials": 3,
+              "seconds": "3.8 (3.1–13.1)",
+              "input": "5106 (3982–12565)",
+              "output": "396 (346–413)",
               "thoughts": "0 (0–0)",
-              "requests": "2 (2–2)",
-              "cost_usd": "0.002291 (0.002060–0.002522)"
+              "requests": "2 (2–3)",
+              "cost_usd": "0.002522 (0.002060–0.004802)"
             }
           },
           "I2 topk15": {
@@ -5353,22 +5722,22 @@
               "cost_usd": "0.002712 (0.002571–0.002815)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "4.1 (3.8–4.3)",
-              "input": "9202 (6222–12183)",
-              "output": "594 (576–611)",
+              "trials": 3,
+              "seconds": "4.3 (3.8–9.9)",
+              "input": "11809 (6222–12183)",
+              "output": "611 (576–761)",
               "thoughts": "0 (0–0)",
               "requests": "2 (2–2)",
-              "cost_usd": "0.004245 (0.003307–0.005182)"
+              "cost_usd": "0.005182 (0.003307–0.005445)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "5.2 (4.4–6.0)",
-              "input": "17965 (17861–18069)",
-              "output": "389 (275–503)",
+              "trials": 3,
+              "seconds": "6.0 (4.4–13.3)",
+              "input": "18069 (17861–18461)",
+              "output": "373 (275–503)",
               "thoughts": "0 (0–0)",
               "requests": "3 (3–3)",
-              "cost_usd": "0.004712 (0.004458–0.004966)"
+              "cost_usd": "0.004820 (0.004458–0.004966)"
             }
           }
         }
@@ -5451,26 +5820,30 @@
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                2,
                 2,
                 2
               ],
               "requests": [
                 2,
-                3
+                3,
+                2
               ],
               "args_t1": "search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力)",
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 3,
+                2,
                 2
               ],
               "requests": [
                 4,
+                3,
                 3
               ],
               "args_t1": "search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming)",
@@ -5509,39 +5882,45 @@
               "opened": null
             },
             "q3": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 2,
-                1
+                1,
+                2
               ],
               "requests": [
                 3,
-                2
+                2,
+                3
               ],
               "args_t1": "search_graph(RAG 実測平均応答時間 正答率) ／ search_graph(RAG 実測)",
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 2,
-                2
+                2,
+                1
               ],
               "requests": [
                 3,
-                3
+                3,
+                2
               ],
               "args_t1": "search_graph(ファインチューニング 構造化出力 使い分け 第2回 第3回) ／ search_graph(第3回 構造化出力 形式を守らせる)",
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 1,
+                2,
                 2
               ],
               "requests": [
                 2,
+                3,
                 3
               ],
               "args_t1": "search_graph(エージェント メモリ 危険)",
@@ -5595,12 +5974,14 @@
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 2,
-                3
+                3,
+                2
               ],
               "requests": [
+                3,
                 3,
                 3
               ],
@@ -5608,12 +5989,14 @@
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
+                2,
                 2,
                 2
               ],
               "requests": [
+                3,
                 3,
                 3
               ],
@@ -5668,26 +6051,30 @@
               "opened": null
             },
             "qa1": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 2,
-                2
+                2,
+                1
               ],
               "requests": [
                 3,
+                2,
                 2
               ],
               "args_t1": "search_materials(ファインチューニング 第2回) ／ search_materials(構造化出力 第3回)",
               "opened": null
             },
             "qa2": {
-              "trials": 2,
+              "trials": 3,
               "tool_calls": [
                 1,
+                2,
                 2
               ],
               "requests": [
                 2,
+                3,
                 3
               ],
               "args_t1": "search_materials(エージェント メモリ 危険)",
@@ -5840,15 +6227,23 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 10,
-                9
+                9,
+                10
               ],
               "chars": [
                 3951,
-                4279
+                4279,
+                3989
               ],
               "ranks": [
                 {
@@ -5858,6 +6253,10 @@
                 {
                   "lec02-main-p053": 1,
                   "lec03-main-p035": 2
+                },
+                {
+                  "lec02-main-p053": null,
+                  "lec03-main-p035": 4
                 }
               ]
             },
@@ -5870,17 +6269,27 @@
                 {
                   "hit": [],
                   "total": 2
+                },
+                {
+                  "hit": [],
+                  "total": 2
                 }
               ],
               "full_pages": [
+                10,
                 10,
                 10
               ],
               "chars": [
                 7004,
+                3581,
                 3581
               ],
               "ranks": [
+                {
+                  "lec03-main-p050": null,
+                  "lec03-main-p051": null
+                },
                 {
                   "lec03-main-p050": null,
                   "lec03-main-p051": null
@@ -5997,17 +6406,24 @@
                 {
                   "hit": [],
                   "total": 0
+                },
+                {
+                  "hit": [],
+                  "total": 0
                 }
               ],
               "full_pages": [
                 13,
-                10
+                10,
+                13
               ],
               "chars": [
                 10739,
-                5067
+                5067,
+                10262
               ],
               "ranks": [
+                {},
                 {},
                 {}
               ]
@@ -6027,15 +6443,24 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec02-main-p053",
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 20,
-                20
+                20,
+                10
               ],
               "chars": [
                 10420,
-                10420
+                10420,
+                4525
               ],
               "ranks": [
                 {
@@ -6045,6 +6470,10 @@
                 {
                   "lec02-main-p053": 2,
                   "lec03-main-p035": null
+                },
+                {
+                  "lec02-main-p053": null,
+                  "lec03-main-p035": 2
                 }
               ]
             },
@@ -6057,17 +6486,27 @@
                 {
                   "hit": [],
                   "total": 2
+                },
+                {
+                  "hit": [],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 10,
-                16
+                16,
+                13
               ],
               "chars": [
                 4682,
-                9802
+                9802,
+                8090
               ],
               "ranks": [
+                {
+                  "lec03-main-p050": null,
+                  "lec03-main-p051": null
+                },
                 {
                   "lec03-main-p050": null,
                   "lec03-main-p051": null
@@ -6224,15 +6663,24 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec02-main-p053",
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 9,
-                12
+                12,
+                9
               ],
               "chars": [
                 4943,
-                6534
+                6534,
+                4983
               ],
               "ranks": [
                 {
@@ -6241,6 +6689,10 @@
                 },
                 {
                   "lec02-main-p053": 4,
+                  "lec03-main-p035": 2
+                },
+                {
+                  "lec02-main-p053": 2,
                   "lec03-main-p035": 2
                 }
               ]
@@ -6258,14 +6710,22 @@
                     "lec03-main-p050"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec03-main-p050"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
+                6,
                 6,
                 6
               ],
               "chars": [
                 4725,
+                4827,
                 4827
               ],
               "ranks": [
@@ -6275,6 +6735,10 @@
                 },
                 {
                   "lec03-main-p050": 4,
+                  "lec03-main-p051": null
+                },
+                {
+                  "lec03-main-p050": 5,
                   "lec03-main-p051": null
                 }
               ]
@@ -6424,15 +6888,24 @@
                     "lec03-main-p035"
                   ],
                   "total": 2
+                },
+                {
+                  "hit": [
+                    "lec02-main-p053",
+                    "lec03-main-p035"
+                  ],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 10,
-                10
+                10,
+                5
               ],
               "chars": [
                 3873,
-                4279
+                4279,
+                2103
               ],
               "ranks": [
                 {
@@ -6442,6 +6915,10 @@
                 {
                   "lec02-main-p053": 5,
                   "lec03-main-p035": 3
+                },
+                {
+                  "lec02-main-p053": 3,
+                  "lec03-main-p035": 4
                 }
               ]
             },
@@ -6454,17 +6931,27 @@
                 {
                   "hit": [],
                   "total": 2
+                },
+                {
+                  "hit": [],
+                  "total": 2
                 }
               ],
               "full_pages": [
                 5,
-                8
+                8,
+                9
               ],
               "chars": [
                 2382,
-                4949
+                4949,
+                4155
               ],
               "ranks": [
+                {
+                  "lec03-main-p050": null,
+                  "lec03-main-p051": null
+                },
                 {
                   "lec03-main-p050": null,
                   "lec03-main-p051": null
@@ -6609,7 +7096,8 @@
               "qa1": {
                 "pages": [
                   7,
-                  5
+                  5,
+                  6
                 ],
                 "gold": [
                   {
@@ -6619,33 +7107,45 @@
                   {
                     "cited": 2,
                     "total": 2
+                  },
+                  {
+                    "cited": 1,
+                    "total": 2
                   }
                 ],
                 "acceptable": [
                   3,
-                  2
+                  2,
+                  3
                 ],
                 "other": [
                   3,
-                  1
+                  1,
+                  2
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 3,
+                  "retrieved_cited": 4,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 1
+                  "neither": 2
                 }
               },
               "qa2": {
                 "pages": [
                   3,
+                  2,
                   2
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 2
+                  },
                   {
                     "cited": 0,
                     "total": 2
@@ -6657,13 +7157,16 @@
                 ],
                 "acceptable": [
                   2,
+                  1,
                   1
                 ],
                 "other": [
                   1,
+                  1,
                   1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -6671,7 +7174,7 @@
                   "retrieved_cited": 0,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 4
+                  "neither": 6
                 }
               }
             },
@@ -6763,9 +7266,14 @@
               "q3": {
                 "pages": [
                   1,
+                  1,
                   1
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 0
+                  },
                   {
                     "cited": 0,
                     "total": 0
@@ -6777,13 +7285,16 @@
                 ],
                 "acceptable": [
                   0,
+                  0,
                   0
                 ],
                 "other": [
                   1,
+                  1,
                   1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -6797,9 +7308,14 @@
               "qa1": {
                 "pages": [
                   7,
-                  5
+                  5,
+                  4
                 ],
                 "gold": [
+                  {
+                    "cited": 2,
+                    "total": 2
+                  },
                   {
                     "cited": 2,
                     "total": 2
@@ -6811,18 +7327,21 @@
                 ],
                 "acceptable": [
                   2,
+                  2,
                   2
                 ],
                 "other": [
                   3,
-                  1
+                  1,
+                  0
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 4,
+                  "retrieved_cited": 6,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
                   "neither": 0
@@ -6831,9 +7350,14 @@
               "qa2": {
                 "pages": [
                   3,
-                  3
+                  3,
+                  2
                 ],
                 "gold": [
+                  {
+                    "cited": 0,
+                    "total": 2
+                  },
                   {
                     "cited": 0,
                     "total": 2
@@ -6845,13 +7369,16 @@
                 ],
                 "acceptable": [
                   2,
-                  2
+                  2,
+                  1
                 ],
                 "other": [
+                  1,
                   1,
                   1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -6859,7 +7386,7 @@
                   "retrieved_cited": 0,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 4
+                  "neither": 6
                 }
               }
             },
@@ -6993,9 +7520,14 @@
               "qa1": {
                 "pages": [
                   4,
+                  5,
                   5
                 ],
                 "gold": [
+                  {
+                    "cited": 2,
+                    "total": 2
+                  },
                   {
                     "cited": 2,
                     "total": 2
@@ -7007,18 +7539,21 @@
                 ],
                 "acceptable": [
                   2,
-                  3
+                  3,
+                  2
                 ],
                 "other": [
                   0,
-                  0
+                  0,
+                  1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 4,
+                  "retrieved_cited": 6,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
                   "neither": 0
@@ -7027,9 +7562,14 @@
               "qa2": {
                 "pages": [
                   3,
-                  4
+                  4,
+                  3
                 ],
                 "gold": [
+                  {
+                    "cited": 1,
+                    "total": 2
+                  },
                   {
                     "cited": 1,
                     "total": 2
@@ -7041,21 +7581,24 @@
                 ],
                 "acceptable": [
                   1,
-                  2
+                  2,
+                  1
                 ],
                 "other": [
+                  1,
                   1,
                   1
                 ],
                 "unresolved": [
                   0,
+                  0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 2,
+                  "retrieved_cited": 3,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 2
+                  "neither": 3
                 }
               }
             },
@@ -7189,7 +7732,8 @@
               "qa1": {
                 "pages": [
                   5,
-                  5
+                  5,
+                  4
                 ],
                 "gold": [
                   {
@@ -7199,22 +7743,29 @@
                   {
                     "cited": 2,
                     "total": 2
+                  },
+                  {
+                    "cited": 2,
+                    "total": 2
                   }
                 ],
                 "acceptable": [
                   3,
+                  2,
                   2
                 ],
                 "other": [
                   1,
-                  1
+                  1,
+                  0
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
                 "grid": {
-                  "retrieved_cited": 3,
+                  "retrieved_cited": 5,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
                   "neither": 1
@@ -7222,6 +7773,7 @@
               },
               "qa2": {
                 "pages": [
+                  2,
                   2,
                   2
                 ],
@@ -7233,17 +7785,24 @@
                   {
                     "cited": 0,
                     "total": 2
+                  },
+                  {
+                    "cited": 0,
+                    "total": 2
                   }
                 ],
                 "acceptable": [
+                  1,
                   1,
                   1
                 ],
                 "other": [
                   1,
+                  1,
                   1
                 ],
                 "unresolved": [
+                  0,
                   0,
                   0
                 ],
@@ -7251,7 +7810,7 @@
                   "retrieved_cited": 0,
                   "retrieved_not_cited": 0,
                   "not_retrieved_cited": 0,
-                  "neither": 4
+                  "neither": 6
                 }
               }
             }
@@ -7308,33 +7867,33 @@
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "2/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "0/2",
-                  "qa2_review": "2/2"
+                  "qa2_persist_or_cannot": "0/3",
+                  "qa2_review": "2/3"
                 },
-                "correct": "0/2",
-                "review": "0/2",
-                "wrong": "2/2",
+                "correct": "0/3",
+                "review": "0/3",
+                "wrong": "3/3",
                 "counts": {
                   "correct": 0,
                   "review": 0,
-                  "wrong": 2,
-                  "trials": 2
+                  "wrong": 3,
+                  "trials": 3
                 }
               }
             },
@@ -7374,48 +7933,48 @@
               },
               "q3": {
                 "checks": {
-                  "q3_refuse": "1/2",
-                  "q3_numflag": "2/2"
+                  "q3_refuse": "2/3",
+                  "q3_numflag": "3/3"
                 },
-                "correct": "1/2",
-                "review": "0/2",
-                "wrong": "1/2",
+                "correct": "2/3",
+                "review": "0/3",
+                "wrong": "1/3",
                 "counts": {
-                  "correct": 1,
+                  "correct": 2,
                   "review": 0,
                   "wrong": 1,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "1/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "2/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "0/2",
-                  "qa2_review": "1/2"
+                  "qa2_persist_or_cannot": "0/3",
+                  "qa2_review": "1/3"
                 },
-                "correct": "0/2",
-                "review": "0/2",
-                "wrong": "2/2",
+                "correct": "0/3",
+                "review": "0/3",
+                "wrong": "3/3",
                 "counts": {
                   "correct": 0,
                   "review": 0,
-                  "wrong": 2,
-                  "trials": 2
+                  "wrong": 3,
+                  "trials": 3
                 }
               }
             },
@@ -7470,33 +8029,33 @@
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "2/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "2/2",
-                  "qa2_review": "1/2"
+                  "qa2_persist_or_cannot": "3/3",
+                  "qa2_review": "1/3"
                 },
-                "correct": "1/2",
-                "review": "0/2",
-                "wrong": "1/2",
+                "correct": "1/3",
+                "review": "0/3",
+                "wrong": "2/3",
                 "counts": {
                   "correct": 1,
                   "review": 0,
-                  "wrong": 1,
-                  "trials": 2
+                  "wrong": 2,
+                  "trials": 3
                 }
               }
             },
@@ -7551,33 +8110,33 @@
               },
               "qa1": {
                 "checks": {
-                  "qa1_first": "2/2",
-                  "qa1_decode": "2/2",
-                  "qa1_ftuse": "2/2"
+                  "qa1_first": "3/3",
+                  "qa1_decode": "3/3",
+                  "qa1_ftuse": "3/3"
                 },
-                "correct": "2/2",
-                "review": "0/2",
-                "wrong": "0/2",
+                "correct": "3/3",
+                "review": "0/3",
+                "wrong": "0/3",
                 "counts": {
-                  "correct": 2,
+                  "correct": 3,
                   "review": 0,
                   "wrong": 0,
-                  "trials": 2
+                  "trials": 3
                 }
               },
               "qa2": {
                 "checks": {
-                  "qa2_persist_or_cannot": "0/2",
-                  "qa2_review": "0/2"
+                  "qa2_persist_or_cannot": "0/3",
+                  "qa2_review": "0/3"
                 },
-                "correct": "0/2",
-                "review": "0/2",
-                "wrong": "2/2",
+                "correct": "0/3",
+                "review": "0/3",
+                "wrong": "3/3",
                 "counts": {
                   "correct": 0,
                   "review": 0,
-                  "wrong": 2,
-                  "trials": 2
+                  "wrong": 3,
+                  "trials": 3
                 }
               }
             }
@@ -7613,22 +8172,22 @@
               "cost_usd": "0.001336 (0.001282–0.001347)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "4.9 (4.4–5.4)",
-              "input": "5250 (4082–6417)",
-              "output": "708 (700–717)",
+              "trials": 3,
+              "seconds": "4.4 (3.7–5.4)",
+              "input": "4136 (4082–6417)",
+              "output": "700 (459–717)",
               "thoughts": "0 (0–0)",
               "requests": "2 (2–3)",
-              "cost_usd": "0.003346 (0.003017–0.003675)"
+              "cost_usd": "0.003017 (0.002388–0.003675)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "5.6 (5.2–6.0)",
-              "input": "8946 (5756–12136)",
-              "output": "308 (293–324)",
+              "trials": 3,
+              "seconds": "6.0 (5.2–9.7)",
+              "input": "5756 (5756–12136)",
+              "output": "293 (261–324)",
               "thoughts": "0 (0–0)",
-              "requests": "4 (3–4)",
-              "cost_usd": "0.003455 (0.002459–0.004451)"
+              "requests": "3 (3–4)",
+              "cost_usd": "0.002459 (0.002379–0.004451)"
             }
           },
           "G graph（参考）": {
@@ -7651,31 +8210,31 @@
               "cost_usd": "0.002620 (0.002620–0.002785)"
             },
             "q3": {
-              "trials": 2,
-              "seconds": "3.7 (3.2–4.3)",
-              "input": "10324 (5334–15313)",
-              "output": "216 (187–244)",
+              "trials": 3,
+              "seconds": "4.3 (3.2–4.5)",
+              "input": "15303 (5334–15313)",
+              "output": "208 (187–244)",
               "thoughts": "0 (0–0)",
-              "requests": "2 (2–3)",
-              "cost_usd": "0.003086 (0.002210–0.003962)"
+              "requests": "3 (2–3)",
+              "cost_usd": "0.003962 (0.002210–0.004012)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "6.1 (6.0–6.2)",
-              "input": "15113 (15113–15113)",
-              "output": "741 (736–746)",
+              "trials": 3,
+              "seconds": "6.0 (4.5–6.2)",
+              "input": "15113 (4867–15113)",
+              "output": "736 (555–746)",
               "thoughts": "0 (0–0)",
-              "requests": "3 (3–3)",
-              "cost_usd": "0.005288 (0.005275–0.005300)"
+              "requests": "3 (2–3)",
+              "cost_usd": "0.005275 (0.002301–0.005300)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "3.8 (3.1–4.5)",
-              "input": "9167 (4752–13582)",
-              "output": "268 (241–294)",
+              "trials": 3,
+              "seconds": "4.5 (3.1–9.0)",
+              "input": "12685 (4752–13582)",
+              "output": "241 (237–294)",
               "thoughts": "0 (0–0)",
-              "requests": "2 (2–3)",
-              "cost_usd": "0.002870 (0.002161–0.003579)"
+              "requests": "3 (2–3)",
+              "cost_usd": "0.003300 (0.002161–0.003579)"
             }
           },
           "A1 term_graph": {
@@ -7707,22 +8266,22 @@
               "cost_usd": "0.001379 (0.001239–0.001449)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "5.5 (5.2–5.7)",
-              "input": "8664 (6877–10452)",
-              "output": "598 (557–640)",
+              "trials": 3,
+              "seconds": "5.7 (5.2–8.0)",
+              "input": "6906 (6877–10452)",
+              "output": "640 (557–741)",
               "thoughts": "0 (0–0)",
               "requests": "3 (3–3)",
-              "cost_usd": "0.003822 (0.003663–0.003981)"
+              "cost_usd": "0.003924 (0.003663–0.003981)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "4.8 (4.5–5.1)",
-              "input": "6700 (6663–6736)",
-              "output": "345 (332–358)",
+              "trials": 3,
+              "seconds": "5.1 (4.5–5.4)",
+              "input": "6736 (6663–6736)",
+              "output": "332 (332–358)",
               "thoughts": "0 (0–0)",
               "requests": "3 (3–3)",
-              "cost_usd": "0.002872 (0.002851–0.002894)"
+              "cost_usd": "0.002851 (0.002306–0.002894)"
             }
           },
           "A2 term_graph_cap3": {
@@ -7754,22 +8313,22 @@
               "cost_usd": "0.001321 (0.001257–0.001687)"
             },
             "qa1": {
-              "trials": 2,
-              "seconds": "4.8 (3.8–5.8)",
-              "input": "5154 (4395–5912)",
-              "output": "632 (607–656)",
+              "trials": 3,
+              "seconds": "3.8 (3.3–5.8)",
+              "input": "4395 (2476–5912)",
+              "output": "607 (469–656)",
               "thoughts": "0 (0–0)",
               "requests": "2 (2–3)",
-              "cost_usd": "0.003125 (0.002836–0.003414)"
+              "cost_usd": "0.002836 (0.001915–0.003414)"
             },
             "qa2": {
-              "trials": 2,
-              "seconds": "3.4 (3.0–3.8)",
-              "input": "4596 (2486–6706)",
-              "output": "232 (218–246)",
+              "trials": 3,
+              "seconds": "3.8 (3.0–12.1)",
+              "input": "6400 (2486–6706)",
+              "output": "244 (218–246)",
               "thoughts": "0 (0–0)",
-              "requests": "2 (2–3)",
-              "cost_usd": "0.001959 (0.001291–0.002627)"
+              "requests": "3 (2–3)",
+              "cost_usd": "0.002530 (0.001291–0.002627)"
             }
           }
         }
@@ -7779,11 +8338,11 @@
   "warnings": {
     "gemini-3.5-flash-lite": [
       "- status が ok ではない試行: なし",
-      "- 再試行した試行（API の失敗を待ってやり直した）: 14 件 — B1 doc_hint/q1 t2（model:503, model:503）、B1 doc_hint/q2 t3（model:503, model:503）、B1 doc_hint/qa1 t2（model:503）、G graph/q1 t2（model:503）、G graph/q2 t2（model:503）、I1 neighbors/q2 t1（model:503, model:503, model:503）、A1 term_graph/q1 t1（model:503）、A1 term_graph/q3 t1（model:503）、A2 term_graph_cap3/q1 t1（model:503, model:503）、I2 topk15/q1 t3（model:503）、T tree/q2 t2（model:503）、V0 vector/q2 t1（model:503, model:503） …",
+      "- 再試行した試行（API の失敗を待ってやり直した）: 22 件 — B1 doc_hint/q1 t2（model:503, model:503）、B1 doc_hint/q2 t3（model:503, model:503）、B1 doc_hint/q3 t3（model:503, model:503, model:503）、B1 doc_hint/qa1 t2（model:503）、G graph/q1 t2（model:503）、G graph/q2 t2（model:503）、G graph/qa1 t3（model:503）、I1 neighbors/q2 t1（model:503, model:503, model:503）、A1 term_graph/q1 t1（model:503）、A1 term_graph/q3 t1（model:503）、A1 term_graph/qa1 t3（model:503）、A1 term_graph/qa2 t3（model:503, model:503） …",
       "- モデルに見えた指示が、設定した条件と違う試行（instructions_match が false）: なし",
       "- モデルが引数を直せば変わる、ツールの error を返した試行: なし",
       "- 資料名・資料 ID・回の手がかりで 1 ページに決まらない引用（ambiguous）がある試行: なし",
-      "- 要確認（required がすべて一致し、flag にも一致。回答を読んで決める。正答にも誤答にも数えない）の試行: なし",
+      "- 要確認（required がすべて一致し、flag にも一致。回答を読んで決める。正答にも誤答にも数えない）の試行: 1 件 — F214 full_aligned/q3 t3",
       "- 記録の質問の文が、いまの conditions.toml と違う試行（質問を変えたあとは、別の --out に書く）: なし"
     ]
   }

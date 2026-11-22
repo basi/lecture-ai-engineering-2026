@@ -1,0 +1,18 @@
+[model] gemini-3.5-flash-lite
+[variant] G graph
+[質問] qa2
+第3回の講義資料によると、エージェントのメモリには、**「すべてを蓄積すると、古い情報や誤りも一緒に戻ってくる」**という危険（懸念）があると説明されています（第3回・PDF p.38）。
+
+これに対して、どのような対策や工夫が必要とされているか、以下のヒントを参考に考えてみてください。
+
+- **情報の取捨選択**: すべてのやり取りや情報をそのまま溜め込むのではなく、何を残し、何を消すべきかをどのように設計・管理すればよいでしょうか（第3回・PDF p.38）。
+- **定期的な見直し**: 実装例の一つであるOpenClawのように、日々の記録（メモ）から不要なものを省き、重要なテーマや基準を超えたものだけを長期メモリに残すためには、どのような仕組みを取り入れると効果的でしょうか（第3回・PDF p.40）。
+
+--- trace ---
+[tool call]   search_graph({'query': 'エージェント メモリ 危険'})
+[tool return] search_graph -> {"seeds": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "sect…
+[tool call]   search_graph({'query': 'メモリ 古い情報 誤り 残し 消す 設計'})
+[tool return] search_graph -> {"seeds": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "sect…
+[time] 回答完了まで 8.98 秒（検索・埋め込みを含む）
+[usage] 入力 12,685 tokens / 出力 237 tokens / モデル応答 3 回
+[cost] 生成APIの推定コスト: $0.003300 USD（埋め込み・索引構築分は含まない）

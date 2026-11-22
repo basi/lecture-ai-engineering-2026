@@ -15,11 +15,11 @@
 
 モデル gemini-3.5-flash-lite:
 - status が ok ではない試行: なし
-- 再試行した試行（API の失敗を待ってやり直した）: 14 件 — B1 doc_hint/q1 t2（model:503, model:503）、B1 doc_hint/q2 t3（model:503, model:503）、B1 doc_hint/qa1 t2（model:503）、G graph/q1 t2（model:503）、G graph/q2 t2（model:503）、I1 neighbors/q2 t1（model:503, model:503, model:503）、A1 term_graph/q1 t1（model:503）、A1 term_graph/q3 t1（model:503）、A2 term_graph_cap3/q1 t1（model:503, model:503）、I2 topk15/q1 t3（model:503）、T tree/q2 t2（model:503）、V0 vector/q2 t1（model:503, model:503） …
+- 再試行した試行（API の失敗を待ってやり直した）: 22 件 — B1 doc_hint/q1 t2（model:503, model:503）、B1 doc_hint/q2 t3（model:503, model:503）、B1 doc_hint/q3 t3（model:503, model:503, model:503）、B1 doc_hint/qa1 t2（model:503）、G graph/q1 t2（model:503）、G graph/q2 t2（model:503）、G graph/qa1 t3（model:503）、I1 neighbors/q2 t1（model:503, model:503, model:503）、A1 term_graph/q1 t1（model:503）、A1 term_graph/q3 t1（model:503）、A1 term_graph/qa1 t3（model:503）、A1 term_graph/qa2 t3（model:503, model:503） …
 - モデルに見えた指示が、設定した条件と違う試行（instructions_match が false）: なし
 - モデルが引数を直せば変わる、ツールの error を返した試行: なし
 - 資料名・資料 ID・回の手がかりで 1 ページに決まらない引用（ambiguous）がある試行: なし
-- 要確認（required がすべて一致し、flag にも一致。回答を読んで決める。正答にも誤答にも数えない）の試行: なし
+- 要確認（required がすべて一致し、flag にも一致。回答を読んで決める。正答にも誤答にも数えない）の試行: 1 件 — F214 full_aligned/q3 t3
 - 記録の質問の文が、いまの conditions.toml と違う試行（質問を変えたあとは、別の --out に書く）: なし
 
 ## モデル: gemini-3.5-flash-lite
@@ -43,20 +43,20 @@
 | F full | q3 | 0,0,0 | 1,1,1 | ツールなし | — |
 | F214 full_aligned | q1 | 0,0,0 | 1,1,1 | ツールなし | — |
 | F214 full_aligned | q2 | 0,0,0 | 1,1,1 | ツールなし | — |
-| F214 full_aligned | q3 | 0,0 [2/3回] | 1,1 | ツールなし | — |
+| F214 full_aligned | q3 | 0,0,0 | 1,1,1 | ツールなし | — |
 | V0 vector | q1 | 1,1,1 | 2,2,2 | search_materials(LoRA 固定 学習 QLoRA 加える) | — |
 | V0 vector | q2 | 1,1,1 | 2,2,2 | search_materials(コンパクション セッション メモリ 長期メモリ 日々のメモ 第3回) | — |
 | V0 vector | q3 | 1,1,1 | 2,2,2 | search_materials(実測平均応答時間 正答率 RAG) | — |
-| V0 vector | qa1 | 2,2 [2/3回] | 2,3 | search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力) | — |
-| V0 vector | qa2 | 3,2 [2/3回] | 4,3 | search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming) | — |
+| V0 vector | qa1 | 2,2,2 | 2,3,2 | search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力) | — |
+| V0 vector | qa2 | 3,2,2 | 4,3,3 | search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming) | — |
 | T tree | q1 | 4,4,4 | 5,5,5 | browse_tree(（引数なし）) ／ browse_tree(lec02-main) ／ browse_tree(lec02-main-s045) ／ browse_tree(lec02-main-p052) | 1,1,1 |
 | T tree | q2 | 6,5,6 | 7,6,7 | browse_tree(（引数なし）) ／ browse_tree(lec03-main) ／ browse_tree(lec03-main-s037) ／ browse_tree(lec03-main-p039) ／ browse_tree(lec03-main-p040) ／ browse_tree(lec03-main-p041) | 3,2,3 |
-| T tree | q3 | 4,4 [2/3回] | 3,3 | browse_tree(（引数なし）) ／ browse_tree(lec01-main) ／ browse_tree(lec02-main) ／ browse_tree(lec03-main) | 0,0 |
+| T tree | q3 | 4,4,4 | 3,3,3 | browse_tree(（引数なし）) ／ browse_tree(lec01-main) ／ browse_tree(lec02-main) ／ browse_tree(lec03-main) | 0,0,0 |
 | G graph | q1 | 1,1,1 | 2,2,2 | search_graph(LoRA QLoRA 固定 学習) | — |
 | G graph | q2 | 1,1,1 | 2,2,2 | search_graph(コンパクション セッション 長期メモリ) | — |
-| G graph | q3 | 2,1 [2/3回] | 3,2 | search_graph(RAG 実測平均応答時間 正答率) ／ search_graph(RAG 実測) | — |
-| G graph | qa1 | 2,2 [2/3回] | 3,3 | search_graph(ファインチューニング 構造化出力 使い分け 第2回 第3回) ／ search_graph(第3回 構造化出力 形式を守らせる) | — |
-| G graph | qa2 | 1,2 [2/3回] | 2,3 | search_graph(エージェント メモリ 危険) | — |
+| G graph | q3 | 2,1,2 | 3,2,3 | search_graph(RAG 実測平均応答時間 正答率) ／ search_graph(RAG 実測) | — |
+| G graph | qa1 | 2,2,1 | 3,3,2 | search_graph(ファインチューニング 構造化出力 使い分け 第2回 第3回) ／ search_graph(第3回 構造化出力 形式を守らせる) | — |
+| G graph | qa2 | 1,2,2 | 2,3,3 | search_graph(エージェント メモリ 危険) | — |
 
 #### 表B: 根拠の取得（gold の取得率は、全文で取得したページ ∩ gold ÷ gold。全文投入は、gold が対象資料に入っているか）
 
@@ -67,20 +67,20 @@
 | F full | q3 | —,—,— | 438,438,438 | — | — | — | 227911,227911,227911 | — |
 | F214 full_aligned | q1 | 1/1,1/1,1/1 | 214,214,214 | — | — | — | 109817,109817,109817 | — |
 | F214 full_aligned | q2 | 3/3,3/3,3/3 | 214,214,214 | — | — | — | 109817,109817,109817 | — |
-| F214 full_aligned | q3 | —,— | 214,214 | — | — | — | 109817,109817 | — |
+| F214 full_aligned | q3 | —,—,— | 214,214,214 | — | — | — | 109817,109817,109817 | — |
 | V0 vector | q1 | 1/1,1/1,1/1 | 5,5,5 | — | — | — | 2956,2956,2956 | t1[#1] t2[#1] t3[#1] |
 | V0 vector | q2 | 3/3,3/3,3/3 | 5,5,5 | — | — | — | 2382,2382,2382 | t1[#4,#1,#5] t2[#5,#1,#4] t3[#5,#1,#4] |
 | V0 vector | q3 | —,—,— | 5,5,5 | — | — | — | 3636,3189,3636 | — |
-| V0 vector | qa1 | 1/2,2/2 | 10,9 | — | — | — | 3951,4279 | t1[×,#4] t2[#1,#2] |
-| V0 vector | qa2 | 0/2,0/2 | 10,10 | — | — | — | 7004,3581 | t1[×,×] t2[×,×] |
+| V0 vector | qa1 | 1/2,2/2,1/2 | 10,9,10 | — | — | — | 3951,4279,3989 | t1[×,#4] t2[#1,#2] t3[×,#4] |
+| V0 vector | qa2 | 0/2,0/2,0/2 | 10,10,10 | — | — | — | 7004,3581,3581 | t1[×,×] t2[×,×] t3[×,×] |
 | T tree | q1 | 1/1,1/1,1/1 | 1,1,1 | 23,23,23 | — | — | 717,717,717 | t1[×] t2[×] t3[×] |
 | T tree | q2 | 2/3,2/3,2/3 | 3,2,3 | 6,7,6 | — | — | 1427,921,1427 | t1[×,×,×] t2[×,×,×] t3[×,×,×] |
-| T tree | q3 | —,— | 0,0 | 12,12 | — | — | 0,0 | — |
+| T tree | q3 | —,—,— | 0,0,0 | 12,12,12 | — | — | 0,0,0 | — |
 | G graph | q1 | 1/1,1/1,1/1 | 10,10,10 | — | 3/7,3/7,3/7 | — | 5382,5382,5382 | t1[#1] t2[#1] t3[#1] |
 | G graph | q2 | 2/3,2/3,2/3 | 10,10,10 | — | 3/7,3/7,3/7 | — | 5658,5658,5658 | t1[×,#2,×] t2[×,#1,×] t3[×,#2,×] |
-| G graph | q3 | —,— | 13,10 | — | 4/9,3/7 | — | 10739,5067 | — |
-| G graph | qa1 | 2/2,2/2 | 20,20 | — | 6/14,6/14 | — | 10420,10420 | t1[#2,×] t2[#2,×] |
-| G graph | qa2 | 0/2,0/2 | 10,16 | — | 3/7,5/12 | — | 4682,9802 | t1[×,×] t2[×,×] |
+| G graph | q3 | —,—,— | 13,10,13 | — | 4/9,3/7,4/9 | — | 10739,5067,10262 | — |
+| G graph | qa1 | 2/2,2/2,2/2 | 20,20,10 | — | 6/14,6/14,3/7 | — | 10420,10420,4525 | t1[#2,×] t2[#2,×] t3[×,#2] |
+| G graph | qa2 | 0/2,0/2,0/2 | 10,16,13 | — | 3/7,5/12,4/9 | — | 4682,9802,8090 | t1[×,×] t2[×,×] t3[×,×] |
 
 #### 表C1: 引用（gold 引用 = 引用したページ ∩ gold ÷ gold。2×2 は gold ページごとの合計: 取れて引用した／取れたが引用しなかった／取らずに引用した／取れず引用もしない）
 
@@ -91,20 +91,20 @@
 | F full | q3 | 0,2,1 | —,—,— | 0,0,0 | 0,2,1 | 0,0,0 | 0/0/0/0 |
 | F214 full_aligned | q1 | 1,2,2 | 1/1,1/1,1/1 | 0,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | F214 full_aligned | q2 | 2,3,3 | 2/3,2/3,2/3 | 0,1,1 | 0,0,0 | 0,0,0 | 6/3/0/0 |
-| F214 full_aligned | q3 | 5,3 | —,— | 0,0 | 5,3 | 0,0 | 0/0/0/0 |
+| F214 full_aligned | q3 | 5,3,5 | —,—,— | 0,0,0 | 5,3,5 | 0,0,0 | 0/0/0/0 |
 | V0 vector | q1 | 2,2,2 | 1/1,1/1,1/1 | 1,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | V0 vector | q2 | 3,5,3 | 2/3,3/3,2/3 | 1,1,1 | 0,1,0 | 0,0,0 | 7/2/0/0 |
 | V0 vector | q3 | 1,1,0 | —,—,— | 0,0,0 | 1,1,0 | 0,0,0 | 0/0/0/0 |
-| V0 vector | qa1 | 7,5 | 1/2,2/2 | 3,2 | 3,1 | 0,0 | 3/0/0/1 |
-| V0 vector | qa2 | 3,2 | 0/2,0/2 | 2,1 | 1,1 | 0,0 | 0/0/0/4 |
+| V0 vector | qa1 | 7,5,6 | 1/2,2/2,1/2 | 3,2,3 | 3,1,2 | 0,0,0 | 4/0/0/2 |
+| V0 vector | qa2 | 3,2,2 | 0/2,0/2,0/2 | 2,1,1 | 1,1,1 | 0,0,0 | 0/0/0/6 |
 | T tree | q1 | 1,1,1 | 1/1,1/1,1/1 | 0,0,0 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | T tree | q2 | 2,2,2 | 2/3,2/3,2/3 | 0,0,0 | 0,0,0 | 0,0,0 | 6/0/0/3 |
-| T tree | q3 | 0,0 | —,— | 0,0 | 0,0 | 0,0 | 0/0/0/0 |
+| T tree | q3 | 0,0,0 | —,—,— | 0,0,0 | 0,0,0 | 0,0,0 | 0/0/0/0 |
 | G graph | q1 | 2,2,2 | 1/1,1/1,1/1 | 1,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | G graph | q2 | 3,4,3 | 2/3,2/3,2/3 | 0,1,0 | 1,1,1 | 0,0,0 | 6/0/0/3 |
-| G graph | q3 | 1,1 | —,— | 0,0 | 1,1 | 0,0 | 0/0/0/0 |
-| G graph | qa1 | 7,5 | 2/2,2/2 | 2,2 | 3,1 | 0,0 | 4/0/0/0 |
-| G graph | qa2 | 3,3 | 0/2,0/2 | 2,2 | 1,1 | 0,0 | 0/0/0/4 |
+| G graph | q3 | 1,1,1 | —,—,— | 0,0,0 | 1,1,1 | 0,0,0 | 0/0/0/0 |
+| G graph | qa1 | 7,5,4 | 2/2,2/2,2/2 | 2,2,2 | 3,1,0 | 0,0,0 | 6/0/0/0 |
+| G graph | qa2 | 3,3,2 | 0/2,0/2,0/2 | 2,2,1 | 1,1,1 | 0,0,0 | 0/0/0/6 |
 
 #### 表C2: 自動チェック（チェックは、通った試行/試行数。自動の正答 = required がすべて一致し、flag が一致しない。要確認 = required がすべて一致し、flag も一致（回答を読んで決める。正答にも誤答にも数えない）。自動の誤答 = required のどれかが一致しない（flag は問わない））
 
@@ -115,20 +115,20 @@
 | F full | q3 | q3_refuse（required）3/3<br>q3_numflag（flag）3/3 | 3/3 | 0/3 | 0/3 |
 | F214 full_aligned | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）1/3 | 1/3 | 0/3 | 2/3 |
 | F214 full_aligned | q2 | q2_summary（required）3/3<br>q2_persist（required）3/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 3/3 | 0/3 | 0/3 |
-| F214 full_aligned | q3 | q3_refuse（required）2/2<br>q3_numflag（flag）2/2 | 2/2 | 0/2 | 0/2 |
+| F214 full_aligned | q3 | q3_refuse（required）3/3<br>q3_numflag（flag）2/3 | 2/3 | 1/3 | 0/3 |
 | V0 vector | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）3/3 | 3/3 | 0/3 | 0/3 |
 | V0 vector | q2 | q2_summary（required）3/3<br>q2_persist（required）3/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 3/3 | 0/3 | 0/3 |
 | V0 vector | q3 | q3_refuse（required）3/3<br>q3_numflag（flag）3/3 | 3/3 | 0/3 | 0/3 |
-| V0 vector | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）2/2 | 2/2 | 0/2 | 0/2 |
-| V0 vector | qa2 | qa2_persist_or_cannot（required）0/2<br>qa2_review（required）2/2 | 0/2 | 0/2 | 2/2 |
+| V0 vector | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）3/3 | 3/3 | 0/3 | 0/3 |
+| V0 vector | qa2 | qa2_persist_or_cannot（required）0/3<br>qa2_review（required）2/3 | 0/3 | 0/3 | 3/3 |
 | T tree | q1 | q1_fix（required）3/3<br>q1_train（required）2/3<br>q1_qlora（required）3/3 | 2/3 | 0/3 | 1/3 |
 | T tree | q2 | q2_summary（required）3/3<br>q2_persist（required）2/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 2/3 | 0/3 | 1/3 |
-| T tree | q3 | q3_refuse（required）2/2<br>q3_numflag（flag）2/2 | 2/2 | 0/2 | 0/2 |
+| T tree | q3 | q3_refuse（required）3/3<br>q3_numflag（flag）3/3 | 3/3 | 0/3 | 0/3 |
 | G graph | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）3/3 | 3/3 | 0/3 | 0/3 |
 | G graph | q2 | q2_summary（required）3/3<br>q2_persist（required）2/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 2/3 | 0/3 | 1/3 |
-| G graph | q3 | q3_refuse（required）1/2<br>q3_numflag（flag）2/2 | 1/2 | 0/2 | 1/2 |
-| G graph | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）1/2 | 2/2 | 0/2 | 0/2 |
-| G graph | qa2 | qa2_persist_or_cannot（required）0/2<br>qa2_review（required）1/2 | 0/2 | 0/2 | 2/2 |
+| G graph | q3 | q3_refuse（required）2/3<br>q3_numflag（flag）3/3 | 2/3 | 0/3 | 1/3 |
+| G graph | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）2/3 | 3/3 | 0/3 | 0/3 |
+| G graph | qa2 | qa2_persist_or_cannot（required）0/3<br>qa2_review（required）1/3 | 0/3 | 0/3 | 3/3 |
 
 #### 表D: 時間・トークン・費用（中央値 (最小–最大)。費用は生成 API の推定で、埋め込みを含まない。算定できなければ「算定不可」で、0 にしない）
 
@@ -139,20 +139,20 @@
 | F full | q3 | 3 | 3.4 (3.1–5.1) | 117016 (117016–117016) | 226 (186–254) | 0 (0–0) | 1 (1–1) | 0.035670 (0.035570–0.035740) |
 | F214 full_aligned | q1 | 3 | 2.8 (2.0–3.6) | 58925 (58925–58925) | 203 (178–277) | 0 (0–0) | 1 (1–1) | 0.018185 (0.018122–0.018370) |
 | F214 full_aligned | q2 | 3 | 2.9 (2.7–14.7) | 58931 (58931–58931) | 344 (256–391) | 0 (0–0) | 1 (1–1) | 0.018539 (0.018319–0.018657) |
-| F214 full_aligned | q3 | 2 | 2.6 (2.5–2.7) | 58916 (58916–58916) | 270 (261–278) | 0 (0–0) | 1 (1–1) | 0.018349 (0.018327–0.018370) |
+| F214 full_aligned | q3 | 3 | 2.7 (2.5–4.6) | 58916 (58916–58916) | 278 (261–330) | 0 (0–0) | 1 (1–1) | 0.018370 (0.018327–0.018500) |
 | V0 vector | q1 | 3 | 2.8 (2.7–2.8) | 3028 (3027–3028) | 163 (157–203) | 0 (0–0) | 2 (2–2) | 0.001316 (0.001301–0.001416) |
 | V0 vector | q2 | 3 | 3.9 (3.5–8.8) | 2500 (2500–2502) | 467 (358–535) | 0 (0–0) | 2 (2–2) | 0.001917 (0.001646–0.002087) |
 | V0 vector | q3 | 3 | 2.7 (2.6–2.8) | 3205 (3120–3205) | 154 (128–160) | 0 (0–0) | 2 (2–2) | 0.001336 (0.001282–0.001347) |
-| V0 vector | qa1 | 2 | 4.9 (4.4–5.4) | 5250 (4082–6417) | 708 (700–717) | 0 (0–0) | 2 (2–3) | 0.003346 (0.003017–0.003675) |
-| V0 vector | qa2 | 2 | 5.6 (5.2–6.0) | 8946 (5756–12136) | 308 (293–324) | 0 (0–0) | 4 (3–4) | 0.003455 (0.002459–0.004451) |
+| V0 vector | qa1 | 3 | 4.4 (3.7–5.4) | 4136 (4082–6417) | 700 (459–717) | 0 (0–0) | 2 (2–3) | 0.003017 (0.002388–0.003675) |
+| V0 vector | qa2 | 3 | 6.0 (5.2–9.7) | 5756 (5756–12136) | 293 (261–324) | 0 (0–0) | 3 (3–4) | 0.002459 (0.002379–0.004451) |
 | T tree | q1 | 3 | 5.3 (5.2–6.2) | 9214 (9214–9214) | 313 (302–332) | 0 (0–0) | 5 (5–5) | 0.003547 (0.003519–0.003594) |
 | T tree | q2 | 3 | 8.1 (6.6–60.5) | 11045 (8200–11045) | 580 (531–625) | 0 (0–0) | 7 (6–7) | 0.004764 (0.003788–0.004876) |
-| T tree | q3 | 2 | 3.6 (3.5–3.6) | 3066 (3066–3066) | 332 (322–341) | 0 (0–0) | 3 (3–3) | 0.001749 (0.001725–0.001772) |
+| T tree | q3 | 3 | 3.5 (2.5–3.6) | 3066 (3066–3066) | 322 (205–341) | 0 (0–0) | 3 (3–3) | 0.001725 (0.001432–0.001772) |
 | G graph | q1 | 3 | 2.8 (2.5–3.1) | 5771 (5771–5775) | 222 (151–227) | 0 (0–0) | 2 (2–2) | 0.002286 (0.002109–0.002300) |
 | G graph | q2 | 3 | 4.8 (3.5–11.3) | 5299 (5299–5301) | 412 (412–478) | 0 (0–0) | 2 (2–2) | 0.002620 (0.002620–0.002785) |
-| G graph | q3 | 2 | 3.7 (3.2–4.3) | 10324 (5334–15313) | 216 (187–244) | 0 (0–0) | 2 (2–3) | 0.003086 (0.002210–0.003962) |
-| G graph | qa1 | 2 | 6.1 (6.0–6.2) | 15113 (15113–15113) | 741 (736–746) | 0 (0–0) | 3 (3–3) | 0.005288 (0.005275–0.005300) |
-| G graph | qa2 | 2 | 3.8 (3.1–4.5) | 9167 (4752–13582) | 268 (241–294) | 0 (0–0) | 2 (2–3) | 0.002870 (0.002161–0.003579) |
+| G graph | q3 | 3 | 4.3 (3.2–4.5) | 15303 (5334–15313) | 208 (187–244) | 0 (0–0) | 3 (2–3) | 0.003962 (0.002210–0.004012) |
+| G graph | qa1 | 3 | 6.0 (4.5–6.2) | 15113 (4867–15113) | 736 (555–746) | 0 (0–0) | 3 (2–3) | 0.005275 (0.002301–0.005300) |
+| G graph | qa2 | 3 | 4.5 (3.1–9.0) | 12685 (4752–13582) | 241 (237–294) | 0 (0–0) | 3 (2–3) | 0.003300 (0.002161–0.003579) |
 
 #### 試行ごとの詳細（回答の全文・ツールの引数・引用の raw）
 
@@ -502,7 +502,7 @@ LoRAとQLoRAにおける学習対象と追加要素については、以下の�
 </details>
 
 <details>
-<summary>F214 full_aligned / q3（2 回）</summary>
+<summary>F214 full_aligned / q3（3 回）</summary>
 
 **t1**｜ok｜2.652 秒｜tool_calls 0｜requests 1｜gold 取得 —｜gold 引用 —｜○q3_refuse ○q3_numflag｜自動の正答
 
@@ -542,6 +542,24 @@ LoRAとQLoRAにおける学習対象と追加要素については、以下の�
 ```
 
 - 引用の raw: PDF p.27（ok。候補 lec01-main-p027）、PDF p.35（ok。候補 lec02-main-p035）、PDF p.13（ok。候補 lec02-main-p013）
+
+**t3**｜ok｜4.579 秒｜tool_calls 0｜requests 1｜gold 取得 —｜gold 引用 —｜○q3_refuse ×q3_numflag｜**要確認（flag に一致）。目視で決める**
+
+```
+ご質問ありがとうございます。
+
+ご提示いただいた資料（`lec01-main`、`lec02-main`、`lec03-main`）を確認いたしましたが、「今回作ったRAGの実測平均応答時間と正答率」に関する具体的な数値やデータについての記載はございません。そのため、資料から回答を確認することはできません。
+
+なお、AIエンジニアリングにおいて、AIモデルやRAGを使ったシステムの性能を評価する際には、開発時やテスト時の体感だけでなく、評価セットを用いて実際に測定することが重要であると説明されています（資料: `lec01-main` PDF p.27、`lec02-main` PDF p.39）。
+
+もし講義の演習や宿題などでご自身が作成されたシステムについて測る必要がある場合は、以下の考え方をヒントに検証を進めてみてください。
+
+**【考え方のヒント】**
+- **正答率の測り方:** 1回の成功だけで判断せず、同じ質問を複数回聞いて結果のばらつき（揺れ）を確認したり、答えられない質問（資料にない質問）も含めた評価セットを使って測る方法が紹介されています（資料: `lec02-main` PDF p.13, p.18）。
+- **応答時間の測り方:** システムの要件（例：3秒以内に答え始めるなど）や「コスト＜効果」の観点に照らし合わせて、ご自身の評価環境で実際にログなどを取得して計測する必要があります（資料: `lec02-main` PDF p.44）。
+```
+
+- 引用の raw: PDF p.27（ok。候補 lec01-main-p027）、PDF p.39（ok。候補 lec02-main-p039）、PDF p.13（ok。候補 lec02-main-p013）、p.18（ok。候補 lec02-main-p018）、PDF p.44（ok。候補 lec02-main-p044）
 
 </details>
 
@@ -723,7 +741,7 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 </details>
 
 <details>
-<summary>V0 vector / qa1（2 回）</summary>
+<summary>V0 vector / qa1（3 回）</summary>
 
 **t1**｜ok｜4.447 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
 
@@ -793,10 +811,33 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 - `search_materials({"query":"構造化出力 形式を守らせる どうやって API"})` → success
 - 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.46（ok。候補 lec02-main-p046）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）
 
+**t3**｜ok｜3.722 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+回答を決まったJSON形式で返させたいときの「ファインチューニング」と「構造化出力」の使い分けや、仕組みについて、講義資料の記述をもとに整理します。
+
+### 1. ファインチューニングと構造化出力の使い分け
+* **構造化出力**：
+  * まず試すべきアプローチです。APIの機能としてスキーマ（項目と型の決まり）を指定し、形式に合う出力だけを生成させます（第3回・PDF p.34）。
+* **ファインチューニング**：
+  * プロンプトや形式指定（構造化出力など）では直らなかった場合の選択肢です。「振る舞い（形式・口調・手順など）」をモデルに覚え込ませるために用いられます（第2回・PDF p.46, p.58）。
+  * ただし、実務においては、形式を強制したいだけであれば、まずはプロンプトの工夫やAPIの構造化出力機能から検討するのが基本となります（第2回・PDF p.57）。
+
+### 2. 構造化出力はどうやって形式を守らせるのか
+構造化出力では、「**制約付きデコーディング**」という仕組みを使って形式を守らせています（第3回・PDF p.35）。
+* LLMがテキストを生成する際、1トークンを選ぶたびに、**あらかじめ定義したスキーマや形式に合わない候補をあらかじめ除外**します（第3回・PDF p.35）。
+* 残った候補の中から次のトークンを選ぶため、形式に合わない出力がそもそも生成されない仕組みになっています（第3回・PDF p.35）。
+* 主要なAPI（OpenAI、Claude、Geminiなど）では、`json_schema` や `strict: true` などの設定を行うことで、この機能を有効にして形式の崩れをほぼなくすことができます（第3回・PDF p.35, p.62）。
+```
+
+- `search_materials({"query":"ファインチューニング"})` → success
+- `search_materials({"query":"構造化出力"})` → success
+- 引用の raw: PDF p.34（ok。候補 lec03-main-p034）、PDF p.46（ok。候補 lec02-main-p046）、p.58（ok。候補 lec02-main-p058）、PDF p.57（ok。候補 lec02-main-p057）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、p.62（ok。候補 lec03-main-p062）
+
 </details>
 
 <details>
-<summary>V0 vector / qa2（2 回）</summary>
+<summary>V0 vector / qa2（3 回）</summary>
 
 **t1**｜ok｜5.982 秒｜tool_calls 3｜requests 4｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ○qa2_review｜自動の誤答
 
@@ -833,6 +874,25 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
   * 例えば実装例として紹介されている「OpenClaw」では、日々のメモを毎晩自動で見直し（dreaming）、重複を除いたり何度も出てくるテーマを探したりして、**基準を超えたものだけを長期メモリに残す**仕組みをとっています（第3回・PDF p.40）。
 
 このように、すべての情報をやみくもに溜め込むのではなく、情報の取捨選択や定期的な見直しの仕組みを取り入れることがポイントになります。
+```
+
+- `search_materials({"query":"エージェント メモリ 危険"})` → success
+- `search_materials({"query":"すべてを蓄積すると"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
+
+**t3**｜ok｜9.722 秒｜tool_calls 2｜requests 3｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ×qa2_review｜自動の誤答
+
+```
+第3回講義の資料では、エージェントのメモリに関して以下のような危険や課題が説明されています。
+
+* **古い情報や誤りも一緒に戻ってくる危険**
+  * すべての情報をそのまま蓄積してしまうと、古い情報や誤った情報までが一緒に呼び出されてしまうという問題が生じます（第3回・PDF p.38）。
+
+この危険を防ぎ、上手にメモリを管理するためにはどのような設計・工夫が必要とされるでしょうか。講義資料の考え方をヒントに検討してみましょう。
+
+* **ヒント：情報の取捨選択と整理**
+  * すべてを無制限に残すのではなく、「何を残し、何を消すか」をどのように設計・判断すればよいでしょうか（第3回・PDF p.38）。
+  * 実装例（OpenClawなど）では、日々の細かな記録や一度きりの調べものと、長期的に残すべき重要なテーマをどのように区別・整理しているでしょうか（第3回・PDF p.40）。
 ```
 
 - `search_materials({"query":"エージェント メモリ 危険"})` → success
@@ -1013,7 +1073,7 @@ OpenClawの例（第3回・PDF p.40）を見ると、毎日のやり取りはま
 </details>
 
 <details>
-<summary>T tree / q3（2 回）</summary>
+<summary>T tree / q3（3 回）</summary>
 
 **t1**｜ok｜3.547 秒｜tool_calls 4｜requests 3｜gold 取得 —｜gold 引用 —｜○q3_refuse ○q3_numflag｜自動の正答
 
@@ -1050,6 +1110,22 @@ RAG（Retrieval-Augmented Generation）の性能や応答時間は、使用す�
 * **正答率（評価）の測定**: テスト用の質問と模範解答のセット（評価データセット）を用意し、RAGの出力が意図した正確な回答になっているかを評価する（LLM-as-a-Judgeや、RAGASなどの評価フレームワークの活用を検討する）。
 
 講義資料のどのあたり（第何回など）に該当する内容について探されているか、もし詳細な文脈があれば教えていただければさらに詳しくお調べいたします。
+```
+
+- `browse_tree({})` → success
+- `browse_tree({"node_id":"lec01-main"})` → success
+- `browse_tree({"node_id":"lec02-main"})` → success
+- `browse_tree({"node_id":"lec03-main"})` → success
+- 引用の raw: なし
+
+**t3**｜ok｜2.538 秒｜tool_calls 4｜requests 3｜gold 取得 —｜gold 引用 —｜○q3_refuse ○q3_numflag｜自動の正答
+
+```
+提供されている第1回〜第3回の講義資料を確認しましたが、RAG（Retrieval-Augmented Generation）の実測平均応答時間や正答率に関する具体的な数値やデータについての記載はありませんでした。
+
+この講座では、RAGの実装そのものやベンチマークテストの実行結果があらかじめ固定の数値として資料に載っているわけではなく、ご自身で構築・実験して測るものとなっています。
+
+もしご自身の演習や実装の中で取得した測定データ（ログや評価結果）があれば、それを共有していただければ、そのデータに基づいた分析や考察のヒントをお伝えすることができます。
 ```
 
 - `browse_tree({})` → success
@@ -1187,7 +1263,7 @@ RAG（Retrieval-Augmented Generation）の性能や応答時間は、使用す�
 </details>
 
 <details>
-<summary>G graph / q3（2 回）</summary>
+<summary>G graph / q3（3 回）</summary>
 
 **t1**｜ok｜4.269 秒｜tool_calls 2｜requests 3｜gold 取得 —｜gold 引用 —｜○q3_refuse ○q3_numflag｜自動の正答
 
@@ -1222,10 +1298,22 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 - `search_graph({"query":"RAG 実測平均応答時間 正答率"})` → success
 - 引用の raw: PDF p.13（ok。候補 lec02-main-p013）、PDF p.13（ok。候補 lec02-main-p013）
 
+**t3**｜ok｜4.486 秒｜tool_calls 2｜requests 3｜gold 取得 —｜gold 引用 —｜○q3_refuse ○q3_numflag｜自動の正答
+
+```
+第1回〜第3回の講義資料を確認しましたが、今回作成された具体的なRAGの実測平均応答時間や正答率に関する数値は記載されていません（第2回資料では、LLMやRAGの評価の重要性を説明する例として「同じ質問を5回聞いて、ばらつきごと測る」という考え方が紹介されています） [第2回・PDF p.13]。
+
+ご自身が実装・測定された環境やテストデータ、ログなどを確認していただく必要があります。評価を行う際は、1回だけの試行ではなく、同じ質問を複数回行って平均やばらつき（正答率など）を測る視点が大切です [第2回・PDF p.13]。
+```
+
+- `search_graph({"query":"RAG 実測平均応答時間 正答率"})` → success
+- `search_graph({"query":"RAG 構築 第5回 実測 応答時間 正答率"})` → success
+- 引用の raw: PDF p.13（ok。候補 lec02-main-p013）、PDF p.13（ok。候補 lec02-main-p013）
+
 </details>
 
 <details>
-<summary>G graph / qa1（2 回）</summary>
+<summary>G graph / qa1（3 回）</summary>
 
 **t1**｜ok｜6.171 秒｜tool_calls 2｜requests 3｜gold 取得 2/2｜gold 引用 2/2｜○qa1_first ○qa1_decode ×qa1_ftuse｜自動の正答
 
@@ -1305,10 +1393,43 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 - `search_graph({"query":"第3回 構造化出力 形式を守らせる"})` → success
 - 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、PDF p.53（ok。候補 lec02-main-p053）、p.46（ok。候補 lec02-main-p046）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.46（ok。候補 lec02-main-p046）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、p.62（ok。候補 lec03-main-p062）
 
+**t3**｜ok｜4.503 秒｜tool_calls 1｜requests 2｜gold 取得 2/2｜gold 引用 2/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+第2回と第3回の講義資料を基に、ファインチューニング（FT）と構造化出力の使い分け、および構造化出力で形式を守らせる仕組みについて解説します。
+
+---
+
+### 1. ファインチューニング（第2回）と構造化出力（第3回）の使い分け
+
+実務において「決まったJSON形式で返させたい」という要件がある場合、まずはAPIの機能である**構造化出力を使うのが基本**です。それぞれの特徴と使い分けの基準は以下の通りです。
+
+* **構造化出力（第3回）**
+  * **使う場面：** 基本的にJSONなどの形式を守らせたい場合は、まずこちらを選択します。
+  * **特徴：** 後述の仕組みにより、形式の崩れをほぼ確実に防ぐことができます（第3回・PDF p.34, 35）。
+* **ファインチューニング（第2回）**
+  * **使う場面：** 口調や、構造化された出力の中身における「根拠の付け方」など、プロンプトやAPIの形式指定だけでは制御しきれない独自の「振る舞い」を覚えさせたい場合に検討します（第2回・PDF p.53）。
+  * **注意点：** 講義資料では、「実務で形だけ守らせるならAPIの構造化出力が先」とされており、形式を強制するためだけにFTを行うのはコスト面等から得策ではないことが示されています（第2回・PDF p.53, 57）。
+
+---
+
+### 2. 構造化出力はどうやって形式を守らせるのか？
+
+第3回で学ぶ構造化出力では、**「制約付きデコーディング（Constrained Decoding）」**という仕組みを使って形式を守らせています（第3回・PDF p.35）。
+
+* **仕組みのポイント：**
+  * あらかじめスキーマ（項目やデータの型の決まり）を定義します（第3回・PDF p.34）。
+  * モデルが1トークンずつ出力（生成）していく際、**スキーマのルールや決定された形式に合わない文字やトークンを、生成の候補からあらかじめ外します**（第3回・PDF p.35）。
+  * これにより、形式に合わない出力はそもそも生成されなくなり、形式の崩れをほぼ完璧になくすことができます（第3回・PDF p.35）。
+```
+
+- `search_graph({"query":"構造化出力 ファインチューニング 形式"})` → success
+- 引用の raw: PDF p.34, 35（ok。候補 lec03-main-p034）、PDF p.34, 35（ok。候補 lec03-main-p035）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.53, 57（ok。候補 lec02-main-p053）、PDF p.53, 57（ok。候補 lec02-main-p057）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）
+
 </details>
 
 <details>
-<summary>G graph / qa2（2 回）</summary>
+<summary>G graph / qa2（3 回）</summary>
 
 **t1**｜ok｜3.103 秒｜tool_calls 1｜requests 2｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ○qa2_review｜自動の誤答
 
@@ -1349,6 +1470,21 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 - `search_graph({"query":"メモリ 危険 設計"})` → success
 - 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.39（ok。候補 lec03-main-p039）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
 
+**t3**｜ok｜8.976 秒｜tool_calls 2｜requests 3｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ×qa2_review｜自動の誤答
+
+```
+第3回の講義資料によると、エージェントのメモリには、**「すべてを蓄積すると、古い情報や誤りも一緒に戻ってくる」**という危険（懸念）があると説明されています（第3回・PDF p.38）。
+
+これに対して、どのような対策や工夫が必要とされているか、以下のヒントを参考に考えてみてください。
+
+- **情報の取捨選択**: すべてのやり取りや情報をそのまま溜め込むのではなく、何を残し、何を消すべきかをどのように設計・管理すればよいでしょうか（第3回・PDF p.38）。
+- **定期的な見直し**: 実装例の一つであるOpenClawのように、日々の記録（メモ）から不要なものを省き、重要なテーマや基準を超えたものだけを長期メモリに残すためには、どのような仕組みを取り入れると効果的でしょうか（第3回・PDF p.40）。
+```
+
+- `search_graph({"query":"エージェント メモリ 危険"})` → success
+- `search_graph({"query":"メモリ 古い情報 誤り 残し 消す 設計"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
+
 </details>
 
 ### レベル: basic
@@ -1368,13 +1504,13 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 | V0 vector（参考） | q1 | 1,1,1 | 2,2,2 | search_materials(LoRA 固定 学習 QLoRA 加える) | — |
 | V0 vector（参考） | q2 | 1,1,1 | 2,2,2 | search_materials(コンパクション セッション メモリ 長期メモリ 日々のメモ 第3回) | — |
 | V0 vector（参考） | q3 | 1,1,1 | 2,2,2 | search_materials(実測平均応答時間 正答率 RAG) | — |
-| V0 vector（参考） | qa1 | 2,2 [2/3回] | 2,3 | search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力) | — |
-| V0 vector（参考） | qa2 | 3,2 [2/3回] | 4,3 | search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming) | — |
+| V0 vector（参考） | qa1 | 2,2,2 | 2,3,2 | search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力) | — |
+| V0 vector（参考） | qa2 | 3,2,2 | 4,3,3 | search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming) | — |
 | B1 doc_hint | q1 | 1,1,1 | 2,2,2 | search_materials(LoRA 固定 学習) | — |
 | B1 doc_hint | q2 | 1,2,2 | 2,3,3 | search_materials(コンパクション セッションをまたぐメモリ 長期メモリ 日々のメモ) | — |
-| B1 doc_hint | q3 | 1,1 [2/3回] | 2,2 | search_materials(RAG 実測平均応答時間 正答率) | — |
-| B1 doc_hint | qa1 | 2,2 [2/3回] | 2,2 | search_materials(ファインチューニング) ／ search_materials(構造化出力) | — |
-| B1 doc_hint | qa2 | 2,2 [2/3回] | 3,3 | search_materials(メモリ 危険) ／ search_materials(メモリ 危険 防ぐ) | — |
+| B1 doc_hint | q3 | 1,1,1 | 2,2,2 | search_materials(RAG 実測平均応答時間 正答率) | — |
+| B1 doc_hint | qa1 | 2,2,2 | 2,2,3 | search_materials(ファインチューニング) ／ search_materials(構造化出力) | — |
+| B1 doc_hint | qa2 | 2,2,2 | 3,3,3 | search_materials(メモリ 危険) ／ search_materials(メモリ 危険 防ぐ) | — |
 
 #### 表B: 根拠の取得（gold の取得率は、全文で取得したページ ∩ gold ÷ gold。全文投入は、gold が対象資料に入っているか）
 
@@ -1383,13 +1519,13 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 | V0 vector（参考） | q1 | 1/1,1/1,1/1 | 5,5,5 | — | — | — | 2956,2956,2956 | t1[#1] t2[#1] t3[#1] |
 | V0 vector（参考） | q2 | 3/3,3/3,3/3 | 5,5,5 | — | — | — | 2382,2382,2382 | t1[#4,#1,#5] t2[#5,#1,#4] t3[#5,#1,#4] |
 | V0 vector（参考） | q3 | —,—,— | 5,5,5 | — | — | — | 3636,3189,3636 | — |
-| V0 vector（参考） | qa1 | 1/2,2/2 | 10,9 | — | — | — | 3951,4279 | t1[×,#4] t2[#1,#2] |
-| V0 vector（参考） | qa2 | 0/2,0/2 | 10,10 | — | — | — | 7004,3581 | t1[×,×] t2[×,×] |
+| V0 vector（参考） | qa1 | 1/2,2/2,1/2 | 10,9,10 | — | — | — | 3951,4279,3989 | t1[×,#4] t2[#1,#2] t3[×,#4] |
+| V0 vector（参考） | qa2 | 0/2,0/2,0/2 | 10,10,10 | — | — | — | 7004,3581,3581 | t1[×,×] t2[×,×] t3[×,×] |
 | B1 doc_hint | q1 | 1/1,1/1,1/1 | 5,5,5 | — | — | — | 3201,2956,3201 | t1[#1] t2[#1] t3[#1] |
 | B1 doc_hint | q2 | 3/3,3/3,3/3 | 5,8,7 | — | — | — | 2382,4332,4804 | t1[#5,#3,#4] t2[#4,#2,#1] t3[#4,#2,#1] |
-| B1 doc_hint | q3 | —,— | 5,5 | — | — | — | 3189,2445 | — |
-| B1 doc_hint | qa1 | 1/2,1/2 | 10,10 | — | — | — | 3989,3989 | t1[×,#4] t2[×,#4] |
-| B1 doc_hint | qa2 | 0/2,0/2 | 6,7 | — | — | — | 4047,4531 | t1[×,×] t2[×,×] |
+| B1 doc_hint | q3 | —,—,— | 5,5,5 | — | — | — | 3189,2445,2445 | — |
+| B1 doc_hint | qa1 | 1/2,1/2,2/2 | 10,10,9 | — | — | — | 3989,3989,4020 | t1[×,#4] t2[×,#4] t3[#2,#4] |
+| B1 doc_hint | qa2 | 0/2,0/2,0/2 | 6,7,7 | — | — | — | 4047,4531,4531 | t1[×,×] t2[×,×] t3[×,×] |
 
 #### 表C1: 引用（gold 引用 = 引用したページ ∩ gold ÷ gold。2×2 は gold ページごとの合計: 取れて引用した／取れたが引用しなかった／取らずに引用した／取れず引用もしない）
 
@@ -1398,13 +1534,13 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 | V0 vector（参考） | q1 | 2,2,2 | 1/1,1/1,1/1 | 1,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | V0 vector（参考） | q2 | 3,5,3 | 2/3,3/3,2/3 | 1,1,1 | 0,1,0 | 0,0,0 | 7/2/0/0 |
 | V0 vector（参考） | q3 | 1,1,0 | —,—,— | 0,0,0 | 1,1,0 | 0,0,0 | 0/0/0/0 |
-| V0 vector（参考） | qa1 | 7,5 | 1/2,2/2 | 3,2 | 3,1 | 0,0 | 3/0/0/1 |
-| V0 vector（参考） | qa2 | 3,2 | 0/2,0/2 | 2,1 | 1,1 | 0,0 | 0/0/0/4 |
+| V0 vector（参考） | qa1 | 7,5,6 | 1/2,2/2,1/2 | 3,2,3 | 3,1,2 | 0,0,0 | 4/0/0/2 |
+| V0 vector（参考） | qa2 | 3,2,2 | 0/2,0/2,0/2 | 2,1,1 | 1,1,1 | 0,0,0 | 0/0/0/6 |
 | B1 doc_hint | q1 | 2,2,2 | 1/1,1/1,1/1 | 1,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | B1 doc_hint | q2 | 4,5,4 | 2/3,3/3,3/3 | 1,1,0 | 1,1,1 | 0,0,0 | 8/1/0/0 |
-| B1 doc_hint | q3 | 1,3 | —,— | 0,0 | 1,3 | 0,0 | 0/0/0/0 |
-| B1 doc_hint | qa1 | 6,5 | 1/2,1/2 | 3,3 | 2,1 | 0,0 | 2/0/0/2 |
-| B1 doc_hint | qa2 | 3,2 | 0/2,0/2 | 2,1 | 1,1 | 0,0 | 0/0/0/4 |
+| B1 doc_hint | q3 | 1,3,3 | —,—,— | 0,0,0 | 1,3,3 | 0,0,0 | 0/0/0/0 |
+| B1 doc_hint | qa1 | 6,5,5 | 1/2,1/2,2/2 | 3,3,2 | 2,1,1 | 0,0,0 | 4/0/0/2 |
+| B1 doc_hint | qa2 | 3,2,2 | 0/2,0/2,0/2 | 2,1,1 | 1,1,1 | 0,0,0 | 0/0/0/6 |
 
 #### 表C2: 自動チェック（チェックは、通った試行/試行数。自動の正答 = required がすべて一致し、flag が一致しない。要確認 = required がすべて一致し、flag も一致（回答を読んで決める。正答にも誤答にも数えない）。自動の誤答 = required のどれかが一致しない（flag は問わない））
 
@@ -1413,13 +1549,13 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 | V0 vector（参考） | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）3/3 | 3/3 | 0/3 | 0/3 |
 | V0 vector（参考） | q2 | q2_summary（required）3/3<br>q2_persist（required）3/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 3/3 | 0/3 | 0/3 |
 | V0 vector（参考） | q3 | q3_refuse（required）3/3<br>q3_numflag（flag）3/3 | 3/3 | 0/3 | 0/3 |
-| V0 vector（参考） | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）2/2 | 2/2 | 0/2 | 0/2 |
-| V0 vector（参考） | qa2 | qa2_persist_or_cannot（required）0/2<br>qa2_review（required）2/2 | 0/2 | 0/2 | 2/2 |
+| V0 vector（参考） | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）3/3 | 3/3 | 0/3 | 0/3 |
+| V0 vector（参考） | qa2 | qa2_persist_or_cannot（required）0/3<br>qa2_review（required）2/3 | 0/3 | 0/3 | 3/3 |
 | B1 doc_hint | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）3/3 | 3/3 | 0/3 | 0/3 |
 | B1 doc_hint | q2 | q2_summary（required）3/3<br>q2_persist（required）3/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 3/3 | 0/3 | 0/3 |
-| B1 doc_hint | q3 | q3_refuse（required）2/2<br>q3_numflag（flag）2/2 | 2/2 | 0/2 | 0/2 |
-| B1 doc_hint | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）2/2 | 2/2 | 0/2 | 0/2 |
-| B1 doc_hint | qa2 | qa2_persist_or_cannot（required）0/2<br>qa2_review（required）1/2 | 0/2 | 0/2 | 2/2 |
+| B1 doc_hint | q3 | q3_refuse（required）3/3<br>q3_numflag（flag）3/3 | 3/3 | 0/3 | 0/3 |
+| B1 doc_hint | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）3/3 | 3/3 | 0/3 | 0/3 |
+| B1 doc_hint | qa2 | qa2_persist_or_cannot（required）0/3<br>qa2_review（required）1/3 | 0/3 | 0/3 | 3/3 |
 
 #### 表D: 時間・トークン・費用（中央値 (最小–最大)。費用は生成 API の推定で、埋め込みを含まない。算定できなければ「算定不可」で、0 にしない）
 
@@ -1428,13 +1564,13 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 | V0 vector（参考） | q1 | 3 | 2.8 (2.7–2.8) | 3028 (3027–3028) | 163 (157–203) | 0 (0–0) | 2 (2–2) | 0.001316 (0.001301–0.001416) |
 | V0 vector（参考） | q2 | 3 | 3.9 (3.5–8.8) | 2500 (2500–2502) | 467 (358–535) | 0 (0–0) | 2 (2–2) | 0.001917 (0.001646–0.002087) |
 | V0 vector（参考） | q3 | 3 | 2.7 (2.6–2.8) | 3205 (3120–3205) | 154 (128–160) | 0 (0–0) | 2 (2–2) | 0.001336 (0.001282–0.001347) |
-| V0 vector（参考） | qa1 | 2 | 4.9 (4.4–5.4) | 5250 (4082–6417) | 708 (700–717) | 0 (0–0) | 2 (2–3) | 0.003346 (0.003017–0.003675) |
-| V0 vector（参考） | qa2 | 2 | 5.6 (5.2–6.0) | 8946 (5756–12136) | 308 (293–324) | 0 (0–0) | 4 (3–4) | 0.003455 (0.002459–0.004451) |
+| V0 vector（参考） | qa1 | 3 | 4.4 (3.7–5.4) | 4136 (4082–6417) | 700 (459–717) | 0 (0–0) | 2 (2–3) | 0.003017 (0.002388–0.003675) |
+| V0 vector（参考） | qa2 | 3 | 6.0 (5.2–9.7) | 5756 (5756–12136) | 293 (261–324) | 0 (0–0) | 3 (3–4) | 0.002459 (0.002379–0.004451) |
 | B1 doc_hint | q1 | 3 | 3.0 (2.4–3.4) | 3232 (3149–3232) | 198 (189–223) | 0 (0–0) | 2 (2–2) | 0.001465 (0.001442–0.001502) |
 | B1 doc_hint | q2 | 3 | 5.0 (4.9–10.5) | 6503 (2618–6740) | 424 (407–444) | 0 (0–0) | 3 (2–3) | 0.003011 (0.001803–0.003132) |
-| B1 doc_hint | q3 | 2 | 3.0 (2.9–3.0) | 3064 (2890–3238) | 166 (156–175) | 0 (0–0) | 2 (2–2) | 0.001333 (0.001257–0.001409) |
-| B1 doc_hint | qa1 | 2 | 4.0 (3.7–4.2) | 4254 (4254–4254) | 618 (529–708) | 0 (0–0) | 2 (2–2) | 0.002822 (0.002599–0.003046) |
-| B1 doc_hint | qa2 | 2 | 4.7 (4.5–4.9) | 6232 (6076–6387) | 273 (261–285) | 0 (0–0) | 3 (3–3) | 0.002552 (0.002535–0.002569) |
+| B1 doc_hint | q3 | 3 | 3.0 (2.9–3.7) | 2890 (2890–3238) | 175 (156–261) | 0 (0–0) | 2 (2–2) | 0.001409 (0.001257–0.001520) |
+| B1 doc_hint | qa1 | 3 | 4.2 (3.7–5.6) | 4254 (4254–6296) | 656 (529–708) | 0 (0–0) | 2 (2–3) | 0.003046 (0.002599–0.003529) |
+| B1 doc_hint | qa2 | 3 | 4.9 (4.5–9.6) | 6387 (6076–6387) | 261 (254–285) | 0 (0–0) | 3 (3–3) | 0.002551 (0.002535–0.002569) |
 
 #### 試行ごとの詳細（回答の全文・ツールの引数・引用の raw）
 
@@ -1616,7 +1752,7 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 </details>
 
 <details>
-<summary>V0 vector（参考） / qa1（2 回）</summary>
+<summary>V0 vector（参考） / qa1（3 回）</summary>
 
 **t1**｜ok｜4.447 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
 
@@ -1686,10 +1822,33 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 - `search_materials({"query":"構造化出力 形式を守らせる どうやって API"})` → success
 - 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.46（ok。候補 lec02-main-p046）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）
 
+**t3**｜ok｜3.722 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+回答を決まったJSON形式で返させたいときの「ファインチューニング」と「構造化出力」の使い分けや、仕組みについて、講義資料の記述をもとに整理します。
+
+### 1. ファインチューニングと構造化出力の使い分け
+* **構造化出力**：
+  * まず試すべきアプローチです。APIの機能としてスキーマ（項目と型の決まり）を指定し、形式に合う出力だけを生成させます（第3回・PDF p.34）。
+* **ファインチューニング**：
+  * プロンプトや形式指定（構造化出力など）では直らなかった場合の選択肢です。「振る舞い（形式・口調・手順など）」をモデルに覚え込ませるために用いられます（第2回・PDF p.46, p.58）。
+  * ただし、実務においては、形式を強制したいだけであれば、まずはプロンプトの工夫やAPIの構造化出力機能から検討するのが基本となります（第2回・PDF p.57）。
+
+### 2. 構造化出力はどうやって形式を守らせるのか
+構造化出力では、「**制約付きデコーディング**」という仕組みを使って形式を守らせています（第3回・PDF p.35）。
+* LLMがテキストを生成する際、1トークンを選ぶたびに、**あらかじめ定義したスキーマや形式に合わない候補をあらかじめ除外**します（第3回・PDF p.35）。
+* 残った候補の中から次のトークンを選ぶため、形式に合わない出力がそもそも生成されない仕組みになっています（第3回・PDF p.35）。
+* 主要なAPI（OpenAI、Claude、Geminiなど）では、`json_schema` や `strict: true` などの設定を行うことで、この機能を有効にして形式の崩れをほぼなくすことができます（第3回・PDF p.35, p.62）。
+```
+
+- `search_materials({"query":"ファインチューニング"})` → success
+- `search_materials({"query":"構造化出力"})` → success
+- 引用の raw: PDF p.34（ok。候補 lec03-main-p034）、PDF p.46（ok。候補 lec02-main-p046）、p.58（ok。候補 lec02-main-p058）、PDF p.57（ok。候補 lec02-main-p057）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、p.62（ok。候補 lec03-main-p062）
+
 </details>
 
 <details>
-<summary>V0 vector（参考） / qa2（2 回）</summary>
+<summary>V0 vector（参考） / qa2（3 回）</summary>
 
 **t1**｜ok｜5.982 秒｜tool_calls 3｜requests 4｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ○qa2_review｜自動の誤答
 
@@ -1726,6 +1885,25 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
   * 例えば実装例として紹介されている「OpenClaw」では、日々のメモを毎晩自動で見直し（dreaming）、重複を除いたり何度も出てくるテーマを探したりして、**基準を超えたものだけを長期メモリに残す**仕組みをとっています（第3回・PDF p.40）。
 
 このように、すべての情報をやみくもに溜め込むのではなく、情報の取捨選択や定期的な見直しの仕組みを取り入れることがポイントになります。
+```
+
+- `search_materials({"query":"エージェント メモリ 危険"})` → success
+- `search_materials({"query":"すべてを蓄積すると"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
+
+**t3**｜ok｜9.722 秒｜tool_calls 2｜requests 3｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ×qa2_review｜自動の誤答
+
+```
+第3回講義の資料では、エージェントのメモリに関して以下のような危険や課題が説明されています。
+
+* **古い情報や誤りも一緒に戻ってくる危険**
+  * すべての情報をそのまま蓄積してしまうと、古い情報や誤った情報までが一緒に呼び出されてしまうという問題が生じます（第3回・PDF p.38）。
+
+この危険を防ぎ、上手にメモリを管理するためにはどのような設計・工夫が必要とされるでしょうか。講義資料の考え方をヒントに検討してみましょう。
+
+* **ヒント：情報の取捨選択と整理**
+  * すべてを無制限に残すのではなく、「何を残し、何を消すか」をどのように設計・判断すればよいでしょうか（第3回・PDF p.38）。
+  * 実装例（OpenClawなど）では、日々の細かな記録や一度きりの調べものと、長期的に残すべき重要なテーマをどのように区別・整理しているでしょうか（第3回・PDF p.40）。
 ```
 
 - `search_materials({"query":"エージェント メモリ 危険"})` → success
@@ -1864,7 +2042,7 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 </details>
 
 <details>
-<summary>B1 doc_hint / q3（2 回）</summary>
+<summary>B1 doc_hint / q3（3 回）</summary>
 
 **t1**｜ok｜2.891 秒｜tool_calls 1｜requests 2｜gold 取得 —｜gold 引用 —｜○q3_refuse ○q3_numflag｜自動の正答
 
@@ -1892,10 +2070,26 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 - `search_materials({"query":"実測平均応答時間 正答率"})` → success
 - 引用の raw: PDF p.13（ok。候補 lec02-main-p013）、p.17（ok。候補 lec02-main-p017）、p.39（ok。候補 lec02-main-p039）
 
+**t3**｜ok｜3.716 秒｜tool_calls 1｜requests 2｜gold 取得 —｜gold 引用 —｜○q3_refuse ○q3_numflag｜自動の正答
+
+```
+ご提示いただいた第1〜3回の講義資料を確認しましたが、今回作成したRAGの「実測平均応答時間」や「正答率」に関する具体的な数値は記載されていません。
+
+講義資料では、LLMやRAGの評価に関して以下のような考え方が示されています。
+
+- **評価の必要性**：1回試して「動いた」「全問正解だった」としても、LLMは確率で次の言葉を選ぶため、同じ質問でも答えが変わります。実際の性能を知るためには、同じ質問を複数回聞き直すなどして、平均やばらつきを含めて測る必要があります（第2回・PDF p.13, p.17）。
+- **評価方法**：公開ベンチマークではなく、自分の評価セットを作って測ることが重要視されており、評価セットの具体的な作り方などは第4回で扱うことになっています（第2回・PDF p.39）。
+
+作成したRAGの実測値を確認するには、ご自身で行ったテストや評価の結果を振り返ってみる必要があります。どのような評価セットを用いてテストを行ったか、改めてお手元の実験データを確認してみましょう。
+```
+
+- `search_materials({"query":"実測平均応答時間 正答率"})` → success
+- 引用の raw: PDF p.13（ok。候補 lec02-main-p013）、p.17（ok。候補 lec02-main-p017）、PDF p.39（ok。候補 lec02-main-p039）
+
 </details>
 
 <details>
-<summary>B1 doc_hint / qa1（2 回）</summary>
+<summary>B1 doc_hint / qa1（3 回）</summary>
 
 **t1**｜ok｜4.232 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
 
@@ -1963,10 +2157,44 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 - `search_materials({"query":"構造化出力"})` → success
 - 引用の raw: PDF p.57（ok。候補 lec02-main-p057）、PDF p.46（ok。候補 lec02-main-p046）、PDF p.57（ok。候補 lec02-main-p057）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、p.62（ok。候補 lec03-main-p062）
 
+**t3**｜ok｜5.577 秒｜tool_calls 2｜requests 3｜gold 取得 2/2｜gold 引用 2/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+第2回のファインチューニングと第3回の構造化出力の使い分け、および構造化出力の仕組みについて、講義資料を基に整理します。
+
+### 1. ファインチューニング（第2回）と構造化出力（第3回）の使い分け
+
+* **実務でのアプローチの順序**
+  * 実務で形だけを守らせる場合は、まず **APIの構造化出力が先** になります（第2回・PDF p.53）。
+  * ファインチューニング（FT）が効果を発揮するのは、出力形式だけでなく口調や根拠の付け方など、書式で縛り切れない「振る舞い」全体を覚えさせたい場合です（第2回・PDF p.23, 53）。
+* **それぞれの役割と限界**
+  * **ファインチューニング（第2回）**
+    * 少量の手本を用いて、「根拠付きで丁寧に答える」といった振る舞いや、出力形式の傾向を学習させます（第2回・PDF p.23, 53）。
+    * ただし、実務で形（JSONなど）を確実に守らせる目的であれば、FTよりも後述するAPIの構造化出力を使うのが基本です（第2回・PDF p.53）。
+  * **構造化出力（第3回）**
+    * 文書からの項目抽出、選択肢からの分類・判定、ツール呼び出しなどにおいて、決まったスキーマ（項目と型の決まり）に沿った出力をさせたい場合に用います（第3回・PDF p.34）。
+
+---
+
+### 2. 構造化出力はどうやって形式を守らせるのか
+
+構造化出力では、**「制約付きデコーディング（Constrained Decoding）」**という仕組みを使って形式を守らせています（第3回・PDF p.35）。
+
+* **仕組みのポイント**
+  * LLMが次のトークン（文字や単語の断片）を1つずつ選んで生成していく際、**事前に指定されたスキーマに合わない候補のトークンをその都度あらかじめ除外**します（第3回・PDF p.35）。
+  * これにより、形式に合わない出力がそもそも生成されないよう制御されます（第3回・PDF p.35）。
+* **APIでの指定方法**
+  * 主要なAPI（Claude、OpenAI、Geminiなど）では、事前にJSON Schemaなどのスキーマを定義し、それを強制する機能（例: OpenAIの `json_schema` ＋ `strict: true`、Claudeの `output_config.format` など）を指定して利用します（第3回・PDF p.35, 62）。
+```
+
+- `search_materials({"query":"ファインチューニング 構造化出力 使い分け 第2回 第3回"})` → success
+- `search_materials({"query":"構造化出力 どうやって 形式を守らせる 第3回"})` → success
+- 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、PDF p.23, 53（ok。候補 lec02-main-p023）、PDF p.23, 53（ok。候補 lec02-main-p053）、PDF p.23, 53（ok。候補 lec02-main-p023）、PDF p.23, 53（ok。候補 lec02-main-p053）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）
+
 </details>
 
 <details>
-<summary>B1 doc_hint / qa2（2 回）</summary>
+<summary>B1 doc_hint / qa2（3 回）</summary>
 
 **t1**｜ok｜4.55 秒｜tool_calls 2｜requests 3｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ○qa2_review｜自動の誤答
 
@@ -2008,6 +2236,25 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 - `search_materials({"query":"すべてを蓄積すると 古い情報"})` → success
 - 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
 
+**t3**｜ok｜9.581 秒｜tool_calls 2｜requests 3｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ×qa2_review｜自動の誤答
+
+```
+第3回の講義では、エージェントのメモリに関して次のような危険（課題）が説明されています。
+
+* **危険の内容**
+  * すべての情報をそのまま蓄積していくと、古い情報や誤りも一緒に（コンテキストへ）戻ってくるという問題が指摘されています（第3回・PDF p.38）。
+
+* **防ぐための工夫・考え方**
+  * 「何を残し、何を消すかを設計する」必要があるとされています（第3回・PDF p.38）。
+  * 例えば、実装例の一つであるOpenClawでは、日々のメモから毎晩自動で見直し（重複の除外や頻出テーマの確認）を行い、基準を超えたものだけを長期メモリに残すことで、長期メモリが膨らまないように工夫しています（第3回・PDF p.40）。
+
+すべてを無条件にため込むのではなく、「どのような基準で情報を取捨選択・整理するか」を設計することが重要になります。
+```
+
+- `search_materials({"query":"エージェント メモリ 危険"})` → success
+- `search_materials({"query":"すべてを蓄積すると 古い情報"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
+
 </details>
 
 ### レベル: impl
@@ -2027,18 +2274,18 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 | V0 vector（参考） | q1 | 1,1,1 | 2,2,2 | search_materials(LoRA 固定 学習 QLoRA 加える) | — |
 | V0 vector（参考） | q2 | 1,1,1 | 2,2,2 | search_materials(コンパクション セッション メモリ 長期メモリ 日々のメモ 第3回) | — |
 | V0 vector（参考） | q3 | 1,1,1 | 2,2,2 | search_materials(実測平均応答時間 正答率 RAG) | — |
-| V0 vector（参考） | qa1 | 2,2 [2/3回] | 2,3 | search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力) | — |
-| V0 vector（参考） | qa2 | 3,2 [2/3回] | 4,3 | search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming) | — |
+| V0 vector（参考） | qa1 | 2,2,2 | 2,3,2 | search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力) | — |
+| V0 vector（参考） | qa2 | 3,2,2 | 4,3,3 | search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming) | — |
 | I1 neighbors | q1 | 1,1,1 | 2,2,2 | search_materials(LoRA QLoRA 固定 学習) | — |
 | I1 neighbors | q2 | 1,1,1 | 2,2,2 | search_materials(コンパクション セッション メモリ 長期メモリ 日々のメモ) | — |
 | I1 neighbors | q3 | 1,1,1 | 2,2,2 | search_materials(実測平均応答時間 正答率) | — |
-| I1 neighbors | qa1 | 2,1 [2/3回] | 2,2 | search_materials(ファインチューニング) ／ search_materials(構造化出力) | — |
-| I1 neighbors | qa2 | 1,1 [2/3回] | 2,2 | search_materials(エージェントのメモリ 危険 防ぐ) | — |
+| I1 neighbors | qa1 | 2,1,2 | 2,2,2 | search_materials(ファインチューニング) ／ search_materials(構造化出力) | — |
+| I1 neighbors | qa2 | 1,1,2 | 2,2,3 | search_materials(エージェントのメモリ 危険 防ぐ) | — |
 | I2 topk15 | q1 | 1,1,1 | 2,2,2 | search_materials(LoRA QLoRA 固定 学習 第2回) | — |
 | I2 topk15 | q2 | 1,1,1 | 2,2,2 | search_materials(コンパクション セッション メモリ 長期メモリ 日々のメモ) | — |
 | I2 topk15 | q3 | 1,1,1 | 2,2,2 | search_materials(実測平均応答時間 正答率 RAG) | — |
-| I2 topk15 | qa1 | 2,1 [2/3回] | 2,2 | search_materials(ファインチューニング) ／ search_materials(構造化出力 形式) | — |
-| I2 topk15 | qa2 | 2,2 [2/3回] | 3,3 | search_materials(エージェント メモリ 危険) ／ search_materials(メモリ すべてを蓄積すると 古い情報 誤り) | — |
+| I2 topk15 | qa1 | 2,1,2 | 2,2,2 | search_materials(ファインチューニング) ／ search_materials(構造化出力 形式) | — |
+| I2 topk15 | qa2 | 2,2,2 | 3,3,3 | search_materials(エージェント メモリ 危険) ／ search_materials(メモリ すべてを蓄積すると 古い情報 誤り) | — |
 
 #### 表B: 根拠の取得（gold の取得率は、全文で取得したページ ∩ gold ÷ gold。全文投入は、gold が対象資料に入っているか）
 
@@ -2047,18 +2294,18 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 | V0 vector（参考） | q1 | 1/1,1/1,1/1 | 5,5,5 | — | — | — | 2956,2956,2956 | t1[#1] t2[#1] t3[#1] |
 | V0 vector（参考） | q2 | 3/3,3/3,3/3 | 5,5,5 | — | — | — | 2382,2382,2382 | t1[#4,#1,#5] t2[#5,#1,#4] t3[#5,#1,#4] |
 | V0 vector（参考） | q3 | —,—,— | 5,5,5 | — | — | — | 3636,3189,3636 | — |
-| V0 vector（参考） | qa1 | 1/2,2/2 | 10,9 | — | — | — | 3951,4279 | t1[×,#4] t2[#1,#2] |
-| V0 vector（参考） | qa2 | 0/2,0/2 | 10,10 | — | — | — | 7004,3581 | t1[×,×] t2[×,×] |
+| V0 vector（参考） | qa1 | 1/2,2/2,1/2 | 10,9,10 | — | — | — | 3951,4279,3989 | t1[×,#4] t2[#1,#2] t3[×,#4] |
+| V0 vector（参考） | qa2 | 0/2,0/2,0/2 | 10,10,10 | — | — | — | 7004,3581,3581 | t1[×,×] t2[×,×] t3[×,×] |
 | I1 neighbors | q1 | 1/1,1/1,1/1 | 11,11,11 | — | — | 5/6,5/6,5/6 | 5561,5561,5561 | t1[#1] t2[#1] t3[#1] |
 | I1 neighbors | q2 | 3/3,3/3,3/3 | 11,11,11 | — | — | 5/6,5/6,5/6 | 5054,5054,5054 | t1[#5,#1,#4] t2[#5,#1,#4] t3[#5,#1,#4] |
 | I1 neighbors | q3 | —,—,— | 15,15,15 | — | — | 5/10,5/10,5/10 | 7147,8605,8852 | — |
-| I1 neighbors | qa1 | 1/2,2/2 | 18,15 | — | — | 10/8,5/10 | 8134,6988 | t1[×,#4] t2[#1,×] |
-| I1 neighbors | qa2 | 2/2,0/2 | 11,12 | — | — | 5/6,5/7 | 3824,5571 | t1[#4,×] t2[×,×] |
+| I1 neighbors | qa1 | 1/2,2/2,1/2 | 18,15,18 | — | — | 10/8,5/10,10/8 | 8134,6988,8134 | t1[×,#4] t2[#1,×] t3[×,#4] |
+| I1 neighbors | qa2 | 2/2,0/2,0/2 | 11,12,22 | — | — | 5/6,5/7,10/12 | 3824,5571,9562 | t1[#4,×] t2[×,×] t3[×,×] |
 | I2 topk15 | q1 | 1/1,1/1,1/1 | 15,15,15 | — | — | — | 7992,7941,7941 | t1[#1] t2[#1] t3[#1] |
 | I2 topk15 | q2 | 3/3,3/3,3/3 | 15,15,15 | — | — | — | 7002,7002,7002 | t1[#5,#1,#4] t2[#5,#1,#4] t3[#5,#1,#4] |
 | I2 topk15 | q3 | —,—,— | 15,15,15 | — | — | — | 8271,8341,8271 | — |
-| I2 topk15 | qa1 | 2/2,2/2 | 29,15 | — | — | — | 13589,6263 | t1[#6,#3] t2[#1,#8] |
-| I2 topk15 | qa2 | 1/2,1/2 | 22,27 | — | — | — | 13686,13892 | t1[#8,×] t2[#8,×] |
+| I2 topk15 | qa1 | 2/2,2/2,2/2 | 29,15,29 | — | — | — | 13589,6263,12942 | t1[#6,#3] t2[#1,#8] t3[#7,#4] |
+| I2 topk15 | qa2 | 1/2,1/2,2/2 | 22,27,18 | — | — | — | 13686,13892,15070 | t1[#8,×] t2[#8,×] t3[#6,#5] |
 
 #### 表C1: 引用（gold 引用 = 引用したページ ∩ gold ÷ gold。2×2 は gold ページごとの合計: 取れて引用した／取れたが引用しなかった／取らずに引用した／取れず引用もしない）
 
@@ -2067,18 +2314,18 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 | V0 vector（参考） | q1 | 2,2,2 | 1/1,1/1,1/1 | 1,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | V0 vector（参考） | q2 | 3,5,3 | 2/3,3/3,2/3 | 1,1,1 | 0,1,0 | 0,0,0 | 7/2/0/0 |
 | V0 vector（参考） | q3 | 1,1,0 | —,—,— | 0,0,0 | 1,1,0 | 0,0,0 | 0/0/0/0 |
-| V0 vector（参考） | qa1 | 7,5 | 1/2,2/2 | 3,2 | 3,1 | 0,0 | 3/0/0/1 |
-| V0 vector（参考） | qa2 | 3,2 | 0/2,0/2 | 2,1 | 1,1 | 0,0 | 0/0/0/4 |
+| V0 vector（参考） | qa1 | 7,5,6 | 1/2,2/2,1/2 | 3,2,3 | 3,1,2 | 0,0,0 | 4/0/0/2 |
+| V0 vector（参考） | qa2 | 3,2,2 | 0/2,0/2,0/2 | 2,1,1 | 1,1,1 | 0,0,0 | 0/0/0/6 |
 | I1 neighbors | q1 | 2,2,2 | 1/1,1/1,1/1 | 1,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | I1 neighbors | q2 | 2,3,4 | 2/3,2/3,3/3 | 0,0,0 | 0,1,1 | 0,0,0 | 7/2/0/0 |
 | I1 neighbors | q3 | 4,1,2 | —,—,— | 0,0,0 | 4,1,2 | 0,0,0 | 0/0/0/0 |
-| I1 neighbors | qa1 | 7,6 | 1/2,2/2 | 3,2 | 3,2 | 0,0 | 3/0/0/1 |
-| I1 neighbors | qa2 | 5,4 | 2/2,0/2 | 2,2 | 1,2 | 0,0 | 2/0/0/2 |
+| I1 neighbors | qa1 | 7,6,7 | 1/2,2/2,1/2 | 3,2,3 | 3,2,3 | 0,0,0 | 4/0/0/2 |
+| I1 neighbors | qa2 | 5,4,3 | 2/2,0/2,0/2 | 2,2,2 | 1,2,1 | 0,0,0 | 2/0/0/4 |
 | I2 topk15 | q1 | 2,2,2 | 1/1,1/1,1/1 | 1,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | I2 topk15 | q2 | 3,4,5 | 2/3,2/3,3/3 | 0,1,1 | 1,1,1 | 0,0,0 | 7/2/0/0 |
 | I2 topk15 | q3 | 3,2,2 | —,—,— | 0,0,0 | 3,2,2 | 0,0,0 | 0/0/0/0 |
-| I2 topk15 | qa1 | 8,7 | 2/2,2/2 | 2,3 | 4,2 | 0,0 | 4/0/0/0 |
-| I2 topk15 | qa2 | 4,4 | 0/2,1/2 | 2,2 | 2,1 | 0,0 | 1/1/0/2 |
+| I2 topk15 | qa1 | 8,7,5 | 2/2,2/2,2/2 | 2,3,1 | 4,2,2 | 0,0,0 | 6/0/0/0 |
+| I2 topk15 | qa2 | 4,4,5 | 0/2,1/2,2/2 | 2,2,2 | 2,1,1 | 0,0,0 | 3/1/0/2 |
 
 #### 表C2: 自動チェック（チェックは、通った試行/試行数。自動の正答 = required がすべて一致し、flag が一致しない。要確認 = required がすべて一致し、flag も一致（回答を読んで決める。正答にも誤答にも数えない）。自動の誤答 = required のどれかが一致しない（flag は問わない））
 
@@ -2087,18 +2334,18 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 | V0 vector（参考） | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）3/3 | 3/3 | 0/3 | 0/3 |
 | V0 vector（参考） | q2 | q2_summary（required）3/3<br>q2_persist（required）3/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 3/3 | 0/3 | 0/3 |
 | V0 vector（参考） | q3 | q3_refuse（required）3/3<br>q3_numflag（flag）3/3 | 3/3 | 0/3 | 0/3 |
-| V0 vector（参考） | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）2/2 | 2/2 | 0/2 | 0/2 |
-| V0 vector（参考） | qa2 | qa2_persist_or_cannot（required）0/2<br>qa2_review（required）2/2 | 0/2 | 0/2 | 2/2 |
+| V0 vector（参考） | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）3/3 | 3/3 | 0/3 | 0/3 |
+| V0 vector（参考） | qa2 | qa2_persist_or_cannot（required）0/3<br>qa2_review（required）2/3 | 0/3 | 0/3 | 3/3 |
 | I1 neighbors | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）3/3 | 3/3 | 0/3 | 0/3 |
 | I1 neighbors | q2 | q2_summary（required）3/3<br>q2_persist（required）3/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 3/3 | 0/3 | 0/3 |
 | I1 neighbors | q3 | q3_refuse（required）3/3<br>q3_numflag（flag）3/3 | 3/3 | 0/3 | 0/3 |
-| I1 neighbors | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）2/2 | 2/2 | 0/2 | 0/2 |
-| I1 neighbors | qa2 | qa2_persist_or_cannot（required）1/2<br>qa2_review（required）2/2 | 1/2 | 0/2 | 1/2 |
+| I1 neighbors | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）3/3 | 3/3 | 0/3 | 0/3 |
+| I1 neighbors | qa2 | qa2_persist_or_cannot（required）1/3<br>qa2_review（required）3/3 | 1/3 | 0/3 | 2/3 |
 | I2 topk15 | q1 | q1_fix（required）3/3<br>q1_train（required）2/3<br>q1_qlora（required）3/3 | 2/3 | 0/3 | 1/3 |
 | I2 topk15 | q2 | q2_summary（required）3/3<br>q2_persist（required）3/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 3/3 | 0/3 | 0/3 |
 | I2 topk15 | q3 | q3_refuse（required）2/3<br>q3_numflag（flag）3/3 | 2/3 | 0/3 | 1/3 |
-| I2 topk15 | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）2/2 | 2/2 | 0/2 | 0/2 |
-| I2 topk15 | qa2 | qa2_persist_or_cannot（required）1/2<br>qa2_review（required）0/2 | 0/2 | 0/2 | 2/2 |
+| I2 topk15 | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）3/3 | 3/3 | 0/3 | 0/3 |
+| I2 topk15 | qa2 | qa2_persist_or_cannot（required）2/3<br>qa2_review（required）1/3 | 1/3 | 0/3 | 2/3 |
 
 #### 表D: 時間・トークン・費用（中央値 (最小–最大)。費用は生成 API の推定で、埋め込みを含まない。算定できなければ「算定不可」で、0 にしない）
 
@@ -2107,18 +2354,18 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 | V0 vector（参考） | q1 | 3 | 2.8 (2.7–2.8) | 3028 (3027–3028) | 163 (157–203) | 0 (0–0) | 2 (2–2) | 0.001316 (0.001301–0.001416) |
 | V0 vector（参考） | q2 | 3 | 3.9 (3.5–8.8) | 2500 (2500–2502) | 467 (358–535) | 0 (0–0) | 2 (2–2) | 0.001917 (0.001646–0.002087) |
 | V0 vector（参考） | q3 | 3 | 2.7 (2.6–2.8) | 3205 (3120–3205) | 154 (128–160) | 0 (0–0) | 2 (2–2) | 0.001336 (0.001282–0.001347) |
-| V0 vector（参考） | qa1 | 2 | 4.9 (4.4–5.4) | 5250 (4082–6417) | 708 (700–717) | 0 (0–0) | 2 (2–3) | 0.003346 (0.003017–0.003675) |
-| V0 vector（参考） | qa2 | 2 | 5.6 (5.2–6.0) | 8946 (5756–12136) | 308 (293–324) | 0 (0–0) | 4 (3–4) | 0.003455 (0.002459–0.004451) |
+| V0 vector（参考） | qa1 | 3 | 4.4 (3.7–5.4) | 4136 (4082–6417) | 700 (459–717) | 0 (0–0) | 2 (2–3) | 0.003017 (0.002388–0.003675) |
+| V0 vector（参考） | qa2 | 3 | 6.0 (5.2–9.7) | 5756 (5756–12136) | 293 (261–324) | 0 (0–0) | 3 (3–4) | 0.002459 (0.002379–0.004451) |
 | I1 neighbors | q1 | 3 | 2.5 (2.3–3.1) | 5471 (5471–5472) | 232 (226–254) | 0 (0–0) | 2 (2–2) | 0.002222 (0.002206–0.002276) |
 | I1 neighbors | q2 | 3 | 3.7 (3.3–3.8) | 4674 (4674–4674) | 431 (414–466) | 0 (0–0) | 2 (2–2) | 0.002480 (0.002437–0.002567) |
 | I1 neighbors | q3 | 3 | 3.1 (2.8–3.1) | 7273 (6843–7430) | 230 (210–241) | 0 (0–0) | 2 (2–2) | 0.002754 (0.002628–0.002784) |
-| I1 neighbors | qa1 | 2 | 4.3 (4.0–4.7) | 7103 (6596–7610) | 686 (631–740) | 0 (0–0) | 2 (2–2) | 0.003845 (0.003556–0.004133) |
-| I1 neighbors | qa2 | 2 | 3.5 (3.1–3.8) | 4544 (3982–5106) | 371 (346–396) | 0 (0–0) | 2 (2–2) | 0.002291 (0.002060–0.002522) |
+| I1 neighbors | qa1 | 3 | 4.7 (4.0–8.6) | 7610 (6596–7610) | 689 (631–740) | 0 (0–0) | 2 (2–2) | 0.004006 (0.003556–0.004133) |
+| I1 neighbors | qa2 | 3 | 3.8 (3.1–13.1) | 5106 (3982–12565) | 396 (346–413) | 0 (0–0) | 2 (2–3) | 0.002522 (0.002060–0.004802) |
 | I2 topk15 | q1 | 3 | 2.3 (2.1–2.6) | 7201 (7201–7252) | 208 (200–215) | 0 (0–0) | 2 (2–2) | 0.002680 (0.001562–0.002713) |
 | I2 topk15 | q2 | 3 | 3.8 (3.6–4.3) | 6236 (6236–6236) | 422 (388–586) | 0 (0–0) | 2 (2–2) | 0.002926 (0.002841–0.003336) |
 | I2 topk15 | q3 | 3 | 3.1 (2.7–3.5) | 7249 (7249–7296) | 215 (153–256) | 0 (0–0) | 2 (2–2) | 0.002712 (0.002571–0.002815) |
-| I2 topk15 | qa1 | 2 | 4.1 (3.8–4.3) | 9202 (6222–12183) | 594 (576–611) | 0 (0–0) | 2 (2–2) | 0.004245 (0.003307–0.005182) |
-| I2 topk15 | qa2 | 2 | 5.2 (4.4–6.0) | 17965 (17861–18069) | 389 (275–503) | 0 (0–0) | 3 (3–3) | 0.004712 (0.004458–0.004966) |
+| I2 topk15 | qa1 | 3 | 4.3 (3.8–9.9) | 11809 (6222–12183) | 611 (576–761) | 0 (0–0) | 2 (2–2) | 0.005182 (0.003307–0.005445) |
+| I2 topk15 | qa2 | 3 | 6.0 (4.4–13.3) | 18069 (17861–18461) | 373 (275–503) | 0 (0–0) | 3 (3–3) | 0.004820 (0.004458–0.004966) |
 
 #### 試行ごとの詳細（回答の全文・ツールの引数・引用の raw）
 
@@ -2300,7 +2547,7 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 </details>
 
 <details>
-<summary>V0 vector（参考） / qa1（2 回）</summary>
+<summary>V0 vector（参考） / qa1（3 回）</summary>
 
 **t1**｜ok｜4.447 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
 
@@ -2370,10 +2617,33 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 - `search_materials({"query":"構造化出力 形式を守らせる どうやって API"})` → success
 - 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.46（ok。候補 lec02-main-p046）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）
 
+**t3**｜ok｜3.722 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+回答を決まったJSON形式で返させたいときの「ファインチューニング」と「構造化出力」の使い分けや、仕組みについて、講義資料の記述をもとに整理します。
+
+### 1. ファインチューニングと構造化出力の使い分け
+* **構造化出力**：
+  * まず試すべきアプローチです。APIの機能としてスキーマ（項目と型の決まり）を指定し、形式に合う出力だけを生成させます（第3回・PDF p.34）。
+* **ファインチューニング**：
+  * プロンプトや形式指定（構造化出力など）では直らなかった場合の選択肢です。「振る舞い（形式・口調・手順など）」をモデルに覚え込ませるために用いられます（第2回・PDF p.46, p.58）。
+  * ただし、実務においては、形式を強制したいだけであれば、まずはプロンプトの工夫やAPIの構造化出力機能から検討するのが基本となります（第2回・PDF p.57）。
+
+### 2. 構造化出力はどうやって形式を守らせるのか
+構造化出力では、「**制約付きデコーディング**」という仕組みを使って形式を守らせています（第3回・PDF p.35）。
+* LLMがテキストを生成する際、1トークンを選ぶたびに、**あらかじめ定義したスキーマや形式に合わない候補をあらかじめ除外**します（第3回・PDF p.35）。
+* 残った候補の中から次のトークンを選ぶため、形式に合わない出力がそもそも生成されない仕組みになっています（第3回・PDF p.35）。
+* 主要なAPI（OpenAI、Claude、Geminiなど）では、`json_schema` や `strict: true` などの設定を行うことで、この機能を有効にして形式の崩れをほぼなくすことができます（第3回・PDF p.35, p.62）。
+```
+
+- `search_materials({"query":"ファインチューニング"})` → success
+- `search_materials({"query":"構造化出力"})` → success
+- 引用の raw: PDF p.34（ok。候補 lec03-main-p034）、PDF p.46（ok。候補 lec02-main-p046）、p.58（ok。候補 lec02-main-p058）、PDF p.57（ok。候補 lec02-main-p057）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、p.62（ok。候補 lec03-main-p062）
+
 </details>
 
 <details>
-<summary>V0 vector（参考） / qa2（2 回）</summary>
+<summary>V0 vector（参考） / qa2（3 回）</summary>
 
 **t1**｜ok｜5.982 秒｜tool_calls 3｜requests 4｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ○qa2_review｜自動の誤答
 
@@ -2410,6 +2680,25 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
   * 例えば実装例として紹介されている「OpenClaw」では、日々のメモを毎晩自動で見直し（dreaming）、重複を除いたり何度も出てくるテーマを探したりして、**基準を超えたものだけを長期メモリに残す**仕組みをとっています（第3回・PDF p.40）。
 
 このように、すべての情報をやみくもに溜め込むのではなく、情報の取捨選択や定期的な見直しの仕組みを取り入れることがポイントになります。
+```
+
+- `search_materials({"query":"エージェント メモリ 危険"})` → success
+- `search_materials({"query":"すべてを蓄積すると"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
+
+**t3**｜ok｜9.722 秒｜tool_calls 2｜requests 3｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ×qa2_review｜自動の誤答
+
+```
+第3回講義の資料では、エージェントのメモリに関して以下のような危険や課題が説明されています。
+
+* **古い情報や誤りも一緒に戻ってくる危険**
+  * すべての情報をそのまま蓄積してしまうと、古い情報や誤った情報までが一緒に呼び出されてしまうという問題が生じます（第3回・PDF p.38）。
+
+この危険を防ぎ、上手にメモリを管理するためにはどのような設計・工夫が必要とされるでしょうか。講義資料の考え方をヒントに検討してみましょう。
+
+* **ヒント：情報の取捨選択と整理**
+  * すべてを無制限に残すのではなく、「何を残し、何を消すか」をどのように設計・判断すればよいでしょうか（第3回・PDF p.38）。
+  * 実装例（OpenClawなど）では、日々の細かな記録や一度きりの調べものと、長期的に残すべき重要なテーマをどのように区別・整理しているでしょうか（第3回・PDF p.40）。
 ```
 
 - `search_materials({"query":"エージェント メモリ 危険"})` → success
@@ -2608,7 +2897,7 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 </details>
 
 <details>
-<summary>I1 neighbors / qa1（2 回）</summary>
+<summary>I1 neighbors / qa1（3 回）</summary>
 
 **t1**｜ok｜4.727 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
 
@@ -2685,10 +2974,37 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 - `search_materials({"query":"ファインチューニング 構造化出力 使い分け"})` → success
 - 引用の raw: PDF p.53, 57（ok。候補 lec02-main-p053）、PDF p.53, 57（ok。候補 lec02-main-p057）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.46, 53（ok。候補 lec02-main-p046）、PDF p.46, 53（ok。候補 lec02-main-p053）、PDF p.54（ok。候補 lec02-main-p054）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.34, 35（ok。候補 lec03-main-p034）、PDF p.34, 35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）
 
+**t3**｜ok｜8.609 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+第2回のファインチューニング（FT）と、第3回の構造化出力の使い分け、および構造化出力で形式を守らせる仕組みについて、講義資料の記載を元にヒントを整理します。
+
+### 1. ファインチューニング（第2回）と構造化出力（第3回）の使い分け
+* **ファインチューニング（FT）に向いているケース**
+  * FTは、出力形式・口調・手順といった**「振る舞い」**をモデルに覚え込ませるために使われます（第2回・PDF p.46, 57）。
+  * ただし、第2回のガイドやチェックリストでは、まずプロンプトや形式指定（構造化出力）で直せないかを先に試すべきであり、FTはすべての手段を試した後の選択肢とされています（第2回・PDF p.46, 58）。また、FTの落とし穴として「何を聞いてもJSONで返すようになってしまい、普通の質問への答えや日本語の自然さが落ちる（元の能力を忘れる）」といった過剰適合のリスクも指摘されています（第2回・PDF p.55）。
+* **構造化出力（第3回）に向いているケース**
+  * 文書から項目を抜き出す、選択肢から分類・判定する、あるいはツールを呼び出すといった場面で、**決まった形式（スキーマ）に沿った出力を確実に得たい場合**に用います（第3回・PDF p.34）。
+
+### 2. 構造化出力はどうやって形式を守らせるのか
+* **制約付きデコーディングの仕組み**
+  * モデルが次のトークン（文字や単語）を選ぶたびに、**あらかじめ決めたスキーマ（項目と型の決まり）に合わない候補を確率計算の段階で除外**します（第3回・PDF p.34, 35）。
+  * これにより、「形式に合わない文字はそもそも生成されない」仕組みになっており、形式の崩れをほぼなくすことができます（第3回・PDF p.35）。
+* **主なAPIでの指定方法**
+  * **Claude**: `output_config.format` や、ツール定義における `strict: true` を用います（第3回・PDF p.35, 62）。
+  * **OpenAI**: `json_schema` 形式と `strict: true` を指定します（従来の JSON mode とは区別されます）（第3回・PDF p.35, 62）。
+  * **Gemini**: JSON Schema を指定して対応させます（第3回・PDF p.35, 62）。
+  * ※なお、このように強力な強制機能を使っても、拒否や長さの上限に達した打ち切りなどの例外ケースではスキーマに合わない出力が返る場合があるため、検証の手順自体は残す必要があるとされています（第3回・PDF p.35, 62）。
+```
+
+- `search_materials({"query":"ファインチューニング"})` → success
+- `search_materials({"query":"構造化出力"})` → success
+- 引用の raw: PDF p.46, 57（ok。候補 lec02-main-p046）、PDF p.46, 57（ok。候補 lec02-main-p057）、PDF p.46, 58（ok。候補 lec02-main-p046）、PDF p.46, 58（ok。候補 lec02-main-p058）、PDF p.55（ok。候補 lec02-main-p055）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.34, 35（ok。候補 lec03-main-p034）、PDF p.34, 35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）
+
 </details>
 
 <details>
-<summary>I1 neighbors / qa2（2 回）</summary>
+<summary>I1 neighbors / qa2（3 回）</summary>
 
 **t1**｜ok｜3.131 秒｜tool_calls 1｜requests 2｜gold 取得 2/2｜gold 引用 2/2｜○qa2_persist_or_cannot ○qa2_review｜自動の正答
 
@@ -2734,6 +3050,34 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 
 - `search_materials({"query":"エージェント メモリ 危険"})` → success
 - 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.39（ok。候補 lec03-main-p039）、PDF p.66（ok。候補 lec03-main-p066）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）、PDF p.39（ok。候補 lec03-main-p039）
+
+**t3**｜ok｜13.079 秒｜tool_calls 2｜requests 3｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ○qa2_review｜自動の誤答
+
+```
+第3回の講義では、エージェントのメモリに関して以下のような危険性や設計上の注意点が説明されています。
+
+### 危険性
+* **古い情報や誤りの混入**
+  * すべての情報を蓄積しようとすると、古い情報や誤りも一緒にコンテキスト（会話の履歴や作業用のメモリ）に戻ってきてしまうという危険があります（第3回・PDF p.38）。
+* **外部からの不正な書き込み（プロンプトインジェクションなど）**
+  * メモリツールや自動メモリ機能などを使って外部のファイル等に記録・読み込みを行う場合、外から意図しない内容が書き込まれてしまうリスクがあります（第3回・PDF p.39）。
+
+---
+
+### 防ぐには何をすればよいか（考え方のヒント）
+講義では、メモリを安全に運用するための具体的なアプローチとして以下が挙げられています。
+
+* **何を残し、何を消すかを設計する**
+  * すべてのやり取りをそのまま蓄積するのではなく、情報の取捨選択を行う仕組みを取り入れることが重要とされています（第3回・PDF p.38）。
+* **定期的な見直しや自動整理の仕組み（自動メモリや「dreaming」など）を取り入れる**
+  * 例えば、日々の細かいメモから重複を除き、何度も出てくるテーマや基準を超えた重要な情報だけを長期メモリに移す仕組みなどを活用することで、長期メモリが膨らみすぎるのを防ぐことができます（第3回・PDF p.40）。
+* **中身を人が確かめる**
+  * エージェントが自分で書き出したメモリの内容を、人が確認できる状態にしておくことも対策の一つとして挙げられています（第3回・PDF p.39）。
+```
+
+- `search_materials({"query":"メモリ 危険"})` → success
+- `search_materials({"query":"すべてを蓄積すると"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.39（ok。候補 lec03-main-p039）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）、PDF p.39（ok。候補 lec03-main-p039）
 
 </details>
 
@@ -2921,7 +3265,7 @@ OpenClawの例（第3回・PDF p.40）を確認してみましょう。
 </details>
 
 <details>
-<summary>I2 topk15 / qa1（2 回）</summary>
+<summary>I2 topk15 / qa1（3 回）</summary>
 
 **t1**｜ok｜4.298 秒｜tool_calls 2｜requests 2｜gold 取得 2/2｜gold 引用 2/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
 
@@ -2982,10 +3326,49 @@ OpenClawの例（第3回・PDF p.40）を確認してみましょう。
 - `search_materials({"query":"ファインチューニング 構造化出力 使い分け"})` → success
 - 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、p.57（ok。候補 lec02-main-p057）、PDF p.46（ok。候補 lec02-main-p046）、p.53（ok。候補 lec02-main-p053）、PDF p.49（ok。候補 lec02-main-p049）、p.57（ok。候補 lec02-main-p057）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、p.62（ok。候補 lec03-main-p062）
 
+**t3**｜ok｜9.857 秒｜tool_calls 2｜requests 2｜gold 取得 2/2｜gold 引用 2/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+第2回と第3回の講義資料に基づき、ファインチューニング（FT）と構造化出力の使い分け、および構造化出力が形式を守らせる仕組みについて解説します。
+
+---
+
+### 1. ファインチューニングと構造化出力の使い分け
+
+実務で必ず決まったJSON形式などの出力を求めたい場合、**「形だけを確実に守らせるならAPIの構造化出力が先」**とされています（第2回・PDF p.53）。それぞれの位置づけと使い分けは以下の通りです。
+
+* **構造化出力（第3回）**
+  * **目的・得意なこと：** あらかじめ決めたスキーマ（項目や型、選択肢などの決まり）に合う出力を確実に生成させること（第3回・PDF p.34）。主要なAPIの機能を使って形式を強制します。
+  * **使い分けの基本：** 形式通りにデータを返させたい、またはツール呼び出しを行いたい場合は、まずプロンプトの工夫やAPIの構造化出力機能を利用します（第2回・PDF p.53、第3回・PDF p.34）。
+* **ファインチューニング（FT / 第2回）**
+  * **目的・得意なこと：** プロンプトや形式指定だけでは直らない「振る舞い（口調、根拠の付け方、複雑な手順の守り方など）」を手本から学ばせること（第2回・PDF p.46, p.53）。
+  * **使い分けの注意点：** 演習等でJSON形式を使った学習を行うこともありますが、純粋に形だけを守らせる目的であれば、コストや手間がかかるFTよりもAPIの構造化出力が優先されます。FTが本当に活きる有効な使い道は、書式だけで縛れない高度な振る舞いや、モデルを小さくしてコストを下げるための調整です（第2回・PDF p.46, p.49, p.53）。
+
+---
+
+### 2. 構造化出力はどうやって形式を守らせるのか？
+
+構造化出力が形式を守れる理由は、LLMがテキストを生成する仕組みに介入する**「制約付きデコーディング（Constrained Decoding）」**という技術にあります（第3回・PDF p.35）。
+
+* **仕組み：**
+  LLMはトークン（文章を区切った単位）を1つずつ順番に予測して出力しますが、構造化出力の機能を使うと、**次に選ぶべきトークンの候補のうち、事前に定義したスキーマ（ルール）に合わないものをその都度除外**します（第3回・PDF p.35）。
+* **結果：**
+  スキーマから外れる文字や不正な形式の候補はそもそも生成されないため、形式の崩れをほぼ確実に防ぐことができます（第3回・PDF p.35）。
+
+---
+
+### 学習のヒント
+「確実にJSONなどの形式を守らせる」という要件に対しては、まずはコストや実装の手間が少ない第3回の仕組み（APIの構造化出力）を検討し、それでもコントロールしきれない複雑な振る舞いの癖づけやコスト最適化が必要な場合に、第2回のファインチューニング（FT）を検討するという順序になります。
+```
+
+- `search_materials({"query":"ファインチューニング"})` → success
+- `search_materials({"query":"構造化出力"})` → success
+- 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.46（ok。候補 lec02-main-p046）、p.53（ok。候補 lec02-main-p053）、PDF p.46（ok。候補 lec02-main-p046）、p.49（ok。候補 lec02-main-p049）、p.53（ok。候補 lec02-main-p053）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）
+
 </details>
 
 <details>
-<summary>I2 topk15 / qa2（2 回）</summary>
+<summary>I2 topk15 / qa2（3 回）</summary>
 
 **t1**｜ok｜6.007 秒｜tool_calls 2｜requests 3｜gold 取得 1/2｜gold 引用 0/2｜×qa2_persist_or_cannot ×qa2_review｜自動の誤答
 
@@ -3039,6 +3422,30 @@ OpenClawの例（第3回・PDF p.40）を確認してみましょう。
 - `search_materials({"query":"すべてを蓄積すると 古い情報 や 誤り"})` → success
 - 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.39（ok。候補 lec03-main-p039）、PDF p.50（ok。候補 lec03-main-p050）、PDF p.38（ok。候補 lec03-main-p038）、p.40（ok。候補 lec03-main-p040）
 
+**t3**｜ok｜13.305 秒｜tool_calls 2｜requests 3｜gold 取得 2/2｜gold 引用 2/2｜○qa2_persist_or_cannot ○qa2_review｜自動の正答
+
+```
+第3回の講義では、エージェントのメモリに関して以下のような危険性やリスクが説明されています。
+
+* **古い情報や誤りの蓄積**
+  * すべての情報を蓄積すると、古い情報や誤りも一緒に（次の会話などのコンテキストに）戻ってくるという問題が指摘されています（第3回・PDF p.38）。
+* **外部からの書き込みによるリスク**
+  * メモリに記録が保存され、後のコンテキストに戻される仕組みにおいて、「外から書き込まれる危険もある」とされています（第3回・PDF p.39）。
+* **紛れ込んだ悪意ある入力が指示として残る**
+  * モデルにとっては指示もデータも同じ文字列に見えるため、メモリ内に紛れ込んだ悪意ある入力が、後の会話でも指示として残ってしまう危険性が挙げられています（第3回・PDF p.50）。
+
+これらを防ぐための設計や対策としては、以下のようなアプローチが紹介されています。
+
+* **何を残し、何を消すかを設計する**
+  * すべてをそのまま残すのではなく、重複を除いたり何度も出てくるテーマを見比べて基準を超えたものだけを残す仕組み（長期メモリへの整理など）を設計します（第3回・PDF p.38, p.40）。
+* **人が中身を確かめる（見直す）**
+  * 長期メモリなどに何が入ったかを、人が確かめることが挙げられています（第3回・PDF p.39, p.51）。
+```
+
+- `search_materials({"query":"エージェント メモリ 危険"})` → success
+- `search_materials({"query":"メモリ 危険 対策 lec03"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.39（ok。候補 lec03-main-p039）、PDF p.50（ok。候補 lec03-main-p050）、PDF p.38（ok。候補 lec03-main-p038）、p.40（ok。候補 lec03-main-p040）、PDF p.39（ok。候補 lec03-main-p039）、p.51（ok。候補 lec03-main-p051）
+
 </details>
 
 ### レベル: adv
@@ -3058,23 +3465,23 @@ OpenClawの例（第3回・PDF p.40）を確認してみましょう。
 | V0 vector（参考） | q1 | 1,1,1 | 2,2,2 | search_materials(LoRA 固定 学習 QLoRA 加える) | — |
 | V0 vector（参考） | q2 | 1,1,1 | 2,2,2 | search_materials(コンパクション セッション メモリ 長期メモリ 日々のメモ 第3回) | — |
 | V0 vector（参考） | q3 | 1,1,1 | 2,2,2 | search_materials(実測平均応答時間 正答率 RAG) | — |
-| V0 vector（参考） | qa1 | 2,2 [2/3回] | 2,3 | search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力) | — |
-| V0 vector（参考） | qa2 | 3,2 [2/3回] | 4,3 | search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming) | — |
+| V0 vector（参考） | qa1 | 2,2,2 | 2,3,2 | search_materials(第2回 ファインチューニング) ／ search_materials(第3回 構造化出力) | — |
+| V0 vector（参考） | qa2 | 3,2,2 | 4,3,3 | search_materials(エージェント メモリ 危険) ／ search_materials(すべてを蓄積すると 古い情報 危険 防ぐ) ／ search_materials(長期メモリ OpenClaw Dreaming) | — |
 | G graph（参考） | q1 | 1,1,1 | 2,2,2 | search_graph(LoRA QLoRA 固定 学習) | — |
 | G graph（参考） | q2 | 1,1,1 | 2,2,2 | search_graph(コンパクション セッション 長期メモリ) | — |
-| G graph（参考） | q3 | 2,1 [2/3回] | 3,2 | search_graph(RAG 実測平均応答時間 正答率) ／ search_graph(RAG 実測) | — |
-| G graph（参考） | qa1 | 2,2 [2/3回] | 3,3 | search_graph(ファインチューニング 構造化出力 使い分け 第2回 第3回) ／ search_graph(第3回 構造化出力 形式を守らせる) | — |
-| G graph（参考） | qa2 | 1,2 [2/3回] | 2,3 | search_graph(エージェント メモリ 危険) | — |
+| G graph（参考） | q3 | 2,1,2 | 3,2,3 | search_graph(RAG 実測平均応答時間 正答率) ／ search_graph(RAG 実測) | — |
+| G graph（参考） | qa1 | 2,2,1 | 3,3,2 | search_graph(ファインチューニング 構造化出力 使い分け 第2回 第3回) ／ search_graph(第3回 構造化出力 形式を守らせる) | — |
+| G graph（参考） | qa2 | 1,2,2 | 2,3,3 | search_graph(エージェント メモリ 危険) | — |
 | A1 term_graph | q1 | 1,1,1 | 2,2,2 | search_materials(LoRA QLoRA 固定 学習 第2回) | — |
 | A1 term_graph | q2 | 2,2,2 | 3,3,3 | search_materials(コンパクション セッション メモリ 長期メモリ 日々のメモ) ／ search_materials(自動メモリ 長期メモリ 日々のメモ すべて長期メモリ) | — |
 | A1 term_graph | q3 | 1,1,1 | 2,2,2 | search_materials(実測平均応答時間 正答率 RAG) | — |
-| A1 term_graph | qa1 | 2,3 [2/3回] | 3,3 | search_materials(ファインチューニング 構造化出力 使い分け 第2回 第3回) ／ search_materials(構造化出力 API スキーマ 第3回) | — |
-| A1 term_graph | qa2 | 2,2 [2/3回] | 3,3 | search_materials(メモリ 危険 防ぐ) ／ search_materials(メモリ 残す 消す 設計) | — |
+| A1 term_graph | qa1 | 2,3,2 | 3,3,3 | search_materials(ファインチューニング 構造化出力 使い分け 第2回 第3回) ／ search_materials(構造化出力 API スキーマ 第3回) | — |
+| A1 term_graph | qa2 | 2,2,2 | 3,3,3 | search_materials(メモリ 危険 防ぐ) ／ search_materials(メモリ 残す 消す 設計) | — |
 | A2 term_graph_cap3 | q1 | 1,1,1 | 2,2,2 | search_materials(LoRA QLoRA 固定 学習 第2回) | — |
 | A2 term_graph_cap3 | q2 | 1,1,1 | 2,2,2 | search_materials(コンパクション セッション メモリ 長期メモリ 日々のメモ) | — |
 | A2 term_graph_cap3 | q3 | 1,1,1 | 2,2,2 | search_materials(実測平均応答時間 正答率 RAG) | — |
-| A2 term_graph_cap3 | qa1 | 2,2 [2/3回] | 3,2 | search_materials(ファインチューニング 第2回) ／ search_materials(構造化出力 第3回) | — |
-| A2 term_graph_cap3 | qa2 | 1,2 [2/3回] | 2,3 | search_materials(エージェント メモリ 危険) | — |
+| A2 term_graph_cap3 | qa1 | 2,2,1 | 3,2,2 | search_materials(ファインチューニング 第2回) ／ search_materials(構造化出力 第3回) | — |
+| A2 term_graph_cap3 | qa2 | 1,2,2 | 2,3,3 | search_materials(エージェント メモリ 危険) | — |
 
 #### 表B: 根拠の取得（gold の取得率は、全文で取得したページ ∩ gold ÷ gold。全文投入は、gold が対象資料に入っているか）
 
@@ -3083,23 +3490,23 @@ OpenClawの例（第3回・PDF p.40）を確認してみましょう。
 | V0 vector（参考） | q1 | 1/1,1/1,1/1 | 5,5,5 | — | — | — | 2956,2956,2956 | t1[#1] t2[#1] t3[#1] |
 | V0 vector（参考） | q2 | 3/3,3/3,3/3 | 5,5,5 | — | — | — | 2382,2382,2382 | t1[#4,#1,#5] t2[#5,#1,#4] t3[#5,#1,#4] |
 | V0 vector（参考） | q3 | —,—,— | 5,5,5 | — | — | — | 3636,3189,3636 | — |
-| V0 vector（参考） | qa1 | 1/2,2/2 | 10,9 | — | — | — | 3951,4279 | t1[×,#4] t2[#1,#2] |
-| V0 vector（参考） | qa2 | 0/2,0/2 | 10,10 | — | — | — | 7004,3581 | t1[×,×] t2[×,×] |
+| V0 vector（参考） | qa1 | 1/2,2/2,1/2 | 10,9,10 | — | — | — | 3951,4279,3989 | t1[×,#4] t2[#1,#2] t3[×,#4] |
+| V0 vector（参考） | qa2 | 0/2,0/2,0/2 | 10,10,10 | — | — | — | 7004,3581,3581 | t1[×,×] t2[×,×] t3[×,×] |
 | G graph（参考） | q1 | 1/1,1/1,1/1 | 10,10,10 | — | 3/7,3/7,3/7 | — | 5382,5382,5382 | t1[#1] t2[#1] t3[#1] |
 | G graph（参考） | q2 | 2/3,2/3,2/3 | 10,10,10 | — | 3/7,3/7,3/7 | — | 5658,5658,5658 | t1[×,#2,×] t2[×,#1,×] t3[×,#2,×] |
-| G graph（参考） | q3 | —,— | 13,10 | — | 4/9,3/7 | — | 10739,5067 | — |
-| G graph（参考） | qa1 | 2/2,2/2 | 20,20 | — | 6/14,6/14 | — | 10420,10420 | t1[#2,×] t2[#2,×] |
-| G graph（参考） | qa2 | 0/2,0/2 | 10,16 | — | 3/7,5/12 | — | 4682,9802 | t1[×,×] t2[×,×] |
+| G graph（参考） | q3 | —,—,— | 13,10,13 | — | 4/9,3/7,4/9 | — | 10739,5067,10262 | — |
+| G graph（参考） | qa1 | 2/2,2/2,2/2 | 20,20,10 | — | 6/14,6/14,3/7 | — | 10420,10420,4525 | t1[#2,×] t2[#2,×] t3[×,#2] |
+| G graph（参考） | qa2 | 0/2,0/2,0/2 | 10,16,13 | — | 3/7,5/12,4/9 | — | 4682,9802,8090 | t1[×,×] t2[×,×] t3[×,×] |
 | A1 term_graph | q1 | 1/1,1/1,1/1 | 5,5,5 | — | — | — | 2723,2923,2923 | t1[#1] t2[#1] t3[#1] |
 | A1 term_graph | q2 | 3/3,3/3,3/3 | 7,7,7 | — | — | — | 4880,4914,4914 | t1[#4,#1,#1] t2[#4,#1,#2] t3[#4,#1,#2] |
 | A1 term_graph | q3 | —,—,— | 5,5,5 | — | — | — | 3636,3636,2445 | — |
-| A1 term_graph | qa1 | 2/2,2/2 | 9,12 | — | — | — | 4943,6534 | t1[#2,#3] t2[#4,#2] |
-| A1 term_graph | qa2 | 1/2,1/2 | 6,6 | — | — | — | 4725,4827 | t1[#4,×] t2[#4,×] |
+| A1 term_graph | qa1 | 2/2,2/2,2/2 | 9,12,9 | — | — | — | 4943,6534,4983 | t1[#2,#3] t2[#4,#2] t3[#2,#2] |
+| A1 term_graph | qa2 | 1/2,1/2,1/2 | 6,6,6 | — | — | — | 4725,4827,4827 | t1[#4,×] t2[#4,×] t3[#5,×] |
 | A2 term_graph_cap3 | q1 | 1/1,1/1,1/1 | 5,5,5 | — | — | — | 2685,2912,2912 | t1[#1] t2[#1] t3[#1] |
 | A2 term_graph_cap3 | q2 | 3/3,3/3,3/3 | 5,5,5 | — | — | — | 2382,2382,2382 | t1[#5,#1,#4] t2[#5,#2,#4] t3[#5,#1,#4] |
 | A2 term_graph_cap3 | q3 | —,—,— | 5,5,5 | — | — | — | 3636,3636,3189 | — |
-| A2 term_graph_cap3 | qa1 | 1/2,2/2 | 10,10 | — | — | — | 3873,4279 | t1[×,#4] t2[#5,#3] |
-| A2 term_graph_cap3 | qa2 | 0/2,0/2 | 5,8 | — | — | — | 2382,4949 | t1[×,×] t2[×,×] |
+| A2 term_graph_cap3 | qa1 | 1/2,2/2,2/2 | 10,10,5 | — | — | — | 3873,4279,2103 | t1[×,#4] t2[#5,#3] t3[#3,#4] |
+| A2 term_graph_cap3 | qa2 | 0/2,0/2,0/2 | 5,8,9 | — | — | — | 2382,4949,4155 | t1[×,×] t2[×,×] t3[×,×] |
 
 #### 表C1: 引用（gold 引用 = 引用したページ ∩ gold ÷ gold。2×2 は gold ページごとの合計: 取れて引用した／取れたが引用しなかった／取らずに引用した／取れず引用もしない）
 
@@ -3108,23 +3515,23 @@ OpenClawの例（第3回・PDF p.40）を確認してみましょう。
 | V0 vector（参考） | q1 | 2,2,2 | 1/1,1/1,1/1 | 1,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | V0 vector（参考） | q2 | 3,5,3 | 2/3,3/3,2/3 | 1,1,1 | 0,1,0 | 0,0,0 | 7/2/0/0 |
 | V0 vector（参考） | q3 | 1,1,0 | —,—,— | 0,0,0 | 1,1,0 | 0,0,0 | 0/0/0/0 |
-| V0 vector（参考） | qa1 | 7,5 | 1/2,2/2 | 3,2 | 3,1 | 0,0 | 3/0/0/1 |
-| V0 vector（参考） | qa2 | 3,2 | 0/2,0/2 | 2,1 | 1,1 | 0,0 | 0/0/0/4 |
+| V0 vector（参考） | qa1 | 7,5,6 | 1/2,2/2,1/2 | 3,2,3 | 3,1,2 | 0,0,0 | 4/0/0/2 |
+| V0 vector（参考） | qa2 | 3,2,2 | 0/2,0/2,0/2 | 2,1,1 | 1,1,1 | 0,0,0 | 0/0/0/6 |
 | G graph（参考） | q1 | 2,2,2 | 1/1,1/1,1/1 | 1,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | G graph（参考） | q2 | 3,4,3 | 2/3,2/3,2/3 | 0,1,0 | 1,1,1 | 0,0,0 | 6/0/0/3 |
-| G graph（参考） | q3 | 1,1 | —,— | 0,0 | 1,1 | 0,0 | 0/0/0/0 |
-| G graph（参考） | qa1 | 7,5 | 2/2,2/2 | 2,2 | 3,1 | 0,0 | 4/0/0/0 |
-| G graph（参考） | qa2 | 3,3 | 0/2,0/2 | 2,2 | 1,1 | 0,0 | 0/0/0/4 |
+| G graph（参考） | q3 | 1,1,1 | —,—,— | 0,0,0 | 1,1,1 | 0,0,0 | 0/0/0/0 |
+| G graph（参考） | qa1 | 7,5,4 | 2/2,2/2,2/2 | 2,2,2 | 3,1,0 | 0,0,0 | 6/0/0/0 |
+| G graph（参考） | qa2 | 3,3,2 | 0/2,0/2,0/2 | 2,2,1 | 1,1,1 | 0,0,0 | 0/0/0/6 |
 | A1 term_graph | q1 | 1,1,2 | 1/1,1/1,1/1 | 0,0,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | A1 term_graph | q2 | 5,5,5 | 3/3,3/3,3/3 | 1,1,1 | 1,1,1 | 0,0,0 | 9/0/0/0 |
 | A1 term_graph | q3 | 1,1,3 | —,—,— | 0,0,0 | 1,1,3 | 0,0,0 | 0/0/0/0 |
-| A1 term_graph | qa1 | 4,5 | 2/2,2/2 | 2,3 | 0,0 | 0,0 | 4/0/0/0 |
-| A1 term_graph | qa2 | 3,4 | 1/2,1/2 | 1,2 | 1,1 | 0,0 | 2/0/0/2 |
+| A1 term_graph | qa1 | 4,5,5 | 2/2,2/2,2/2 | 2,3,2 | 0,0,1 | 0,0,0 | 6/0/0/0 |
+| A1 term_graph | qa2 | 3,4,3 | 1/2,1/2,1/2 | 1,2,1 | 1,1,1 | 0,0,0 | 3/0/0/3 |
 | A2 term_graph_cap3 | q1 | 2,2,2 | 1/1,1/1,1/1 | 1,1,1 | 0,0,0 | 0,0,0 | 3/0/0/0 |
 | A2 term_graph_cap3 | q2 | 5,4,4 | 3/3,3/3,3/3 | 1,1,0 | 1,0,1 | 0,0,0 | 9/0/0/0 |
 | A2 term_graph_cap3 | q3 | 1,1,1 | —,—,— | 0,0,0 | 1,1,1 | 0,0,0 | 0/0/0/0 |
-| A2 term_graph_cap3 | qa1 | 5,5 | 1/2,2/2 | 3,2 | 1,1 | 0,0 | 3/0/0/1 |
-| A2 term_graph_cap3 | qa2 | 2,2 | 0/2,0/2 | 1,1 | 1,1 | 0,0 | 0/0/0/4 |
+| A2 term_graph_cap3 | qa1 | 5,5,4 | 1/2,2/2,2/2 | 3,2,2 | 1,1,0 | 0,0,0 | 5/0/0/1 |
+| A2 term_graph_cap3 | qa2 | 2,2,2 | 0/2,0/2,0/2 | 1,1,1 | 1,1,1 | 0,0,0 | 0/0/0/6 |
 
 #### 表C2: 自動チェック（チェックは、通った試行/試行数。自動の正答 = required がすべて一致し、flag が一致しない。要確認 = required がすべて一致し、flag も一致（回答を読んで決める。正答にも誤答にも数えない）。自動の誤答 = required のどれかが一致しない（flag は問わない））
 
@@ -3133,23 +3540,23 @@ OpenClawの例（第3回・PDF p.40）を確認してみましょう。
 | V0 vector（参考） | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）3/3 | 3/3 | 0/3 | 0/3 |
 | V0 vector（参考） | q2 | q2_summary（required）3/3<br>q2_persist（required）3/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 3/3 | 0/3 | 0/3 |
 | V0 vector（参考） | q3 | q3_refuse（required）3/3<br>q3_numflag（flag）3/3 | 3/3 | 0/3 | 0/3 |
-| V0 vector（参考） | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）2/2 | 2/2 | 0/2 | 0/2 |
-| V0 vector（参考） | qa2 | qa2_persist_or_cannot（required）0/2<br>qa2_review（required）2/2 | 0/2 | 0/2 | 2/2 |
+| V0 vector（参考） | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）3/3 | 3/3 | 0/3 | 0/3 |
+| V0 vector（参考） | qa2 | qa2_persist_or_cannot（required）0/3<br>qa2_review（required）2/3 | 0/3 | 0/3 | 3/3 |
 | G graph（参考） | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）3/3 | 3/3 | 0/3 | 0/3 |
 | G graph（参考） | q2 | q2_summary（required）3/3<br>q2_persist（required）2/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 2/3 | 0/3 | 1/3 |
-| G graph（参考） | q3 | q3_refuse（required）1/2<br>q3_numflag（flag）2/2 | 1/2 | 0/2 | 1/2 |
-| G graph（参考） | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）1/2 | 2/2 | 0/2 | 0/2 |
-| G graph（参考） | qa2 | qa2_persist_or_cannot（required）0/2<br>qa2_review（required）1/2 | 0/2 | 0/2 | 2/2 |
+| G graph（参考） | q3 | q3_refuse（required）2/3<br>q3_numflag（flag）3/3 | 2/3 | 0/3 | 1/3 |
+| G graph（参考） | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）2/3 | 3/3 | 0/3 | 0/3 |
+| G graph（参考） | qa2 | qa2_persist_or_cannot（required）0/3<br>qa2_review（required）1/3 | 0/3 | 0/3 | 3/3 |
 | A1 term_graph | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）3/3 | 3/3 | 0/3 | 0/3 |
 | A1 term_graph | q2 | q2_summary（required）3/3<br>q2_persist（required）3/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 3/3 | 0/3 | 0/3 |
 | A1 term_graph | q3 | q3_refuse（required）2/3<br>q3_numflag（flag）3/3 | 2/3 | 0/3 | 1/3 |
-| A1 term_graph | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）2/2 | 2/2 | 0/2 | 0/2 |
-| A1 term_graph | qa2 | qa2_persist_or_cannot（required）2/2<br>qa2_review（required）1/2 | 1/2 | 0/2 | 1/2 |
+| A1 term_graph | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）3/3 | 3/3 | 0/3 | 0/3 |
+| A1 term_graph | qa2 | qa2_persist_or_cannot（required）3/3<br>qa2_review（required）1/3 | 1/3 | 0/3 | 2/3 |
 | A2 term_graph_cap3 | q1 | q1_fix（required）3/3<br>q1_train（required）3/3<br>q1_qlora（required）3/3 | 3/3 | 0/3 | 0/3 |
 | A2 term_graph_cap3 | q2 | q2_summary（required）3/3<br>q2_persist（required）3/3<br>q2_daily（required）3/3<br>q2_scope（reference）3/3 | 3/3 | 0/3 | 0/3 |
 | A2 term_graph_cap3 | q3 | q3_refuse（required）3/3<br>q3_numflag（flag）3/3 | 3/3 | 0/3 | 0/3 |
-| A2 term_graph_cap3 | qa1 | qa1_first（required）2/2<br>qa1_decode（required）2/2<br>qa1_ftuse（bonus）2/2 | 2/2 | 0/2 | 0/2 |
-| A2 term_graph_cap3 | qa2 | qa2_persist_or_cannot（required）0/2<br>qa2_review（required）0/2 | 0/2 | 0/2 | 2/2 |
+| A2 term_graph_cap3 | qa1 | qa1_first（required）3/3<br>qa1_decode（required）3/3<br>qa1_ftuse（bonus）3/3 | 3/3 | 0/3 | 0/3 |
+| A2 term_graph_cap3 | qa2 | qa2_persist_or_cannot（required）0/3<br>qa2_review（required）0/3 | 0/3 | 0/3 | 3/3 |
 
 #### 表D: 時間・トークン・費用（中央値 (最小–最大)。費用は生成 API の推定で、埋め込みを含まない。算定できなければ「算定不可」で、0 にしない）
 
@@ -3158,23 +3565,23 @@ OpenClawの例（第3回・PDF p.40）を確認してみましょう。
 | V0 vector（参考） | q1 | 3 | 2.8 (2.7–2.8) | 3028 (3027–3028) | 163 (157–203) | 0 (0–0) | 2 (2–2) | 0.001316 (0.001301–0.001416) |
 | V0 vector（参考） | q2 | 3 | 3.9 (3.5–8.8) | 2500 (2500–2502) | 467 (358–535) | 0 (0–0) | 2 (2–2) | 0.001917 (0.001646–0.002087) |
 | V0 vector（参考） | q3 | 3 | 2.7 (2.6–2.8) | 3205 (3120–3205) | 154 (128–160) | 0 (0–0) | 2 (2–2) | 0.001336 (0.001282–0.001347) |
-| V0 vector（参考） | qa1 | 2 | 4.9 (4.4–5.4) | 5250 (4082–6417) | 708 (700–717) | 0 (0–0) | 2 (2–3) | 0.003346 (0.003017–0.003675) |
-| V0 vector（参考） | qa2 | 2 | 5.6 (5.2–6.0) | 8946 (5756–12136) | 308 (293–324) | 0 (0–0) | 4 (3–4) | 0.003455 (0.002459–0.004451) |
+| V0 vector（参考） | qa1 | 3 | 4.4 (3.7–5.4) | 4136 (4082–6417) | 700 (459–717) | 0 (0–0) | 2 (2–3) | 0.003017 (0.002388–0.003675) |
+| V0 vector（参考） | qa2 | 3 | 6.0 (5.2–9.7) | 5756 (5756–12136) | 293 (261–324) | 0 (0–0) | 3 (3–4) | 0.002459 (0.002379–0.004451) |
 | G graph（参考） | q1 | 3 | 2.8 (2.5–3.1) | 5771 (5771–5775) | 222 (151–227) | 0 (0–0) | 2 (2–2) | 0.002286 (0.002109–0.002300) |
 | G graph（参考） | q2 | 3 | 4.8 (3.5–11.3) | 5299 (5299–5301) | 412 (412–478) | 0 (0–0) | 2 (2–2) | 0.002620 (0.002620–0.002785) |
-| G graph（参考） | q3 | 2 | 3.7 (3.2–4.3) | 10324 (5334–15313) | 216 (187–244) | 0 (0–0) | 2 (2–3) | 0.003086 (0.002210–0.003962) |
-| G graph（参考） | qa1 | 2 | 6.1 (6.0–6.2) | 15113 (15113–15113) | 741 (736–746) | 0 (0–0) | 3 (3–3) | 0.005288 (0.005275–0.005300) |
-| G graph（参考） | qa2 | 2 | 3.8 (3.1–4.5) | 9167 (4752–13582) | 268 (241–294) | 0 (0–0) | 2 (2–3) | 0.002870 (0.002161–0.003579) |
+| G graph（参考） | q3 | 3 | 4.3 (3.2–4.5) | 15303 (5334–15313) | 208 (187–244) | 0 (0–0) | 3 (2–3) | 0.003962 (0.002210–0.004012) |
+| G graph（参考） | qa1 | 3 | 6.0 (4.5–6.2) | 15113 (4867–15113) | 736 (555–746) | 0 (0–0) | 3 (2–3) | 0.005275 (0.002301–0.005300) |
+| G graph（参考） | qa2 | 3 | 4.5 (3.1–9.0) | 12685 (4752–13582) | 241 (237–294) | 0 (0–0) | 3 (2–3) | 0.003300 (0.002161–0.003579) |
 | A1 term_graph | q1 | 3 | 2.8 (2.5–25.2) | 3025 (2817–3025) | 210 (177–238) | 0 (0–0) | 2 (2–2) | 0.001370 (0.001350–0.001502) |
 | A1 term_graph | q2 | 3 | 5.2 (5.1–5.3) | 6773 (6763–6808) | 510 (503–512) | 0 (0–0) | 3 (3–3) | 0.003304 (0.003289–0.003322) |
 | A1 term_graph | q3 | 3 | 2.9 (2.8–3.4) | 3205 (2772–3205) | 195 (111–219) | 0 (0–0) | 2 (2–2) | 0.001379 (0.001239–0.001449) |
-| A1 term_graph | qa1 | 2 | 5.5 (5.2–5.7) | 8664 (6877–10452) | 598 (557–640) | 0 (0–0) | 3 (3–3) | 0.003822 (0.003663–0.003981) |
-| A1 term_graph | qa2 | 2 | 4.8 (4.5–5.1) | 6700 (6663–6736) | 345 (332–358) | 0 (0–0) | 3 (3–3) | 0.002872 (0.002851–0.002894) |
+| A1 term_graph | qa1 | 3 | 5.7 (5.2–8.0) | 6906 (6877–10452) | 640 (557–741) | 0 (0–0) | 3 (3–3) | 0.003924 (0.003663–0.003981) |
+| A1 term_graph | qa2 | 3 | 5.1 (4.5–5.4) | 6736 (6663–6736) | 332 (332–358) | 0 (0–0) | 3 (3–3) | 0.002851 (0.002306–0.002894) |
 | A2 term_graph_cap3 | q1 | 3 | 3.1 (2.9–20.5) | 3002 (2877–3002) | 193 (149–210) | 0 (0–0) | 2 (2–2) | 0.001383 (0.001273–0.001388) |
 | A2 term_graph_cap3 | q2 | 3 | 3.8 (3.7–4.0) | 2500 (2495–2500) | 451 (442–452) | 0 (0–0) | 2 (2–2) | 0.001878 (0.001855–0.001878) |
 | A2 term_graph_cap3 | q3 | 3 | 3.0 (3.0–3.2) | 3205 (3120–3206) | 154 (118–290) | 0 (0–0) | 2 (2–2) | 0.001321 (0.001257–0.001687) |
-| A2 term_graph_cap3 | qa1 | 2 | 4.8 (3.8–5.8) | 5154 (4395–5912) | 632 (607–656) | 0 (0–0) | 2 (2–3) | 0.003125 (0.002836–0.003414) |
-| A2 term_graph_cap3 | qa2 | 2 | 3.4 (3.0–3.8) | 4596 (2486–6706) | 232 (218–246) | 0 (0–0) | 2 (2–3) | 0.001959 (0.001291–0.002627) |
+| A2 term_graph_cap3 | qa1 | 3 | 3.8 (3.3–5.8) | 4395 (2476–5912) | 607 (469–656) | 0 (0–0) | 2 (2–3) | 0.002836 (0.001915–0.003414) |
+| A2 term_graph_cap3 | qa2 | 3 | 3.8 (3.0–12.1) | 6400 (2486–6706) | 244 (218–246) | 0 (0–0) | 3 (2–3) | 0.002530 (0.001291–0.002627) |
 
 #### 試行ごとの詳細（回答の全文・ツールの引数・引用の raw）
 
@@ -3356,7 +3763,7 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 </details>
 
 <details>
-<summary>V0 vector（参考） / qa1（2 回）</summary>
+<summary>V0 vector（参考） / qa1（3 回）</summary>
 
 **t1**｜ok｜4.447 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
 
@@ -3426,10 +3833,33 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 - `search_materials({"query":"構造化出力 形式を守らせる どうやって API"})` → success
 - 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.46（ok。候補 lec02-main-p046）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）
 
+**t3**｜ok｜3.722 秒｜tool_calls 2｜requests 2｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+回答を決まったJSON形式で返させたいときの「ファインチューニング」と「構造化出力」の使い分けや、仕組みについて、講義資料の記述をもとに整理します。
+
+### 1. ファインチューニングと構造化出力の使い分け
+* **構造化出力**：
+  * まず試すべきアプローチです。APIの機能としてスキーマ（項目と型の決まり）を指定し、形式に合う出力だけを生成させます（第3回・PDF p.34）。
+* **ファインチューニング**：
+  * プロンプトや形式指定（構造化出力など）では直らなかった場合の選択肢です。「振る舞い（形式・口調・手順など）」をモデルに覚え込ませるために用いられます（第2回・PDF p.46, p.58）。
+  * ただし、実務においては、形式を強制したいだけであれば、まずはプロンプトの工夫やAPIの構造化出力機能から検討するのが基本となります（第2回・PDF p.57）。
+
+### 2. 構造化出力はどうやって形式を守らせるのか
+構造化出力では、「**制約付きデコーディング**」という仕組みを使って形式を守らせています（第3回・PDF p.35）。
+* LLMがテキストを生成する際、1トークンを選ぶたびに、**あらかじめ定義したスキーマや形式に合わない候補をあらかじめ除外**します（第3回・PDF p.35）。
+* 残った候補の中から次のトークンを選ぶため、形式に合わない出力がそもそも生成されない仕組みになっています（第3回・PDF p.35）。
+* 主要なAPI（OpenAI、Claude、Geminiなど）では、`json_schema` や `strict: true` などの設定を行うことで、この機能を有効にして形式の崩れをほぼなくすことができます（第3回・PDF p.35, p.62）。
+```
+
+- `search_materials({"query":"ファインチューニング"})` → success
+- `search_materials({"query":"構造化出力"})` → success
+- 引用の raw: PDF p.34（ok。候補 lec03-main-p034）、PDF p.46（ok。候補 lec02-main-p046）、p.58（ok。候補 lec02-main-p058）、PDF p.57（ok。候補 lec02-main-p057）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、p.62（ok。候補 lec03-main-p062）
+
 </details>
 
 <details>
-<summary>V0 vector（参考） / qa2（2 回）</summary>
+<summary>V0 vector（参考） / qa2（3 回）</summary>
 
 **t1**｜ok｜5.982 秒｜tool_calls 3｜requests 4｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ○qa2_review｜自動の誤答
 
@@ -3466,6 +3896,25 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
   * 例えば実装例として紹介されている「OpenClaw」では、日々のメモを毎晩自動で見直し（dreaming）、重複を除いたり何度も出てくるテーマを探したりして、**基準を超えたものだけを長期メモリに残す**仕組みをとっています（第3回・PDF p.40）。
 
 このように、すべての情報をやみくもに溜め込むのではなく、情報の取捨選択や定期的な見直しの仕組みを取り入れることがポイントになります。
+```
+
+- `search_materials({"query":"エージェント メモリ 危険"})` → success
+- `search_materials({"query":"すべてを蓄積すると"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
+
+**t3**｜ok｜9.722 秒｜tool_calls 2｜requests 3｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ×qa2_review｜自動の誤答
+
+```
+第3回講義の資料では、エージェントのメモリに関して以下のような危険や課題が説明されています。
+
+* **古い情報や誤りも一緒に戻ってくる危険**
+  * すべての情報をそのまま蓄積してしまうと、古い情報や誤った情報までが一緒に呼び出されてしまうという問題が生じます（第3回・PDF p.38）。
+
+この危険を防ぎ、上手にメモリを管理するためにはどのような設計・工夫が必要とされるでしょうか。講義資料の考え方をヒントに検討してみましょう。
+
+* **ヒント：情報の取捨選択と整理**
+  * すべてを無制限に残すのではなく、「何を残し、何を消すか」をどのように設計・判断すればよいでしょうか（第3回・PDF p.38）。
+  * 実装例（OpenClawなど）では、日々の細かな記録や一度きりの調べものと、長期的に残すべき重要なテーマをどのように区別・整理しているでしょうか（第3回・PDF p.40）。
 ```
 
 - `search_materials({"query":"エージェント メモリ 危険"})` → success
@@ -3601,7 +4050,7 @@ OpenClawの実装例を見ると、日々のメモがすべてそのまま長期
 </details>
 
 <details>
-<summary>G graph（参考） / q3（2 回）</summary>
+<summary>G graph（参考） / q3（3 回）</summary>
 
 **t1**｜ok｜4.269 秒｜tool_calls 2｜requests 3｜gold 取得 —｜gold 引用 —｜○q3_refuse ○q3_numflag｜自動の正答
 
@@ -3636,10 +4085,22 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 - `search_graph({"query":"RAG 実測平均応答時間 正答率"})` → success
 - 引用の raw: PDF p.13（ok。候補 lec02-main-p013）、PDF p.13（ok。候補 lec02-main-p013）
 
+**t3**｜ok｜4.486 秒｜tool_calls 2｜requests 3｜gold 取得 —｜gold 引用 —｜○q3_refuse ○q3_numflag｜自動の正答
+
+```
+第1回〜第3回の講義資料を確認しましたが、今回作成された具体的なRAGの実測平均応答時間や正答率に関する数値は記載されていません（第2回資料では、LLMやRAGの評価の重要性を説明する例として「同じ質問を5回聞いて、ばらつきごと測る」という考え方が紹介されています） [第2回・PDF p.13]。
+
+ご自身が実装・測定された環境やテストデータ、ログなどを確認していただく必要があります。評価を行う際は、1回だけの試行ではなく、同じ質問を複数回行って平均やばらつき（正答率など）を測る視点が大切です [第2回・PDF p.13]。
+```
+
+- `search_graph({"query":"RAG 実測平均応答時間 正答率"})` → success
+- `search_graph({"query":"RAG 構築 第5回 実測 応答時間 正答率"})` → success
+- 引用の raw: PDF p.13（ok。候補 lec02-main-p013）、PDF p.13（ok。候補 lec02-main-p013）
+
 </details>
 
 <details>
-<summary>G graph（参考） / qa1（2 回）</summary>
+<summary>G graph（参考） / qa1（3 回）</summary>
 
 **t1**｜ok｜6.171 秒｜tool_calls 2｜requests 3｜gold 取得 2/2｜gold 引用 2/2｜○qa1_first ○qa1_decode ×qa1_ftuse｜自動の正答
 
@@ -3719,10 +4180,43 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 - `search_graph({"query":"第3回 構造化出力 形式を守らせる"})` → success
 - 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、PDF p.53（ok。候補 lec02-main-p053）、p.46（ok。候補 lec02-main-p046）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.46（ok。候補 lec02-main-p046）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、p.62（ok。候補 lec03-main-p062）
 
+**t3**｜ok｜4.503 秒｜tool_calls 1｜requests 2｜gold 取得 2/2｜gold 引用 2/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+第2回と第3回の講義資料を基に、ファインチューニング（FT）と構造化出力の使い分け、および構造化出力で形式を守らせる仕組みについて解説します。
+
+---
+
+### 1. ファインチューニング（第2回）と構造化出力（第3回）の使い分け
+
+実務において「決まったJSON形式で返させたい」という要件がある場合、まずはAPIの機能である**構造化出力を使うのが基本**です。それぞれの特徴と使い分けの基準は以下の通りです。
+
+* **構造化出力（第3回）**
+  * **使う場面：** 基本的にJSONなどの形式を守らせたい場合は、まずこちらを選択します。
+  * **特徴：** 後述の仕組みにより、形式の崩れをほぼ確実に防ぐことができます（第3回・PDF p.34, 35）。
+* **ファインチューニング（第2回）**
+  * **使う場面：** 口調や、構造化された出力の中身における「根拠の付け方」など、プロンプトやAPIの形式指定だけでは制御しきれない独自の「振る舞い」を覚えさせたい場合に検討します（第2回・PDF p.53）。
+  * **注意点：** 講義資料では、「実務で形だけ守らせるならAPIの構造化出力が先」とされており、形式を強制するためだけにFTを行うのはコスト面等から得策ではないことが示されています（第2回・PDF p.53, 57）。
+
+---
+
+### 2. 構造化出力はどうやって形式を守らせるのか？
+
+第3回で学ぶ構造化出力では、**「制約付きデコーディング（Constrained Decoding）」**という仕組みを使って形式を守らせています（第3回・PDF p.35）。
+
+* **仕組みのポイント：**
+  * あらかじめスキーマ（項目やデータの型の決まり）を定義します（第3回・PDF p.34）。
+  * モデルが1トークンずつ出力（生成）していく際、**スキーマのルールや決定された形式に合わない文字やトークンを、生成の候補からあらかじめ外します**（第3回・PDF p.35）。
+  * これにより、形式に合わない出力はそもそも生成されなくなり、形式の崩れをほぼ完璧になくすことができます（第3回・PDF p.35）。
+```
+
+- `search_graph({"query":"構造化出力 ファインチューニング 形式"})` → success
+- 引用の raw: PDF p.34, 35（ok。候補 lec03-main-p034）、PDF p.34, 35（ok。候補 lec03-main-p035）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.53, 57（ok。候補 lec02-main-p053）、PDF p.53, 57（ok。候補 lec02-main-p057）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）
+
 </details>
 
 <details>
-<summary>G graph（参考） / qa2（2 回）</summary>
+<summary>G graph（参考） / qa2（3 回）</summary>
 
 **t1**｜ok｜3.103 秒｜tool_calls 1｜requests 2｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ○qa2_review｜自動の誤答
 
@@ -3762,6 +4256,21 @@ LLMは確率で次の言葉を選ぶため、同じ質問でも答えが毎回�
 - `search_graph({"query":"エージェント メモリ 危険"})` → success
 - `search_graph({"query":"メモリ 危険 設計"})` → success
 - 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.39（ok。候補 lec03-main-p039）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
+
+**t3**｜ok｜8.976 秒｜tool_calls 2｜requests 3｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ×qa2_review｜自動の誤答
+
+```
+第3回の講義資料によると、エージェントのメモリには、**「すべてを蓄積すると、古い情報や誤りも一緒に戻ってくる」**という危険（懸念）があると説明されています（第3回・PDF p.38）。
+
+これに対して、どのような対策や工夫が必要とされているか、以下のヒントを参考に考えてみてください。
+
+- **情報の取捨選択**: すべてのやり取りや情報をそのまま溜め込むのではなく、何を残し、何を消すべきかをどのように設計・管理すればよいでしょうか（第3回・PDF p.38）。
+- **定期的な見直し**: 実装例の一つであるOpenClawのように、日々の記録（メモ）から不要なものを省き、重要なテーマや基準を超えたものだけを長期メモリに残すためには、どのような仕組みを取り入れると効果的でしょうか（第3回・PDF p.40）。
+```
+
+- `search_graph({"query":"エージェント メモリ 危険"})` → success
+- `search_graph({"query":"メモリ 古い情報 誤り 残し 消す 設計"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
 
 </details>
 
@@ -3954,7 +4463,7 @@ LLMは確率で次の言葉を選ぶため、1回試しただけでは評価に�
 </details>
 
 <details>
-<summary>A1 term_graph / qa1（2 回）</summary>
+<summary>A1 term_graph / qa1（3 回）</summary>
 
 **t1**｜ok｜5.702 秒｜tool_calls 2｜requests 3｜gold 取得 2/2｜gold 引用 2/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
 
@@ -4020,10 +4529,47 @@ LLMは確率で次の言葉を選ぶため、1回試しただけでは評価に�
 - `search_materials({"query":"形式を強制する機能"})` → success
 - 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.53（ok。候補 lec02-main-p053）、p.57（ok。候補 lec02-main-p057）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、p.62（ok。候補 lec03-main-p062）
 
+**t3**｜ok｜8.037 秒｜tool_calls 2｜requests 3｜gold 取得 2/2｜gold 引用 2/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+ご質問の「ファインチューニング（第2回）」と「構造化出力（第3回）」の使い分け、および構造化出力で形式を守らせる仕組みについて、講義資料をもとに解説します。
+
+---
+
+### 1. ファインチューニング（第2回）と構造化出力（第3回）の使い分け
+
+実務で特定の形式（JSONなど）で出力させたい場合、基本方針として**「まずは API の構造化出力が先」**となります（第2回・PDF p.53）。それぞれの役割と使い分けの基準は以下の通りです。
+
+* **構造化出力（第3回）を使う場面**
+  * **目的:** 指定したスキーマ（項目と型の決まり）に厳密に従った JSON などを返させる場合（第3回・PDF p.34）。
+  * **特徴:** 文書からの項目抽出、選択肢からの分類・判定、ツール呼び出しなどで利用します（第3回・PDF p.34）。API の機能として確実かつ効率的に形式を守らせることができます。
+* **ファインチューニング（第2回）を使う場面**
+  * **目的:** 口調、根拠の付け方、あるいは書式だけでは縛りきれない「モデルの振る舞い全体」を直したい場合（第2回・PDF p.23, 53）。
+  * **注意点:** 演習では効果を数えやすい例として JSON 出力を扱うこともありますが、形だけを形式通りに守らせたい実務の現場では、まず API の構造化出力を用いるのが適切とされています（第2回・PDF p.53）。
+
+---
+
+### 2. 構造化出力はどうやって形式を守らせるのか？
+
+第3回では、構造化出力が形式を守る仕組みとして**「制約付きデコーディング（Constrained Decoding）」**が紹介されています（第3回・PDF p.35）。
+
+* **仕組みのポイント**
+  * 先にスキーマ（項目と型の決まり）を定義します（第3回・PDF p.34）。
+  * モデルが文章の次の「トークン（文字の断片）」を1つずつ選んで生成していく際、**スキーマのルール（型や選択肢）に合わない候補をその都度、確率の計算から除外**します（第3回・PDF p.35）。
+  * これにより、形式に合わない文字や出力はそもそも生成されなくなります（第3回・PDF p.35）。
+* **APIでの指定方法の例**
+  * OpenAI API や Anthropic Claude API、Gemini API などの主要な API において、`json_schema` や `strict: true` などの設定を行うことで、この機能を利用できます（第3回・PDF p.35, 62）。
+  * これにより形式の崩れをほぼ無くすことができますが、API の制限による拒否や、トークンの長さ上限での打ち切りなど、例外が起きる場合もあるため注意が必要です（第3回・PDF p.35, 62）。
+```
+
+- `search_materials({"query":"ファインチューニング 構造化出力 使い分け 第2回 第3回"})` → success
+- `search_materials({"query":"構造化出力 どうやって 形式を守らせる JSON Schema 第3回"})` → success
+- 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.23, 53（ok。候補 lec02-main-p023）、PDF p.23, 53（ok。候補 lec02-main-p053）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）、PDF p.35, 62（ok。候補 lec03-main-p035）、PDF p.35, 62（ok。候補 lec03-main-p062）
+
 </details>
 
 <details>
-<summary>A1 term_graph / qa2（2 回）</summary>
+<summary>A1 term_graph / qa2（3 回）</summary>
 
 **t1**｜ok｜5.104 秒｜tool_calls 2｜requests 3｜gold 取得 1/2｜gold 引用 1/2｜○qa2_persist_or_cannot ×qa2_review｜自動の誤答
 
@@ -4066,6 +4612,28 @@ LLMは確率で次の言葉を選ぶため、1回試しただけでは評価に�
 - `search_materials({"query":"エージェント メモリ 危険"})` → success
 - `search_materials({"query":"メモリ 危険 防ぐ"})` → success
 - 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.50（ok。候補 lec03-main-p050）、PDF p.39（ok。候補 lec03-main-p039）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）、PDF p.38（ok。候補 lec03-main-p038）、p.40（ok。候補 lec03-main-p040）
+
+**t3**｜ok｜5.366 秒｜tool_calls 2｜requests 3｜gold 取得 1/2｜gold 引用 1/2｜○qa2_persist_or_cannot ×qa2_review｜自動の誤答
+
+```
+第3回の講義では、エージェントのメモリに関して以下のような危険やリスクが説明されています。
+
+* **古い情報や誤りの混入**
+  * すべての情報をそのまま蓄積すると、古い情報や誤りも一緒に（次のコンテキストに）戻ってくるという問題があります（第3回・PDF p.38）。
+* **セキュリティ・信頼境界の観点からのリスク（不正な指示の残留）**
+  * メモリは過去の入力を書いた全員が書き込めるため、そこに紛れ込んだ悪意ある入力が、後の会話でも指示として残り続けてしまうというリスクがあります（第3回・PDF p.50）。
+
+これらを防ぐ（適切に管理する）ための考え方やアプローチとして、講義では以下が挙げられています。
+
+* **何を残し、何を消すかの設計**
+  * すべてを蓄積するのではなく、情報の取捨選択を行うこと（第3回・PDF p.38）。例えば、OpenClawなどの実装例では、日々のメモから何度も出てくるテーマなどを定期的に見直し、基準を超えたもの（長期メモリ）だけを残す仕組みが紹介されています（第3回・PDF p.40）。
+
+どのような基準でメモリの情報を取捨選択すべきか、ご自身の設計やアイデアもあわせて考えてみてください。
+```
+
+- `search_materials({"query":"エージェント メモリ 危険"})` → success
+- `search_materials({"query":"メモリ 危険 残し 消す"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.50（ok。候補 lec03-main-p050）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
 
 </details>
 
@@ -4242,7 +4810,7 @@ LLMは確率で次の言葉を選ぶため、1回試しただけでは評価に�
 </details>
 
 <details>
-<summary>A2 term_graph_cap3 / qa1（2 回）</summary>
+<summary>A2 term_graph_cap3 / qa1（3 回）</summary>
 
 **t1**｜ok｜5.766 秒｜tool_calls 2｜requests 3｜gold 取得 1/2｜gold 引用 1/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
 
@@ -4307,10 +4875,41 @@ LLMは確率で次の言葉を選ぶため、1回試しただけでは評価に�
 - `search_materials({"query":"構造化出力 形式"})` → success
 - 引用の raw: PDF p.46（ok。候補 lec02-main-p046）、p.53（ok。候補 lec02-main-p053）、PDF p.53（invalid）、p.57（invalid）、PDF p.34（ok。候補 lec03-main-p034）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、p.62（ok。候補 lec03-main-p062）
 
+**t3**｜ok｜3.314 秒｜tool_calls 1｜requests 2｜gold 取得 2/2｜gold 引用 2/2｜○qa1_first ○qa1_decode ○qa1_ftuse｜自動の正答
+
+```
+ご質問ありがとうございます。ファインチューニングと構造化出力の使い分け、および構造化出力で形式を守らせる仕組みについて、第2回と第3回の講義資料をもとに解説します。
+
+---
+
+### 1. 第2回のファインチューニングと、第3回の構造化出力の使い分け
+
+講義資料では、出力の形式を整えたい場合について以下のように説明されています。
+
+* **実務での基本方針**
+  * 実務で形だけ（JSON形式など）を守らせたい場合は、まずプロンプトやAPIの形式指定（構造化出力）を試すのが先とされています（第2回・PDF p.53, p.57）。
+  * ファインチューニング（FT）は、口調や根拠の付け方など「書式で縛れない振る舞い」に対して有効ですが（第2回・PDF p.53）、形式を強制するだけなら、まずは第3回で学ぶ構造化出力やAPIの機能を利用するのが基本となります。
+
+---
+
+### 2. 構造化出力はどうやって形式を守らせるのか？
+
+第3回では、構造化出力の仕組みとして**「制約付きデコーディング」**が紹介されています（第3回・PDF p.35）。
+
+* **仕組みのポイント**
+  * モデルがテキスト（トークン）を1つずつ生成する際、事前に決めたスキーマ（項目と型の決まり）に合わない候補をその都度除外します（第3回・PDF p.34, p.35）。
+  * 残った候補の中から次のトークンを選ぶため、スキーマに合わない出力はそもそも生成されなくなります（第3回・PDF p.35）。
+* **APIでの指定例**
+  * OpenAIのAPIなどでは、`json_schema` と `strict: true` を指定することで、形式の崩れをほぼなくす（スキーマどおりの割合を100%に近づける）ことができます（第3回・PDF p.35）。
+```
+
+- `search_materials({"query":"ファインチューニング 構造化出力"})` → success
+- 引用の raw: PDF p.53（ok。候補 lec02-main-p053）、p.57（ok。候補 lec02-main-p057）、PDF p.53（ok。候補 lec02-main-p053）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.34（ok。候補 lec03-main-p034）、p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）、PDF p.35（ok。候補 lec03-main-p035）
+
 </details>
 
 <details>
-<summary>A2 term_graph_cap3 / qa2（2 回）</summary>
+<summary>A2 term_graph_cap3 / qa2（3 回）</summary>
 
 **t1**｜ok｜3.005 秒｜tool_calls 1｜requests 2｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ×qa2_review｜自動の誤答
 
@@ -4346,6 +4945,22 @@ LLMは確率で次の言葉を選ぶため、1回試しただけでは評価に�
 
 - `search_materials({"query":"エージェント メモリ 危険"})` → success
 - `search_materials({"query":"すべてを蓄積すると 古い情報 危険"})` → success
+- 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
+
+**t3**｜ok｜12.051 秒｜tool_calls 2｜requests 3｜gold 取得 0/2｜gold 引用 0/2｜×qa2_persist_or_cannot ×qa2_review｜自動の誤答
+
+```
+第3回講義資料では、エージェントのメモリにおける危険性として、情報をすべて蓄積してしまうことで**「古い情報や誤りも一緒に戻ってくる」**ことが挙げられています（第3回・PDF p.38）。
+
+これを防ぐための設計・対策としては、以下のようなアプローチが説明されています。
+
+* **何を残し、何を消すかを設計する**（第3回・PDF p.38）
+* **自動で見直し（整理）を行う仕組みを入れる**
+  * 例として紹介されている実装（OpenClawなど）では、毎晩自動でやり取りを見直し（1. 集める、2. 見比べる、3. 移す）、基準を超えた重要なものだけを長期メモリに残し、一度きりの調べものは日々のメモに留めて長期メモリが膨らまないようにしています（第3回・PDF p.40）。
+```
+
+- `search_materials({"query":"エージェント メモリ 危険 防ぐ"})` → success
+- `search_materials({"query":"すべてを蓄積すると 古い情報 や 誤り"})` → success
 - 引用の raw: PDF p.38（ok。候補 lec03-main-p038）、PDF p.38（ok。候補 lec03-main-p038）、PDF p.40（ok。候補 lec03-main-p040）
 
 </details>
