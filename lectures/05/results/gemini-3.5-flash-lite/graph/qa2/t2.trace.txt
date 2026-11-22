@@ -1,0 +1,21 @@
+[model] gemini-3.5-flash-lite
+[variant] G graph
+[質問] qa2
+第3回講義資料では、エージェントのメモリにおける危険性や注意点について、以下のように説明されています。
+
+* **危険性・注意点**
+  * すべての情報をそのまま蓄積し続けると、古い情報や誤り、一度きりの情報なども一緒にコンテキストへ戻ってくるという問題があります（第3回・PDF p.38）。
+  * また、外部からメモリや設定ファイルなどに情報が書き込まれる危険性についても触れられています（第3回・PDF p.39）。
+
+* **防ぐためにすべきこと**
+  * 「何を残し、何を消すかを設計する」ことが重要とされています（第3回・PDF p.38）。
+  * 実装例としては、すべてをそのまま残すのではなく、定期的に見直しを行って基準を超えた重要な情報だけを長期メモリに残す仕組みなどが紹介されています（第3回・PDF p.40）。
+
+--- trace ---
+[tool call]   search_graph({'query': 'エージェント メモリ 危険'})
+[tool return] search_graph -> {"seeds": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "sect…
+[tool call]   search_graph({'query': 'メモリ 危険 設計'})
+[tool return] search_graph -> {"seeds": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "sect…
+[time] 回答完了まで 4.48 秒（検索・埋め込みを含む）
+[usage] 入力 13,582 tokens / 出力 241 tokens / モデル応答 3 回
+[cost] 生成APIの推定コスト: $0.003579 USD（埋め込み・索引構築分は含まない）

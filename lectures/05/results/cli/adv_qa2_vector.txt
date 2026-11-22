@@ -1,0 +1,5 @@
+ 1  第3回  PDF p.38  メモリがないと、毎回ゼロからやり直しになる  d=0.249  hit
+ 2  第3回  PDF p.13  メモリ  d=0.262  hit
+ 3  第3回  PDF p.39  実装例：Claude  d=0.269  hit
+ 4  第3回  PDF p.65  補足：メモリと Context Engineering の最新動向  d=0.275  hit
+ 5  第3回  PDF p.40  実装例：OpenClaw  d=0.276  hit

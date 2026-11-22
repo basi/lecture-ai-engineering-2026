@@ -1,0 +1,23 @@
+[model] gemini-3.5-flash-lite
+[variant] I2 topk15
+[質問] qa2
+第3回の講義では、エージェントのメモリに関して以下のような危険や注意点が説明されています。
+
+* **古い情報や誤りの混入**
+  * すべての情報をそのまま蓄積していくと、古い情報や誤りも一緒にメモリ（次の会話のコンテキスト）に戻ってきてしまうという危険があります（第3回・PDF p.38）。
+* **外部からの不正な書き込み**
+  * 外からメモリに情報が書き込まれるリスクがあります（第3回・PDF p.39）。また、紛れ込んだ悪意ある入力が後の会話でも指示として残り続けてしまうリスクも指摘されています（第3回・PDF p.50）。
+
+これらに対する対策としては、次のような設計を行うことが挙げられています。
+
+* **何を残し、何を消すかを設計する**
+  * すべてを蓄積するのではなく、基準を超えたものだけを長期メモリに残し、長期メモリが膨らまないように仕組みを工夫します（第3回・PDF p.38, p.40）。
+
+--- trace ---
+[tool call]   search_materials({'query': 'エージェント メモリ 危険'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[tool call]   search_materials({'query': 'すべてを蓄積すると 古い情報 や 誤り'})
+[tool return] search_materials -> {"results": [{"page_id": "lec02-main-p022", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "s…
+[time] 回答完了まで 4.36 秒（検索・埋め込みを含む）
+[usage] 入力 18,069 tokens / 出力 275 tokens / モデル応答 3 回
+[cost] 生成APIの推定コスト: $0.004458 USD（埋め込み・索引構築分は含まない）

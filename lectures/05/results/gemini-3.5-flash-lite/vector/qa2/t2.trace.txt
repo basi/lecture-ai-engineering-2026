@@ -1,0 +1,24 @@
+[model] gemini-3.5-flash-lite
+[variant] V0 vector
+[質問] qa2
+第3回の講義では、エージェントのメモリに関して次のような危険性が説明されています。
+
+* **古い情報や誤りも一緒に戻ってくる危険性**
+  * すべての情報をそのまま蓄積してしまうと、過去の不要になった古い情報や誤った情報までが次のコンテキストに一緒に戻ってきてしまうという問題が生じます（第3回・PDF p.38）。
+
+この危険性を防ぐために、講義では以下のような工夫や設計が紹介されています。
+
+* **何を残し、何を消すかを設計する**（第3回・PDF p.38）
+* **長期メモリが膨らまないようにする工夫（例：自動の見直しや整理）**
+  * 例えば実装例として紹介されている「OpenClaw」では、日々のメモを毎晩自動で見直し（dreaming）、重複を除いたり何度も出てくるテーマを探したりして、**基準を超えたものだけを長期メモリに残す**仕組みをとっています（第3回・PDF p.40）。
+
+このように、すべての情報をやみくもに溜め込むのではなく、情報の取捨選択や定期的な見直しの仕組みを取り入れることがポイントになります。
+
+--- trace ---
+[tool call]   search_materials({'query': 'エージェント メモリ 危険'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[tool call]   search_materials({'query': 'すべてを蓄積すると'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p018", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[time] 回答完了まで 5.16 秒（検索・埋め込みを含む）
+[usage] 入力 5,756 tokens / 出力 293 tokens / モデル応答 3 回
+[cost] 生成APIの推定コスト: $0.002459 USD（埋め込み・索引構築分は含まない）

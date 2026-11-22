@@ -1,0 +1,24 @@
+[model] gemini-3.5-flash-lite
+[variant] B1 doc_hint
+[質問] qa2
+第3回の講義資料によると、エージェントのメモリに関する危険性や注意点として以下の点が説明されています。
+
+* **古い情報や誤りも一緒に戻ってくる危険性**
+  * すべての情報を蓄積してしまうと、古い情報や誤った情報も一緒にコンテキストに戻ってきてしまう（第3回・PDF p.38）。
+* **外から書き込まれる危険性**
+  * メモリに書き出された内容が、外部から書き込まれてしまうリスクがある（第3回・PDF p.39）。
+
+これらに対する対策としては、以下のように設計・管理することが挙げられています。
+
+* **「何を残し、何を消すか」を設計する**（第3回・PDF p.38）
+* **すべてを長期に残さず、整理・見直しの仕組みを入れる**（例：OpenClawの実装例のように、日々のメモから自動で不要な重複などを除いて基準を超えたものだけを長期メモリに移す）（第3回・PDF p.40）
+* **中身を人が確かめる**（第3回・PDF p.39）
+
+--- trace ---
+[tool call]   search_materials({'query': 'メモリ 危険'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[tool call]   search_materials({'query': 'メモリ 危険 防ぐ'})
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p038", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[time] 回答完了まで 4.55 秒（検索・埋め込みを含む）
+[usage] 入力 6,076 tokens / 出力 285 tokens / モデル応答 3 回
+[cost] 生成APIの推定コスト: $0.002535 USD（埋め込み・索引構築分は含まない）

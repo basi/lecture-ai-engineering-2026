@@ -1,0 +1,28 @@
+[model] gemini-3.5-flash-lite
+[variant] A2 term_graph_cap3
+[質問] q1
+第2回の講義資料によると、LoRAとQLoRAの仕組みについて以下の通り説明されています。
+
+* **LoRA（Low-Rank Adaptation）**
+  * **固定するもの：** 本体の重み（Pretrained Weights $W$）は固定し、学習しません（第2回・PDF p.52）。
+  * **学習するもの：** 細長い2つの小さな行列（行列A・B）の積で表される変化分（差分）だけを学習します（第2回・PDF p.51, p.52）。
+
+* **QLoRA**
+  * **加えること（特徴）：** LoRAの仕組みに加え、元の重みを4bit（数値を粗く保存）に圧縮することで、さらに少ないメモリで調整できるようにします（第2回・PDF p.51, p.52）。
+
+--- trace ---
+[tool call]   search_materials({'query': 'LoRA QLoRA 固定 学習 第2回'})
+[tool return] search_materials -> {"results": [{"page_id": "lec02-main-p052", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "s…
+[time] 回答完了まで 20.46 秒（検索・埋め込みを含む）
+[usage] 入力 2,877 tokens / 出力 210 tokens / モデル応答 2 回
+[cost] 生成APIの推定コスト: $0.001388 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[term_graph] query='LoRA QLoRA 固定 学習 第2回' params={"top_k": 5, "cap": 3, "vector_pool": 5, "hub_terms": 9}
+  用語: LoRA、QLoRA／回の指定: 第2回
+  選択: lec02-main-p052 d=0.211 確保:用語:LoRA
+  選択: lec02-main-p060 d=0.223 距離
+  選択: lec02-main-p051 d=0.236 距離
+  選択: lec02-main-p023 d=0.265 補充
+  選択: lec02-main-p006 d=0.269 補充
+  章の上限で外した: lec02-main-p061, lec02-main-p054, lec02-main-p058, lec02-main-p047, lec02-main-p059

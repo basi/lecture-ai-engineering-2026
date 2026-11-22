@@ -1,0 +1,50 @@
+[model] gemini-3.5-flash-lite
+[variant] A2 term_graph_cap3
+[質問] qa1
+第2回のファインチューニング（FT）と第3回の構造化出力の使い分け、および構造化出力が形式を守らせる仕組みについては、講義資料に次のように整理されています。
+
+### 1. ファインチューニング（第2回）と構造化出力（第3回）の使い分け
+* **ファインチューニング（FT）**：
+  * **向いている場面**：書式だけで縛れない、口調や手順、根拠の付け方といった**「振る舞い」**をモデルに覚えさせたいときです（第2回・PDF p.46, p.53）。
+  * **実務での位置づけ**：実務で「必ず決まったJSON形式で返させる」という形だけを守らせたい場合、まずはプロンプトやAPIの機能（構造化出力）を試すのが先であり、FTは効果を数えやすい演習等で使われるアプローチです（第2回・PDF p.53, p.57）。
+* **構造化出力（第3回）**：
+  * **向いている場面**：文書から特定の項目を抜き出したり、選択肢から分類・判定したり、ツールを呼び出したりする際に、**確実に決まったスキーマ（項目と型の決まり）でJSON等のデータを返させたいとき**に使います（第3回・PDF p.34）。
+
+---
+
+### 2. 構造化出力はどうやって形式を守らせるのか
+構造化出力では、モデルがテキストを生成する仕組みの裏で**「制約付きデコーディング」**という技術が使われています（第3回・PDF p.35）。
+
+* **仕組み**：モデルが次のトークン（文字や単語の断片）を選ぶたびに、**あらかじめ定義したスキーマ（型や選択肢）に合わない候補を自動的に除外**します（第3回・PDF p.35）。
+* **結果**：スキーマに合わない出力はそもそも生成されないため、形式の崩れをほぼなくすことができます（第3回・PDF p.35）。
+* **APIでの指定方法**：主要なAPIでは、以下のような仕組みや設定でこの機能を利用します（第3回・PDF p.35, p.62）。
+  * OpenAI API：`json_schema` と `strict: true` の指定（※従来のJSON modeとは別物）
+  * Claude API：応答の形式指定（`output_config.format`）やツール定義の `strict: true`
+  * Gemini API：JSON Schemaの指定
+
+--- trace ---
+[tool call]   search_materials({'query': 'ファインチューニング'})
+[tool call]   search_materials({'query': '構造化出力 形式'})
+[tool return] search_materials -> {"results": [{"page_id": "lec02-main-p057", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "s…
+[tool return] search_materials -> {"results": [{"page_id": "lec03-main-p034", "document_id": "lec03-main", "lecture": 3, "document_title": "AIエージェント", "se…
+[time] 回答完了まで 3.81 秒（検索・埋め込みを含む）
+[usage] 入力 4,395 tokens / 出力 607 tokens / モデル応答 2 回
+[cost] 生成APIの推定コスト: $0.002836 USD（埋め込み・索引構築分は含まない）
+
+--- 取得の内訳 ---
+[term_graph] query='ファインチューニング' params={"top_k": 5, "cap": 3, "vector_pool": 5, "hub_terms": 9}
+  用語: ファインチューニング／回の指定: なし
+  選択: lec02-main-p057 d=0.283 確保:用語:ファインチューニング
+  選択: lec02-main-p056 d=0.290 距離
+  選択: lec02-main-p046 d=0.291 距離
+  選択: lec02-main-p023 d=0.307 距離
+  選択: lec02-main-p020 d=0.328 距離
+  章の上限で外した: lec02-main-p058, lec02-main-p045, lec02-main-p050, lec02-main-p049, lec02-main-p055, lec02-main-p051
+[term_graph] query='構造化出力 形式' params={"top_k": 5, "cap": 3, "vector_pool": 5, "hub_terms": 9}
+  用語: 構造化出力／回の指定: なし
+  選択: lec03-main-p034 d=0.226 確保:用語:構造化出力
+  選択: lec03-main-p062 d=0.239 距離
+  選択: lec03-main-p035 d=0.261 距離
+  選択: lec03-main-p033 d=0.262 距離
+  選択: lec02-main-p053 d=0.324 距離
+  章の上限で外した: lec03-main-p036
