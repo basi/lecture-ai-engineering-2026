@@ -1,0 +1,47 @@
+{
+  "client_env_names": [
+    "AIE_LEC06_CANARY",
+    "HOME",
+    "LANG",
+    "PATH",
+    "PYTHONUNBUFFERED"
+  ],
+  "canary_name": "AIE_LEC06_CANARY",
+  "report": {
+    "platform": "linux",
+    "own_env_names": [
+      "HOME",
+      "LC_CTYPE",
+      "PATH"
+    ],
+    "own_env_has_canary": false,
+    "proc_available": true,
+    "parent": {
+      "pid": 3634,
+      "environ_readable": true,
+      "has_canary": true
+    },
+    "ancestors": [
+      {
+        "level": 1,
+        "pid": 2502,
+        "environ_openable": true
+      },
+      {
+        "level": 2,
+        "pid": 2498,
+        "environ_openable": true
+      },
+      {
+        "level": 3,
+        "pid": 1617,
+        "environ_openable": true
+      },
+      {
+        "level": 4,
+        "pid": 731,
+        "environ_openable": true
+      }
+    ]
+  }
+}

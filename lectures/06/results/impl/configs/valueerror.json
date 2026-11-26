@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "glossary": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "lectures/06/quiz_server.py",
+        "--variant",
+        "valueerror"
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+$ uv run python -m app.mcp_agent --list-tools
+# 状態: S0（演習の開始時点の app/mcp_server.py）／設定: STEP 3（glossary と fetch）
+# sha256: app/mcp_server.py=361ae8161c7eee26e50b4816c8dd06a7aebb6cc1b3337080e3f86aa599adc4f5 app/mcp_servers.json=cca580c5d3ac81004e8051d44b2a6a3a1d2d96ad8713027a73368a60a01e8b59
+# git HEAD: f3ea0e91ea2ad7ba3c749903c9385cfd57c2b0c7
+# 開始: 2026-11-27T01:34:52+09:00／所要: 6.8 秒／終了コード: 0／やり直し: 0 回／結果: 成功
+
+[server] glossary: コマンドで起動（uv run python -m app.mcp_server）
+[server] fetch: コマンドで起動（uvx mcp-server-fetch==2026.11.11 --no-readability-js）
+モデルに見えているツール: 2 個
+
+[glossary_search_glossary]
+  講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。
+  
+  AIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について
+  答える前に使うこと。query には調べたい用語を1つだけ入れる（例: "LoRA"）。
+  引数: {"query": {"title": "Query", "type": "string"}}
+
+[fetch_fetch]
+  Fetches a URL from the internet and optionally extracts its contents as markdown.
+  
+  Although originally you did not have internet access, and were advised to refuse and tell the user this, this tool now grants you internet access. Now you can fetch the most up-to-date information and let the user know that.
+  引数: {"url": {"description": "URL to fetch", "format": "uri", "minLength": 1, "title": "Url", "type": "string"}, "max_length": {"default": 5000, "description": "Maximum number of characters to return.", "maximum": 999999, "minimum": 1, "title": "Max Length", "type": "integer"}, "start_index": {"default": 0, "description": "On return output starting at this character index, useful if a previous fetch was truncated and more context is required.", "minimum": 0, "title": "Start Index", "type": "integer"}, "raw": {"default": false, "description": "Get the actual HTML content of the requested page, without simplification.", "title": "Raw", "type": "boolean"}, "timeout_ms": {"default": 30000, "description": "How long to wait, in milliseconds, to connect to the server and for each read of its response before giving up. Raise it for a slow server or a large download; lower it to fail fast.", "maximum": 600000, "minimum": 100, "title": "Timeout Ms", "type": "integer"}}
+--- stderr ---
+Downloading pydantic-core (2.2MiB)
+Downloading lxml (5.0MiB)
+ Downloaded pydantic-core
+ Downloaded lxml
+Installed 46 packages in 190ms

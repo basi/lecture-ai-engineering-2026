@@ -1,0 +1,191 @@
+$ uv run python -m app.mcp_agent --trace 'https://modelcontextprotocol.io/ の冒頭を日本語で3行に要約して'
+# 状態: S0（演習の開始時点の app/mcp_server.py）／設定: STEP 3（glossary と fetch）
+# sha256: app/mcp_server.py=361ae8161c7eee26e50b4816c8dd06a7aebb6cc1b3337080e3f86aa599adc4f5 app/mcp_servers.json=cca580c5d3ac81004e8051d44b2a6a3a1d2d96ad8713027a73368a60a01e8b59
+# git HEAD: f3ea0e91ea2ad7ba3c749903c9385cfd57c2b0c7
+# 開始: 2026-11-27T01:37:22+09:00／所要: 9.9 秒／終了コード: 1／やり直し: 0 回／結果: 停止（UnexpectedModelBehavior）
+
+[server] glossary: コマンドで起動（uv run python -m app.mcp_server）
+[server] fetch: コマンドで起動（uvx mcp-server-fetch==2026.11.11 --no-readability-js）
+[model] gemini-3.5-flash-lite
+[tools] MCP サーバー（app/mcp_servers.json）
+--- stderr ---
+Tool 'fetch' failed: 'Error executing tool fetch: Failed to fetch robots.txt https://modelcontextprotocol.io/robots.txt due to a connection issue'
+HTTP Request: GET https://modelcontextprotocol.io/robots.txt "HTTP/1.1 200 OK"
+Tool 'fetch' failed: "Error executing tool fetch: Failed to fetch https://modelcontextprotocol.io/: ConnectError('')"
+Traceback (most recent call last):
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/tool_manager.py", line 1057, in _raw_execute
+    tool_result = await self.toolset.call_tool(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/toolsets/_tool_search.py", line 446, in call_tool
+    return await self.wrapped.call_tool(name, tool_args, ctx, tool)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/toolsets/wrapper.py", line 68, in call_tool
+    return await self.wrapped.call_tool(name, tool_args, ctx, tool)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/toolsets/combined.py", line 101, in call_tool
+    return await tool.source_toolset.call_tool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/toolsets/prefixed.py", line 41, in call_tool
+    return await super().call_tool(original_name, tool_args, ctx, tool)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/toolsets/wrapper.py", line 68, in call_tool
+    return await self.wrapped.call_tool(name, tool_args, ctx, tool)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/mcp.py", line 1526, in call_tool
+    return await self.direct_call_tool(name, tool_args, use_task=use_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/mcp.py", line 1436, in direct_call_tool
+    result = await self._call_tool_checked(name, args, metadata=metadata, use_task=use_task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/mcp.py", line 1506, in _call_tool_checked
+    _raise_mcp_tool_error(message, self.tool_error_behavior)
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/mcp.py", line 1929, in _raise_mcp_tool_error
+    raise exceptions.ModelRetry(message=message) from cause
+pydantic_ai.exceptions.ModelRetry: Error executing tool fetch: Failed to fetch https://modelcontextprotocol.io/: ConnectError('')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspaces/lecture-ai-engineering-2026/app/mcp_agent.py", line 179, in <module>
+    main()
+  File "/workspaces/lecture-ai-engineering-2026/app/mcp_agent.py", line 162, in main
+    result = target.run_sync(args.question, model=model)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/agent/abstract.py", line 827, in run_sync
+    return _utils.run_until_complete(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_utils.py", line 108, in run_until_complete
+    return _graph_run_until_complete(coro)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/_utils.py", line 116, in run_until_complete
+    return loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/agent/abstract.py", line 678, in run
+    node = await agent_run.next(node)  # pyright: ignore[reportArgumentType]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 656, in next
+    return await self._run_node_with_hooks(node, self._stream_and_advance)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 571, in _run_node_with_hooks
+    result = await lifecycle(node)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 551, in lifecycle
+    result = await step_fn(lifecycle_node)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 670, in _stream_and_advance
+    return await self._advance_graph(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 466, in _advance_graph
+    task = await self._graph_run.next(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 579, in next
+    return await anext(self)
+           ^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 556, in __anext__
+    raise self._next.error
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 857, in _run_tracked_task
+    result = await self._run_task(t_)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 915, in _run_task
+    output = await node.call(step_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/step.py", line 253, in _call_node
+    return await node.run(GraphRunContext(state=ctx.state, deps=ctx.deps))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 2249, in run
+    async with self.stream(ctx):
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 217, in __aexit__
+    await anext(self.gen)
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 2270, in stream
+    async for _event in stream:
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/combined.py", line 649, in wrap_run_event_stream
+    async for event in stream:
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/abstract.py", line 930, in wrap_run_event_stream
+    async for event in stream:
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/abstract.py", line 930, in wrap_run_event_stream
+    async for event in stream:
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_run_context.py", line 102, in dispatch_event_stream
+    async for event in stream:
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 227, in _with_event_stream_buffer
+    async for event in stream:
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 2487, in _run_stream
+    async for event in _run_stream():
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 2452, in _run_stream
+    async for event in self._handle_tool_calls(ctx, tool_calls, response_output=response_output):
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 2574, in _handle_tool_calls
+    async for event in process_tool_calls(
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_tool_execution.py", line 371, in process_tool_calls
+    async for event in processor.run():
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_tool_execution.py", line 504, in run
+    async for event in self._run_strategy():
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_tool_execution.py", line 1192, in _run_strategy
+    async for event in flush_pending():
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_tool_execution.py", line 1180, in flush_pending
+    async for event in self._run_function_calls(batch):
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_tool_execution.py", line 698, in _run_function_calls
+    async for event in self._call_tools(
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_tool_execution.py", line 903, in _call_tools
+    if event := await handle_call_or_result(item, index_by_task[item]):
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_tool_execution.py", line 831, in handle_call_or_result
+    (await coro_or_task) if inspect.isawaitable(coro_or_task) else coro_or_task.result()
+     ^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_tool_execution.py", line 733, in _call_tool
+    tool_result = await self.tool_manager.execute_tool_call(validated)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/tool_manager.py", line 781, in execute_tool_call
+    return await self._execute_tool_call_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/tool_manager.py", line 1029, in _execute_tool_call_impl
+    tool_result = await self._run_execute_hooks(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/tool_manager.py", line 523, in _run_execute_hooks
+    tool_result = await cap.wrap_tool_execute(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/combined.py", line 824, in wrap_tool_execute
+    return await chain(args)
+           ^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/combined.py", line 1068, in wrapped
+    return await cap.wrap_tool_execute(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/abstract.py", line 1184, in wrap_tool_execute
+    return await handler(args)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/combined.py", line 1068, in wrapped
+    return await cap.wrap_tool_execute(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/abstract.py", line 1184, in wrap_tool_execute
+    return await handler(args)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/tool_manager.py", line 518, in lifecycle
+    tool_result = await cap.on_tool_execute_error(ctx, call=call, tool_def=tool_def, args=args, error=e)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/combined.py", line 845, in on_tool_execute_error
+    raise error
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/combined.py", line 840, in on_tool_execute_error
+    return await capability.on_tool_execute_error(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/abstract.py", line 1219, in on_tool_execute_error
+    raise error
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/combined.py", line 840, in on_tool_execute_error
+    return await capability.on_tool_execute_error(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/capabilities/abstract.py", line 1219, in on_tool_execute_error
+    raise error
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/tool_manager.py", line 512, in lifecycle
+    tool_result = await do_execute(args)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/tool_manager.py", line 499, in do_execute
+    return await self._raw_execute(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/tool_manager.py", line 1070, in _raw_execute
+    self._check_max_retries(name, validated.tool.max_retries, e)
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/tool_manager.py", line 308, in _check_max_retries
+    raise UnexpectedModelBehavior(
+pydantic_ai.exceptions.UnexpectedModelBehavior: Tool 'fetch_fetch' exceeded max retries count of 1. Consider raising the retry limit, or see the docs on tool retries: https://pydantic.dev/docs/ai/tools-toolsets/tools-advanced/#tool-retries

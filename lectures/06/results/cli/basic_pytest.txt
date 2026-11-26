@@ -1,0 +1,8 @@
+$ uv run pytest -q
+# 状態: S1（基礎の宿題を終えた app/mcp_server.py）／設定: STEP 4（glossary・fetch・aws）
+# sha256: app/mcp_server.py=12c291b521cefbdeafebec490021a6742ac03b184b5ee6cbc00614bd6793803a app/mcp_servers.json=cbe29d1bd89ecf00ed7d7775dbd69f52f8162ad1c5af8818d77c95507598a8f2
+# git HEAD: f3ea0e91ea2ad7ba3c749903c9385cfd57c2b0c7
+# 開始: 2026-11-27T01:35:17+09:00／所要: 8.0 秒／終了コード: 0／やり直し: 0 回／結果: 成功
+
+..........................                                               [100%]
+26 passed in 5.46s

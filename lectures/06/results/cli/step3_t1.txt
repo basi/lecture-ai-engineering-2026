@@ -1,0 +1,25 @@
+$ uv run python -m app.mcp_agent --trace 'https://modelcontextprotocol.io/ の冒頭を日本語で3行に要約して'
+# 状態: S0（演習の開始時点の app/mcp_server.py）／設定: STEP 3（glossary と fetch）
+# sha256: app/mcp_server.py=361ae8161c7eee26e50b4816c8dd06a7aebb6cc1b3337080e3f86aa599adc4f5 app/mcp_servers.json=cca580c5d3ac81004e8051d44b2a6a3a1d2d96ad8713027a73368a60a01e8b59
+# git HEAD: f3ea0e91ea2ad7ba3c749903c9385cfd57c2b0c7
+# 開始: 2026-11-27T01:37:08+09:00／所要: 9.6 秒／終了コード: 0／やり直し: 0 回／結果: 成功
+
+[server] glossary: コマンドで起動（uv run python -m app.mcp_server）
+[server] fetch: コマンドで起動（uvx mcp-server-fetch==2026.11.11 --no-readability-js）
+[model] gemini-3.5-flash-lite
+[tools] MCP サーバー（app/mcp_servers.json）
+Model Context Protocol（MCP）は、AIアプリケーションと外部のデータソースやツールを接続するためのオープンソースの標準規格です。
+AIにとっての「USB-Cポート」のような役割を果たし、多様なシステムや情報へ安全にアクセスできるようにします。
+これにより、開発者は効率的に拡張性の高いAIアプリケーションやエージェントを構築できるようになります。
+
+--- trace ---
+[tool call]   fetch_fetch({'url': 'https://modelcontextprotocol.io/'})
+[tool return] fetch_fetch -> Contents of https://modelcontextprotocol.io/:
+> ## Documentation Index
+> Fetch the complete documentation index at: http…
+[usage] 入力 2,230 tokens / 出力 98 tokens / モデル応答 2 回
+--- stderr ---
+HTTP Request: GET https://modelcontextprotocol.io/robots.txt "HTTP/1.1 200 OK"
+HTTP Request: GET https://modelcontextprotocol.io/ "HTTP/1.1 307 Temporary Redirect"
+HTTP Request: GET https://modelcontextprotocol.io/robots.txt "HTTP/1.1 200 OK"
+HTTP Request: GET https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro.md "HTTP/1.1 200 OK"

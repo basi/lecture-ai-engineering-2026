@@ -1,0 +1,109 @@
+{
+  "condition": "valueerror",
+  "question_id": "q99",
+  "question": "第99回のクイズを作って",
+  "trial": 1,
+  "model": "gemini-3.5-flash-lite",
+  "started_at": "2026-11-27T01:39:19+09:00",
+  "duration_s": 4.5,
+  "status": "ok",
+  "output": "申し訳ありませんが、第99回の講義は設定されていません。（本講座は全何回か、または該当する回の内容をご確認ください）\n\nもし他の回の確認問題をご希望でしたら、「第X回の確認問題を出して」とお気軽にお申し付けください！",
+  "usage": {
+    "input_tokens": 456,
+    "output_tokens": 58,
+    "requests": 1
+  },
+  "tool_calls": [],
+  "tool_returns": [],
+  "retry_prompts": [],
+  "called_make_quiz": false,
+  "make_quiz_args": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "exception": null,
+  "http_error": null,
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "第99回のクイズを作って",
+          "timestamp": "2026-11-26T16:39:20.873425Z",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-11-26T16:39:20.873767Z",
+      "instructions": "あなたはAIエンジニアリング講座（AIE2026）の学習支援エージェントです。\n- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n- 回の内容を聞かれたら get_lecture_summary を使う。\n- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。\n- 回答の最後に、関係する回（第N回）を示す。\n- 宿題の答えそのものは書かず、考え方のヒントで導く。\n- 用語集で扱わない質問（Web ページの内容、AWS のドキュメントなど）には、その内容に合うツールがあれば使う。",
+      "kind": "request",
+      "run_id": "01a218b9-cea2-7325-88f1-182e6fb436e3",
+      "conversation_id": "01a218b9-cea2-7325-88f1-182f001081ad",
+      "metadata": null,
+      "state": "complete"
+    },
+    {
+      "parts": [
+        {
+          "content": "申し訳ありませんが、第99回の講義は設定されていません。（本講座は全何回か、または該当する回の内容をご確認ください）\n\nもし他の回の確認問題をご希望でしたら、「第X回の確認問題を出して」とお気軽にお申し付けください！",
+          "id": null,
+          "provider_name": "google",
+          "provider_details": {
+            "thought_signature": "EpYBCpMBAWkUfROiu/2yKjgeD8X0IWvW42evqKpk0kCl7JI59EcvspAhUyYqZxPhYHStOsAIdt9n8vbqOkn6tWu8YW6skAVJlPu2petUmyDoEzr33qIRkuikw7yW7kXtJuo+5nfOrfI1CAL4Bz0Nquj0vNOn5fb2CopWp9amgnokawQgAHWRAowUZJdHAEAWwxgENIrL2qp7"
+          },
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 456,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 58,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "audio_seconds": 0.0,
+        "details": {
+          "text_prompt_tokens": 456
+        },
+        "cost": "0.0002818",
+        "input_text_tokens": 456
+      },
+      "model_name": "gemini-3.5-flash-lite",
+      "timestamp": "2026-11-26T16:39:24.472015Z",
+      "kind": "response",
+      "provider_name": "google",
+      "provider_url": "https://generativelanguage.googleapis.com/",
+      "provider_details": {
+        "finish_reason": "STOP",
+        "service_tier": "standard"
+      },
+      "provider_response_id": "uWAIa4yRCsHcg8UPgMaH0QY",
+      "finish_reason": "stop",
+      "run_id": "01a218b9-cea2-7325-88f1-182e6fb436e3",
+      "conversation_id": "01a218b9-cea2-7325-88f1-182f001081ad",
+      "metadata": null,
+      "workspace_ref": null,
+      "failed_attempts": null,
+      "state": "complete"
+    }
+  ],
+  "config": {
+    "mcpServers": {
+      "glossary": {
+        "command": "uv",
+        "args": [
+          "run",
+          "python",
+          "lectures/06/quiz_server.py",
+          "--variant",
+          "valueerror"
+        ]
+      }
+    }
+  },
+  "git_head": "f3ea0e91ea2ad7ba3c749903c9385cfd57c2b0c7",
+  "retries": 0,
+  "files_sha256": {
+    "app/mcp_server.py": "bca9ae3ee410ae41d25a50d123b790e7b87d3b1bcb888347f31f80366f01ba47",
+    "lectures/06/quiz_server.py": "e278f2a8ec48e9aee661f95be143963cf59e73e36af60c587bbcd533431cf088"
+  }
+}

@@ -1,0 +1,9 @@
+# 条件: valueerror／質問: q99（第99回のクイズを作って）／試行: 1
+# 開始: 2026-11-27T01:39:19+09:00／status: ok／所要: 4.5 秒／やり直し: 0 回
+# [server] glossary: コマンドで起動（uv run python lectures/06/quiz_server.py --variant valueerror）
+
+[answer] 申し訳ありませんが、第99回の講義は設定されていません。（本講座は全何回か、または該当する回の内容をご確認ください）
+
+もし他の回の確認問題をご希望でしたら、「第X回の確認問題を出して」とお気軽にお申し付けください！
+[finish] stop
+[usage] 入力 456 tokens / 出力 58 tokens / モデル応答 1 回
