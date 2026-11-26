@@ -76,3 +76,68 @@ Removed MCP server glossary from local config
 - Claude Code は、リポジトリに入っている設定（`.mcp.json`）を、すぐには信用しない。対話で使うときは、使う前に本人が承認する（`claude -p` は例外）。演習のエージェントには、この段がない。設定ファイルに書いたサーバーは、次の起動でそのまま起動する。演習の補足にあった「出所の分からないサーバーは、設定ファイルに書きません」を、Claude Code は仕組みでも支えている。
 - URL の書き方は、演習では `"url"` だけでよいが、Claude Code の `.mcp.json` では `"type": "http"` が要る。演習の設定をそのまま `.mcp.json` に写すと、aws の項目は読み飛ばされる。
 - 疑問：演習のエージェントに承認の段を足すなら、どこに置くのがよいか。第3回の `save_learning_log` で使った、呼ぶ前に利用者の承認を求める仕組み（requires_approval）を、MCP のツールにも使えるのか。
+
+<details>
+<summary>仮説と照合</summary>
+
+### 仮説（実行前に記録）
+
+2026-11-26、実行前に記録した。回数は、`lectures/06/run.py` で流す回数（段 B は各 2 回、段 C は各 3 回）に対するもの。
+
+**演習**
+
+1. STEP 1 の 1 つ目（`app.agent --list-tools`）は、search_materials・make_quiz・save_learning_log の 3 つを表示する。upstream の例（search_materials だけ）と違うのは、fork の `app/agent.py` に第3回のツールが残っているから。2 つ目は glossary_search_glossary の 1 つだけ。
+2. STEP 2 は、2 回とも glossary_search_glossary を呼び、引数は「3レベル」を含む。モデル応答は 2 回。INSTRUCTIONS の 1 行目（答える前に、必ず search_glossary で用語集を確認する）と、用語集の別名「3レベル」があるから。
+3. STEP 3 は、2 回とも fetch_fetch を、質問の URL で呼ぶ。INSTRUCTIONS の最後の行（Web ページの内容には、合うツールがあれば使う）があるから。また、2 回中 1 回以上は、search_glossary も呼ぶ。MCP は用語集にある語で、INSTRUCTIONS の 1 行目が「必ず」と言うから。
+4. STEP 4 は、2 回とも `aws_` で始まる検索のツールを呼ぶ。fetch と aws のツールの説明文は、英語のまま一覧に出る。
+
+**基礎**
+
+1. エージェント側を変えずに、一覧に glossary_get_lecture_summary が増える（glossary のツールが 1 個から 2 個になる）。
+2. 「第2回では何を学びますか？」で、2 回とも glossary_get_lecture_summary を `lecture=2` で呼ぶ。INSTRUCTIONS の「回の内容を聞かれたら get_lecture_summary を使う」と、説明文の例（「第3回では何を学ぶ？」）があるから。
+3. `uv run pytest -q` は、基礎の時点（S1）でも、実装を足した時点（S2）でも、すべて通る。upstream のテストは、ツールが「含まれる」かで判定しているから。
+
+**実装：段 A（API を使わずに決まる部分。ローカルのテストで確かめ済みで、Codespaces でも同じになるはず）**
+
+1. return：第99回・第5回のどちらも、isError は false で、本文は理由の文そのもの。モデルにも、ツールの結果として全文が渡る。
+2. ValueError：本文は `Error executing tool make_quiz` だけになり、理由の文はサーバーのログ（stderr）にしか残らない。モデルに渡るのは、そのあとに「Fix the errors and try again.」が付いた文。
+3. ToolError：本文は `Error executing tool make_quiz: ` と理由の文。モデルには、そのあとに「Fix the errors and try again.」が付く。
+4. schema：第99回は、関数に届く前に、サーバーが英語の検証エラーを返す（出題できる回の案内は無い）。第5回は範囲内なので、return と同じ文を返す。
+5. raise の 2 条件と schema（第99回）は、同じツールが 2 回続けて失敗すると、UnexpectedModelBehavior で実行が止まる。
+
+**実装：段 C（Gemini の反応）**
+
+1. return（第99回）：3 回とも make_quiz(99) を 1 回だけ呼び、呼び直さない。回答では、第99回は無いことと、出題できる回（1, 2, 3, 4, 6）を伝え、利用者に選んでもらう。文の最後に「利用者に、この中から回を選んでもらってください」と書いたから。
+2. ValueError（第99回）：理由が届かないので、3 回中 2 回以上は、別の回で呼び直すか、もう一度 99 で呼んで止まる。止まらずに答えた回も、第99回が無いことは伝えられない。
+3. ToolError（第99回）：理由は届くので、3 回とも、第99回が無いことは伝える。ただし「Fix the errors and try again.」が付くので、3 回中 1 回以上は、利用者に聞かずに別の回で呼び直す。
+4. schema（第99回）：Gemini の関数呼び出しはスキーマを守らせるモード（VALIDATED）なので、99 がサーバーに届くのは、3 回中 1 回以下。届かない回は、make_quiz を呼ばずに答えるか、範囲内の値に置き換えて呼ぶか、エラーになる。
+5. return（第5回）：3 回とも make_quiz(5) を呼び、第5回の用語がまだ無いことと、出題できる回を伝える。呼び直さない。
+6. raise の 2 条件は、呼び直しのぶん、return よりモデル応答の回数が多い（中央値で 1 回以上）。
+
+**セキュリティ**
+
+1. stdio のサーバー（子）に見える環境変数は、既定の数個（HOME・LOGNAME・PATH・SHELL・TERM・USER）のうち、クライアントにあるもの（HOME・PATH）だけで、目印（AIE_LEC06_CANARY）は無い。
+2. Codespaces（Linux）では、子から親の `/proc/PID/environ` を読め、目印が見える。祖先の environ も開ける。環境変数を渡さないことは、秘密を守る境界にはならない。
+3. `run.py --scan` は、results に秘密情報らしき文字列を見つけない。
+
+### 照合
+
+| # | 仮説 | 結果 | 照合 |
+|---|---|---|---|
+| 演習 1 | STEP 1 の 1 つ目は 3 つ、2 つ目は 1 つ | | |
+| 演習 2 | STEP 2 は 2 回とも glossary_search_glossary（「3レベル」） | | |
+| 演習 3 | STEP 3 は 2 回とも fetch_fetch。1 回以上 search_glossary も | | |
+| 演習 4 | STEP 4 は 2 回とも `aws_` の検索 | | |
+| 基礎 1 | 一覧に glossary_get_lecture_summary が増える | | |
+| 基礎 2 | 2 回とも get_lecture_summary(2) | | |
+| 基礎 3 | S1・S2 とも pytest がすべて通る | | |
+| 段 A 1〜5 | 本文とモデルに渡る文、2 回の失敗で止まる | | |
+| 段 C 1 | return：3 回とも呼び直さず、無い回と出題できる回を伝える | | |
+| 段 C 2 | ValueError：2 回以上、呼び直すか止まる | | |
+| 段 C 3 | ToolError：3 回とも無いと伝え、1 回以上は呼び直す | | |
+| 段 C 4 | schema：99 が届くのは 1 回以下 | | |
+| 段 C 5 | return（第5回）：3 回とも用語が無いことを伝える | | |
+| 段 C 6 | raise はモデル応答の回数が多い | | |
+| セキュリティ 1〜3 | 子に目印は無い／親からは読める／走査で見つからない | | |
+
+</details>
