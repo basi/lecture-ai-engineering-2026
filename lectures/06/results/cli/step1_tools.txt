@@ -1,0 +1,15 @@
+$ uv run python -m app.mcp_agent --list-tools
+# 状態: S0（演習の開始時点の app/mcp_server.py）／設定: STEP 1（glossary だけ）
+# sha256: app/mcp_server.py=361ae8161c7eee26e50b4816c8dd06a7aebb6cc1b3337080e3f86aa599adc4f5 app/mcp_servers.json=d1641986ab00fd3fe14786d9ba9c9a0bb933026e99a42238a06710046ecb4dc7
+# git HEAD: f3ea0e91ea2ad7ba3c749903c9385cfd57c2b0c7
+# 開始: 2026-11-27T01:34:49+09:00／所要: 3.5 秒／終了コード: 0／やり直し: 0 回／結果: 成功
+
+[server] glossary: コマンドで起動（uv run python -m app.mcp_server）
+モデルに見えているツール: 1 個
+
+[glossary_search_glossary]
+  講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。
+  
+  AIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について
+  答える前に使うこと。query には調べたい用語を1つだけ入れる（例: "LoRA"）。
+  引数: {"query": {"title": "Query", "type": "string"}}

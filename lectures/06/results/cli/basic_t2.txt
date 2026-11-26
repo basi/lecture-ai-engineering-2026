@@ -1,0 +1,29 @@
+$ uv run python -m app.mcp_agent --trace '第2回では何を学びますか？'
+# 状態: S1（基礎の宿題を終えた app/mcp_server.py）／設定: STEP 4（glossary・fetch・aws）
+# sha256: app/mcp_server.py=12c291b521cefbdeafebec490021a6742ac03b184b5ee6cbc00614bd6793803a app/mcp_servers.json=cbe29d1bd89ecf00ed7d7775dbd69f52f8162ad1c5af8818d77c95507598a8f2
+# git HEAD: f3ea0e91ea2ad7ba3c749903c9385cfd57c2b0c7
+# 開始: 2026-11-27T01:38:40+09:00／所要: 8.1 秒／終了コード: 0／やり直し: 0 回／結果: 成功
+
+[server] glossary: コマンドで起動（uv run python -m app.mcp_server）
+[server] fetch: コマンドで起動（uvx mcp-server-fetch==2026.11.11 --no-readability-js）
+[server] aws: URL に接続（https://knowledge-mcp.global.api.aws）
+[model] gemini-3.5-flash-lite
+[tools] MCP サーバー（app/mcp_servers.json）
+第2回では、**「ファインチューニングとLoRA」**をテーマに、以下の内容を学びます。
+
+* **事前学習とファインチューニング**：事前学習とファインチューニングの違い、およびそれぞれの向き不向き（向く場面・向かない場面）。
+* **SFT（教師あり微調整）**：入力と望ましい出力のペアを用いた学習や、データの質・形式の重要性について。
+* **PEFTとLoRA**：全パラメータを更新するのではなく、小さな低ランク行列のみを学習させることでメモリや容量を抑える仕組み。主なハイパーパラメータ（ランク $r$、学習率、エポック数）やQLoRAとの関係について。
+* **演習（Google Colab）**：小さなモデル（Qwen3.5-0.8Bなど）を用いて、架空のFAQデータで実際にLoRA学習を行い、学習前後での出力変化（形式の遵守率や内容正解率など）を比較します。
+
+関連回：第2回
+
+--- trace ---
+[tool call]   glossary_get_lecture_summary({'lecture': 2})
+[tool return] glossary_get_lecture_summary -> # 第2回 ファインチューニングとLoRA
+
+## この回のねらい
+
+- 事前学習とファインチューニングの違い、ファインチューニングが向く場面と向かない場面を理解する
+- LoRAの考え方を理解し、Google Colab上で小さなモデルを…
+[usage] 入力 5,942 tokens / 出力 242 tokens / モデル応答 2 回

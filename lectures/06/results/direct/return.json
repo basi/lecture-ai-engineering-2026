@@ -1,0 +1,103 @@
+{
+  "condition": "return",
+  "server_command": [
+    "uv",
+    "run",
+    "python",
+    "-m",
+    "app.mcp_server"
+  ],
+  "started_at": "2026-11-27T01:36:24+09:00",
+  "duration_s": 2.2,
+  "git_head": "f3ea0e91ea2ad7ba3c749903c9385cfd57c2b0c7",
+  "files_sha256": {
+    "app/mcp_server.py": "bca9ae3ee410ae41d25a50d123b790e7b87d3b1bcb888347f31f80366f01ba47",
+    "lectures/06/quiz_server.py": "e278f2a8ec48e9aee661f95be143963cf59e73e36af60c587bbcd533431cf088"
+  },
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\n    AIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n    答える前に使うこと。query には調べたい用語を1つだけ入れる（例: \"LoRA\"）。\n    ",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "title": "search_glossaryArguments"
+      }
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n    「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。\n    ",
+      "inputSchema": {
+        "properties": {
+          "lecture": {
+            "title": "Lecture",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object",
+        "title": "get_lecture_summaryArguments"
+      }
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n    利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。\n    ",
+      "inputSchema": {
+        "properties": {
+          "lecture": {
+            "title": "Lecture",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object",
+        "title": "make_quizArguments"
+      }
+    }
+  ],
+  "calls": {
+    "99": {
+      "isError": false,
+      "text": "第99回はありません。この講座は第1回〜第13回です。確認問題を出せる回: 1, 2, 3, 4, 6。利用者に、この中から回を選んでもらってください。"
+    },
+    "5": {
+      "isError": false,
+      "text": "第5回の用語は、まだ用語集にありません。確認問題を出せる回: 1, 2, 3, 4, 6。利用者に、この中から回を選んでもらってください。"
+    },
+    "2": {
+      "isError": false,
+      "text": "{\"question\": \"「学習率」の意味は？\", \"answer\": \"1回の更新でパラメータをどれだけ動かすかを決めるハイパーパラメータ。大きすぎると学習が不安定になり、小さすぎると進みが遅い。\"}"
+    }
+  },
+  "agent": {
+    "output": "（偽のモデルの答え）",
+    "tool_calls": [
+      {
+        "tool": "glossary_make_quiz",
+        "args": {
+          "lecture": 99
+        }
+      }
+    ],
+    "tool_returns": [
+      {
+        "tool": "glossary_make_quiz",
+        "content": "第99回はありません。この講座は第1回〜第13回です。確認問題を出せる回: 1, 2, 3, 4, 6。利用者に、この中から回を選んでもらってください。"
+      }
+    ],
+    "retry_prompts": [],
+    "exception": null
+  }
+}

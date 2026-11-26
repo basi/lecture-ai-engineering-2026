@@ -28,6 +28,32 @@ server = MCPServer(
 server.tool()(tools.search_glossary)
 
 # TODO(宿題・基礎): get_lecture_summary も公開しよう
+server.tool()(tools.get_lecture_summary)
+
+# 宿題・実装: 第3回の make_quiz を公開する。出題できない回は、理由と出題できる回を return で返す
+LAST_LECTURE = 13  # 講座は全 13 回
+
+
+def quiz_unavailable(lecture: int) -> str | None:
+    """確認問題を出せない回なら、その理由と出題できる回をまとめた文を返す。出せる回なら None を返す。"""
+    available = sorted({e["lecture"] for e in tools.load_glossary()})
+    if not 1 <= lecture <= LAST_LECTURE:
+        reason = f"第{lecture}回はありません。この講座は第1回〜第{LAST_LECTURE}回です。"
+    elif lecture not in available:
+        reason = f"第{lecture}回の用語は、まだ用語集にありません。"
+    else:
+        return None
+    options = ", ".join(map(str, available))
+    return f"{reason}確認問題を出せる回: {options}。利用者に、この中から回を選んでもらってください。"
+
+
+@server.tool(description=tools.make_quiz.__doc__)  # 説明文は第3回の make_quiz と同じにする
+def make_quiz(lecture: int) -> str:
+    unavailable = quiz_unavailable(lecture)
+    if unavailable is not None:
+        # raise にせず return で返す。文がそのままモデルに渡り、モデルは利用者に回を選び直してもらえる
+        return unavailable
+    return tools.make_quiz(lecture)
 
 
 def main() -> None:

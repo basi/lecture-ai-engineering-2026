@@ -1,0 +1,116 @@
+{
+  "condition": "valueerror",
+  "server_command": [
+    "uv",
+    "run",
+    "python",
+    "lectures/06/quiz_server.py",
+    "--variant",
+    "valueerror"
+  ],
+  "started_at": "2026-11-27T01:36:26+09:00",
+  "duration_s": 4.2,
+  "git_head": "f3ea0e91ea2ad7ba3c749903c9385cfd57c2b0c7",
+  "files_sha256": {
+    "app/mcp_server.py": "bca9ae3ee410ae41d25a50d123b790e7b87d3b1bcb888347f31f80366f01ba47",
+    "lectures/06/quiz_server.py": "e278f2a8ec48e9aee661f95be143963cf59e73e36af60c587bbcd533431cf088"
+  },
+  "tools": [
+    {
+      "name": "search_glossary",
+      "description": "講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。\n\n    AIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について\n    答える前に使うこと。query には調べたい用語を1つだけ入れる（例: \"LoRA\"）。\n    ",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "title": "search_glossaryArguments"
+      }
+    },
+    {
+      "name": "get_lecture_summary",
+      "description": "指定した回（1始まりの整数）の講義の要点を返す。\n\n    「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。\n    ",
+      "inputSchema": {
+        "properties": {
+          "lecture": {
+            "title": "Lecture",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object",
+        "title": "get_lecture_summaryArguments"
+      }
+    },
+    {
+      "name": "make_quiz",
+      "description": "指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。\n\n    利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。\n    ",
+      "inputSchema": {
+        "properties": {
+          "lecture": {
+            "title": "Lecture",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lecture"
+        ],
+        "type": "object",
+        "title": "make_quizArguments"
+      }
+    }
+  ],
+  "calls": {
+    "99": {
+      "isError": true,
+      "text": "Error executing tool make_quiz"
+    },
+    "5": {
+      "isError": true,
+      "text": "Error executing tool make_quiz"
+    },
+    "2": {
+      "isError": false,
+      "text": "{\"question\": \"「Hugging Face Hub」の意味は？\", \"answer\": \"公開されたモデルやデータセットを共有・ダウンロードできるプラットフォーム。オープンウェイトのモデルを入手したり、LoRAアダプタを公開したりするのに使われる。\"}"
+    }
+  },
+  "agent": {
+    "output": null,
+    "tool_calls": [
+      {
+        "tool": "glossary_make_quiz",
+        "args": {
+          "lecture": 99
+        }
+      },
+      {
+        "tool": "glossary_make_quiz",
+        "args": {
+          "lecture": 99
+        }
+      }
+    ],
+    "tool_returns": [],
+    "retry_prompts": [
+      {
+        "tool": "glossary_make_quiz",
+        "content": "Error executing tool make_quiz",
+        "sent_to_model": "Error executing tool make_quiz\n\nFix the errors and try again."
+      }
+    ],
+    "exception": {
+      "type": "UnexpectedModelBehavior",
+      "message": "Tool 'glossary_make_quiz' exceeded max retries count of 1. Consider raising the retry limit, or see the docs on tool retries: https://pydantic.dev/docs/ai/tools-toolsets/tools-advanced/#tool-retries",
+      "cause_type": "ModelRetry",
+      "cause_message": "Error executing tool make_quiz"
+    }
+  }
+}

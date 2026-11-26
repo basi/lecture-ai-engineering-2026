@@ -1,0 +1,27 @@
+$ uv run python -m app.agent --list-tools
+# 状態: S0（演習の開始時点の app/mcp_server.py）／設定: STEP 1（glossary だけ）
+# sha256: app/mcp_server.py=361ae8161c7eee26e50b4816c8dd06a7aebb6cc1b3337080e3f86aa599adc4f5 app/mcp_servers.json=d1641986ab00fd3fe14786d9ba9c9a0bb933026e99a42238a06710046ecb4dc7
+# git HEAD: f3ea0e91ea2ad7ba3c749903c9385cfd57c2b0c7
+# 開始: 2026-11-27T01:34:46+09:00／所要: 2.8 秒／終了コード: 0／やり直し: 0 回／結果: 成功
+
+モデルに見えているツール: 3 個
+
+[search_materials]
+  第1〜3回の本講義資料を検索し、関連ページの本文・タイトル・ページ番号を返す。
+  
+  queryに調べたい内容を指定する。
+  引数: {"query": {"type": "string"}}
+
+[make_quiz]
+  指定した回（1始まりの整数）の用語を用語集から1つ選び、確認問題と答えを返す。
+  
+  利用者に「第2回の確認問題を出して」のように、ある回の復習の問題を求められたときに使う。
+  引数: {"lecture": {"type": "integer"}}
+
+[save_learning_log]
+  学習の記録を learning_log/ フォルダに Markdown ファイルとして保存する。
+  
+  利用者に学習の記録や保存を頼まれたときだけ使うこと。title は記録の題名、content は本文（Markdown）。
+  保存は取り消しにくいので、このツールを呼ぶと、保存の前にプログラムが利用者に承認を求める
+  （会話の中で先に確認を取らなくてよい）。承認されなかったときは保存しない。
+  引数: {"title": {"type": "string"}, "content": {"type": "string"}}

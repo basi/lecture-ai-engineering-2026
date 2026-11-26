@@ -1,0 +1,84 @@
+2026-11-27 01:34:45 第6回の実行を始めます（全 38 項目のうち、済み 0 項目。HEAD は f3ea0e9）
+2026-11-27 01:34:45 === 段 A（API を使わない）: 14 項目（済み 0）===
+2026-11-27 01:34:46 step1_agent_tools: 実行（S0・STEP 1）uv run python -m app.agent --list-tools
+2026-11-27 01:34:49 step1_agent_tools: 成功（2.8 秒、やり直し 0 回）→ results/cli/step1_agent_tools.txt
+2026-11-27 01:34:49 step1_tools: 実行（S0・STEP 1）uv run python -m app.mcp_agent --list-tools
+2026-11-27 01:34:52 step1_tools: 成功（3.5 秒、やり直し 0 回）→ results/cli/step1_tools.txt
+2026-11-27 01:34:52 step3_tools: 実行（S0・STEP 3）uv run python -m app.mcp_agent --list-tools
+2026-11-27 01:34:59 step3_tools: 成功（6.8 秒、やり直し 0 回）→ results/cli/step3_tools.txt
+2026-11-27 01:34:59 step4_tools: 実行（S0・STEP 4）uv run python -m app.mcp_agent --list-tools
+2026-11-27 01:35:04 step4_tools: 成功（5.2 秒、やり直し 0 回）→ results/cli/step4_tools.txt
+2026-11-27 01:35:05 basic_tools: 実行（S1・STEP 4）uv run python -m app.mcp_agent --list-tools
+2026-11-27 01:35:11 basic_tools: 成功（5.6 秒、やり直し 0 回）→ results/cli/basic_tools.txt
+2026-11-27 01:35:11 impl_tools: 実行（S2・STEP 4）uv run python -m app.mcp_agent --list-tools
+2026-11-27 01:35:17 impl_tools: 成功（6.0 秒、やり直し 0 回）→ results/cli/impl_tools.txt
+2026-11-27 01:35:17 basic_pytest: 実行（S1・STEP 4）uv run pytest -q
+2026-11-27 01:35:25 basic_pytest: 成功（8.0 秒、やり直し 0 回）→ results/cli/basic_pytest.txt
+2026-11-27 01:35:25 impl_pytest: 実行（S2・STEP 4）uv run pytest -q
+2026-11-27 01:35:30 impl_pytest: 成功（5.1 秒、やり直し 0 回）→ results/cli/impl_pytest.txt
+2026-11-27 01:35:30 impl_pytest_lec06: 実行（S2・STEP 4）uv run pytest -q lectures/06
+2026-11-27 01:36:24 impl_pytest_lec06: 成功（54.0 秒、やり直し 0 回）→ results/cli/impl_pytest_lec06.txt
+2026-11-27 01:36:24 direct_return: 実行（S2）uv run python -m app.mcp_server
+2026-11-27 01:36:26 direct_return: 成功（2.2 秒）→ results/direct/return.json
+2026-11-27 01:36:26 direct_valueerror: 実行（S2）uv run python lectures/06/quiz_server.py --variant valueerror
+2026-11-27 01:36:30 direct_valueerror: 成功（4.2 秒）→ results/direct/valueerror.json
+2026-11-27 01:36:30 direct_toolerror: 実行（S2）uv run python lectures/06/quiz_server.py --variant toolerror
+2026-11-27 01:36:32 direct_toolerror: 成功（2.1 秒）→ results/direct/toolerror.json
+2026-11-27 01:36:32 direct_schema: 実行（S2）uv run python lectures/06/quiz_server.py --variant schema
+2026-11-27 01:36:35 direct_schema: 成功（2.2 秒）→ results/direct/schema.json
+2026-11-27 01:36:35 env_probe: 実行（クライアントに渡す環境変数: AIE_LEC06_CANARY, HOME, LANG, PATH, PYTHONUNBUFFERED）
+2026-11-27 01:36:38 env_probe: 成功 → results/security/env_probe.json
+2026-11-27 01:36:38 === 段 B（LLM を使う CLI）: 9 項目（済み 0）===
+2026-11-27 01:36:38 step2_t1: 実行（S0・STEP 1）uv run python -m app.mcp_agent --trace 'AIE2026の講座の宿題にある「3レベル」とは何ですか？'
+2026-11-27 01:36:48 step2_t1: 成功（10.0 秒、やり直し 0 回）→ results/cli/step2_t1.txt
+2026-11-27 01:36:48 step2_t2: 実行（S0・STEP 1）uv run python -m app.mcp_agent --trace 'AIE2026の講座の宿題にある「3レベル」とは何ですか？'
+2026-11-27 01:37:03 step2_t2: 成功（9.8 秒、やり直し 0 回）→ results/cli/step2_t2.txt
+2026-11-27 01:37:03 step3_t1: 実行（S0・STEP 3）uv run python -m app.mcp_agent --trace 'https://modelcontextprotocol.io/ の冒頭を日本語で3行に要約して'
+2026-11-27 01:37:17 step3_t1: 成功（9.6 秒、やり直し 0 回）→ results/cli/step3_t1.txt
+2026-11-27 01:37:17 step3_t2: 実行（S0・STEP 3）uv run python -m app.mcp_agent --trace 'https://modelcontextprotocol.io/ の冒頭を日本語で3行に要約して'
+2026-11-27 01:37:32 step3_t2: 停止（UnexpectedModelBehavior）（9.9 秒、やり直し 0 回）→ results/cli/step3_t2.txt
+2026-11-27 01:37:32 step4_t1: 実行（S0・STEP 4）uv run python -m app.mcp_agent --trace 'AWSのドキュメントを検索して、Amazon S3 のバージョニングを2行で説明して'
+2026-11-27 01:37:54 step4_t1: 成功（16.5 秒、やり直し 0 回）→ results/cli/step4_t1.txt
+2026-11-27 01:37:54 step4_t2: 実行（S0・STEP 4）uv run python -m app.mcp_agent --trace 'AWSのドキュメントを検索して、Amazon S3 のバージョニングを2行で説明して'
+2026-11-27 01:38:22 step4_t2: 成功（23.4 秒、やり直し 0 回）→ results/cli/step4_t2.txt
+2026-11-27 01:38:22 basic_t1: 実行（S1・STEP 4）uv run python -m app.mcp_agent --trace '第2回では何を学びますか？'
+2026-11-27 01:38:35 basic_t1: 成功（8.4 秒、やり直し 0 回）→ results/cli/basic_t1.txt
+2026-11-27 01:38:35 basic_t2: 実行（S1・STEP 4）uv run python -m app.mcp_agent --trace '第2回では何を学びますか？'
+2026-11-27 01:38:49 basic_t2: 成功（8.1 秒、やり直し 0 回）→ results/cli/basic_t2.txt
+2026-11-27 01:38:49 impl_t1: 実行（S2・STEP 4）uv run python -m app.mcp_agent --trace '第99回のクイズを作って'
+2026-11-27 01:39:05 impl_t1: 成功（11.4 秒、やり直し 0 回）→ results/cli/impl_t1.txt
+2026-11-27 01:39:05 === 段 C（LLM を使う、プロセス内の比較。S2）: 15 項目（済み 0）===
+2026-11-27 01:39:05 サーバー側のエラーの表示（トレースバックなど）が、画面に出ることがあります。想定どおりの動きです。
+2026-11-27 01:39:05 return_q99_t1: 実行（条件 return／第99回のクイズを作って／試行 1）
+2026-11-27 01:39:14 return_q99_t1: ok（4.4 秒、やり直し 0 回）→ results/impl/return/q99/t1.json
+2026-11-27 01:39:14 valueerror_q99_t1: 実行（条件 valueerror／第99回のクイズを作って／試行 1）
+2026-11-27 01:39:24 valueerror_q99_t1: ok（4.5 秒、やり直し 0 回）→ results/impl/valueerror/q99/t1.json
+2026-11-27 01:39:24 toolerror_q99_t1: 実行（条件 toolerror／第99回のクイズを作って／試行 1）
+2026-11-27 01:39:31 toolerror_q99_t1: ok（2.2 秒、やり直し 0 回）→ results/impl/toolerror/q99/t1.json
+2026-11-27 01:39:31 valueerror_q99_t2: 実行（条件 valueerror／第99回のクイズを作って／試行 2）
+2026-11-27 01:39:41 valueerror_q99_t2: ok（4.5 秒、やり直し 0 回）→ results/impl/valueerror/q99/t2.json
+2026-11-27 01:39:41 toolerror_q99_t2: 実行（条件 toolerror／第99回のクイズを作って／試行 2）
+2026-11-27 01:39:49 toolerror_q99_t2: ok（3.5 秒、やり直し 0 回）→ results/impl/toolerror/q99/t2.json
+2026-11-27 01:39:49 return_q99_t2: 実行（条件 return／第99回のクイズを作って／試行 2）
+2026-11-27 01:39:59 return_q99_t2: ok（5.2 秒、やり直し 0 回）→ results/impl/return/q99/t2.json
+2026-11-27 01:39:59 toolerror_q99_t3: 実行（条件 toolerror／第99回のクイズを作って／試行 3）
+2026-11-27 01:40:09 toolerror_q99_t3: ok（4.1 秒、やり直し 0 回）→ results/impl/toolerror/q99/t3.json
+2026-11-27 01:40:09 return_q99_t3: 実行（条件 return／第99回のクイズを作って／試行 3）
+2026-11-27 01:40:18 return_q99_t3: ok（4.8 秒、やり直し 0 回）→ results/impl/return/q99/t3.json
+2026-11-27 01:40:18 valueerror_q99_t3: 実行（条件 valueerror／第99回のクイズを作って／試行 3）
+2026-11-27 01:40:29 valueerror_q99_t3: ok（5.4 秒、やり直し 0 回）→ results/impl/valueerror/q99/t3.json
+2026-11-27 01:40:29 schema_q99_t1: 実行（条件 schema／第99回のクイズを作って／試行 1）
+2026-11-27 01:40:39 schema_q99_t1: ok（5.6 秒、やり直し 0 回）→ results/impl/schema/q99/t1.json
+2026-11-27 01:40:39 schema_q99_t2: 実行（条件 schema／第99回のクイズを作って／試行 2）
+2026-11-27 01:40:49 schema_q99_t2: ok（4.8 秒、やり直し 0 回）→ results/impl/schema/q99/t2.json
+2026-11-27 01:40:49 schema_q99_t3: 実行（条件 schema／第99回のクイズを作って／試行 3）
+2026-11-27 01:40:59 schema_q99_t3: ok（4.5 秒、やり直し 0 回）→ results/impl/schema/q99/t3.json
+2026-11-27 01:40:59 return_q5_t1: 実行（条件 return／第5回のクイズを作って／試行 1）
+2026-11-27 01:41:07 return_q5_t1: ok（2.8 秒、やり直し 0 回）→ results/impl/return/q5/t1.json
+2026-11-27 01:41:07 return_q5_t2: 実行（条件 return／第5回のクイズを作って／試行 2）
+2026-11-27 01:41:14 return_q5_t2: ok（2.8 秒、やり直し 0 回）→ results/impl/return/q5/t2.json
+2026-11-27 01:41:14 return_q5_t3: 実行（条件 return／第5回のクイズを作って／試行 3）
+2026-11-27 01:41:23 return_q5_t3: ok（3.2 秒、やり直し 0 回）→ results/impl/return/q5/t3.json
+2026-11-27 01:41:23 app/mcp_server.py と app/mcp_servers.json を、HEAD の内容に戻しました（sha256 を確かめました）
+2026-11-27 01:41:23 走査: 秘密情報らしき文字列は見つかりませんでした（66 ファイル）
+2026-11-27 01:41:23 すべての項目が終わりました。lectures/06/results/ を commit して push してください。

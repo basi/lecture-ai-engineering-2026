@@ -1,0 +1,9 @@
+# 条件: schema／質問: q99（第99回のクイズを作って）／試行: 1
+# 開始: 2026-11-27T01:40:34+09:00／status: ok／所要: 5.6 秒／やり直し: 0 回
+# [server] glossary: コマンドで起動（uv run python lectures/06/quiz_server.py --variant schema）
+
+[answer] 申し訳ありません。この講座（AIE2026）は全13回のため、第99回は存在しません。
+
+第1回から第13回までの間で、クイズを作成したい回を指定してください。
+[finish] stop
+[usage] 入力 465 tokens / 出力 49 tokens / モデル応答 1 回

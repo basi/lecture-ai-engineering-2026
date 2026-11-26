@@ -1,0 +1,13 @@
+[11/26/26 16:36:31] INFO     Tool 'make_quiz' failed: 'Error       server.py:453
+                             executing tool make_quiz:                          
+                             第99回はありません。この講座は第1回〜              
+                             第13回です。確認問題を出せる回: 1, 2,              
+                             3, 4,                                              
+                             6。利用者に、この中から回を選んでもら              
+                             ってください。'                                    
+                    INFO     Tool 'make_quiz' failed: 'Error       server.py:453
+                             executing tool make_quiz:                          
+                             第5回の用語は、まだ用語集にありません              
+                             。確認問題を出せる回: 1, 2, 3, 4,                  
+                             6。利用者に、この中から回を選んでもら              
+                             ってください。'                                    
