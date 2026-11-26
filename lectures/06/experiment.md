@@ -172,5 +172,5 @@ lectures/06/results/
 | 段階 | 状態 |
 |---|---|
 | 準備（コード・テスト・仮説） | 済み |
-| Codespaces での実行（段 A・B・C） | まだ |
-| 結果の書き写し（answer.md） | まだ |
+| Codespaces での実行（段 A・B・C） | 済み（2026-11-27。全 38 項目、やり直し 0 回、走査も通った） |
+| 結果の書き写し（answer.md） | 済み（`run.py --summarize` で `results/summary.md` も作った） |
