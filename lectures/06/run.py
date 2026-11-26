@@ -1564,7 +1564,7 @@ def execute_all(workspace: Workspace, items: list[Item], runner: Runner | None =
             runner.run(items)
         except DailyLimit as e:
             log(f"Gemini API の 1 日の上限に達したとみなして、止めます（{e}）。")
-            log("しばらく待ってから、同じコマンドをもう一度実行してください。済んだ項目は飛ばして、続きから流します。")
+            log("結果を commit して push してから、日本時間 17 時（1 日の上限が戻る時刻）を過ぎて、同じコマンドをもう一度実行してください。済んだ項目は飛ばして、続きから流します。")
             exit_code = 2
         except KeyboardInterrupt:
             log("Ctrl+C で止めました。済んだ項目は残っています。同じコマンドをもう一度実行すると、続きから流します。")
@@ -1587,7 +1587,7 @@ def execute_all(workspace: Workspace, items: list[Item], runner: Runner | None =
         log(f"失敗した項目が {len(runner.failures)} 件あります。")
         for failure in runner.failures:
             log(f"  - {failure.id}: {failure.reason}（{shown(failure.path)}）")
-        log("上の一覧と、.error.txt の内容を、知らせてください。同じコマンドをもう一度実行すると、失敗した項目だけをやり直します。")
+        log("同じコマンドをもう一度実行すると、失敗した項目だけをやり直します。それでも失敗が残ったら、結果を commit して push してから、上の一覧を知らせてください（.error.txt の中身を貼る必要はありません）。")
     elif exit_code == 0 and restored and scan_code == 0:
         log(f"すべての項目が終わりました。{results_dir()} を commit して push してください。")
     if exit_code == 0 and (runner.failures or scan_code != 0 or not restored):
